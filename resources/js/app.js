@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
-import app from '../views/App.blade.php';
+import App from './App.vue';
 import router from './router/index.js';
 import { createPinia } from 'pinia';
 
-const app = createApp(app);
+const app = createApp(App);
 
 const pinia = createPinia();
 
