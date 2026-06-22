@@ -23,5 +23,11 @@ class AuthController extends Controller
             'contact' => $validatedData['contact'],
             'password' => Hash::make($validatedData['password']),
         ]);
+
+        $user->assignRole('landlord');
+
+        return response()->json([
+            'message' => 'successfully registered as landlord',
+        ], 201);
     }
 }
