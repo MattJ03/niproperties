@@ -7,12 +7,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Http\Controllers\AuthController;
 use Database\Seeders\DatabaseSeeder;
+use App\Models\User;
 
 class AuthControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    use RefreshDatabase;
     public function test_example(): void
     {
         $response = $this->get('/');
@@ -20,7 +19,7 @@ class AuthControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function __setUp(): void {
+    public function setUp(): void {
         parent::setUp();
         $this->seed(DatabaseSeeder::class);
     }
@@ -31,6 +30,7 @@ class AuthControllerTest extends TestCase
             'email' => 'real@email.com',
             'contact' => '0123456789',
             'password' => 'password',
+            'password_confirmation' => 'password',
         ];
 
         $response = $this->postJson('/api/registerLandlord', $user);
