@@ -11,6 +11,6 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background: #FAF9F6;
+    background: #F2EFE6;
 }
 </style>

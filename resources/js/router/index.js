@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Register from "../screens/Register.vue";
 
 const routes = [
-
+    { path: '/register', component: Register, name: 'register' },
 ];
 
 const router = createRouter({
