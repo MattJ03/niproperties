@@ -80,7 +80,7 @@ class AuthController extends Controller
             'token' => $token,
             'user' => $user,
             'message' => 'Logged in successfully',
-        ]);
+        ], 200);
     }
 
 }

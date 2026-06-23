@@ -151,4 +151,8 @@ class AuthControllerTest extends TestCase
         $this->assertTrue($user->hasRole('buyer'));
     }
 
+    public function test_user_login_works(): void {
+
+    }
+
 }
