@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -26,8 +27,34 @@ class AuthController extends Controller
 
         $user->assignRole('landlord');
 
+        Log::info($user->email . ' registered as landlord')''
         return response()->json([
             'message' => 'successfully registered as landlord',
         ], 201);
+    }
+
+    public function registerBuyer(Request $request) {
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'contact' => 'required|string|max:20',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'contact' => $validatedData['contact'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        $user->assignRole('buyer');
+
+        Log::info($user->email . ' registered as buyer');
+
+        return response()->json([
+            'message' => 'successfully registered as buyer',
+        ]);
     }
 }

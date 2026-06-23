@@ -75,4 +75,19 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/registerLandlord', $landlord);
         $response->assertStatus(422);
     }
+
+    public function test_landlord_register_adds_to_the_user_table(): void {
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'email@user.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerLandlord', $payload);
+        $response->assertStatus(201);
+        $landlord = User::where('email', $payload['email'])->first();
+        $this->assertEquals($payload['name'], $landlord->name);
+    }
 }
