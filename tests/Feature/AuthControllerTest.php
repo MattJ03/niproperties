@@ -36,4 +36,43 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/registerLandlord', $user);
         $response->assertStatus(201);
     }
+
+    public function test_register_landlord_no_password_confirmation(): void {
+        $user = [
+            'name' => 'Test User',
+            'email' => 'test@email.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+        ];
+        $response = $this->postJson('/api/registerLandlord', $user);
+        $response->assertStatus(422);
+
+    }
+
+    public function test_landlord_assigned_correct_role(): void {
+        $landlord = [
+            'name' => 'Test User',
+            'email' => 'email@fake.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerLandlord', $landlord);
+
+        $user = User::first();
+        $this->assertTrue($user->hasRole('landlord'));
+        $response->assertStatus(201);
+    }
+
+    public function test_landlord_register_requires_name(): void {
+        $landlord = [
+            'email' => 'fake@email.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerLandlord', $landlord);
+        $response->assertStatus(422);
+    }
 }
