@@ -90,4 +90,65 @@ class AuthControllerTest extends TestCase
         $landlord = User::where('email', $payload['email'])->first();
         $this->assertEquals($payload['name'], $landlord->name);
     }
+
+    public function test_register_buyer_works(): void {
+
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'mohammad@gmail.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerBuyer', $payload);
+        $response->assertStatus(201);
+        $buyer = User::where('email', $payload['email'])->first();
+        $this->assertEquals($payload['name'], $buyer->name);
+    }
+
+    public function test_confirmation_password_has_to_be_same_as_password(): void {
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'taylor@gmail.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'passwrd',
+        ];
+
+        $response = $this->postJson('/api/registerBuyer', $payload);
+        $response->assertStatus(422);
+    }
+
+    public function test_password_is_hashed_buyer_registered(): void {
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'gewgew@gmail.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerBuyer', $payload);
+        $response->assertStatus(201);
+
+        $buyer = User::where('email', $payload['email'])->first();
+        $this->assertNotEquals($payload['password'], $buyer->password);
+    }
+
+    public function test_register_buyer_assigns_role_buyer(): void {
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'test@gmail.com',
+            'contact' => '0123456789',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $response = $this->postJson('/api/registerBuyer', $payload);
+        $response->assertStatus(201);
+        $user = User::where('email', $payload['email'])->first();
+        $this->assertTrue($user->hasRole('buyer'));
+    }
+
 }

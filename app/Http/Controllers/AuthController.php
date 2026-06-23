@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         $user->assignRole('landlord');
 
-        Log::info($user->email . ' registered as landlord')''
+        Log::info($user->email . ' registered as landlord');
         return response()->json([
             'message' => 'successfully registered as landlord',
         ], 201);
@@ -55,6 +55,32 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'successfully registered as buyer',
+        ], 201);
+    }
+
+    public function login(Request $request) {
+
+        $validatedData = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->first();
+
+        if(!$user || !Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'message' => 'These credentials do not match our records.',
+            ]);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
+            'message' => 'Logged in successfully',
         ]);
     }
+
 }
