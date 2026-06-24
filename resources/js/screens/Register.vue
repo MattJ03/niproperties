@@ -4,17 +4,17 @@
             <h2 class="header-reg">Get started on NI Properties</h2>
             <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
-                <div class="buyer-square" @click="role.value = 'buyer'">
+                <div class="buyer-square" @click="role = 'buyer'">
                     <img :src="key" class="key-img" alt="key-image"/>
 
                     buyer
                 </div>
-                <div class="landlord-square" @click="role.value = 'landlord'">
+                <div class="landlord-square" @click="role = 'landlord'">
                     <img :src="home" class="key-img" alt="key-image"/>
                     landlord
                 </div>
             </div>
-            <div class="form-card">
+            <form @submit.prevent="submitReg()" class="form-card">
 
                 <div class="form-field">
                 <input type="text" class="input-field" id="name" v-model="form.name" placeholder=" "/>
@@ -25,7 +25,7 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="form-field">
-                    <input type="number" class="input-field" id="contact" v-model="form.contact" placeholder=" "/>
+                    <input type="tel" class="input-field" id="contact" v-model="form.contact" placeholder=" "/>
                     <label for="contact">Contact number</label>
                 </div>
                 <div class="form-field">
@@ -36,8 +36,8 @@
                     <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
                     <label for="password_confirmation">Re-enter password</label>
                 </div>
-
-            </div>
+                <button class="submit-btn">Submit</button>
+            </form>
         </div>
     </div>
 
@@ -49,7 +49,7 @@ import home from '../assets/home.png';
 import key from '../assets/key.png';
 import api from "axios";
 import { useAuthStore } from "../stores/AuthStore.js";
-
+import { useRouter } from 'vue-router';
 
 const loading = ref(false);
 const error = ref('');
@@ -64,17 +64,32 @@ const form = reactive ({
 });
 
 const authStore = useAuthStore();
+const router = useRouter();
+
 
 const submitReg = async (form) => {
     loading.value = true;
     try {
+        console.log(role.value);
         if(role.value === 'landlord') {
             await authStore.registerLandlord(form);
         } else if(role.value === 'buyer') {
-
+            await authStore.registerBuyer(form);
         }
+        console.log('submitted');
+        router.push('/home');
+    } catch (error) {
+        error.value = error.response?.message || 'error submitting';
+    } finally {
+        loading.value = false;
     }
 }
+
+setTimeout(() => {
+    console.log(role.value);
+}, 8000);
+
+
 
 
 </script>
@@ -203,6 +218,20 @@ const submitReg = async (form) => {
 .key-img {
     height: 30%;
     width: 20%;
+}
+.submit-btn {
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    background-color: #0064e0;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+}
+.submit-btn:hover {
+
 }
 
 </style>

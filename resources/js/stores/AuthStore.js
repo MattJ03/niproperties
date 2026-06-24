@@ -41,6 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
         loading,
         error,
         registerLandlord,
+        registerBuyer,
     };
 });
 
