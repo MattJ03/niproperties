@@ -23,6 +23,7 @@
                 <div class="form-field">
                     <input type="email" class="input-field" id="email" v-model="form.email" placeholder=" "/>
                     <label for="email">Email</label>
+                    <span class="field-error" v-if="errors.email"> {{ errors.email }} </span>
                 </div>
                 <div class="form-field">
                     <input type="tel" class="input-field" id="contact" v-model="form.contact" placeholder=" "/>
@@ -54,6 +55,13 @@ import { useRouter } from 'vue-router';
 const loading = ref(false);
 const error = ref('');
 const role = ref('');
+const errors = reactive({
+   name: '',
+   email: '',
+   contact: '',
+   password: '',
+   password_confiration: '',
+});
 
 const form = reactive ({
     name: '',
@@ -66,9 +74,32 @@ const form = reactive ({
 const authStore = useAuthStore();
 const router = useRouter();
 
+function validate() {
+    let valid = true;
 
-const submitReg = async (form) => {
+    errors.name = form.name ? '' : 'Please enter your name';
+    errors.email = form.email ? '' : 'Please enter your email';
+    errors.contact = form.contact ? '' : 'Please enter your phone number';
+    errors.password = form.password ? '' : 'Please enter a password';
+    errors.password_confiration = form.password_confirmation ? '' : 'Please confirm your password';
+    if (!form.name || !form.email || !form.contact || !form.password || !form.password_confirmation) {
+        valid = false;
+    }
+
+    return valid;
+}
+
+
+const submitReg = async () => {
+    if(!validate()) {
+        return;
+    }
+    if(!role.value) {
+        error.value = 'Please select buyer or landlord';
+        return;
+    }
     loading.value = true;
+
     try {
         console.log(role.value);
         if(role.value === 'landlord') {
@@ -232,6 +263,12 @@ setTimeout(() => {
 }
 .submit-btn:hover {
 
+}
+.field-error {
+    display: block;
+    color: #c0392b;
+    font-size: 12px;
+    margin-top: 6px;
 }
 
 </style>
