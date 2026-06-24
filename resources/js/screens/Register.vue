@@ -4,11 +4,12 @@
             <h2 class="header-reg">Get started on NI Properties</h2>
             <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
-                <div class="buyer-square">
+                <div class="buyer-square" @click="role.value = 'buyer'">
                     <img :src="key" class="key-img" alt="key-image"/>
+
                     buyer
                 </div>
-                <div class="landlord-square">
+                <div class="landlord-square" @click="role.value = 'landlord'">
                     <img :src="home" class="key-img" alt="key-image"/>
                     landlord
                 </div>
@@ -35,6 +36,7 @@
                     <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
                     <label for="password_confirmation">Re-enter password</label>
                 </div>
+
             </div>
         </div>
     </div>
@@ -48,6 +50,11 @@ import key from '../assets/key.png';
 import api from "axios";
 import { useAuthStore } from "../stores/AuthStore.js";
 
+
+const loading = ref(false);
+const error = ref('');
+const role = ref('');
+
 const form = reactive ({
     name: '',
     email: '',
@@ -56,10 +63,20 @@ const form = reactive ({
     password_confirmation: '',
 });
 
+const authStore = useAuthStore();
 
-const selectRole = (async) => {
+const submitReg = async (form) => {
+    loading.value = true;
+    try {
+        if(role.value === 'landlord') {
+            await authStore.registerLandlord(form);
+        } else if(role.value === 'buyer') {
 
+        }
+    }
 }
+
+
 </script>
 <style scoped>
 .container {

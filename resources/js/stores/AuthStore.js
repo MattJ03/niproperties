@@ -9,25 +9,40 @@ export const useAuthStore = defineStore('auth', () => {
     const loading = ref(false);
     const error = ref('');
 
- async function registerLandlord(payload) {
-     loading.value = true;
-     try {
-         const res = api.post(`registerLandlord`, payload);
-         return res.data;
-     } catch(error) {
-         error.value = error.response?.data?.message || 'error registering as landlord';
-     }
-     finally {
-         loading.value = false;
-     }
- }
+    async function registerLandlord(payload) {
+        loading.value = true;
+        try {
+            const res = api.post(`registerLandlord`, payload);
+            return res.data;
+        } catch (error) {
+            error.value = error.response?.data?.message || 'error registering as landlord';
+        } finally {
+            loading.value = false;
+        }
+    }
 
- return {
-     name,
-     token,
-     role,
-     loading,
-     error,
-     registerLandlord,
- };
-}
+    async function registerBuyer(payload) {
+        loading.value = true;
+        try {
+            const res = api.post(`registerBuyer`, payload);
+            return res.data;
+        } catch (error) {
+            error.value = error.response?.data?.message || 'error registering as buyer';
+        }
+        finally {
+            loading.value = false;
+        }
+    }
+
+    return {
+        name,
+        token,
+        role,
+        loading,
+        error,
+        registerLandlord,
+    };
+});
+
+
+
