@@ -1,9 +1,11 @@
 <template>
     <div class="container">
         <div class="form-container">
+            <h2 class="header-reg">Get started on NI Properties</h2>
             <div class="form-card">
+
                 <div class="form-field">
-                <input type="text" class="input-field" id="name" placeholder=" "/>
+                <input type="text" class="input-field" id="name" v-model="form.name" placeholder=" "/>
                 <label for="name">Name</label>
                 </div>
             </div>
@@ -16,11 +18,12 @@ import { ref, reactive, computed } from 'vue';
 import house from '../assets/registerHouse.png';
 
 
-const form = reactive({
-    name: String,
-    email: String,
-    contact: String,
-
+const form = reactive ({
+    name: '',
+    email: '',
+    contact: '',
+    password: '',
+    password_confirmation: '',
 });
 </script>
 <style scoped>
@@ -35,6 +38,7 @@ const form = reactive({
 .form-container {
     display: flex;
     justify-content: left;
+    flex-direction: column;
     background-color: #ffffff;
     height: 70%;
     width: 35%;
@@ -81,5 +85,13 @@ const form = reactive({
     transform: translateY(0);
     font-size: 12px;
     color: #1c1e21;
+}
+
+.header-reg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
 }
 </style>
