@@ -19,6 +19,7 @@
                 <div class="form-field">
                 <input type="text" class="input-field" id="name" v-model="form.name" placeholder=" "/>
                 <label for="name">Name</label>
+                    <span class="field-error" v-if="errors.name"> {{ errors.name }}</span>
                 </div>
                 <div class="form-field">
                     <input type="email" class="input-field" id="email" v-model="form.email" placeholder=" "/>
@@ -28,14 +29,17 @@
                 <div class="form-field">
                     <input type="tel" class="input-field" id="contact" v-model="form.contact" placeholder=" "/>
                     <label for="contact">Contact number</label>
+                    <span class="field-error" v-if="errors.contact"> {{ errors.contact }}</span>
                 </div>
                 <div class="form-field">
                     <input type="password" class="input-field" id="password" v-model="form.password" placeholder=" "/>
                     <label for="password">Password</label>
+                    <span class="field-error" v-if="errors.password"> {{ errors.password }}</span>
                 </div>
                 <div class="form-field">
                     <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
                     <label for="password_confirmation">Re-enter password</label>
+                    <span class="field-error" v-if="errors.password_confiration"> {{ errors.password_confiration }}</span>
                 </div>
                 <button class="submit-btn">Submit</button>
             </form>
