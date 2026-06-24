@@ -2,7 +2,16 @@
     <div class="container">
         <div class="form-container">
             <h2 class="header-reg">Get started on NI Properties</h2>
-            <p class="header-mes">Create an account to view properties in Northern ireland and create listings</p>
+            <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
+            <div class="account-selection">
+                <div class="buyer-square">
+                    buyer
+                </div>
+                <div class="landlord-square">
+                    <img :src="key" class="key-img" alt="key-image"/>
+                    landlord
+                </div>
+            </div>
             <div class="form-card">
 
                 <div class="form-field">
@@ -33,7 +42,8 @@
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import house from '../assets/registerHouse.png';
-
+import key from '../assets/key.png';
+import api from "axios";
 
 const form = reactive ({
     name: '',
@@ -57,12 +67,12 @@ const form = reactive ({
     justify-content: left;
     flex-direction: column;
     background-color: #ffffff;
-    height: 70%;
+    height: 85%;
     width: 35%;
     border:  solid 1px #ffffff;
     border-radius: 14px;
     margin-left: 90px;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 .form-card {
     display: flex;
@@ -83,6 +93,9 @@ const form = reactive ({
 .input-field:focus {
     outline: none;
     border-color: #1877f2;;
+}
+.input-field:hover {
+    border-color: #1877f2;
 }
 .form-field {
     position: relative;
@@ -121,6 +134,40 @@ const form = reactive ({
     justify-content: center;
     align-items: center;
     font-size: 15px;
+}
+
+.account-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 85%;
+  margin-left: 45px;
+    height: 100px;
+    gap: 20px;
+    background-color: red;
+}
+.buyer-square {
+    height: 60%;
+    width: 20%;
+    background-color: #F2EFE6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+.landlord-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+    width: 20%;
+    background-color: #F2EFE6;
+    font-size: 18px;
+}
+.key-img {
+    height: 30%;
+    width: 20%;
 }
 
 </style>

@@ -1,5 +1,6 @@
 import { ref, reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
+import api from '../axios.js';
 
 export const useAuthStore = defineStore('auth', () => {
     const name = ref(localStorage.getItem('name'));
@@ -11,7 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
     async function login(email, password) {
         loading.value = true;
         try {
-
+            const res = api.get('')
         }
     }
 
