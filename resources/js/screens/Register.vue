@@ -13,6 +13,10 @@
                     <img :src="home" class="key-img" alt="key-image"/>
                     landlord
                 </div>
+
+            </div>
+            <div class="error-role-wrapper">
+                <span class="field-error" v-if="!role"> {{ error }}</span>
             </div>
             <form @submit.prevent="submitReg()" class="form-card">
 
@@ -274,5 +278,13 @@ setTimeout(() => {
     font-size: 12px;
     margin-top: 6px;
 }
-
+.error-role-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 33%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 40%;
+}
 </style>
