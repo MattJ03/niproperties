@@ -5,10 +5,11 @@
             <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
                 <div class="buyer-square">
+                    <img :src="key" class="key-img" alt="key-image"/>
                     buyer
                 </div>
                 <div class="landlord-square">
-                    <img :src="key" class="key-img" alt="key-image"/>
+                    <img :src="home" class="key-img" alt="key-image"/>
                     landlord
                 </div>
             </div>
@@ -42,8 +43,10 @@
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import house from '../assets/registerHouse.png';
+import home from '../assets/home.png';
 import key from '../assets/key.png';
 import api from "axios";
+import { useAuthStore } from "../stores/AuthStore.js";
 
 const form = reactive ({
     name: '',
@@ -52,6 +55,11 @@ const form = reactive ({
     password: '',
     password_confirmation: '',
 });
+
+
+const selectRole = (async) => {
+
+}
 </script>
 <style scoped>
 .container {
@@ -145,7 +153,7 @@ const form = reactive ({
   margin-left: 45px;
     height: 100px;
     gap: 20px;
-    background-color: red;
+
 }
 .buyer-square {
     height: 60%;
@@ -154,17 +162,27 @@ const form = reactive ({
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 3px;
+    border: dotted rgba(72, 86, 242, 0.5);;
     font-size: 18px;
+    cursor: pointer;
+    border-radius: 12px;
 }
 .landlord-square {
     display: flex;
     justify-content: center;
+
     align-items: center;
     height: 60%;
     width: 20%;
     background-color: #F2EFE6;
     font-size: 18px;
+    border-radius: 12px;
+    border: dotted rgba(72, 86, 242, 0.5);;
+    gap: 5px;
+    cursor: pointer;
 }
+
 .key-img {
     height: 30%;
     width: 20%;
