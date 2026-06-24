@@ -2,11 +2,28 @@
     <div class="container">
         <div class="form-container">
             <h2 class="header-reg">Get started on NI Properties</h2>
+            <p class="header-mes">Create an account to view properties in Northern ireland and create listings</p>
             <div class="form-card">
 
                 <div class="form-field">
                 <input type="text" class="input-field" id="name" v-model="form.name" placeholder=" "/>
                 <label for="name">Name</label>
+                </div>
+                <div class="form-field">
+                    <input type="email" class="input-field" id="email" v-model="form.email" placeholder=" "/>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-field">
+                    <input type="number" class="input-field" id="contact" v-model="form.contact" placeholder=" "/>
+                    <label for="contact">Contact number</label>
+                </div>
+                <div class="form-field">
+                    <input type="password" class="input-field" id="password" v-model="form.password" placeholder=" "/>
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-field">
+                    <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
+                    <label for="password_confirmation">Re-enter password</label>
                 </div>
             </div>
         </div>
@@ -51,7 +68,9 @@ const form = reactive ({
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
 }
 .input-field {
     height: 60px;
@@ -81,10 +100,11 @@ const form = reactive ({
 
 .input-field:focus ~ label,
 .input-field:not(:placeholder-shown) ~ label {
-    top: 10px;
+    top: 5px;
     transform: translateY(0);
     font-size: 12px;
     color: #1c1e21;
+
 }
 
 .header-reg {
@@ -93,5 +113,14 @@ const form = reactive ({
     align-items: center;
     flex-direction: column;
     font-size: 24px;
+    padding-top: 22px;
+    margin-bottom: 0;
 }
+.header-mes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
 </style>
