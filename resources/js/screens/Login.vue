@@ -16,8 +16,8 @@
                     <label for="password">Password</label>
                     <span class="error-text" v-if="errors.password"> {{errors.password }}</span>
                 </div>
-                <button class="login-btn">Log in</button>
-                <button class="create-account-btn">Create an account</button>
+                <button type="submit" class="login-btn">Log in</button>
+                <button type="button" @click="moveToRegister()" class="create-account-btn">Create an account</button>
             </form>
 
         </div>
@@ -65,10 +65,23 @@ import { useRouter } from "vue-router";
 
      errors.email = form.email ? '' : 'enter email';
      errors.password = form.password ? '' : 'enter password';
-     if(!form.email || form.password) {
+     if(!form.email || !form.password) {
          valid = false;
      }
      return valid;
+ }
+
+ async function moveToRegister() {
+     loading.value = true;
+     try {
+         await router.push({
+             name: 'register',
+         });
+     } catch(err) {
+         error.value = error.response?.data?.message || 'failed to router to register screen';
+     } finally {
+         loading.value = false;
+     }
  }
 
 </script>

@@ -134,7 +134,9 @@ const submitReg = async () => {
             await authStore.registerBuyer(form);
         }
         console.log('submitted');
-        router.push('/home');
+        router.push({
+            name: 'login'
+        });
     } catch (error) {
         error.value = error.response?.message || 'error submitting';
     } finally {
@@ -296,7 +298,7 @@ setTimeout(() => {
     cursor: pointer;
 }
 .landlord-square:hover {
-    background-color: #1877f2;
+
     transition: 0.3s;
 }
 .landlord-square.active span,
