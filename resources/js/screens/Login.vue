@@ -7,8 +7,12 @@
            </div>
             <form class="form-fields">
                 <div class="form-field">
-                <input type="email" class="input-field" id="name" placeholder=" "/>
-                <label for="name">Name</label>
+                <input type="email" class="input-field" id="email" placeholder=" "/>
+                <label for="name">Email</label>
+                </div>
+                <div class="form-field">
+                    <input type="password" class="input-field" id="password" placeholder=" " />
+                    <label for="password">Password</label>
                 </div>
             </form>
         </div>
@@ -29,7 +33,7 @@ import logo from '../assets/nipropertieslogo.png';
 .form-card {
 
     height: 80%;
-    width: 35%;
+    width: 32%;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 14px;
@@ -40,6 +44,8 @@ import logo from '../assets/nipropertieslogo.png';
     flex-direction: row;
     align-items: center;
     gap: 60px;
+    padding-top: 10px;
+    padding-bottom: 75px;
 }
 .logo-img {
     height: 18%;
@@ -47,8 +53,10 @@ import logo from '../assets/nipropertieslogo.png';
 }
 .form-fields {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 35px;
 }
 .input-field {
     height: 60px;
