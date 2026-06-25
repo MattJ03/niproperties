@@ -1,6 +1,7 @@
 import { ref, reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
 import api from '../axios.js';
+import {local} from "laravel-vite-plugin/fonts";
 
 export const useAuthStore = defineStore('auth', () => {
     const name = ref(localStorage.getItem('name'));
@@ -41,6 +42,9 @@ export const useAuthStore = defineStore('auth', () => {
             token.value = res.data.token;
             role.value = res.data.role;
             name.value = res.data.user.name;
+            localStorage.setItem('token', token.value);
+            localStorage.setItem('role', role.value);
+            localStorage.setItem('name', role.value);
         } catch (error) {
             error.value = error.response?.data?.message || 'error logging in';
         } finally {
