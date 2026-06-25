@@ -17,6 +17,7 @@
                     <span class="error-text" v-if="errors.password"> {{errors.password }}</span>
                 </div>
                 <button class="login-btn">Log in</button>
+                <button class="create-account-btn">Create an account</button>
             </form>
 
         </div>
@@ -158,6 +159,21 @@ import { useRouter } from "vue-router";
 }
     .login-btn:hover {
         background-color: #2d6e53;
+}
+
+.create-account-btn {
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    background-color: #fffffff3;
+    color: #1877f2;
+    font-size: 15px;
+    cursor: pointer;
+    border: solid 1px #0064e0;
+}
+.create-account-btn:hover {
+    background-color: #F2EFE6;
 }
 
 .error-text {
