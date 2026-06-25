@@ -50,7 +50,8 @@
                 <div class="form-field">
                     <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
                     <label for="password_confirmation">Re-enter password</label>
-                    <span class="field-error" v-if="errors.password_confiration"> {{ errors.password_confiration }}</span>
+                    <span class="field-error" v-if="errors.diff_passwords"> {{ errors.diff_passwords }}</span>
+
                 </div>
                 <button class="submit-btn">Submit</button>
                 <button @click="moveToLogin()" class="login-btn">Already have an account</button>
@@ -68,7 +69,7 @@ import house from '../assets/registerHouse.png';
 import home from '../assets/home.png';
 import niproperties from '../assets/nipropertieslogo.png';
 import key from '../assets/key.png';
-import api from "axios";
+import api, {formToJSON} from "axios";
 import { useAuthStore } from "../stores/AuthStore.js";
 import { useRouter } from 'vue-router';
 
@@ -81,6 +82,7 @@ const errors = reactive({
    contact: '',
    password: '',
    password_confiration: '',
+    diff_passwords: ''
 });
 
 const form = reactive ({
@@ -104,6 +106,9 @@ function validate() {
     errors.password_confiration = form.password_confirmation ? '' : 'Please confirm your password';
     if (!form.name || !form.email || !form.contact || !form.password || !form.password_confirmation) {
         valid = false;
+    } else if(form.password !== form.password_confirmation) {
+        errors.diff_passwords = 'Passwords do not match';
+        valid = false;
     }
 
     return valid;
@@ -118,6 +123,7 @@ const submitReg = async () => {
         error.value = 'Please select buyer or landlord';
         return;
     }
+
     loading.value = true;
 
     try {
