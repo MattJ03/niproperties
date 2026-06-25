@@ -4,12 +4,16 @@
             <h2 class="header-reg">Get started on NI Properties</h2>
             <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
-                <div class="buyer-square" @click="role = 'buyer'">
+                <div class="buyer-square"
+                     :class="{ active: role === 'buyer'}"
+                     @click="role = 'buyer'">
                     <img :src="key" class="key-img" alt="key-image"/>
 
                     buyer
                 </div>
-                <div class="landlord-square" @click="role = 'landlord'">
+                <div class="landlord-square"
+                     :class="{ active: role === 'landlord'}"
+                     @click="role = 'landlord'">
                     <img :src="home" class="key-img" alt="key-image"/>
                     landlord
                 </div>
@@ -239,6 +243,9 @@ setTimeout(() => {
     cursor: pointer;
     border-radius: 12px;
 }
+.buyer-square.active {
+    background-color: #1877f2;
+}
 .landlord-square {
     display: flex;
     justify-content: center;
@@ -253,7 +260,9 @@ setTimeout(() => {
     gap: 5px;
     cursor: pointer;
 }
-
+.landlord-square.active {
+    background-color: #1877f2;
+}
 .key-img {
     height: 30%;
     width: 20%;

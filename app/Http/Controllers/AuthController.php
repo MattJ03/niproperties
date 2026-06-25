@@ -34,6 +34,7 @@ class AuthController extends Controller
     }
 
     public function registerBuyer(Request $request) {
+        Log::info('method running');
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
