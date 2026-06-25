@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <div class="form-container">
+            <div class="top-of-form">
+                <img :src="niproperties" class="logo-img" alt="logo" />
             <h2 class="header-reg">Get started on NI Properties</h2>
+            </div>
             <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
                 <div class="buyer-square"
@@ -50,8 +53,11 @@
                     <span class="field-error" v-if="errors.password_confiration"> {{ errors.password_confiration }}</span>
                 </div>
                 <button class="submit-btn">Submit</button>
-                <button class="login-btn">Already have an account</button>
+                <button @click="moveToLogin()" class="login-btn">Already have an account</button>
             </form>
+        </div>
+        <div class="image-container">
+            <img :src="house" class="large-image" alt="house"/>
         </div>
     </div>
 
@@ -60,6 +66,7 @@
 import { ref, reactive, computed } from 'vue';
 import house from '../assets/registerHouse.png';
 import home from '../assets/home.png';
+import niproperties from '../assets/nipropertieslogo.png';
 import key from '../assets/key.png';
 import api from "axios";
 import { useAuthStore } from "../stores/AuthStore.js";
@@ -134,7 +141,11 @@ const moveToLogin = async () => {
     try {
        await router.push({
             name: 'login'
-        })
+        });
+    } catch (error) {
+        error.value = error.response?.data?.message || 'failed to move to login screen';
+    } finally {
+        loading.value = false;
     }
 }
 
@@ -153,6 +164,7 @@ setTimeout(() => {
     margin-right: 20px;
     margin-top: 15px;
     height: 100dvh;
+    gap: 80px;
 
 }
 .form-container {
@@ -173,6 +185,8 @@ setTimeout(() => {
     align-items: center;
     flex-direction: column;
     gap: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin-top: 25px;
 }
 .input-field {
@@ -185,10 +199,10 @@ setTimeout(() => {
 }
 .input-field:focus {
     outline: none;
-    border-color: #1877f2;;
+    border-color: #1F4D3A;;
 }
 .input-field:hover {
-    border-color: #1877f2;
+    border-color: #1F4D3A;
 }
 .form-field {
     position: relative;
@@ -214,13 +228,8 @@ setTimeout(() => {
 }
 
 .header-reg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     font-size: 24px;
-    padding-top: 22px;
-    margin-bottom: 0;
+    margin: 0;
 }
 .header-mes {
     display: flex;
@@ -248,17 +257,22 @@ setTimeout(() => {
     justify-content: center;
     align-items: center;
     gap: 3px;
-    border: dotted rgba(72, 86, 242, 0.5);;
+    border: solid 1px #000000;
     font-size: 18px;
     cursor: pointer;
     border-radius: 12px;
 }
 .buyer-square:hover {
+    border-color: #1F4D3A;
     transition: 0.3s;
-    background-color: #1877f2;
 }
 .buyer-square.active {
-    background-color: #1877f2;
+    background-color: #1F4D3A;
+    border-color: #1F4D3A;
+}
+.buyer-square.active span,
+.buyer-square.active {
+    color: #FFFFFF;
 }
 .landlord-square {
     display: flex;
@@ -270,7 +284,7 @@ setTimeout(() => {
     background-color: #F2EFE6;
     font-size: 18px;
     border-radius: 12px;
-    border: dotted rgba(72, 86, 242, 0.5);;
+    border: 1px solid #000000;
     gap: 5px;
     cursor: pointer;
 }
@@ -278,9 +292,12 @@ setTimeout(() => {
     background-color: #1877f2;
     transition: 0.3s;
 }
+.landlord-square.active span,
 .landlord-square.active {
-    background-color: #1877f2;
+    background-color: #1F4D3A;
+    color: #FFFFFF;
 }
+
 .key-img {
     height: 30%;
     width: 20%;
@@ -290,7 +307,7 @@ setTimeout(() => {
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 30px;
-    background-color: #0064e0;
+    background-color: #1F4D3A;
     color: #ffffff;
     font-size: 15px;
     cursor: pointer;
@@ -328,5 +345,28 @@ setTimeout(() => {
 .login-btn:hover {
     background-color:#F2EFE6;
 }
+.top-of-form {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+   margin-top: 20px;
 
+}
+
+.logo-img {
+
+    width: 140px;
+}
+
+.image-container {
+    margin-top: 60px;
+    height: 75%;
+    margin: auto;
+    margin-right: 90px;
+}
+.large-image {
+   height: 75dvh;
+   width: 100%;
+}
 </style>
