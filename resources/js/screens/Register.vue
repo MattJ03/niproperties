@@ -50,6 +50,7 @@
                     <span class="field-error" v-if="errors.password_confiration"> {{ errors.password_confiration }}</span>
                 </div>
                 <button class="submit-btn">Submit</button>
+                <button class="login-btn">Already have an account</button>
             </form>
         </div>
     </div>
@@ -243,6 +244,10 @@ setTimeout(() => {
     cursor: pointer;
     border-radius: 12px;
 }
+.buyer-square:hover {
+    transition: 0.3s;
+    background-color: #1877f2;
+}
 .buyer-square.active {
     background-color: #1877f2;
 }
@@ -259,6 +264,10 @@ setTimeout(() => {
     border: dotted rgba(72, 86, 242, 0.5);;
     gap: 5px;
     cursor: pointer;
+}
+.landlord-square:hover {
+    background-color: #1877f2;
+    transition: 0.3s;
 }
 .landlord-square.active {
     background-color: #1877f2;
@@ -279,7 +288,7 @@ setTimeout(() => {
     border: none;
 }
 .submit-btn:hover {
-
+     background-color: #005AC9;
 }
 .field-error {
     display: block;
@@ -296,4 +305,19 @@ setTimeout(() => {
     margin-bottom: 0;
     margin-right: 40%;
 }
+.login-btn {
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    background-color: #fffffff3;
+    color: #0064e0;
+    font-size: 15px;
+    cursor: pointer;
+    border: solid 1px #0064e0;
+}
+.login-btn:hover {
+    background-color:#F2EFE6;
+}
+
 </style>
