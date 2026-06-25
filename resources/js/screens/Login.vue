@@ -5,16 +5,20 @@
                <img :src="logo" class="logo-img" alt="logo"/>
                <h2>Log in</h2>
            </div>
-            <form class="form-fields">
+            <form @submit.prevent="loginUser()" class="form-fields">
                 <div class="form-field">
-                <input type="email" class="input-field" id="email" placeholder=" "/>
-                <label for="name">Email</label>
+                <input type="email" v-model="form.email" class="input-field" id="email" placeholder=" "/>
+                <label for="email">Email</label>
+                    <span class="error-text" v-if="errors.email"> {{ errors.email }}</span>
                 </div>
                 <div class="form-field">
-                    <input type="password" class="input-field" id="password" placeholder=" " />
+                    <input type="password" v-model="form.password" class="input-field" id="password" placeholder=" " />
                     <label for="password">Password</label>
+                    <span class="error-text" v-if="errors.password"> {{errors.password }}</span>
                 </div>
+                <button class="login-btn">Log in</button>
             </form>
+
         </div>
     </div>
 </template>
@@ -22,6 +26,8 @@
 import logo from '../assets/nipropertieslogo.png';
 import { ref, reactive, computed } from "vue";
 import { useAuthStore } from "../stores/AuthStore.js";
+import { useRouter } from "vue-router";
+
 
  const loading = ref(false);
  const error = ref('');
@@ -30,6 +36,39 @@ import { useAuthStore } from "../stores/AuthStore.js";
     password: '',
 });
 
+ const authStore = useAuthStore();
+ const router = useRouter();
+ const errors = reactive({
+     email: '',
+     password: '',
+ });
+
+ async function loginUser() {
+     if(!validate()) {
+         return;
+     }
+     try {
+     await authStore.login(form);
+     await router.push({
+         name: 'home',
+     });
+ } catch (err) {
+         error.value = error.response?.data?.message || 'Failed to login';
+     } finally {
+         loading.value = false;
+     }
+ }
+
+ function validate() {
+     let valid = true;
+
+     errors.email = form.email ? '' : 'enter email';
+     errors.password = form.password ? '' : 'enter password';
+     if(!form.email || form.password) {
+         valid = false;
+     }
+     return valid;
+ }
 
 </script>
 <style scoped>
@@ -104,6 +143,29 @@ import { useAuthStore } from "../stores/AuthStore.js";
     transform: translateY(0);
     font-size: 12px;
     color: #1c1e21;
+
+}
+.login-btn {
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    background-color: #1F4D3A;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+}
+    .login-btn:hover {
+        background-color: #2d6e53;
+}
+
+.error-text {
+    display: block;
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 6px;
+    margin-left: 8px;
 
 }
 </style>

@@ -72,7 +72,7 @@ class AuthController extends Controller
         if(!$user || !Hash::check($credentials['password'], $user->password)) {
             return response()->json([
                 'message' => 'These credentials do not match our records.',
-            ]);
+            ], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
