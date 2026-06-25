@@ -129,6 +129,15 @@ const submitReg = async () => {
     }
 }
 
+const moveToLogin = async () => {
+    loading.value = true;
+    try {
+       await router.push({
+            name: 'login'
+        })
+    }
+}
+
 setTimeout(() => {
     console.log(role.value);
 }, 8000);
