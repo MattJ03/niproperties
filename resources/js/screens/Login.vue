@@ -20,6 +20,17 @@
 </template>
 <script setup>
 import logo from '../assets/nipropertieslogo.png';
+import { ref, reactive, computed } from "vue";
+import { useAuthStore } from "../stores/AuthStore.js";
+
+ const loading = ref(false);
+ const error = ref('');
+ const form = reactive({
+    email: '',
+    password: '',
+});
+
+
 </script>
 <style scoped>
 .container {
