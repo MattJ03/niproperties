@@ -160,11 +160,11 @@ setTimeout(() => {
 <style scoped>
 .container {
     display: flex;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 15px;
-    height: 100dvh;
-    gap: 80px;
+    gap: 60px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px;
+    min-height: 100vh;
 
 }
 .form-container {
@@ -173,11 +173,12 @@ setTimeout(() => {
     flex-direction: column;
     background-color: #ffffff;
     height: 85%;
-    width: 35%;
+    width: 45%;
     border:  solid 1px #ffffff;
     border-radius: 14px;
     margin-left: 90px;
     margin-top: 60px;
+    padding-bottom: 30px;
 }
 .form-card {
     display: flex;
@@ -360,13 +361,14 @@ setTimeout(() => {
 }
 
 .image-container {
-    margin-top: 60px;
-    height: 75%;
-    margin: auto;
-    margin-right: 90px;
+  height: 100dvh;
+    margin-top: 80px;
+
 }
 .large-image {
-   height: 75dvh;
+   height: 80%;
+    object-fit: cover;
    width: 100%;
+    border-radius: 12px;
 }
 </style>
