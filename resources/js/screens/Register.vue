@@ -315,7 +315,7 @@ setTimeout(() => {
     border: none;
 }
 .submit-btn:hover {
-     background-color: #005AC9;
+     background-color: #2d6e53;
 }
 .field-error {
     display: block;
