@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Http\Controllers\AuthController;
 use Database\Seeders\DatabaseSeeder;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -152,7 +152,46 @@ class AuthControllerTest extends TestCase
     }
 
     public function test_user_login_works(): void {
+       $user = User::factory()->create([
+           'email' => 'fake@gmail.com',
+           'password' => 'password',
+       ]);
 
+       $response = $this->postJson('/api/login', [
+           'email' => 'fake@gmail.com',
+           'password' => 'password',
+       ]);
+
+       $response->assertStatus(200);
+    }
+
+    public function test_login_returns_token(): void {
+        $user = User::factory()->create([
+            'password' => Hash::make('password123'),
+        ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => $user['email'],
+            'password' => 'password123',
+        ]);
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'token',
+        ]);
+        $this->assertNotEmpty($response->json()['token']);
+
+    }
+
+    public function test_login_requires_same_password(): void {
+        $user = User::factory()->create([
+            'password' => Hash::make('password123'),
+        ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => $user['email'],
+            'password' => 'password123',
+        ]);
+        $response->assertStatus(200);
     }
 
 }
