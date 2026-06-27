@@ -19,6 +19,7 @@
                 <button type="submit" class="login-btn">Log in</button>
                 <button type="button" @click="moveToRegister()" class="create-account-btn">Create an account</button>
             </form>
+            <router-link class="forgot-password" to="reset-password">forgot your password?</router-link>
 
         </div>
     </div>
@@ -196,5 +197,12 @@ import { useRouter } from "vue-router";
     margin-top: 6px;
     margin-left: 8px;
 
+}
+.forgot-password {
+    color: #1F4D3A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 }
 </style>

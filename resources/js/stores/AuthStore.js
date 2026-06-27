@@ -44,7 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
             name.value = res.data.user.name;
             localStorage.setItem('token', token.value);
             localStorage.setItem('role', role.value);
-            localStorage.setItem('name', role.value);
+            localStorage.setItem('name', name.value);
         } catch (err) {
             error.value = error.response?.data?.message || 'error logging in';
             throw err;
