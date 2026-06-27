@@ -203,6 +203,6 @@ import { useRouter } from "vue-router";
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 </style>
