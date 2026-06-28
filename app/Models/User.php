@@ -32,4 +32,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected function listings() {
+        return $this->hasMany(Listing::class, 'landlord_id');
+    }
 }
