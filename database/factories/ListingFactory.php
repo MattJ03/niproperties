@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Listing;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Database\Factories\UserFactory;
+use App\Models\User;
 
 /**
  * @extends Factory<Listing>
@@ -19,7 +21,13 @@ class ListingFactory extends Factory
     {
         return [
             'address_line_1' => fake()->streetAddress(),
-            ''
+            'town' => fake()->city(),
+            'county' => fake()->country(),
+            'postcode' => fake()->postcode(),
+            'price' => fake()->numberBetween(50000, 100000),
+            'no_of_rooms' => fake()->numberBetween(1, 10),
+            'type' => fake()->randomElement(['house', 'apartment', 'commercial']),
+            'sale_status' => fake()->randomElement(['open', 'closed']),
         ];
     }
 }
