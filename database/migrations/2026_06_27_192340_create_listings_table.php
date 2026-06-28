@@ -14,8 +14,17 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('address_line_1');
-            $table->string('address_line_2');
-            $table->string()
+            $table->string('address_line_2')->nullable();
+            $table->string('town');
+            $table->string('county');
+            $table->string('postcode');
+            $table->integer('no_of_rooms');
+            $table->string('type');
+            $table->enum('sale_status', ['open', 'closed'])->default('open');
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->unsignedInteger('views')->default(0);
+            $table->foreignId('landlord_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
