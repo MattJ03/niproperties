@@ -13,7 +13,7 @@ class ListingPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        return $user->hasRole('landlord' && $listing->landlord_id === $user->id);
+         return $user->hasRole('landlord') && $listing->landlord_id === $user->id;
     }
 
     /**
@@ -49,7 +49,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        return false;
+        return $user->hasRole('landlord') && $listing->landlord_id === $user->id;
     }
 
     /**
@@ -57,7 +57,7 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        return false;
+        return $user->hasRole('landlord') && $listing->landlord_id === $user->id;
     }
 
     /**
@@ -65,6 +65,6 @@ class ListingPolicy
      */
     public function forceDelete(User $user, Listing $listing): bool
     {
-        return false;
+        return $user->hasRole('landlord') && $listing->landlord_id === $user->id;
     }
 }
