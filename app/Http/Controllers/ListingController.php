@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use App\Policies\ListingPolicy;
 
 class ListingController extends Controller
 {
@@ -12,7 +13,25 @@ class ListingController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->id();
+        $this->authorize('viewAny', Listing::class);
+
+        $listings = Listing::where('status', 'open')
+                             ->where('landlord_id', '!==', $user->id)
+                              ->orderBy('created_at', 'desc')
+                              ->paginate(20);
+
+        if($listings->count() <= 0) {
+            return response()->json([
+                'message' => 'No listings found.',
+                'listings' => $listings,
+            ], 200);
+        }
+
+        return response()->json([
+            'listings' => $listings,
+            'message' => 'listings found',
+        ]);
     }
 
     /**
