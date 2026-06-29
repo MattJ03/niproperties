@@ -21,7 +21,7 @@ class ListingPolicy
      */
     public function view(User $user, Listing $listing): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,11 @@ class ListingPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        if($user->hasRole('landlord')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -37,7 +41,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        return false;
+        return $user->hasRole('landlord' && $listing->landlord_id === $user->id);
     }
 
     /**
