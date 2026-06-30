@@ -105,4 +105,9 @@ class ListingControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(10, $response->json('listings.data'));
     }
+
+    public function test_store_listing_saves_to_db(): void {
+        $landlord = User::factory()->create();
+        $landlord->assignRole('landlord');
+    }
 }

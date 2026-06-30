@@ -9,3 +9,7 @@ Route::post('/registerLandlord', [AuthController::class, 'registerLandlord']);
 Route::post('/registerBuyer', [AuthController::class, 'registerBuyer']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/listingsIndex', [ListingController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/storeListing', [ListingController::class, 'store']);
+});
