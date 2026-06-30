@@ -115,7 +115,60 @@ class ListingControllerTest extends TestCase
 
         $response = $this->postJson('/api/storeListing', $payload);
         $response->assertStatus(201);
-
-
+        $this->assertDatabaseHas('listings', [
+            'landlord_id' => $landlord->id,
+        ]);
     }
+
+    public function test_store_listing_requires_landlord_id(): void {
+        $user = User::factory()->create();
+        $user->assignRole('buyer');
+        $this->actingAs($user);
+
+        $listing = Listing::factory()->make([
+            'landlord_id' => $user->id,
+        ]);
+
+        $response = $this->postJson('/api/storeListing', $listing->toArray());
+        $response->assertStatus(403);
+        }
+
+        public function test_guest_cannot_create_listing(): void {
+
+        $listing = Listing::factory()->make()->toArray();
+        $response = $this->postJson('/api/storeListing', $listing);
+        $response->assertStatus(401);
+
+        }
+
+        public function test_no_mass_assignment_bug_even_when_other_landlord_tries_it(): void {
+        $user = User::factory()->create();
+        $user->assignRole('landlord');
+        $this->actingAs($user);
+
+        $user2 = User::factory()->create()->assignRole('landlord');
+        $user2->id = 2;
+
+        $listing = Listing::factory()->make([
+            'landlord_id' => $user2->id,
+        ])->toArray();
+
+        $response = $this->postJson('/api/storeListing', $listing);
+        $response->assertStatus(201);
+        $this->assertDatabaseMissing('listings', [
+            'landlord_id' => $user2->id,
+        ]);
+        }
+
+        public function test_guest_cannot_store_listing_for_landlord_id_through_mass_assignment_bug(): void {
+        $landlord = User::factory()->create();
+        $landlord->assignRole('landlord');
+        $landlordId = $landlord->id;
+
+            $listing = Listing::factory()->make([
+                'landlord_id' => $landlordId,
+            ])->toArray();
+            $response = $this->postJson('/api/storeListing', $listing);
+            $response->assertStatus(401);
+        }
 }
