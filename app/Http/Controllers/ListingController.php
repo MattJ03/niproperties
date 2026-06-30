@@ -92,12 +92,24 @@ class ListingController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Listing $listing)
+    public function show(Request $request, Listing $listing)
     {
-        //
+        $user = $request->user();
+        if($user->hasRole('landlord') && $user->id === $listing->landlord_id) {
+            return response()->json([
+                'listing' => $listing,
+                'message' => 'listing found',
+            ]);
+        }
+        $listing->update([
+            'views' => $listing->increment('views'),
+        ]);
+
+        return response()->json([
+            'listing' => $listing,
+            'message' => 'listing found and views incremented',
+        ]);
+
     }
 
     /**
