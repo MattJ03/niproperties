@@ -8,4 +8,4 @@ use App\Http\Controllers\ListingController;
 Route::post('/registerLandlord', [AuthController::class, 'registerLandlord']);
 Route::post('/registerBuyer', [AuthController::class, 'registerBuyer']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/index', [ListingController::class, 'index']);
+Route::get('/listingsIndex', [ListingController::class, 'index']);

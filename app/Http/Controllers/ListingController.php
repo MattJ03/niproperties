@@ -3,36 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use App\Policies\ListingPolicy;
 use App\Services\GeocodingService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ListingController extends Controller
 {
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index()
-    {
-        $user = auth()->id();
-        $this->authorize('viewAny', Listing::class);
+  public function index()
+  {
 
-        $listings = Listing::where('status', 'open')
-                             ->where('landlord_id', '!==', $user->id)
-                              ->orderBy('created_at', 'desc')
-                              ->paginate(20);
+      $userId = auth()->id();
 
-        if($listings->count() <= 0) {
-            return response()->json([
-                'message' => 'No listings found.',
-                'listings' => $listings,
-            ], 200);
-        }
+      $query = Listing::where('sale_status', 'open');
 
+      if ($userId) {
+          $query->where('landlord_id', '!=', $userId);
+      }
 
-        return response()->json([
-            'listings' => $listings,
-            'message' => 'listings found',
-        ]);
-    }
+      if($query->count() < 1) {
+          return response()->json([
+              'message' => 'there are no listings',
+              'listings' => $query,
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $query->orderBy('created_at', 'desc')->paginate(20),
+          'message' => 'listings found',
+      ]);
+  }
 
     /**
      * Show the form for creating a new resource.

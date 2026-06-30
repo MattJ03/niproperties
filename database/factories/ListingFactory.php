@@ -19,6 +19,10 @@ class ListingFactory extends Factory
      */
     public function definition(): array
     {
+
+        $landlord = User::factory()->create();
+        $landlord->assignRole('landlord');
+
         return [
             'address_line_1' => fake()->streetAddress(),
             'town' => fake()->city(),
@@ -28,6 +32,7 @@ class ListingFactory extends Factory
             'no_of_rooms' => fake()->numberBetween(1, 10),
             'type' => fake()->randomElement(['house', 'apartment', 'commercial']),
             'sale_status' => fake()->randomElement(['open', 'closed']),
+            'landlord_id' => $landlord->id,
         ];
     }
 }

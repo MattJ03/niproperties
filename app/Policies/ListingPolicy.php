@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ListingPolicy
 {
