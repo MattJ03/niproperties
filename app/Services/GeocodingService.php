@@ -18,8 +18,25 @@ class GeocodingService {
 
         $result = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $address . ' United Kingdom',
-            'key' => config('services.google.key'),
+            'key' => config('services.google.geocoding_key'),
             'components' => 'country:GB',
         ]);
-    }
+
+        $data = $result->json();
+
+        if(($data['status'] ?? null) !== 'OK') {
+            return null;
+        }
+
+            $location = $data['results'][0]['geometry']['location'];
+
+            $lat = $location['lat'];
+            $lng = $location['lng'];
+
+            return [
+                'lat' => $lat,
+                'lng' => $lng,
+            ];
+        }
+
 }

@@ -36,7 +36,7 @@ return [
     ],
 
     'google' => [
-        'key' => env('GOOGLE_GEOCODING_API_KEY'),
+        'geocoding_key' => env('GOOGLE_GEOCODING_API_KEY'),
     ]
 
 ];
