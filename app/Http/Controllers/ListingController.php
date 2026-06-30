@@ -34,6 +34,7 @@ class ListingController extends Controller
 
       return response()->json([
           'listings' => $query->orderBy('created_at', 'desc')->paginate(20),
+          'listings_count' => $query->count(),
           'message' => 'listings found',
       ]);
   }

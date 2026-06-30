@@ -31,7 +31,7 @@ class ListingFactory extends Factory
             'price' => fake()->numberBetween(50000, 100000),
             'no_of_rooms' => fake()->numberBetween(1, 10),
             'type' => fake()->randomElement(['house', 'apartment', 'commercial']),
-            'sale_status' => fake()->randomElement(['open', 'closed']),
+            'sale_status' => 'open',
             'landlord_id' => $landlord->id,
         ];
     }

@@ -8,6 +8,8 @@ use Tests\TestCase;
 use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Database\Factories\ListingFactory;
+use Database\Factories\UserFactory;
+use App\Models\User;
 
 class ListingControllerTest extends TestCase
 {
@@ -29,7 +31,38 @@ class ListingControllerTest extends TestCase
 
         $response = $this->getJson('/api/listingsIndex');
         $response->assertStatus(200);
-
-
     }
+
+    public function test_index_returns_the_correct_number_of_listings(): void {
+        $listings = Listing::factory()->count(10)->create();
+
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $this->assertDatabaseCount('listings', 10);
+    }
+
+    public function test_doesnt_return_listings_of_the_logged_in_landlord(): void {
+
+        $user = User::factory()->create();
+        $user->assignRole('landlord');
+        $this->actingAs($user);
+
+        $listings = Listing::factory()->count(10)->create([
+            'sale_status' => 'open',
+        ]);
+
+        $listingsMine = Listing::factory()->count(10)->create([
+            'sale_status' => 'open',
+            'landlord_id' => $user->id,
+        ]);
+
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $this->assertDatabaseCount('listings', 20);
+        $response->assertJsonFragment([
+            'listings_count' => 10,
+        ]);
+    }
+
+    public function test_
 }
