@@ -42,17 +42,47 @@ class ListingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, GeocodingService $geocodingService)
     {
-        //
+        $user = auth()->user();
+        $this->authorize('create', $user);
+
+        $validatedData = $request->validate([
+           'address_line_1' => 'required|string|max:255|min:3',
+           'address_line_2' => 'nullable|string|max:255|min:3',
+            'town' => 'nullable|string|max:255|min:3',
+            'county' => 'required|string|max:40|min:3',
+            'postcode' => 'required|string|max:40|min:3',
+            'price' => 'required|numeric|min:1|max:100000000',
+            'no_of_rooms' => 'required|numeric|min:1|max:45',
+            'type' => 'required|string|max:40|min:3',
+            'sale_status' => 'required|in:open',
+            'latitude' => 'nullable|decimal:10',
+            'longitude' => 'nullable|decimal:10',
+        ]);
+
+        $listing = Listing::create([
+            'address_line_1' => $validatedData['address_line_1'],
+            'address_line_2' => $validatedData['address_line_2'],
+            'town' => $validatedData['town'],
+            'county' => $validatedData['county'],
+            'postcode' => $validatedData['postcode'],
+            'price' => $validatedData['price'],
+            'no_of_rooms' => $validatedData['no_of_rooms'],
+            'type' => $validatedData['type'],
+            'sale_status' => $validatedData['sale_status'],
+            'landlord_id' => $user->id,
+            ]);
+
+        return response()->json([
+            'listing' => $listing,
+            'message' => 'listing created',
+        ], 201);
     }
 
     /**
