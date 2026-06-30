@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use App\Policies\ListingPolicy;
+use App\Services\GeocodingService;
 
 class ListingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $user = auth()->id();
@@ -27,6 +26,7 @@ class ListingController extends Controller
                 'listings' => $listings,
             ], 200);
         }
+
 
         return response()->json([
             'listings' => $listings,
