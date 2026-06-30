@@ -109,5 +109,13 @@ class ListingControllerTest extends TestCase
     public function test_store_listing_saves_to_db(): void {
         $landlord = User::factory()->create();
         $landlord->assignRole('landlord');
+        $this->actingAs($landlord);
+
+        $payload = Listing::factory()->make()->toArray();
+
+        $response = $this->postJson('/api/storeListing', $payload);
+        $response->assertStatus(201);
+
+
     }
 }

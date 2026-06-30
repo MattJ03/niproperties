@@ -49,21 +49,19 @@ class ListingController extends Controller
      */
     public function store(Request $request, GeocodingService $geocodingService)
     {
-        $user = auth()->user();
-        $this->authorize('create', $user);
+
+        $this->authorize('create', Listing::class);
 
         $validatedData = $request->validate([
            'address_line_1' => 'required|string|max:255|min:3',
            'address_line_2' => 'nullable|string|max:255|min:3',
-            'town' => 'nullable|string|max:255|min:3',
+            'town' => 'required|string|max:255|min:3',
             'county' => 'required|string|max:40|min:3',
             'postcode' => 'required|string|max:40|min:3',
             'price' => 'required|numeric|min:1|max:100000000',
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
             'sale_status' => 'required|in:open',
-            'latitude' => 'nullable|decimal:10',
-            'longitude' => 'nullable|decimal:10',
         ]);
 
         $listing = Listing::create([
@@ -76,8 +74,17 @@ class ListingController extends Controller
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
             'sale_status' => $validatedData['sale_status'],
-            'landlord_id' => $user->id,
+            'landlord_id' => $request->user()->id,
             ]);
+
+        $cords = $geocodingService->geocode($listing);
+
+        if($cords) {
+            $listing->update([
+                'latitude' => $cords['lat'],
+                'longitude' => $cords['lng'],
+            ]);
+        }
 
         return response()->json([
             'listing' => $listing,
