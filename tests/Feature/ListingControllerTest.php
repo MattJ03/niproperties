@@ -64,5 +64,45 @@ class ListingControllerTest extends TestCase
         ]);
     }
 
-    public function test_
+    public function test_index_returns_all_listings_for_landlord_if_none_are_theres(): void {
+        $user = User::factory()->create();
+        $user->assignRole('landlord');
+        $this->actingAs($user);
+
+        $listings = Listing::factory()->count(10)->create([]);
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'listings_count' => 10,
+        ]);
+    }
+
+    public function test_index_sends_message_saying_no_listings(): void {
+
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'message' => 'there are no listings',
+        ]);
+    }
+
+    public function test_index_doesnt_return_listings_with_a_non_open_status(): void {
+        $listings = Listing::factory()->count(10)->create([
+            'sale_status' => 'closed',
+        ]);
+
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'message' => 'there are no listings',
+        ]);
+    }
+
+    public function test_get_paginated_results_from_listings(): void {
+        $listings = Listing::factory()->count(10)->create();
+
+        $response = $this->getJson('/api/listingsIndex');
+        $response->assertStatus(200);
+        $this->assertCount(10, $response->json('listings.data'));
+    }
 }
