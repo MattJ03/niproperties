@@ -229,6 +229,70 @@ class ListingControllerTest extends TestCase
         }
 
         public function test_update_method_updates_fields(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
 
+        $listing = Listing::factory()->create([
+            'landlord_id' => $user->id,
+        ]);
+
+        $updatedListing = Listing::factory()->make([
+            'landlord_id' => $user->id,
+            'town' => 'updatedTown'
+        ])->toArray();
+
+        $response = $this->putJson('/api/updateListing/' . $listing->id, $updatedListing);
+
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('listings', [
+            'town' => 'updatedTown',
+        ]);
         }
+
+        public function test_cant_update_listing_which_isnt_yours(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
+        $listing = Listing::factory()->create();
+
+        $updatedListing = Listing::factory()->make([
+           'landlord_id' => $user->id,
+        ])->toArray();
+
+        $response = $this->putJson('/api/updateListing/' . $listing->id, $updatedListing);
+        $response->assertStatus(403);
+        }
+
+        public function test_update_returns_the_updated_listing(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
+        $listing = Listing::factory()->create([
+            'landlord_id' => $user->id,
+        ]);
+
+        $updatedListing = Listing::factory()->make([
+            'landlord_id' => $user->id,
+            'county' => 'fakeCity',
+        ])->toArray();
+
+        $response = $this->putJson('/api/updateListing/' . $listing->id, $updatedListing);
+        $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'listing',
+        ]);
+        }
+
+        public function test_delete_method_deletes_listing(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
+
+        $listing = Listing::factory()->create([
+            'landlord_id' => $user->id,
+        ]);
+
+        $this->assertDatabaseCount('listings', 1);
+
+        $response = $this->
+        }
+
+
 }

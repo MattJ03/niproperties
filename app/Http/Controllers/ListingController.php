@@ -150,9 +150,14 @@ class ListingController extends Controller
         ], 201);
     }
 
+    public function delete(Listing $listing) {
+      $user = auth()->user();
 
-    public function destroy(Listing $listing)
-    {
-        //
+      $this->authorize('delete', $listing);
+      $listing->delete();
+
+      return response()->json([
+          'message' => 'listing deleted',
+      ], 200);
     }
 }
