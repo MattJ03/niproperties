@@ -171,4 +171,21 @@ class ListingControllerTest extends TestCase
             $response = $this->postJson('/api/storeListing', $listing);
             $response->assertStatus(401);
         }
+
+        public function test_show_method_returns_listing_when_user_logged_in(): void {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $listing = Listing::factory()->create();
+
+        $response = $this->getJson('/api/listing/' . $listing->id);
+        $response->assertStatus(200);
+
+        }
+
+        public function test_guest_can_hit_show_listing_endpoint(): void {
+        $listing = Listing::factory()->create();
+
+        $response = $this->getJson('/api/listing/' . $listing->id);
+        $response->assertStatus(200);
+        }
 }

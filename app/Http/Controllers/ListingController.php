@@ -95,15 +95,16 @@ class ListingController extends Controller
     public function show(Request $request, Listing $listing)
     {
         $user = $request->user();
-        if($user->hasRole('landlord') && $user->id === $listing->landlord_id) {
+        if(auth()->check() && $user->hasRole('landlord') && $user->id === $listing->landlord_id) {
             return response()->json([
                 'listing' => $listing,
                 'message' => 'listing found',
-            ]);
+            ], 200);
         }
         $listing->update([
             'views' => $listing->increment('views'),
         ]);
+        $listing->refresh();
 
         return response()->json([
             'listing' => $listing,
