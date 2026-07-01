@@ -291,8 +291,40 @@ class ListingControllerTest extends TestCase
 
         $this->assertDatabaseCount('listings', 1);
 
-        $response = $this->
+        $response = $this->deleteJson('api/deleteListing/' . $listing->id);
+        $response->assertStatus(200);
+        $this->assertDatabaseCount('listings', 0);
         }
 
+        public function test_delete_cannot_delete_when_guest(): void {
+        $listing = Listing::factory()->create();
 
+        $response = $this->deleteJson('/api/deleteListing/' . $listing->id);
+        $response->assertStatus(401);
+        }
+
+        public function test_buyer_cannot_delete_the_listing(): void {
+        $user = User::factory()->create()->assignRole('buyer');
+        $this->actingAs($user);
+
+        $listing = Listing::factory()->create();
+
+        $response = $this->deleteJson('/api/deleteListing/' . $listing->id);
+        $response->assertStatus(403);
+        }
+
+        public function test_landlord_cannot_delete_another_landlords_listing(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
+
+        $listing = Listing::factory()->create([
+            'town' => 'fakeTown',
+            ]);
+
+        $response = $this->deleteJson('/api/deleteListing/' . $listing->id);
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('listings', [
+            'town' => 'fakeTown',
+        ]);
+        }
 }
