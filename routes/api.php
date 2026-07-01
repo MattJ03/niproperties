@@ -13,4 +13,5 @@ Route::get('/listing/{listing}', [ListingController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);
+    Route::put('/updateListing/{listing}', [ListingController::class, 'update']);
 });

@@ -188,4 +188,47 @@ class ListingControllerTest extends TestCase
         $response = $this->getJson('/api/listing/' . $listing->id);
         $response->assertStatus(200);
         }
+
+        public function test_increment_goes_up_by_one_when_viewed_not_by_landlord_of_the_listing(): void {
+        $user = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($user);
+
+        $listing = Listing::factory()->create([
+            'landlord_id' => $user->id,
+        ]);
+
+        $response = $this->getJson('/api/listing/' . $listing->id);
+        $response->assertStatus(200);
+        $this->assertDatabaseMissing('listings', [
+            'views' => 1
+        ]);
+        }
+
+        public function test_increment_views_when_viewed_not_by_landlord_of_the_listing(): void {
+        $user = User::factory()->create()->assignRole('buyer');
+        $this->actingAs($user);
+        $listing = Listing::factory()->create();
+
+        $response = $this->getJson('/api/listing/' . $listing->id);
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('listings', [
+            'views' => 1
+        ]);
+        }
+
+        public function test_correct_listing_being_returned(): void {
+        $listing = Listing::factory()->create([
+            'town' => 'fakeTown'
+        ]);
+
+        $response = $this->getJson('/api/listing/' . $listing->id);
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('listings', [
+            'town' => 'fakeTown',
+        ]);
+        }
+
+        public function test_update_method_updates_fields(): void {
+
+        }
 }
