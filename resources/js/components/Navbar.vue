@@ -13,7 +13,7 @@
             <button class="sell-btn" v-if="role === 'buyer'" >
                 <img :src="upload" class="upload-img" alt="upload" />
                 Upload listing</button>
-            <button class="login-btn" v-if="role">
+            <button class="login-btn" v-if="!role" @click="moveToLogin()">
                 Log in
             </button>
         </div>
@@ -25,10 +25,26 @@ import nipropertieslogo from '../assets/nipropertieslogo.png';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
 import upload from '../assets/upload.png';
+import { useRouter } from "vue-router";
 
+const error = ref('');
 const authStore = useAuthStore();
-
+const router = useRouter();
 const { role } = storeToRefs(authStore);
+const loading = ref(false)
+
+const moveToLogin = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'login',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to login';
+    } finally {
+        loading.value = false;
+    }
+}
 </script>
 <style scoped>
 .nav-bar {
@@ -54,11 +70,12 @@ const { role } = storeToRefs(authStore);
     justify-content: center;
     align-items: center;
     padding-left: 500px;
-
+    gap: 20px;
 }
 .headings-selector span {
     font-size: 17px;
     cursor: pointer;
+
     padding-right: 50px;
     color: #FFFFFF;
 }
@@ -67,11 +84,13 @@ const { role } = storeToRefs(authStore);
 }
 .btn-section-nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: right;
+    width: 90%;
     flex-direction: row;
     padding-bottom: 40px;
     padding-top: 50px;
     gap: 30px;
+    margin-right: 100px;
 
 }
 .sell-btn {
@@ -79,11 +98,14 @@ const { role } = storeToRefs(authStore);
     justify-content: center;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     border: 0;
-    border-radius: 8px;
-    padding: 10px 16px;
+    border-radius: 10px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-right: 12px;
+    padding-left: 12px;
     background-color: #E7CBA6;
     color: #1F4D3A;
     cursor: pointer;
@@ -96,5 +118,23 @@ const { role } = storeToRefs(authStore);
     padding-right: 0;
     object-fit: contain;
     color: #FFFFFF;
+}
+.login-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    border-radius: 10px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: #E7CBA6;
+    color: #1F4D3A;
+    cursor: pointer;
+    line-height: 1;
 }
 </style>
