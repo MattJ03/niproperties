@@ -1,4 +1,7 @@
 <template>
+    <Navbar>
+
+    </Navbar>
     <div class="container">
         <div class="top-container">
         <img :src="house4k" class="top-container-house-img" alt="top-house-image" />
@@ -9,13 +12,13 @@
                 </div>
                     <div class="type-of-home-selection">
                         <div class="selection-background">
-                            <strong><span>Buy</span></strong>
+                            <strong><span>Under £200,000</span></strong>
                         </div>
                         <div class="selection-background">
                             <strong><span>Rent</span></strong>
                         </div>
                         <div class="selection-background">
-                            <strong><span>Commercial</span></strong>
+                            <strong><span>Commercial properties</span></strong>
                         </div>
                 </div>
                 <div class="search-wrapper">
@@ -33,6 +36,7 @@ import { ref, reactive, computed, onMounted } from "vue";
 import house4k from '../assets/house4k.jpg';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
+import Navbar from "../components/Navbar.vue";
 
 const authStore = useAuthStore();
 

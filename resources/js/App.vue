@@ -8,7 +8,7 @@ export default {
 </script>
 <style>
 body {
-    font-family: Optomistic Helvetica, Arial, sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
     padding: 0;
     background: #F2EFE6;
