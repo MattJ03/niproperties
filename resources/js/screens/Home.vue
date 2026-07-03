@@ -15,7 +15,12 @@
                     <input type="text" v-model="search" class="search-bar" placeholder="what are you looking for..."/>
                     <button class="search-btn">Search</button>
                 </div>
+
                 <div class="type-of-home-selection">
+                    <div class="message-below-search">
+                        <p>Popular searches</p>
+                    </div>
+                    <div class="row-of-popular-searches">
                     <div class="selection-background">
                         <img :src="location" class="popular-icons" />
                         <strong><span class="popular-search-text">Belfast</span></strong>
@@ -31,6 +36,7 @@
                     <div class="selection-background">
                         <img :src="briefcase" class="popular-icons" />
                         <strong><span class="popular-search-text">Commercial properties</span></strong>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -112,10 +118,12 @@ const search = ref('');
     z-index: 1;
     position: relative;
    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     padding-left: 30px;
     padding-right: 30px;
     font-size: 20px;
-    gap: 50px;
     padding-top: 30px
 }
 .type-of-home-selection span {
@@ -185,8 +193,26 @@ const search = ref('');
 .popular-search-text {
     z-index: 1;
     font-size: 16px;
+    white-space: nowrap;
 }
 .popular-icons {
     height: 16px;
+}
+.message-below-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
+    position: relative;
+    margin: auto;
+    color: #D3D3D3;
+}
+.row-of-popular-searches {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
 }
 </style>
