@@ -10,20 +10,28 @@
                 <h2 class="hello-message">Find your new home</h2>
                     <h2 class="hello-message-name" v-if="name"> {{ name }}</h2>
                 </div>
-                    <div class="type-of-home-selection">
-                        <div class="selection-background">
-                            <strong><span>Under £200,000</span></strong>
-                        </div>
-                        <div class="selection-background">
-                            <strong><span>Rent</span></strong>
-                        </div>
-                        <div class="selection-background">
-                            <strong><span>Commercial properties</span></strong>
-                        </div>
-                </div>
+
                 <div class="search-wrapper">
                     <input type="text" v-model="search" class="search-bar" placeholder="what are you looking for..."/>
                     <button class="search-btn">Search</button>
+                </div>
+                <div class="type-of-home-selection">
+                    <div class="selection-background">
+                        <img :src="location" class="popular-icons" />
+                        <strong><span class="popular-search-text">Belfast</span></strong>
+                    </div>
+                    <div class="selection-background">
+                        <img :src="priceTag" class="popular-icons" />
+                        <strong><span class="popular-search-text">Under £200,000</span></strong>
+                    </div>
+                    <div class="selection-background">
+                        <img :src="keys" class="popular-icons" />
+                        <strong><span class="popular-search-text">Rent</span></strong>
+                    </div>
+                    <div class="selection-background">
+                        <img :src="briefcase" class="popular-icons" />
+                        <strong><span class="popular-search-text">Commercial properties</span></strong>
+                    </div>
                 </div>
             </div>
 
@@ -37,10 +45,15 @@ import house4k from '../assets/house4k.jpg';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
 import Navbar from "../components/Navbar.vue";
+import location from '../assets/img.png';
+import priceTag from '../assets/price_tag.png';
+import briefcase from '../assets/briefcase.png';
+import keys from '../assets/keys.png';
+
 
 const authStore = useAuthStore();
 
-const {role, name} = storeToRefs(authStore);
+const { role, name} = storeToRefs(authStore);
 const search = ref('');
 
 
@@ -109,7 +122,18 @@ const search = ref('');
     color: #FFFFFF;
 }
 .selection-background {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+    color: #FFFFFF;
 }
 .selection-background:hover {
     border-bottom: 5px solid #1F4D3A;
@@ -137,7 +161,7 @@ const search = ref('');
 }
 .search-bar:hover {
     background-color: #F2EFE6;
-    cursor: pointer;
+    cursor: text;
 }
 .search-btn {
     display: flex;
@@ -157,5 +181,12 @@ const search = ref('');
 }
 .search-btn:hover {
     background-color:  #2d6e53;
+}
+.popular-search-text {
+    z-index: 1;
+    font-size: 16px;
+}
+.popular-icons {
+    height: 16px;
 }
 </style>
