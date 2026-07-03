@@ -1,6 +1,5 @@
 <template>
     <Navbar>
-
     </Navbar>
     <div class="container">
         <div class="top-container">
@@ -40,7 +39,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="info-container">
+            <div class="message-trusted-wrapper">
+                <p>Trusted across Northern Ireland</p>
+                <strong><p class="message-trusted">Making property simple</p></strong>
+            </div>
+            <div class="row-info-squares">
+               <div class="-info-square">
+                   <div class="square-image-wrapper">
+                       <img :src="ireland" class="square-image" alt="square image ireland" />
+                   </div>
+               </div>
+                <div class="-info-square">
 
+                </div>
+            </div>
         </div>
     </div>
 
@@ -55,7 +69,7 @@ import location from '../assets/img.png';
 import priceTag from '../assets/price_tag.png';
 import briefcase from '../assets/briefcase.png';
 import keys from '../assets/keys.png';
-
+import ireland from '../assets/ireland.png';
 
 const authStore = useAuthStore();
 
@@ -69,6 +83,7 @@ const search = ref('');
     display: flex;
     width: 100%;
     min-height: 200dvh;
+    flex-direction: column;
 }
 
 .top-container {
@@ -214,5 +229,67 @@ const search = ref('');
     align-items: center;
     flex-direction: row;
     gap: 30px;
+}
+.info-container {
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    flex-direction: column;
+    z-index: 1;
+    position: relative;
+
+}
+.message-trusted-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+.message-trusted {
+    font-size: 40px;
+}
+.row-info-squares {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    margin-left: 30px;
+}
+.-info-square {
+    display: flex;
+    border-radius: 12px;
+    flex-direction: column;
+    height: 250px;
+    width: 20%;
+    border: 1px solid #000000;
+    z-index: 1;
+    background-color: #FFFFFF;
+
+}
+.square-image-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 10%;
+    width: fit-content;
+    height: fit-content;
+
+    margin-left: 30px;
+    margin-top: 40px;
+
+    background-color: #FDFBD4;
+    border-radius: 80px;
+
+
+}
+.square-image {
+    height: 44px;
+    padding: 8px 8px;
+
 }
 </style>
