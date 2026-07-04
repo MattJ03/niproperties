@@ -84,7 +84,19 @@
                           <img :src="rightarrow" class="bottom-square-icon" alt="right arrow"/>
                       </div>
                     </div>
-
+                </div>
+                <div class="-info-square">
+                    <div class="square-image-wrapper">
+                        <img :src="shield" class="square-image" alt="shield"/>
+                    </div>
+                    <div class="info-in-square">
+                        <strong><span>Verified listings</span></strong>
+                        <p class="smaller-text-in-square">Listings are approved by admins before being posted on NI properties.</p>
+                        <div class="bottom-square">
+                            <span class="bottom-of-square-text">View About section</span>
+                            <img :src="rightarrow" class="bottom-square-icon" alt="right arrow"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,7 +117,7 @@ import ireland from '../assets/ireland.png';
 import rightarrow from '../assets/rightarrow.png';
 import homesquare from '../assets/housesquare.png';
 import agent from '../assets/agent.png';
-
+import shield from '../assets/shield.png';
 
 const authStore = useAuthStore();
 
@@ -297,7 +309,7 @@ const search = ref('');
     align-items: center;
     flex-direction: row;
     width: 100%;
-    gap: 60px;
+    gap: 30px;
 
 }
 .-info-square {
