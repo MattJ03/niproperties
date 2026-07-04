@@ -54,15 +54,27 @@
                        <strong><span>Listings in all 6 counties</span></strong>
                        <p class="smaller-text-in-square">Find hundreds of properties all across the 6 counties of Northern Ireland.</p>
                        <div class="bottom-square">
-
-                       <span class="bottom-of-square-text">Browse properties</span>
+                       <span class="bottom-of-square-text">View locations</span>
                            <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
                        </div>
                    </div>
                </div>
                 <div class="-info-square">
                     <div class="square-image-wrapper">
-                        <img :src=""
+                        <img :src="homesquare" class="square-image" alt="home image"/>
+                    </div>
+                    <div class="info-in-square">
+                        <strong><span>Over 3000 sales as of 2026</span></strong>
+                        <p class="smaller-text-in-square">Thousands of houses to choose from, to meet any possible need.</p>
+                        <div class="bottom-square">
+                            <span class="bottom-of-square-text">Browse Properties</span>
+                            <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
+                        </div>
+                    </div>
+                </div>
+                <div class="-info-square">
+                    <div class="square-image-wrapper">
+                        <img :src="agent"
                     </div>
                 </div>
             </div>
@@ -82,6 +94,9 @@ import briefcase from '../assets/briefcase.png';
 import keys from '../assets/keys.png';
 import ireland from '../assets/ireland.png';
 import rightarrow from '../assets/rightarrow.png';
+import homesquare from '../assets/housesquare.png';
+import agent from '../assets/agent.png';
+
 
 const authStore = useAuthStore();
 
