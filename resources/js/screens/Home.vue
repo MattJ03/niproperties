@@ -322,7 +322,7 @@ const search = ref('');
     padding-right: 40px;
     padding-left: 15px;
     width: 20%;
-    border: 1px solid #000000;
+    border: none;
     z-index: 1;
     background-color: #FFFFFF;
 
@@ -369,6 +369,7 @@ const search = ref('');
 .bottom-of-square-text {
     color: #2d6e53;
     padding-top: 20px;
+    font-size: 18px;
 }
 .bottom-square-icon {
     display: flex;
