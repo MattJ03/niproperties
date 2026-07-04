@@ -50,9 +50,20 @@
                    <div class="square-image-wrapper">
                        <img :src="ireland" class="square-image" alt="square image ireland" />
                    </div>
+                   <div class="info-in-square">
+                       <strong><span>Listings in all 6 counties</span></strong>
+                       <p class="smaller-text-in-square">Find hundreds of properties all across the 6 counties of Northern Ireland.</p>
+                       <div class="bottom-square">
+
+                       <span class="bottom-of-square-text">Browse properties</span>
+                           <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
+                       </div>
+                   </div>
                </div>
                 <div class="-info-square">
-
+                    <div class="square-image-wrapper">
+                        <img :src=""
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +81,7 @@ import priceTag from '../assets/price_tag.png';
 import briefcase from '../assets/briefcase.png';
 import keys from '../assets/keys.png';
 import ireland from '../assets/ireland.png';
+import rightarrow from '../assets/rightarrow.png';
 
 const authStore = useAuthStore();
 
@@ -257,14 +269,18 @@ const search = ref('');
     align-items: center;
     flex-direction: row;
     width: 100%;
-    gap: 20px;
-    margin-left: 30px;
+    gap: 60px;
+
 }
 .-info-square {
     display: flex;
+    justify-content: left;
     border-radius: 12px;
     flex-direction: column;
-    height: 250px;
+    height: fit-content;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    padding-left: 15px;
     width: 20%;
     border: 1px solid #000000;
     z-index: 1;
@@ -275,7 +291,7 @@ const search = ref('');
     display: flex;
     justify-content: left;
     align-items: center;
-    height: 10%;
+
     width: fit-content;
     height: fit-content;
 
@@ -291,5 +307,36 @@ const search = ref('');
     height: 44px;
     padding: 8px 8px;
 
+}
+.info-in-square {
+    display: flex;
+    justify-content: left;
+    padding-top: 30px;
+    font-size: 20px;
+    margin-left: 16px;
+    flex-direction: column;
+}
+.smaller-text-in-square {
+    color: #A9A9A9;
+}
+.bottom-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+}
+.bottom-of-square-text {
+    color: #2d6e53;
+    padding-top: 20px;
+}
+.bottom-square-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 40px;
+    padding-top: 20px;
+    padding-left: 10px;
 }
 </style>
