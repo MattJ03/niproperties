@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('listing_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('listing_id')->constrained('listings')->onDelete('cascade');
+            $table->string('file_path');
+            $table->string('file_type');
+            $table->foreignId('landlord_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

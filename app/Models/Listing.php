@@ -14,4 +14,8 @@ class Listing extends Model
     public function landlord() {
         return $this->belongsTo(User::class, 'landlord_id');
     }
+
+    public function listingImages() {
+        return $this->hasMany(ListingImage::class);
+    }
 }
