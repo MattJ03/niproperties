@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('listing_id')->constrained('listings')->onDelete('cascade');
             $table->string('file_path');
             $table->string('file_type');
-            $table->foreignId('landlord_id')->constrained('users')->onDelete('cascade');
+            $table->boolean('is_primary')->default(false);
             $table->timestamps();
         });
     }
