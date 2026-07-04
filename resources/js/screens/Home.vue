@@ -42,7 +42,7 @@
         </div>
         <div class="info-container">
             <div class="message-trusted-wrapper">
-                <p>Trusted across Northern Ireland</p>
+                <p class="trusted-header">Trusted across Northern Ireland</p>
                 <strong><p class="message-trusted">Making property simple</p></strong>
             </div>
             <div class="row-info-squares">
@@ -74,8 +74,17 @@
                 </div>
                 <div class="-info-square">
                     <div class="square-image-wrapper">
-                        <img :src="agent"
+                        <img :src="agent" class="square-image" alt="agent image"/>
                     </div>
+                    <div class="info-in-square">
+                        <strong><span>Trusted vendors</span></strong>
+                        <p class="smaller-text-in-square">Vendors have to be approved before being able to list their properties.</p>
+                      <div class="bottom-square">
+                          <span class="bottom-of-square-text">View Landlords</span>
+                          <img :src="rightarrow" class="bottom-square-icon" alt="right arrow"/>
+                      </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -266,6 +275,10 @@ const search = ref('');
     z-index: 1;
     position: relative;
 
+}
+.trusted-header {
+    font-size: 18px;
+    color: #2d6e53;
 }
 .message-trusted-wrapper {
     display: flex;
