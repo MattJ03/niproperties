@@ -26,9 +26,28 @@ class ListingImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Listing $listing)
     {
+        $this->authorize('create', [ListingImage::class, $listing]);
 
+        $validatedImage = $request->validate([
+           'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_primary' => 'boolean',
+
+        ]);
+
+        $path = $request->file('file')->store('listing-images/' . $listing->id, 'listings');
+
+       $listingImage = $listing->listingImages()->create([
+           'file_path' => $path,
+           'file_type' => $request->file('file')->getClientOriginalName(),
+           'is_primary' => $validatedImage['is_primary'] ?? false,
+       ]);
+
+       return response()->json([
+           'listingImage' => $listingImage,
+           'message' => "Image uploaded successfully.",
+       ]);
     }
 
     /**
