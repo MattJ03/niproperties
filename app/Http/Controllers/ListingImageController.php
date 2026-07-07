@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use App\Models\ListingImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ListingImageController extends Controller
 {
@@ -40,7 +42,7 @@ class ListingImageController extends Controller
 
        $listingImage = $listing->listingImages()->create([
            'file_path' => $path,
-           'file_type' => $request->file('file')->getClientOriginalName(),
+           'file_type' => $request->file('file')->getClientOriginalExtension(),
            'is_primary' => $validatedImage['is_primary'] ?? false,
        ]);
 
@@ -55,7 +57,16 @@ class ListingImageController extends Controller
      */
     public function show(ListingImage $listingImage)
     {
-        //
+
+
+
+        return response()->file(
+            Storage::disk('listings')->path($listingImage->file_path),
+            [
+                'Content-Type' => Storage::disk('listings')->mimeType($listingImage->file_path),
+                'Content-Disposition' => 'inline; filename="' . basename($listingImage->file_path) . '"'
+            ]
+        );
     }
 
     /**
@@ -79,6 +90,13 @@ class ListingImageController extends Controller
      */
     public function destroy(ListingImage $listingImage)
     {
-        //
+        $this->authorize('delete', $listingImage);
+
+        Storage::disk('listings')->delete($listingImage->file_path);
+        $listingImage->delete();
+
+        return response()->json([
+            'message' => "Image deleted successfully.",
+        ]);
     }
 }

@@ -60,6 +60,13 @@ return [
             'report' => false,
         ],
 
+        'listings' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/listings'),
+            'visibility' => 'private',
+            'throw' => false,
+        ]
+
     ],
 
     /*
