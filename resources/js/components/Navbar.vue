@@ -10,7 +10,7 @@
             <strong><span>Dashboard & Analytics</span></strong>
         </div>
         <div class="btn-section-nav">
-            <button class="sell-btn" v-if="role === 'buyer'" >
+            <button class="sell-btn" v-if="role === 'buyer'" @click="moveToUpload()" >
                 <img :src="upload" class="upload-img" alt="upload" />
                 Upload listing</button>
             <button class="login-btn" v-if="!role" @click="moveToLogin()">
@@ -41,6 +41,19 @@ const moveToLogin = async () => {
         });
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to move to login';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToUpload = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'upload listing',
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to upload';
     } finally {
         loading.value = false;
     }
