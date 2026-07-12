@@ -2,13 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\Listing;
 use App\Models\ListingImage;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\User;
 use Database\Factories\ListingImageFactory;
+use Illuminate\Support\Facades\Storage;
 
 class ListingImageControllerTest extends TestCase
 {
@@ -28,14 +31,31 @@ class ListingImageControllerTest extends TestCase
         $this->seed(DatabaseSeeder::class);
     }
 
-    public function test_store_image(): void {
+    public function test_store_image(): void
+    {
+        Storage::fake('listings');
+
         $user = User::factory()->create();
         $user->assignRole('landlord');
-        $this->actingAs($user);
 
-        $listingImage = ListingImage::factory()->make()->toArray();
+        $listing = Listing::factory()->create(['landlord_id' => $user->id]);
 
-        $response = $this->postJson('api/storeListingImage', $listingImage);
-        $response->assertStatus(201);
+        $file = UploadedFile::fake()->image('house.jpg');
+
+        $response = $this->actingAs($user)
+            ->post("/api/listings/{$listing->id}/images", [
+                'file' => $file,
+                'is_primary' => true,
+            ]);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('listing_images', [
+            'listing_id' => $listing->id,
+            'is_primary' => true,
+        ]);
+
+        $image = ListingImage::first();
+        Storage::disk('listings')->assertExists($image->file_path);
     }
 }
