@@ -4,30 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\ListingImage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Policies\ListingImagePolicy;
 
 class ListingImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    use AuthorizesRequests;
     public function store(Request $request, Listing $listing)
     {
         $this->authorize('create', [ListingImage::class, $listing]);
@@ -57,8 +41,6 @@ class ListingImageController extends Controller
      */
     public function show(ListingImage $listingImage)
     {
-
-
 
         return response()->file(
             Storage::disk('listings')->path($listingImage->file_path),
