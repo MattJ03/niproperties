@@ -43,13 +43,17 @@
                 </div>
                 <div class="field">
                     <strong><label class="field-text">No. of rooms</label></strong>
-                    <input type="number" v-model="form.no_of_rooms" class="input-text-town"
+                    <input type="number" v-model="form.no_of_rooms" class="input-text-town">
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Rent/Buy</label></strong>
                     <div class="rent-or-buy-button-wrapper">
-                    <button class="rent-select-btn">Rent</button>
-                    <button class="buy-select-btn">Buy</button>
+                    <button class="rent-select-btn" @click="form.type = 'rent'"
+                    :class=" { active: form.type === 'rent'}"
+                    >Rent</button>
+                    <button class="buy-select-btn" @click="form.type = 'buy'"
+                    :class=" { active: form.type === 'buy'}"
+                    >Buy</button>
                     </div>
                 </div>
                 </div>
@@ -69,6 +73,8 @@ const form = reactive({
     no_of_rooms: '',
     type: '',
 });
+
+
 </script>
 <style scoped>
 .container {
@@ -160,7 +166,35 @@ const form = reactive({
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
 .rent-or-buy-button-wrapper {
-
+    display: flex;
+    height: 50px;
+    width: 200px;
+}
+.rent-select-btn {
+    width: 100px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #2d6e53;
+    font-size: 15px;
+    color: #FDFBD4;
+}
+.buy-select-btn {
+    width: 100px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #2d6e53;
+    font-size: 15px;
+    color: #FDFBD4;
+}
+.rent-select-btn.active {
+    background-color: #1F4D3A;
+    color: #FDFBD4;
+}
+.buy-select-btn.active {
+    background-color: #1F4D3A;
+    color: #FDFBD4;
 }
 
 </style>
