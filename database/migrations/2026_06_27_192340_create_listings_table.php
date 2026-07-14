@@ -25,6 +25,7 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->unsignedInteger('views')->default(0);
+            $table->text('description')->nullable();
             $table->foreignId('landlord_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });

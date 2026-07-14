@@ -54,6 +54,7 @@ class ListingController extends Controller
             'price' => 'required|numeric|min:1|max:100000000',
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
+
             'sale_status' => 'required|in:open',
         ]);
 
@@ -67,6 +68,7 @@ class ListingController extends Controller
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
             'sale_status' => $validatedData['sale_status'],
+            'description' => $request['description'],
             'landlord_id' => $request->user()->id,
             ]);
 

@@ -57,6 +57,11 @@
                     </div>
                 </div>
                 </div>
+            <div class="row-details">
+                <textarea class="description-text" placeholder="Leave a short description about the property...">
+
+                </textarea>
+            </div>
         </div>
         </div>
 </template>
@@ -106,7 +111,7 @@ const form = reactive({
     flex-direction: column;
     padding-right: 120px;
     padding-left: 40px;
-    height: 40dvh;
+    height: fit-content;
     margin-left: 298px;
     background-color: #FFFFFF;
     margin-top: 40px;
@@ -170,31 +175,31 @@ const form = reactive({
     height: 50px;
     width: 200px;
 }
-.rent-select-btn {
-    width: 100px;
-    border-radius: 14px;
-    cursor: pointer;
-    border: none;
-    background-color: #2d6e53;
-    font-size: 15px;
-    color: #FDFBD4;
-}
+.rent-select-btn,
 .buy-select-btn {
     width: 100px;
     border-radius: 14px;
     cursor: pointer;
-    border: none;
-    background-color: #2d6e53;
+    border: 1.5px solid #2d6e53;
+    background-color: transparent;
     font-size: 15px;
-    color: #FDFBD4;
+    color: #2d6e53;
+    font-weight: 500;
+    transition: all 0.15s ease;
 }
-.rent-select-btn.active {
-    background-color: #1F4D3A;
-    color: #FDFBD4;
-}
+
+.rent-select-btn.active,
 .buy-select-btn.active {
-    background-color: #1F4D3A;
+    background-color: #2d6e53;
     color: #FDFBD4;
+    border-color: #2d6e53;
+}
+.description-text {
+    width: 100%;
+    background-color: #FDFBD4;
+    border-radius: 14px;
+    height: 130px;
+    color: #FFFFFF;
 }
 
 </style>
