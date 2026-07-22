@@ -87,6 +87,9 @@
 </template>
 <script setup>
 import { ref, reactive, computed } from 'vue';
+import api from "axios";
+
+const loading = ref(false);
 
 const form = reactive({
     first_address_line: '',
@@ -114,6 +117,14 @@ function handleFileSelect(e) {
             url: URL.createObjectURL(file),
         });
     }
+}
+
+async function submitListing() {
+    loading.value = true;
+    try {
+
+    }
+
 }
 
 </script>
