@@ -5,6 +5,7 @@
         <span>You're listing will be reviewed by an admin before being made public. Usual wait is 24 hours or less.</span>
         </div>
         <div class="property-details-card">
+            <strong><span class="property-details-header">Property details</span></strong>
             <div class="row-details-address">
                 <div class="field">
                     <strong><label class="field-tex">Address line 1</label></strong>
@@ -18,7 +19,7 @@
             <div class="row-details">
                 <div class="field">
                     <strong><label class="field-text">Town</label></strong>
-                <input type="text" v-model="form.town" class="input-text-town">
+                <input type="text" v-model="form.town" class="input-text-town" placeholder="Tyrone">
                 </div>
                 <div class="field">
                     <strong><label class="field-text">County</label> </strong>
@@ -58,9 +59,23 @@
                 </div>
                 </div>
             <div class="row-details">
-                <textarea class="description-text" placeholder="Leave a short description about the property...">
+                <textarea class="description-text" v-model="form.description" placeholder="Leave a short description about the property...">
 
                 </textarea>
+            </div>
+        </div>
+        <div class="attach-card">
+            <strong><span class="attach-header">Property photos</span></strong>
+            <div class="attach-row">
+                <label class="drag-file-wrapper">
+                    <input type="file" class="drag-file" multiple accept="image/*" @change="handleFileSelect">
+                    <span class="upload-icon">📷</span>
+                    <p class="placeholder-title">Drag photos here or click to browse</p>
+                    <p class="placeholder-subtext">JPG, PNG, GIF up to 2MB each</p>
+                </label>
+                <div class="preview-box" v-for="(img, index) in images">
+
+                </div>
             </div>
         </div>
         </div>
@@ -77,16 +92,31 @@ const form = reactive({
     price: '',
     no_of_rooms: '',
     type: '',
+    description: '',
 });
 
+const images = ref([]);
+const fileInput = ref(null);
+
+function triggerFileInput() {
+    fileInput.value.click();
+}
+
+function handleFileSelect(e) {
+    for (const file of e.target.files) {
+        images.value.push({
+            file: file,
+            url: URL.createObjectURL(file),
+        });
+    }
+}
 
 </script>
 <style scoped>
 .container {
     display: flex;
     flex-direction: column;
-
-    height: 100dvh;
+    height: fit-content;
     width: 100%;
 
 }
@@ -105,7 +135,7 @@ const form = reactive({
     margin-bottom: 10px;
 }
 .property-details-card {
-    padding-top: 80px;
+    padding-top: 40px;
     display: flex;
     width: 900px;
     flex-direction: column;
@@ -116,12 +146,15 @@ const form = reactive({
     background-color: #FFFFFF;
     margin-top: 40px;
     border-radius: 12px;
-
-
+}
+.property-details-header {
+    padding-bottom: 25px;
+    font-size: 18px;
 }
 .row-details-address {
     display: flex;
     margin-bottom: 40px;
+    padding-top: 30px;
     width: 100%;
     gap: 80px;
 }
@@ -199,7 +232,74 @@ const form = reactive({
     background-color: #FDFBD4;
     border-radius: 14px;
     height: 130px;
-    color: #FFFFFF;
+    color: #000000;
+    padding-left: 15px;
+    padding-top: 5px;
+    font-size: 16px;
 }
-
+.attach-card {
+    display: flex;
+    padding-top: 40px;
+    width: 900px;
+    flex-direction: column;
+    padding-right: 120px;
+    padding-left: 40px;
+    height: 650px;
+    margin-left: 298px;
+    background-color: #FFFFFF;
+    margin-top: 40px;
+    border-radius: 12px;
+}
+.attach-header {
+    display: flex;
+    font-size: 18px;
+    flex-direction: column;
+}
+.attach-row {
+    display: flex;
+    flex-direction: row;
+}
+.drag-file {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    border-radius: 14px;
+    background-color: #FDFBD4;
+}
+.drag-file-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 200px;
+    border: 2px dashed #2d6e53;
+    border-radius: 12px;
+    background-color: #FDFBD4;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.drag-file {
+    display: none;
+}
+.upload-icon {
+    font-size: 32px;
+}
+.placeholder-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #111;
+}
+.placeholder-subtext {
+    margin: 0;
+    font-size: 13px;
+    color: #88807b;
+}
+.preview-box {
+    display: flex;
+    justify-content: center;
+}
 </style>
