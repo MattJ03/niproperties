@@ -88,8 +88,11 @@
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import api from "axios";
+import { useListingStore } from "../stores/ListingStore.js";
 
+const listingStore = useListingStore();
 const loading = ref(false);
+const error = ref('');
 
 const form = reactive({
     first_address_line: '',
@@ -122,7 +125,12 @@ function handleFileSelect(e) {
 async function submitListing() {
     loading.value = true;
     try {
-
+        await listingStore.storeListing(form);
+        console.log('listing submitted');
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to submit listing uploadlisting.vue';
+    } finally {
+        loading.value = false;
     }
 
 }
