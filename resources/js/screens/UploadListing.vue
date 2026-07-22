@@ -79,6 +79,9 @@
                 </div>
                 </div>
             </div>
+            <div class="upload-btn-wrapper">
+                <button @click="submitListing" class="upload-btn">Submit listing</button>
+            </div>
         </div>
         </div>
 </template>
@@ -324,5 +327,23 @@ function handleFileSelect(e) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.upload-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.upload-btn {
+    background-color: #2d6e53;
+    padding-left: 28px;
+    padding-right: 28px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 </style>
