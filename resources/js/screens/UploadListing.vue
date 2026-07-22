@@ -73,8 +73,10 @@
                     <p class="placeholder-title">Drag photos here or click to browse</p>
                     <p class="placeholder-subtext">JPG, PNG, GIF up to 2MB each</p>
                 </label>
-                <div class="preview-box" v-for="(img, index) in images">
-
+                <div class="preview-wrapper">
+                <div class="preview-box" v-for="(img, index) in images" :key="index">
+                   <img :src="img.url" alt="">
+                </div>
                 </div>
             </div>
         </div>
@@ -257,7 +259,8 @@ function handleFileSelect(e) {
 }
 .attach-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
 }
 .drag-file {
     display: flex;
@@ -298,8 +301,28 @@ function handleFileSelect(e) {
     font-size: 13px;
     color: #88807b;
 }
+.preview-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    padding-top: 20px;
+}
 .preview-box {
     display: flex;
     justify-content: center;
+    flex-direction: row;
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.preview-box img {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
