@@ -10,7 +10,7 @@
             <strong><span>Dashboard & Analytics</span></strong>
         </div>
         <div class="btn-section-nav">
-            <button class="sell-btn" v-if="role === 'buyer'" @click="moveToUpload()" >
+            <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
                 <img :src="upload" class="upload-img" alt="upload" />
                 Upload listing</button>
             <button class="login-btn" v-if="!role" @click="moveToLogin()">
