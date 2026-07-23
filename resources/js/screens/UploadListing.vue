@@ -34,13 +34,13 @@
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Postcode</label></strong>
-                    <input type="text" v-model="form.postcode" class="input-text-town">
+                    <input type="text" v-model="form.postcode" class="input-text-town" placeholder="BT9 4TE">
                 </div>
                 </div>
             <div class="row-details">
                 <div class="field">
                 <strong><label class="field-text">Price (£)</label></strong>
-                <input type="number" v-model="form.price" class="input-text-town">
+                <input type="number" v-model="form.price" class="input-text-town" placeholder="£">
                 </div>
                 <div class="field">
                     <strong><label class="field-text">No. of rooms</label></strong>
@@ -109,6 +109,18 @@ const form = reactive({
 const images = ref([]);
 const fileInput = ref(null);
 
+const errors = reactive({
+    address_line_1: '',
+    address_line_2: '',
+    town: '',
+    county: '',
+    postcode: '',
+    price: '',
+    no_of_rooms: '',
+    type: '',
+    description: '',
+});
+
 function triggerFileInput() {
     fileInput.value.click();
 }
@@ -124,6 +136,9 @@ function handleFileSelect(e) {
 
 async function submitListing() {
     loading.value = true;
+    if(!validate()) {
+        return;
+    }
     try {
         await listingStore.storeListing(form);
         console.log('listing submitted');
@@ -133,6 +148,22 @@ async function submitListing() {
         loading.value = false;
     }
 
+}
+
+function validate() {
+    let valid = true;
+
+    errors.address_line_2 = form.address_line_2 ? '' : 'Please enter an address';
+    errors.county = form.county ? '' : 'Please enter a county';
+    errors.postcode = form.postcode ? '' : 'Please enter a postcode';
+    errors.price = form.price ? '' : 'Please enter a price';
+    errors.no_of_rooms = form.no_of_rooms ? '' : 'please enter the number of rooms';
+    errors.type =  form.type ? '': 'Please select the type of listing';
+
+    if(!form.address_line_1 || !form.county || !form.postcode || !form.price || !form.no_of_rooms || !form.type) {
+        valid = false
+    }
+    return valid;
 }
 
 </script>
