@@ -9,11 +9,11 @@
             <div class="row-details-address">
                 <div class="field">
                     <strong><label class="field-tex">Address line 1</label></strong>
-                    <input type="text" v-model="form.first_address_line" class="input-text-address" placeholder="e.g. 4 Malone Road, Belfast">
+                    <input type="text" v-model="form.address_line_1" class="input-text-address" placeholder="e.g. 4 Malone Road, Belfast">
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Address line 2</label></strong>
-                    <input type="text" v-model="form.second_address_line" class="input-text-address">
+                    <input type="text" v-model="form.address_line_2" class="input-text-address">
                 </div>
             </div>
             <div class="row-details">
@@ -87,7 +87,7 @@
 </template>
 <script setup>
 import { ref, reactive, computed } from 'vue';
-import api from "axios";
+import api from '../axios.js';
 import { useListingStore } from "../stores/ListingStore.js";
 
 const listingStore = useListingStore();
@@ -95,8 +95,8 @@ const loading = ref(false);
 const error = ref('');
 
 const form = reactive({
-    first_address_line: '',
-    second_address_line: '',
+    address_line_1: '',
+    address_line_2: '',
     town: '',
     county: '',
     postcode: '',
