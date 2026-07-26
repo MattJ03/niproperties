@@ -21,6 +21,7 @@
                 <div class="field">
                     <strong><label class="field-text">Town</label></strong>
                 <input type="text" v-model="form.town" class="input-text-town" placeholder="Tyrone">
+                    <span class="error-message" v-if="errors.town"> {{ errors.town }}</span>
                 </div>
                 <div class="field">
                     <strong><label class="field-text">County</label> </strong>
@@ -32,20 +33,24 @@
                         <option>Armagh</option>
                         <option>Down</option>
                     </select>
+                    <span class="error-message" v-if="errors.county"> {{ errors.county }}</span>
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Postcode</label></strong>
                     <input type="text" v-model="form.postcode" class="input-text-town" placeholder="BT9 4TE">
+                    <span class="error-message" v-if="errors.postcode"> {{ errors.postcode }}</span>
                 </div>
                 </div>
             <div class="row-details">
                 <div class="field">
                 <strong><label class="field-text">Price (£)</label></strong>
                 <input type="number" v-model="form.price" class="input-text-town" placeholder="£">
+                    <span class="error-message" v-if="errors.price"> {{ errors.price }}</span>
                 </div>
                 <div class="field">
                     <strong><label class="field-text">No. of rooms</label></strong>
                     <input type="number" v-model="form.no_of_rooms" class="input-text-town">
+                    <span class="error-message" v-if="errors.no_of_rooms"> {{ errors.no_of_rooms }}</span>
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Rent/Buy</label></strong>
@@ -57,6 +62,7 @@
                     :class=" { active: form.type === 'buy'}"
                     >Buy</button>
                     </div>
+                    <span class="error-message" v-if="errors.type"> {{ errors.type }}</span>
                 </div>
                 </div>
             <div class="row-details">
@@ -156,10 +162,11 @@ function validate() {
     let valid = true;
 
     errors.address_line_1 = form.address_line_1 ? '' : 'Please enter an address';
+    errors.town = form.town ? '' : 'Please enter a town';
     errors.county = form.county ? '' : 'Please enter a county';
     errors.postcode = form.postcode ? '' : 'Please enter a postcode';
     errors.price = form.price ? '' : 'Please enter a price';
-    errors.no_of_rooms = form.no_of_rooms ? '' : 'please enter the number of rooms';
+    errors.no_of_rooms = form.no_of_rooms ? '' : 'Please enter the number of rooms';
     errors.type =  form.type ? '': 'Please select the type of listing';
 
     if(!form.address_line_1 || !form.county || !form.postcode || !form.price || !form.no_of_rooms || !form.type) {
