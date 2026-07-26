@@ -1,7 +1,7 @@
 <template>
     <nav class="nav-bar">
         <div class="logo-wrapper">
-            <img :src="nipropertieslogo" class="logo" />
+            <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
         <div class="headings-selector">
             <strong><span>Browse all</span></strong>
@@ -58,24 +58,39 @@ const moveToUpload = async () => {
         loading.value = false;
     }
 }
+
+const moveToHome = async () => {
+    loading.value = true
+    try {
+         router.push({
+            name: 'home',
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to go home';
+    } finally {
+        loading.value = false;
+    }
+}
 </script>
 <style scoped>
 .nav-bar {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 15dvh;
+    height: 10dvh;
     display: flex;
     flex-direction: row;
     align-items: center;
     z-index: 100;
     padding-left: 40px;
+    background-color: #FFFFFF;
 }
 .logo-wrapper {
 
 }
 .logo {
-    height: 108px;
+    height:  108px;
+    cursor: pointer;
 
 }
 .headings-selector {
@@ -90,7 +105,7 @@ const moveToUpload = async () => {
     cursor: pointer;
 
     padding-right: 50px;
-    color: #FFFFFF;
+    color: #2d6e53;
 }
 .headings-selector span:hover {
     color: #1F4D3A;

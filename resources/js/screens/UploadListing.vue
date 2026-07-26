@@ -1,4 +1,5 @@
 <template>
+    <Navbar></Navbar>
     <div class="container">
         <div class="header-group">
         <h1>List a new property</h1>
@@ -81,8 +82,11 @@
                     <p class="placeholder-subtext">JPG, PNG, GIF up to 2MB each</p>
                 </label>
                 <div class="preview-wrapper">
-                <div class="preview-box" v-for="(img, index) in images" :key="index">
-                   <img :src="img.url" alt="">
+                <div class="preview-box" v-for="(img, index) in images" :key="index" :class="{ 'is-primary': index === primaryIndex }">
+                   <img :src="img.url" alt="" @click="setPrimaryIndex()">
+                    <button class="set-primary-btn" @click="setPrimary(index)">
+                        {{ index === primaryIndex ? '★ Cover' : 'Set as cover' }}
+                    </button>
                 </div>
                 </div>
             </div>
@@ -96,10 +100,12 @@
 import { ref, reactive, computed } from 'vue';
 import api from '../axios.js';
 import { useListingStore } from "../stores/ListingStore.js";
+import Navbar from "../components/Navbar.vue";
 
 const listingStore = useListingStore();
 const loading = ref(false);
 const error = ref('');
+const primaryIndex = ref(0);
 
 const form = reactive({
     address_line_1: '',
@@ -174,6 +180,8 @@ function validate() {
     }
     return valid;
 }
+
+
 
 </script>
 <style scoped>
@@ -380,7 +388,24 @@ function validate() {
     overflow: hidden;
     flex-shrink: 0;
 }
+.set-primary-btn {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    font-size: 11px;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    cursor: pointer;
+}
+.preview-box.is-primary .set-primary-btn {
+    background-color: #2d6e53;
+}
 .preview-box img {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
