@@ -10,6 +10,7 @@
                 <div class="field">
                     <strong><label class="field-tex">Address line 1</label></strong>
                     <input type="text" v-model="form.address_line_1" class="input-text-address" placeholder="e.g. 4 Malone Road, Belfast">
+                    <span class="error-message" v-if="errors.address_line_1"> {{ errors.address_line_1 }}</span>
                 </div>
                 <div class="field">
                     <strong><label class="field-text">Address line 2</label></strong>
@@ -137,6 +138,7 @@ function handleFileSelect(e) {
 async function submitListing() {
     loading.value = true;
     if(!validate()) {
+        console.log('validation error');
         return;
     }
     try {
@@ -153,7 +155,7 @@ async function submitListing() {
 function validate() {
     let valid = true;
 
-    errors.address_line_2 = form.address_line_2 ? '' : 'Please enter an address';
+    errors.address_line_1 = form.address_line_1 ? '' : 'Please enter an address';
     errors.county = form.county ? '' : 'Please enter a county';
     errors.postcode = form.postcode ? '' : 'Please enter a postcode';
     errors.price = form.price ? '' : 'Please enter a price';
@@ -395,5 +397,12 @@ function validate() {
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
+}
+.error-message {
+        display: block;
+        color: #c0392b;
+        font-size: 12px;
+        margin-top: 6px;
+
 }
 </style>
