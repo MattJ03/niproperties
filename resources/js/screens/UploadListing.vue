@@ -83,7 +83,7 @@
                 </label>
                 <div class="preview-wrapper">
                 <div class="preview-box" v-for="(img, index) in images" :key="index" :class="{ 'is-primary': index === primaryIndex }">
-                   <img :src="img.url" alt="" @click="setPrimaryIndex()">
+                    <img :src="img.url" alt="">
                     <button class="set-primary-btn" @click="setPrimary(index)">
                         {{ index === primaryIndex ? '★ Cover' : 'Set as cover' }}
                     </button>
@@ -136,6 +136,9 @@ const errors = reactive({
 
 function triggerFileInput() {
     fileInput.value.click();
+}
+function setPrimary(index) {
+    primaryIndex.value = index;
 }
 
 function handleFileSelect(e) {
@@ -379,6 +382,7 @@ function validate() {
     padding-top: 20px;
 }
 .preview-box {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -405,7 +409,7 @@ function validate() {
     background-color: #2d6e53;
 }
 .preview-box img {
-    position: relative;
+
     display: flex;
     flex-direction: row;
     width: 100%;
