@@ -101,8 +101,10 @@ import { ref, reactive, computed } from 'vue';
 import api from '../axios.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import Navbar from "../components/Navbar.vue";
+import { useListingImageStore } from "../stores/ListingImageStore.js";
 
 const listingStore = useListingStore();
+const listingImageStore = useListingImageStore();
 const loading = ref(false);
 const error = ref('');
 const primaryIndex = ref(0);
