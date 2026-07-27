@@ -160,6 +160,7 @@ async function submitListing() {
     }
     try {
         await listingStore.storeListing(form);
+        await listingImageStore.storeListingImage(listingStore.listingId, images.value, primaryIndex.value);
         console.log('listing submitted');
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to submit listing uploadlisting.vue';

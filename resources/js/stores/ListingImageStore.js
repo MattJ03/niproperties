@@ -11,17 +11,13 @@ export const useListingImageStore = defineStore('listing_images', () => {
     const storeListingImage = async (listingId, images, primaryIndex) => {
         loading.value = true;
         try {
-            for(const [img, index] of images.entries()) {
+            for(const [index, img] of images.entries()) {
                 const formData = new FormData();
                 formData.append('file', img.file);
                 formData.append('is_primary', index === primaryIndex ? 1 : 0);
 
 
-                await api.post(`/listings/${listingId}/images`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
+                await api.post(`/listings/${listingId}/images`, formData);
             }
         } catch (err) {
             error.value = error.response?.data?.message ?? 'Failed to upload images'
