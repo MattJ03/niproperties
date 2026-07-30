@@ -161,4 +161,24 @@ class ListingController extends Controller
           'message' => 'listing deleted',
       ], 200);
     }
+
+    public function get3MostRecentListings() {
+      $user = auth()->id();
+
+      $query = Listing::where('sale_status', 'open')
+                         ->where('landlord_id', '!=', $user)
+                         ->orderBy('created_at', 'desc')->take(3)->get();
+
+      if($query->count() < 1) {
+          return response()->json([
+              'message' => 'there are no listings',
+              'listings' => $query,
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $query,
+          'message' => 'listings found',
+      ]);
+    }
 }
