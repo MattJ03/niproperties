@@ -163,21 +163,29 @@ class ListingController extends Controller
     }
 
     public function get3MostRecentListings() {
-      $user = auth()->id();
+      $userId = auth()->id();
 
-      $query = Listing::where('sale_status', 'open')
-                         ->where('landlord_id', '!=', $user)
-                         ->orderBy('created_at', 'desc')->take(3)->get();
+      $query = Listing::where('sale_status', 'open');
 
-      if($query->count() < 1) {
+          if($userId) {
+              $query->where('landlord_id', '!=', $userId);
+
+          }
+
+          $listings = $query->with('listingImages')
+              ->orderBy('created_at', 'desc')
+              ->take(3)
+              ->get();
+
+      if($listings->count() < 1) {
           return response()->json([
               'message' => 'there are no listings',
-              'listings' => $query,
+              'listings' => $listings,
           ]);
       }
 
       return response()->json([
-          'listings' => $query,
+          'listings' => $listings,
           'message' => 'listings found',
       ]);
     }

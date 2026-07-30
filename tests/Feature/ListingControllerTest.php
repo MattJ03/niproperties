@@ -346,5 +346,8 @@ class ListingControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertDatabaseCount('listings', 10);
         $response->assertJsonCount(3, 'listings');
+        $response->dump();
         }
+
+
 }
