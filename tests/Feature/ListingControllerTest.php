@@ -327,4 +327,24 @@ class ListingControllerTest extends TestCase
             'town' => 'fakeTown',
         ]);
         }
+
+        public function test_get_3_recent_listings(): void {
+        $listings = Listing::factory()->count(3)->create();
+
+        $response = $this->getJson('/api/listingsRecent3');
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'listings', 'message',
+        ]);
+        }
+
+        public function test_only_returns_3_even_with_more_listings_in_db(): void {
+        $listings = Listing::factory()->count(10)->create();
+
+        $response = $this->getJson('/api/listingsRecent3');
+
+        $response->assertStatus(200);
+        $this->assertDatabaseCount('listings', 10);
+        $response->assertJsonCount(3, 'listings');
+        }
 }
