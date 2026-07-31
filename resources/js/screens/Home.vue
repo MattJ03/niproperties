@@ -100,6 +100,9 @@
                 </div>
             </div>
         </div>
+        <div class="recent-uploads">
+
+        </div>
     </div>
 
 </template>
@@ -379,5 +382,10 @@ const search = ref('');
     height: 40px;
     padding-top: 20px;
     padding-left: 10px;
+}
+.recent-uploads {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
