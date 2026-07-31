@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="img-wrapper">
-
+            <img  v-if="primaryImageCheck" :src="/listings/images/${primaryImage.id}" alt="listing image" />
         </div>
 
     </div>
