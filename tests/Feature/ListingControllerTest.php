@@ -349,5 +349,27 @@ class ListingControllerTest extends TestCase
         $response->dump();
         }
 
+        public function test_when_less_than_3_listings_return_all(): void {
+        $listings = Listing::factory()->count(2)->create();
+
+        $response = $this->getJson('/api/listingsRecent3');
+        $response->assertStatus(200);
+        $this->assertDatabaseCount('listings', 2);
+        }
+
+        public function test_dont_get_listings_tied_to_landlord(): void {
+        $landlord = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($landlord);
+
+        $listing = Listing::factory()->count(2)->create();
+
+        $listingLandlord = Listing::factory()->create([
+            'landlord_id' => $landlord->id,
+        ]);
+
+        $response = $this->getJson('/api/listingsRecent3');
+        $response->assertStatus(200);
+        $response->assertJsonCount(2, 'listings');
+        }
 
 }
