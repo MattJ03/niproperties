@@ -8,6 +8,7 @@ export const useListingStore = defineStore('listings', () => {
    const listings = ref([]);
    const listing = ref('');
    const listingId = ref(null);
+   const recentListings = ref([]);
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -22,12 +23,26 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const get3RecentListings = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('/listingsRecent3');
+           recentListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'unable to get the 3 recent listings';
+       } finally {
+           loading.value = false;
+       }
+   }
+
    return {
        loading,
        error,
        listings,
        listing,
        listingId,
+       recentListings,
        storeListing,
+       get3RecentListings,
    };
 });

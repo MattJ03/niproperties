@@ -100,8 +100,12 @@
                 </div>
             </div>
         </div>
-        <div class="recent-uploads">
+        <div class="recent-uploads-container">
+            <div class="row-recent-uploads">
+                <RecentListing
 
+                />
+            </div>
         </div>
     </div>
 
@@ -121,6 +125,7 @@ import rightarrow from '../assets/rightarrow.png';
 import homesquare from '../assets/housesquare.png';
 import agent from '../assets/agent.png';
 import shield from '../assets/shield.png';
+import RecentListing from "../components/RecentListing.vue";
 
 const authStore = useAuthStore();
 
@@ -383,9 +388,13 @@ const search = ref('');
     padding-top: 20px;
     padding-left: 10px;
 }
-.recent-uploads {
+.recent-uploads-container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.row-recent-uploads {
+    display: flex;
+    flex-direction: row;
 }
 </style>
