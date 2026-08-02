@@ -103,7 +103,9 @@
         <div class="recent-uploads-container">
             <div class="row-recent-uploads">
                 <RecentListing
-
+                    v-for="listing in listingStore.recentListings"
+                    :listing="listing"
+                    key="listing.id"
                 />
             </div>
         </div>
@@ -126,11 +128,18 @@ import homesquare from '../assets/housesquare.png';
 import agent from '../assets/agent.png';
 import shield from '../assets/shield.png';
 import RecentListing from "../components/RecentListing.vue";
+import { useListingStore } from "../stores/ListingStore.js";
 
 const authStore = useAuthStore();
+const listingStore = useListingStore();
 
 const { role, name} = storeToRefs(authStore);
 const search = ref('');
+
+onMounted(() => {
+    listingStore.get3RecentListings();
+    console.log('api call made to get 3 recent listings');
+})
 
 
 </script>
@@ -138,7 +147,6 @@ const search = ref('');
 .container {
     display: flex;
     width: 100%;
-    min-height: 200dvh;
     flex-direction: column;
 }
 
@@ -289,7 +297,7 @@ const search = ref('');
 .info-container {
     display: flex;
     width: 100%;
-    height: 100dvh;
+    height: 50dvh;
     overflow: hidden;
     flex-direction: column;
     z-index: 1;
@@ -389,12 +397,13 @@ const search = ref('');
     padding-left: 10px;
 }
 .recent-uploads-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   height: 50dvh;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 .row-recent-uploads {
     display: flex;
+    gap: 20px;
     flex-direction: row;
 }
 </style>

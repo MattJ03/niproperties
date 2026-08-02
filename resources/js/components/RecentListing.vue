@@ -31,7 +31,7 @@ const props = defineProps({
 const noImage = ref('');
 
 const primaryImage = computed(() => {
-    if(props.listing.listing.listing_images === null) {
+    if(props.listing.listing_images === null) {
         noImage.value = 'No Image Found'
         return null;
     }
@@ -42,21 +42,25 @@ const primaryImage = computed(() => {
 <style scoped>
 .container {
     display: flex;
-    height: 300px;
-    width: 500px;
+    flex-direction: column;
+    height: 50dvh;
+
+    border-radius: 12px;
     border: 1px solid #000000;
     flex-direction: column;
 
 }
 .img-wrapper {
     display: flex;
-    height: 100%;
-    width: 100%;
+    height: 100px;
+    width: 100px;
 }
 .listing-details {
     display: flex;
     justify-content: center;
-    margin: auto;
+    align-items: center;
+    flex-direction: column;
+
 
 }
 .listing-details span {
@@ -67,9 +71,9 @@ const primaryImage = computed(() => {
     font-size: 15px;
 }
 .no-image-placeholder {
-    height: 50%;
-    width: 50%;
-    border: 1px solid #000000;
+    height: 100px;
+    width: 100px;
+
 
 }
 </style>
