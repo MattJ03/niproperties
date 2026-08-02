@@ -6,7 +6,7 @@
         </div>
         <div class="listing-details-wrapper">
         <div class="listing-details">
-            <span>£ {{ props.listing.price }} </span>
+            <span> {{ formatPrice(props.listing.price) }} </span>
             <span> {{ props.listing.address_line_1 }}</span>
             <span v-if="props.listing.address_line_2"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">
@@ -39,7 +39,16 @@ const primaryImage = computed(() => {
     }
 
     return props.listing.listing_images.find(img => img.is_primary) ?? props.listing.listing_images[0];
-})
+});
+
+function formatPrice(price) {
+   return Intl.NumberFormat(
+        'en-GB',
+        { style: "currency",
+                 currency: "GBP"},
+
+    ).format(price);
+}
 </script>
 <style scoped>
 .container {
@@ -55,14 +64,16 @@ const primaryImage = computed(() => {
 .img-wrapper {
     display: flex;
     justify-content: center;
-    height: 85%;
+    height: 70%;
     width: 100%;
 }
 .listing-img {
-    width: 85%;
+    width: 100%;
+    border-radius: 12px 12px 0px 0px;
 }
 .listing-details-wrapper {
     display: flex;
+    justify-content: left;
     width: 100%;
     height: 100%;
     border-radius: 12px;
