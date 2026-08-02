@@ -55,6 +55,13 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function logout() {
+        loading.value = true;
+        try {
+            const res = await api.post
+        }
+    }
+
     return {
         name,
         token,

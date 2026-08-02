@@ -74,7 +74,7 @@ const moveToHome = async () => {
 }
 
 const checkIfLoggedIn = computed (() => {
-    if(authStore)
+
 })
 </script>
 <style scoped>
