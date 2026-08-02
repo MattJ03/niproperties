@@ -58,7 +58,18 @@ export const useAuthStore = defineStore('auth', () => {
     async function logout() {
         loading.value = true;
         try {
-            const res = await api.post
+            const res = await api.post(`/logout`);
+            token.value = null;
+            role.value = null;
+            name.value = null;
+            loggedIn.value = false
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('name');
+        } catch(err) {
+            error.value = error.response?.data?.message || 'failed to log out';
+        } finally {
+            loading.value = false;
         }
     }
 
@@ -71,7 +82,8 @@ export const useAuthStore = defineStore('auth', () => {
         loggedIn,
         registerLandlord,
         registerBuyer,
-        login
+        login,
+        logout,
     };
 });
 
