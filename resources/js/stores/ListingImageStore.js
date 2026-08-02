@@ -26,6 +26,7 @@ export const useListingImageStore = defineStore('listing_images', () => {
         }
     }
 
+
     return {
         loading,
         error,

@@ -1,9 +1,10 @@
 <template>
     <div class="container">
         <div class="img-wrapper">
-            <img  v-if="primaryImage" :src="`/listings/images/${primaryImage.id}`" alt="listing image" />
+            <img  v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" alt="listing image" class="listing-img"/>
             <div v-else class="no-image-placeholder">No Image Found</div>
         </div>
+        <div class="listing-details-wrapper">
         <div class="listing-details">
             <span>£ {{ props.listing.price }} </span>
             <span> {{ props.listing.address_line_1 }}</span>
@@ -12,6 +13,7 @@
             <span class="town-text"> {{ props.listing.town }}</span>
                 <span class="town-text"> {{ props.listing.postcode}}</span>
             </div>
+        </div>
         </div>
 
     </div>
@@ -52,19 +54,31 @@ const primaryImage = computed(() => {
 }
 .img-wrapper {
     display: flex;
-    height: 100px;
-    width: 100px;
+    justify-content: center;
+    height: 85%;
+    width: 100%;
+}
+.listing-img {
+    width: 85%;
+}
+.listing-details-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background-color: #1a202c;
 }
 .listing-details {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    width: 100%;
 
 }
 .listing-details span {
     font-size: 15px;
+
 }
 .town-text {
     color: #A9A9A9;

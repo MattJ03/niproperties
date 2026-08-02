@@ -12,6 +12,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/listingsIndex', [ListingController::class, 'index']);
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
 Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListings']);
+Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
