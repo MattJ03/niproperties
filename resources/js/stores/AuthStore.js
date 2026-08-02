@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
     const token = ref(localStorage.getItem('token'));
     const role = ref(localStorage.getItem('role'));
     const loading = ref(false);
+    const loggedIn = ref(false);
     const error = ref('');
 
     async function registerLandlord(payload) {
@@ -42,6 +43,7 @@ export const useAuthStore = defineStore('auth', () => {
             token.value = res.data.token;
             role.value = res.data.role;
             name.value = res.data.user.name;
+            loggedIn.value = true;
             localStorage.setItem('token', token.value);
             localStorage.setItem('role', role.value);
             localStorage.setItem('name', name.value);
@@ -59,6 +61,7 @@ export const useAuthStore = defineStore('auth', () => {
         role,
         loading,
         error,
+        loggedIn,
         registerLandlord,
         registerBuyer,
         login

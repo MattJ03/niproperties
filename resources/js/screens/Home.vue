@@ -310,6 +310,7 @@ onMounted(() => {
 }
 .message-trusted-wrapper {
     display: flex;
+    margin-top: 0;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -318,6 +319,7 @@ onMounted(() => {
 }
 .message-trusted {
     font-size: 40px;
+    margin-top: 0;
 }
 .row-info-squares {
     display: flex;

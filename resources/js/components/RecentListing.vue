@@ -43,7 +43,7 @@ const primaryImage = computed(() => {
 .container {
     display: flex;
     flex-direction: column;
-    height: 50dvh;
+    height: 48dvh;
 
     border-radius: 12px;
     border: 1px solid #000000;

@@ -16,6 +16,7 @@
             <button class="login-btn" v-if="!role" @click="moveToLogin()">
                 Log in
             </button>
+            <button class="login-btn">Log out</button>
         </div>
     </nav>
 </template>
@@ -71,6 +72,10 @@ const moveToHome = async () => {
         loading.value = false;
     }
 }
+
+const checkIfLoggedIn = computed (() => {
+    if(authStore)
+})
 </script>
 <style scoped>
 .nav-bar {
