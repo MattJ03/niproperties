@@ -4,7 +4,7 @@
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
         <div class="headings-selector">
-            <strong><span>Browse all</span></strong>
+            <strong><span @click="moveToBrowseAll()">Browse all</span></strong>
             <strong><span>Buy</span></strong>
             <strong><span>Commercial</span></strong>
             <strong><span>Dashboard & Analytics</span></strong>
@@ -69,6 +69,20 @@ const moveToHome = async () => {
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to go home';
     } finally {
+        loading.value = false;
+    }
+}
+
+const moveToBrowseAll = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to browse';
+    }
+    finally {
         loading.value = false;
     }
 }
