@@ -6,13 +6,17 @@
         </div>
         <div class="listing-details-wrapper">
         <div class="listing-details">
-            <span> {{ formatPrice(props.listing.price) }} </span>
+            <span class="details-price"> {{ formatPrice(props.listing.price) }} </span>
             <span> {{ props.listing.address_line_1 }}</span>
             <span v-if="props.listing.address_line_2"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">
+                <div class="town-postcode-background">
             <span class="town-text"> {{ props.listing.town }}</span>
+                </div>
+                <div class="town-postcode-background">
                 <span class="town-text"> {{ props.listing.postcode}}</span>
-            </div>
+                </div>
+                </div>
         </div>
         </div>
 
@@ -69,36 +73,60 @@ function formatPrice(price) {
 }
 .listing-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 12px 12px 0px 0px;
 }
 .listing-details-wrapper {
     display: flex;
     justify-content: left;
     width: 100%;
-    height: 100%;
+    height: 30%;
     border-radius: 12px;
-    background-color: #1a202c;
+    background-color: #FDFBD4;
 }
 .listing-details {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+    margin-top: 15px;
     flex-direction: column;
     width: 100%;
 
 }
 .listing-details span {
-    font-size: 15px;
+
 
 }
+.small-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
 .town-text {
-    color: #A9A9A9;
-    font-size: 15px;
+
+    color: #000000;
+    font-size: 20px;
+}
+.town-postcode-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .no-image-placeholder {
     height: 100px;
     width: 100px;
-
-
+}
+.details-price {
+    font-size: 36px;
+    color: #2d6e53;
 }
 </style>
