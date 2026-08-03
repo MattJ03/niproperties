@@ -8,7 +8,7 @@
         <div class="listing-details">
             <span class="details-price"> {{ formatPrice(props.listing.price) }} </span>
             <span> {{ props.listing.address_line_1 }}</span>
-            <span v-if="props.listing.address_line_2"> {{ props.listing.address_line_2 }}</span>
+            <span v-if="props.listing.address_line_2" class="address-text"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">
                 <div class="town-postcode-background">
             <span class="town-text"> {{ props.listing.town }}</span>
@@ -58,8 +58,7 @@ function formatPrice(price) {
 .container {
     display: flex;
     flex-direction: column;
-    height: 48dvh;
-
+    height: 49dvh;
     border-radius: 12px;
     border: 1px solid #000000;
     flex-direction: column;
@@ -84,6 +83,7 @@ function formatPrice(price) {
     height: 30%;
     border-radius: 12px;
     background-color: #FDFBD4;
+    padding-bottom: 15px;
 }
 .listing-details {
     display: flex;
@@ -96,17 +96,20 @@ function formatPrice(price) {
 }
 .listing-details span {
 
-
+}
+.address-text {
+    font-size: 16px;
 }
 .small-info-wrapper {
     display: flex;
     flex-direction: row;
     gap: 15px;
+    padding-bottom: 15px;
 }
 .town-text {
 
     color: #000000;
-    font-size: 20px;
+    font-size: 16px;
 }
 .town-postcode-background {
     display: flex;
@@ -116,14 +119,22 @@ function formatPrice(price) {
     height: fit-content;
     width: fit-content;
     border-radius: 14px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .no-image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     height: 100px;
     width: 100px;
+    font-size: 20px;
+    border: 1px solid #000000;
+    border-radius: 14px;
+    padding: 8px 16px;
 }
 .details-price {
     font-size: 36px;
