@@ -21,7 +21,7 @@
             <div class="row-details">
                 <div class="field">
                     <strong><label class="field-text">Town</label></strong>
-                <input type="text" v-model="form.town" class="input-text-town" placeholder="Tyrone">
+                <input type="text" v-model="form.town" class="input-text-town" placeholder="Downpatrick">
                     <span class="error-message" v-if="errors.town"> {{ errors.town }}</span>
                 </div>
                 <div class="field">
