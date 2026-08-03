@@ -102,12 +102,15 @@ import api from '../axios.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import Navbar from "../components/Navbar.vue";
 import { useListingImageStore } from "../stores/ListingImageStore.js";
+import { useRouter } from "vue-router";
+
 
 const listingStore = useListingStore();
 const listingImageStore = useListingImageStore();
 const loading = ref(false);
 const error = ref('');
 const primaryIndex = ref(0);
+const router = useRouter();
 
 const form = reactive({
     address_line_1: '',
@@ -162,6 +165,9 @@ async function submitListing() {
         await listingStore.storeListing(form);
         await listingImageStore.storeListingImage(listingStore.listingId, images.value, primaryIndex.value);
         console.log('listing submitted');
+        router.push({
+            name: 'home',
+        });
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to submit listing uploadlisting.vue';
     } finally {
