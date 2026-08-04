@@ -9,6 +9,7 @@ export const useListingStore = defineStore('listings', () => {
    const listing = ref('');
    const listingId = ref(null);
    const recentListings = ref([]);
+   const listingsCount = ref('');
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -18,6 +19,19 @@ export const useListingStore = defineStore('listings', () => {
            listingId.value = res.data.listing.id;
        } catch (err) {
            error.value = error.response?.data?.message ?? 'failed to store listing';
+       } finally {
+           loading.value = false;
+       }
+   }
+
+   const getAllListings = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('listingsIndex');
+           listings.value = res.data.listings;
+           listingsCount.value = res.data.listings_count;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get all listings';
        } finally {
            loading.value = false;
        }
@@ -42,7 +56,9 @@ export const useListingStore = defineStore('listings', () => {
        listing,
        listingId,
        recentListings,
+       listingsCount,
        storeListing,
+       getAllListings,
        get3RecentListings,
    };
 });
