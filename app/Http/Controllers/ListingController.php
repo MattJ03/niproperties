@@ -9,6 +9,7 @@ use App\Policies\ListingPolicy;
 use App\Services\GeocodingService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Log;
 
 class ListingController extends Controller
 {
@@ -24,17 +25,21 @@ class ListingController extends Controller
       if ($userId) {
           $query->where('landlord_id', '!=', $userId);
       }
+    $listings = $query->with('listingImages');
 
-      if($query->count() < 1) {
+      if($listings->count() < 1) {
+          Log::info($listings->count() . ' number of listings');
           return response()->json([
               'message' => 'there are no listings',
-              'listings' => $query,
+              'listings' => $listings,
           ]);
       }
+      Log::info($query->count() . ' number of listings');
+      $listings->orderBy('created_at', 'desc')->paginate(25);
 
       return response()->json([
-          'listings' => $query->orderBy('created_at', 'desc')->paginate(20),
-          'listings_count' => $query->count(),
+          'listings' => $listings,
+          'listings_count' => $listings->count(),
           'message' => 'listings found',
       ]);
   }

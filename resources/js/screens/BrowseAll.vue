@@ -7,8 +7,15 @@
                 <span class="total-listings-text">Total listings across Northern Ireland: {{ listingStore.listingsCount }}</span>
             </div>
             <select class="sort-dropdown">
-            <option>Sort: Most recent</option>
+            <option> Sort: Most recent</option>
             </select>
+        </div>
+        <div class="listings-rows">
+            <ListingGrid
+                v-for="listing in listingStore.allListings"
+                :listing="listing"
+                key="listing.id"
+                />
         </div>
     </div>
 </template>
@@ -16,14 +23,19 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
+import ListingGrid from "../components/ListingGrid.vue";
+import {storeToRefs} from "pinia";
 
 const loading = ref(false);
 const error = ref('');
 const listingStore = useListingStore();
 
+
+
 onMounted(() => {
+    console.log('onMounted running')
     listingStore.getAllListings();
-})
+});
 
 </script>
 <style scoped>
@@ -41,12 +53,12 @@ onMounted(() => {
     height: 11%;
     width: 100%;
     margin-top: 150px;
-    padding-bottom: 15px;
     background-color: #FFFFFF;
 }
 .header-text-wrapper {
     display: flex;
     margin-left: 50px;
+    padding-bottom: 20px;
     flex-direction: column;
 }
 .total-listings-text {
@@ -60,5 +72,14 @@ onMounted(() => {
     background-color: #FDFBD4;
     padding: 10px 10px;
     border-radius: 10px;
+}
+.dropdown-recent-image {
+    height: 85%;
+    width: 15%;
+}
+.listings-rows {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

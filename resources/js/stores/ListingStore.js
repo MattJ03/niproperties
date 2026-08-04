@@ -5,7 +5,7 @@ import api from '../axios.js';
 export const useListingStore = defineStore('listings', () => {
    const loading = ref(false);
    const error = ref('');
-   const listings = ref([]);
+   const allListings = ref([]);
    const listing = ref('');
    const listingId = ref(null);
    const recentListings = ref([]);
@@ -27,8 +27,10 @@ export const useListingStore = defineStore('listings', () => {
    const getAllListings = async () => {
        loading.value = true;
        try {
-           const res = await api.get('listingsIndex');
-           listings.value = res.data.listings;
+           console.log('tried');
+           const res = await api.get('/listingsIndex');
+           allListings.value = res.data.listings;
+           console.log(allListings.value.length);
            listingsCount.value = res.data.listings_count;
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get all listings';
@@ -52,7 +54,7 @@ export const useListingStore = defineStore('listings', () => {
    return {
        loading,
        error,
-       listings,
+       allListings,
        listing,
        listingId,
        recentListings,
