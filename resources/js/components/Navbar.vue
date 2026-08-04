@@ -101,6 +101,7 @@ const checkIfLoggedIn = computed(() => authStore.loggedIn === true);
     z-index: 100;
     padding-left: 40px;
     background-color: #FFFFFF;
+    margin-bottom: 40px;
 }
 .logo-wrapper {
 
