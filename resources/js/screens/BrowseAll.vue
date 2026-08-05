@@ -10,12 +10,17 @@
             <option> Sort: Most recent</option>
             </select>
         </div>
+        <div class="listing-and-filter-container">
+            <div class="filter-container">
+
+            </div>
         <div class="listings-rows">
             <ListingGrid
                 v-for="listing in listingStore.allListings"
                 :listing="listing"
                 key="listing.id"
                 />
+        </div>
         </div>
     </div>
 </template>
@@ -45,7 +50,6 @@ onMounted(() => {
 .container {
     display: flex;
     flex-direction: column;
-
     width: 100%;
 
 
@@ -58,6 +62,7 @@ onMounted(() => {
     height: 11%;
     width: 100%;
     margin-top: 150px;
+    margin-bottom: 40px;
     background-color: #FFFFFF;
 }
 .header-text-wrapper {
@@ -78,16 +83,27 @@ onMounted(() => {
     padding: 10px 10px;
     border-radius: 10px;
 }
-.dropdown-recent-image {
-    height: 85%;
-    width: 15%;
-}
+
 .listings-rows {
     display: grid;
+    flex-direction: row;
+    margin-top: 40px;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     align-items: start;
     gap: 20px;
     width: 100%;
     padding: 0 50px;
+}
+.filter-container {
+    display: flex;
+    height: 80%;
+    border: 1px solid #000000;
+    width: 30%;
+
+    margin-left: 40px;
+}
+.listing-and-filter-container {
+    display: flex;
+    flex-direction: row;
 }
 </style>
