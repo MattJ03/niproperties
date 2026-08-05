@@ -44,8 +44,10 @@ onMounted(() => {
 <style scoped>
 .container {
     display: flex;
-    height: 100dvh;
+    flex-direction: column;
+
     width: 100%;
+
 
 }
 .header-container {
@@ -81,8 +83,11 @@ onMounted(() => {
     width: 15%;
 }
 .listings-rows {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+    padding: 0 50px;
 }
 </style>
