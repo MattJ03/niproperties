@@ -35,7 +35,10 @@ const listingStore = useListingStore();
 onMounted(() => {
     console.log('onMounted running')
     listingStore.getAllListings();
+    console.log(listingStore.allListings.length);
 });
+
+
 
 </script>
 <style scoped>

@@ -3,6 +3,7 @@
         <div class="img-wrapper">
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-image" alt="listing image" />
         </div>
+        <span> {{ props.listing.price}}</span>
     </div>
 
 </template>
@@ -25,6 +26,8 @@ const primaryImage = computed(() => {
     }
     return props.listing.listing_images.find(img => img.is_primary) ?? props.listing.listing_images[0];
 });
+
+
 </script>
 <style scoped>
 .container {

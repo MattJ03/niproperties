@@ -25,7 +25,9 @@ class ListingController extends Controller
       if ($userId) {
           $query->where('landlord_id', '!=', $userId);
       }
-    $listings = $query->with('listingImages');
+    $listings = $query->with('listingImages')
+                       ->orderBy('created_at', 'desc')
+                       ->paginate(25);
 
       if($listings->count() < 1) {
           Log::info($listings->count() . ' number of listings');
@@ -34,12 +36,11 @@ class ListingController extends Controller
               'listings' => $listings,
           ]);
       }
-      Log::info($query->count() . ' number of listings');
-      $listings->orderBy('created_at', 'desc')->paginate(25);
+      Log::info($listings->count() . ' number of listings');
 
       return response()->json([
-          'listings' => $listings,
-          'listings_count' => $listings->count(),
+          'listings' => $listings->items(),
+          'listings_count' => $listings->total(),
           'message' => 'listings found',
       ]);
   }

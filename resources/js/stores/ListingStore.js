@@ -30,7 +30,7 @@ export const useListingStore = defineStore('listings', () => {
            console.log('tried');
            const res = await api.get('/listingsIndex');
            allListings.value = res.data.listings;
-           console.log(allListings.value.length);
+           console.log(allListings.value.length + 'checking in store');
            listingsCount.value = res.data.listings_count;
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get all listings';
