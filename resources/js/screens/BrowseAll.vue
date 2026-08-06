@@ -12,7 +12,19 @@
         </div>
         <div class="listing-and-filter-container">
             <div class="filter-container">
+               <h2 class="filters-header">Filters</h2>
+                <div class="buy-rent-section">
+                    <p>rent or buy</p>
+                    <div class="rent-buy-btn">
+                        <button class="rent-btn" @click="filters.rentOrBuy = 'rent'"
+                                 :class="{ active: filters.rentOrBuy === 'rent'}">Rent</button>
+                        <button class="buy-btn" @click="filters.rentOrBuy = 'buy'"
+                        :class="{ active: filters.rentOrBuy === 'buy'}">Buy</button>
+                    </div>
+                </div>
+                <div class="price-section">
 
+                </div>
             </div>
         <div class="listings-rows">
             <ListingGrid
@@ -34,6 +46,10 @@ import {storeToRefs} from "pinia";
 const loading = ref(false);
 const error = ref('');
 const listingStore = useListingStore();
+
+const filters = reactive({
+    rentOrBuy: '',
+});
 
 
 
@@ -70,6 +86,7 @@ onMounted(() => {
     margin-left: 50px;
     padding-bottom: 20px;
     flex-direction: column;
+
 }
 .total-listings-text {
     font-size: 16px;
@@ -82,6 +99,7 @@ onMounted(() => {
     background-color: #FDFBD4;
     padding: 10px 10px;
     border-radius: 10px;
+    margin-right: 65px;
 }
 
 .listings-rows {
@@ -96,14 +114,57 @@ onMounted(() => {
 }
 .filter-container {
     display: flex;
-    height: 80%;
-    border: 1px solid #000000;
-    width: 30%;
 
+    height: 700px;
+    flex-direction: column;
+    border: 1px solid #FFFFFF;
+    width: 30%;
     margin-left: 40px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
 }
 .listing-and-filter-container {
     display: flex;
     flex-direction: row;
+}
+.filters-header {
+    margin-left: 40%;
+}
+.buy-rent-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.rent-buy-btn {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+
+}
+.rent-btn {
+    padding: 16px 16px;
+    border-radius: 14px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    cursor: pointer;
+
+}
+.rent-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.buy-btn {
+    padding: 16px 16px;
+    border-radius: 14px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    cursor: pointer;
+
+}
+.buy-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
 }
 </style>
