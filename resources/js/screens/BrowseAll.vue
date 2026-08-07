@@ -38,9 +38,31 @@
                 <div class="county-section">
                     <strong><p class="filter-topic">County</p></strong>
 
-                    <select class="county-select">
-                        <option class="dropdown-value-county" v-for="county in counties"> {{ county }}</option>
+                    <select v-model="filters.county" class="county-select">
+                        <option class="dropdown-value-county" v-for="county in counties" > {{ county }}</option>
                     </select>
+                </div>
+                <div class="room-number-selection">
+                    <strong><p class="filter-topic">Number of rooms</p></strong>
+                    <div class="row-of-numbers">
+                        <div class="square-num-rooms">
+                            Any
+                        </div>
+                        <div class="square-num-rooms">
+                            1-4
+                        </div>
+                        <div class="square-num-rooms">
+                            5-7
+                        </div>
+                        <div class="square-num-rooms">
+                            8-10
+                        </div>
+                        <div class="square-num-rooms">
+                            11+
+                        </div>
+                    </div>
+                </div>
+                <div class="keywords-section">
 
                 </div>
             </div>
@@ -75,6 +97,8 @@ const filters = reactive({
     max_price: '',
     county: '',
 });
+
+const numRoomsRange = ref([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 
 
@@ -273,6 +297,9 @@ onMounted(() => {
     font-size: 16px;
     padding-left: 15px;
 }
+.county-select:hover {
+    border: 1px solid #FF0000;
+}
 .dropdown-value-county {
     font-size: 16px;
     height: 50px;
@@ -280,5 +307,32 @@ onMounted(() => {
     background-color: #000000;
     color: #FFFFFF;
 }
-
+.room-number-selection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.row-of-numbers {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+.square-num-rooms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       height: 40px;
+       width: 60px;
+       border: 1px solid #F2EFE6;
+       border-radius: 14px;
+       cursor: pointer;
+}
+.square-num-rooms:hover {
+    border: 1px solid #FF0000;
+}
+.keywords-section {
+    display: flex;
+}
 </style>
