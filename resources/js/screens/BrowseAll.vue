@@ -14,16 +14,29 @@
             <div class="filter-container">
                <h2 class="filters-header">Filters</h2>
                 <div class="buy-rent-section">
-                    <p>rent or buy</p>
+                    <strong><p class="filter-topic">Rent or buy</p></strong>
                     <div class="rent-buy-btn">
-                        <button class="rent-btn" @click="filters.rentOrBuy = 'rent'"
-                                 :class="{ active: filters.rentOrBuy === 'rent'}">Rent</button>
-                        <button class="buy-btn" @click="filters.rentOrBuy = 'buy'"
-                        :class="{ active: filters.rentOrBuy === 'buy'}">Buy</button>
+                        <button class="rent-btn" @click="filters.rent_or_buy = 'rent'"
+                                 :class="{ active: filters.rent_or_buy === 'rent'}">
+                            <img :src="keys" alt="keys" class="icon-rent" />
+                            <span>Rent</span>
+                        </button>
+                        <button class="buy-btn" @click="filters.rent_or_buy = 'buy'"
+                        :class="{ active: filters.rent_or_buy === 'buy'}">
+                            <img :src="housesquare" alt="house" class="icon-buy"/>
+                            <strong><span>Buy</span></strong>
+                        </button>
                     </div>
                 </div>
                 <div class="price-section">
-
+                    <strong><p class="filter-topic">Price range</p></strong>
+                    <div class="min-max-row">
+                    <input type="number" class="min-max-input" v-model="filters.min_price" placeholder="min-price"/>
+                    <input type="number" class="min-max-input" v-model="filters.max_price" placeholder="max-price"/>
+                    </div>
+                    </div>
+                <div class="county-section">
+                    <strong><span class="filter-topic">County</span> </strong>
                 </div>
             </div>
         <div class="listings-rows">
@@ -42,14 +55,20 @@ import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import ListingGrid from "../components/ListingGrid.vue";
 import {storeToRefs} from "pinia";
+import housesquare from '../assets/housesquare.png';
+import keys from '../assets/keys2.png';
 
 const loading = ref(false);
 const error = ref('');
 const listingStore = useListingStore();
 
 const filters = reactive({
-    rentOrBuy: '',
+    rent_or_buy: '',
+    min_price: '',
+    max_price: ''
 });
+
+
 
 
 
@@ -114,7 +133,7 @@ onMounted(() => {
 }
 .filter-container {
     display: flex;
-
+    box-shadow: 0 6px 20px rgba(0,0,0,.06);
     height: 700px;
     flex-direction: column;
     border: 1px solid #FFFFFF;
@@ -128,27 +147,41 @@ onMounted(() => {
     flex-direction: row;
 }
 .filters-header {
-    margin-left: 40%;
+   margin-left: 30px;
+}
+.filter-topic {
+    font-size: 18px;
+
 }
 .buy-rent-section {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: 25px;
     flex-direction: column;
 
 }
 .rent-buy-btn {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     cursor: pointer;
 
 }
 .rent-btn {
-    padding: 16px 16px;
-    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 48px;
+    padding: 0 34px;
+
+    border-radius: 12px;
     background-color: #FFFFFF;
     border: 1px solid #000000;
+
     cursor: pointer;
+    font-size: 16px;
 
 }
 .rent-btn.active {
@@ -156,15 +189,68 @@ onMounted(() => {
     color: #FFFFFF;
 }
 .buy-btn {
-    padding: 16px 16px;
-    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 48px;
+    padding: 0 34px;
+
+    border-radius: 12px;
     background-color: #FFFFFF;
     border: 1px solid #000000;
+
     cursor: pointer;
+    font-size: 16px;
 
 }
 .buy-btn.active {
     background-color: #2d6e53;
     color: #FFFFFF;
+}
+.price-section {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 30px;
+    flex-direction: column;
+}
+.min-max-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+
+}
+.min-max-input {
+    width: 60%;
+    height: 55px;
+    border-radius: 12px;
+    border: 1px solid #F2EFE6;
+    font-size: 16px;
+    padding-left: 15px;
+}
+.min-max-input:hover {
+    border: 1px solid #FF0000;
+}
+.icon-buy {
+    height: 18px;
+    width: 50%;
+    background-color: #FDFBD4;
+    border-radius: 80%;
+    padding: 6px 6px;
+}
+.icon-rent {
+    height: 18px;
+    width: 50%;
+    padding: 6px 6px;
+    background-color: #FDFBD4;
+    border-radius: 80%;
+}
+.county-section {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 30px;
 }
 </style>
