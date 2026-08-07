@@ -36,7 +36,12 @@
                     </div>
                     </div>
                 <div class="county-section">
-                    <strong><span class="filter-topic">County</span> </strong>
+                    <strong><p class="filter-topic">County</p></strong>
+
+                    <select class="county-select">
+                        <option class="dropdown-value-county" v-for="county in counties"> {{ county }}</option>
+                    </select>
+
                 </div>
             </div>
         <div class="listings-rows">
@@ -57,15 +62,18 @@ import ListingGrid from "../components/ListingGrid.vue";
 import {storeToRefs} from "pinia";
 import housesquare from '../assets/housesquare.png';
 import keys from '../assets/keys2.png';
+import location from '../assets/location.png';
 
 const loading = ref(false);
 const error = ref('');
 const listingStore = useListingStore();
+const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 
 const filters = reactive({
     rent_or_buy: '',
     min_price: '',
-    max_price: ''
+    max_price: '',
+    county: '',
 });
 
 
@@ -163,7 +171,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     cursor: pointer;
 
 }
@@ -250,7 +258,27 @@ onMounted(() => {
 }
 .county-section {
     display: flex;
+    flex-direction: column;
     margin-top: 20px;
     margin-left: 30px;
+    width: 100%;
 }
+.county-select {
+    width: 85%;
+    height: 50px;
+    border: 1px solid #F2EFE6;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    font-size: 16px;
+    padding-left: 15px;
+}
+.dropdown-value-county {
+    font-size: 16px;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 </style>
