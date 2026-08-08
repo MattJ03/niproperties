@@ -143,6 +143,7 @@ const resetFilters = async() => {
             filters.min_num_of_rooms = '';
             filters.max_num_of_rooms = '';
             filters.search = '';
+           await listingStore.getAllListings();
     } catch(err) {
         error.value = error.response?.data?.message || 'cant reset values';
     } finally {
@@ -150,8 +151,8 @@ const resetFilters = async() => {
     }
 }
 
-function applyFilters() {
-    listingStore.getAllListings({
+async function applyFilters() {
+    await listingStore.getAllListings({
         rent_or_buy: filters.rent_or_buy || null,
         min_price: filters.min_price || null,
         max_price: filters.max_price || null,
@@ -294,11 +295,14 @@ onMounted(() => {
 
     border-radius: 12px;
     background-color: #FFFFFF;
-    border: 1px solid #000000;
+    border: 1px solid #F2EFE6;
 
     cursor: pointer;
     font-size: 16px;
 
+}
+.rent-btn:hover {
+    border: 1px solid #FF0000;
 }
 .rent-btn.active {
     background-color: #2d6e53;
@@ -315,11 +319,14 @@ onMounted(() => {
 
     border-radius: 12px;
     background-color: #FFFFFF;
-    border: 1px solid #000000;
+    border: 1px solid #F2EFE6;
 
     cursor: pointer;
     font-size: 16px;
 
+}
+.buy-btn:hover {
+    border: 1px solid #FF0000;
 }
 .buy-btn.active {
     background-color: #2d6e53;
