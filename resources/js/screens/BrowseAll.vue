@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <Navbar></Navbar>
     <div class="container">
         <div class="header-container">
@@ -63,9 +63,18 @@
                     </div>
                 </div>
                 <div class="keywords-section">
-
+                    <p class="filter-topic">Keywords</p>
+                    <div class="keywords-input-wrapper">
+                    <img :src="search" class="search-icon" alt="search"/>
+                    <input type="text" class="keywords-input" />
+                    </div>
                 </div>
-            </div>
+                <div class="button-wrapper">
+                <button class="apply-filters-btn">
+                <img :src="scaffolding" alt="scaffolding" class="img-in-btn" />
+                Apply filters</button>
+                </div>
+                </div>
         <div class="listings-rows">
             <ListingGrid
                 v-for="listing in listingStore.allListings"
@@ -85,6 +94,9 @@ import {storeToRefs} from "pinia";
 import housesquare from '../assets/housesquare.png';
 import keys from '../assets/keys2.png';
 import location from '../assets/location.png';
+import search from '../assets/search.png';
+import scaffolding from '../assets/scaffolding2.png';
+
 
 const loading = ref(false);
 const error = ref('');
@@ -96,6 +108,7 @@ const filters = reactive({
     min_price: '',
     max_price: '',
     county: '',
+    num_of_rooms: '',
 });
 
 const numRoomsRange = ref([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -128,8 +141,8 @@ onMounted(() => {
     padding-right: 50px;
     height: 11%;
     width: 100%;
-    margin-top: 150px;
-    margin-bottom: 40px;
+    margin-top: 120px;
+    margin-bottom: 20px;
     background-color: #FFFFFF;
 }
 .header-text-wrapper {
@@ -166,7 +179,7 @@ onMounted(() => {
 .filter-container {
     display: flex;
     box-shadow: 0 6px 20px rgba(0,0,0,.06);
-    height: 700px;
+    height: fit-content;
     flex-direction: column;
     border: 1px solid #FFFFFF;
     width: 30%;
@@ -243,7 +256,7 @@ onMounted(() => {
 }
 .price-section {
     display: flex;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 30px;
     flex-direction: column;
 }
@@ -283,7 +296,7 @@ onMounted(() => {
 .county-section {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 30px;
     width: 100%;
 }
@@ -310,7 +323,7 @@ onMounted(() => {
 .room-number-selection {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 30px;
 }
 .row-of-numbers {
@@ -334,5 +347,65 @@ onMounted(() => {
 }
 .keywords-section {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.keywords-input {
+    width: 85%;
+    height: 50px;
+    border: 1px solid #F2EFE6;
+    border-radius: 12px;
+    padding: 0 16px 0 45px;
+    font-size: 16px;
+}
+.keywords-input:hover {
+    border: 1px solid #FF0000;
+}
+.keywords-input-wrapper {
+    position: relative;
+    width: 100%;
+
+}
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 22px;
+}
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.apply-filters-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 3px;
+    height: 60px;
+    padding: 20px 40px;
+    width: 70%;
+    font-size: 17px;
+    background-color: #2d6e53;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    color: #FFFFFF;
+}
+.apply-filters-btn:hover {
+    background-color: #1F4D3A;
+}
+.img-in-btn {;
+    height: 24px;
+
 }
 </style>
