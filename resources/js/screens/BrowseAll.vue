@@ -12,7 +12,13 @@
         </div>
         <div class="listing-and-filter-container">
             <div class="filter-container">
+                <div class="top-of-filters">
                <h2 class="filters-header">Filters</h2>
+                    <div class="reset-wrapper">
+                        <img :src="reset" alt="reset image" class="reset-img" />
+                    <span class="reset-filters" @click="resetFilters()">Reset Filters</span>
+                    </div>
+                    </div>
                 <div class="buy-rent-section">
                     <strong><p class="filter-topic">Rent or buy</p></strong>
                     <div class="rent-buy-btn">
@@ -101,6 +107,7 @@ import keys from '../assets/keys2.png';
 import location from '../assets/location.png';
 import search2 from '../assets/search.png';
 import scaffolding from '../assets/scaffolding2.png';
+import reset from '../assets/reset.png';
 
 
 const loading = ref(false);
@@ -126,6 +133,22 @@ setTimeout(() => {
    console.log(filters.min_num_of_rooms);
 }, 6000);
 
+const resetFilters = async() => {
+    loading.value = true;
+    try {
+        filters.rent_or_buy = '';
+        filters.min_price = '';
+            filters.max_price = '';
+            filters.county = '';
+            filters.min_num_of_rooms = '';
+            filters.max_num_of_rooms = '';
+            filters.search = '';
+    } catch(err) {
+        error.value = error.response?.data?.message || 'cant reset values';
+    } finally {
+        loading.value = false;
+    }
+}
 
 
 onMounted(() => {
@@ -205,6 +228,30 @@ onMounted(() => {
 }
 .filters-header {
    margin-left: 30px;
+}
+.top-of-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.reset-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+.reset-filters {
+    font-size: 18px;
+    margin-right: 30px;
+    margin-top: 5px;
+    color: #2d6e53;
+    cursor: pointer;
+}
+.reset-img {
+    height: 20px;
+    cursor: pointer;
 }
 .filter-topic {
     font-size: 18px;
