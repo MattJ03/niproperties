@@ -48,16 +48,21 @@
                         <div class="square-num-rooms">
                             Any
                         </div>
-                        <div class="square-num-rooms">
+                        <div class="square-num-rooms" @click="filters.min_num_of_rooms = '1'; filters.max_num_of_rooms = '4'"
+                        :class="{ active: filters.min_num_of_rooms === '1'}"
+                        >
                             1-4
                         </div>
-                        <div class="square-num-rooms">
+                        <div class="square-num-rooms" @click="filters.min_num_of_rooms = '5'; filters.max_num_of_rooms = '7'"
+                        :class="{ active: filters.min_num_of_rooms === 5}">
                             5-7
                         </div>
-                        <div class="square-num-rooms">
+                        <div class="square-num-rooms" @click="filters.min_num_of_rooms = '8'; filters.max_num_of_rooms = '10'"
+                        :class="{ active: filters.min_num_of_rooms === '8'}">
                             8-10
                         </div>
-                        <div class="square-num-rooms">
+                        <div class="square-num-rooms" @click="filters.min_num_of_rooms = '11'"
+                        :class="{ active: filters.min_num_of_rooms === '11'}">
                             11+
                         </div>
                     </div>
@@ -65,8 +70,8 @@
                 <div class="keywords-section">
                     <p class="filter-topic">Keywords</p>
                     <div class="keywords-input-wrapper">
-                    <img :src="search" class="search-icon" alt="search"/>
-                    <input type="text" class="keywords-input" />
+                    <img :src="search2" class="search-icon" alt="search"/>
+                    <input v-model="filters.search" type="text" class="keywords-input" />
                     </div>
                 </div>
                 <div class="button-wrapper">
@@ -94,7 +99,7 @@ import {storeToRefs} from "pinia";
 import housesquare from '../assets/housesquare.png';
 import keys from '../assets/keys2.png';
 import location from '../assets/location.png';
-import search from '../assets/search.png';
+import search2 from '../assets/search.png';
 import scaffolding from '../assets/scaffolding2.png';
 
 
@@ -108,12 +113,18 @@ const filters = reactive({
     min_price: '',
     max_price: '',
     county: '',
-    num_of_rooms: '',
+    min_num_of_rooms: '',
+    max_num_of_rooms: '',
+    search: '',
 });
+
+const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-
+setTimeout(() => {
+   console.log(filters.min_num_of_rooms);
+}, 6000);
 
 
 
@@ -122,6 +133,7 @@ onMounted(() => {
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
 });
+
 
 
 
@@ -342,6 +354,10 @@ onMounted(() => {
        border-radius: 14px;
        cursor: pointer;
 }
+.square-num-rooms.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
 .square-num-rooms:hover {
     border: 1px solid #FF0000;
 }
@@ -404,7 +420,7 @@ onMounted(() => {
 .apply-filters-btn:hover {
     background-color: #1F4D3A;
 }
-.img-in-btn {;
+.img-in-btn {
     height: 24px;
 
 }
