@@ -24,11 +24,13 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
-   const getAllListings = async () => {
+   const getAllListings = async (filters = {}) => {
        loading.value = true;
        try {
            console.log('tried');
-           const res = await api.get('/listingsIndex');
+           const res = await api.get('/listingsIndex', {
+               params: filters,
+           });
            allListings.value = res.data.listings;
            console.log(allListings.value.length + 'checking in store');
            listingsCount.value = res.data.listings_count;

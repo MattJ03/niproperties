@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="button-wrapper">
-                <button class="apply-filters-btn">
+                <button class="apply-filters-btn" @click="applyFilters()">
                 <img :src="scaffolding" alt="scaffolding" class="img-in-btn" />
                 Apply filters</button>
                 </div>
@@ -148,6 +148,18 @@ const resetFilters = async() => {
     } finally {
         loading.value = false;
     }
+}
+
+function applyFilters() {
+    listingStore.getAllListings({
+        rent_or_buy: filters.rent_or_buy || null,
+        min_price: filters.min_price || null,
+        max_price: filters.max_price || null,
+        county: filters.county || null,
+        min_num_of_rooms: filters.min_num_of_rooms || null,
+        max_num_of_rooms: filters.max_num_of_rooms || null,
+        sear: filters.search || null,
+    });
 }
 
 

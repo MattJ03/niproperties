@@ -15,34 +15,51 @@ class ListingController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-  public function index()
-  {
-
-      $userId = auth()->id();
+  public function index(Request $request) {
+      $user = auth()->id();
 
       $query = Listing::where('sale_status', 'open');
-
-      if ($userId) {
-          $query->where('landlord_id', '!=', $userId);
+      if($user) {
+          $query->where('landlord_id', '!=', $user);
       }
-    $listings = $query->with('listingImages')
-                       ->orderBy('created_at', 'desc')
-                       ->paginate(25);
 
-      if($listings->count() < 1) {
-          Log::info($listings->count() . ' number of listings');
+      if($request->filled('rent_or_buy')) {
+          $query->where('type', $request->rent_or_buy);
+      }
+      if($request->filled('min_price')) {
+          $query->where('price', '>=', $request->min_price);
+      }
+      if($request->filled('max_price')) {
+          $query->where('price', '<=', $request->max_price);
+      }
+      if($request->filled('county')) {
+          $query->where('county', $request->county);
+      }
+      if($request->filled('min_num_of_rooms')) {
+          $query->where('no_of_rooms', '>=', $request->min_num_of_rooms);
+      }
+      if($request->filled('max_num_of_rooms')) {
+          $query->where('no_of_rooms', '<=', $request->max_num_of_rooms);
+      }
+
+      $listings = $query->with('listingImages')
+                         ->orderBy('created_at', 'desc')
+                          ->paginate(25);
+
+      if($listings->count() <= 0) {
           return response()->json([
-              'message' => 'there are no listings',
+              'message' => 'No listings found.',
               'listings' => $listings,
           ]);
       }
-      Log::info($listings->count() . ' number of listings');
 
       return response()->json([
           'listings' => $listings->items(),
           'listings_count' => $listings->total(),
-          'message' => 'listings found',
+          'message' => 'listings found.',
       ]);
+
+
   }
 
 
