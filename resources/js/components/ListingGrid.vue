@@ -3,13 +3,21 @@
         <div class="img-wrapper">
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
-        <span> {{ props.listing.price}}</span>
-
+        <div class="listing-details">
+            <strong><p class="price-listing">£{{ props.listing.price}}</p></strong>
+            <strong><span class="address-line-1-text">{{ props.listing.address_line_1}}</span></strong>
+            <div class="postcode-town-wrapper">
+              <img :src="location" alt="location pointer" class="location-img"/>
+                <span class="town-text"> {{ props.listing.town }}, </span>
+                <span class="town-text"> {{ props.listing.postcode }}</span>
+            </div>
+        </div>
     </div>
 
 </template>
 <script setup>
 import { ref, reactive, computed } from 'vue';
+import location from '../assets/location.png';
 
 const noImage = ref('');
 const props = defineProps({
@@ -35,16 +43,49 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-
+    height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
 }
 .img-wrapper {
     width: 100%;
-    height: 200px;
+    height: 150px;
     overflow: hidden;
 }
 .listing-img {
     width: 100%;
     height: 100%;
+    border-radius: 12px;
     object-fit: cover;
 }
+.listing-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.price-listing {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 17px;
+
+}
+.address-line-1-text {
+    font-size: 18px;
+}
+.postcode-town-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    gap: 5px;
+}
+.location-img {
+    height: 18px;
+}
+.town-text {
+    font-size: 16px;
+    color: #65676b;
+}
+
 </style>
