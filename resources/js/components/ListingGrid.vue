@@ -25,6 +25,11 @@
                     <span class="tiny-text-below-info">County</span>
                 </div>
                 </div>
+            <hr class="horizontal-line"/>
+            <div class="description-wrapper">
+                <p class="description-text"> {{ props.listing.description}}</p>
+
+            </div>
         </div>
     </div>
 
@@ -112,6 +117,7 @@ const primaryImage = computed(() => {
     display: flex;
     align-items: center;
     margin-top: 30px;
+    width: 100%;
 
 }
 .num-and-info {
@@ -135,5 +141,18 @@ const primaryImage = computed(() => {
 .tiny-text-below-info {
     font-size: 12px;
     color: #65676b;
+}
+.horizontal-line {
+    width: 100%;
+    color: #1c1e21;
+    margin-left: -20px;
+    margin-top: 15px;
+}
+.description-wrapper {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 15px;
+    color: #65676b;
+
 }
 </style>
