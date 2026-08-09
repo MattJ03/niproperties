@@ -11,6 +11,20 @@
                 <span class="town-text"> {{ props.listing.town }}, </span>
                 <span class="town-text"> {{ props.listing.postcode }}</span>
             </div>
+            <div class="house-information">
+                <div class="topic-wrapper">
+                <img :src="rooms" alt="rooms" class="rooms-icon" />
+                <div class="num-and-info">
+                    <strong><span class="rooms-info-text"> {{ props.listing.no_of_rooms }} </span></strong>
+                <span class="tiny-text-below-info">Rooms</span>
+                </div>
+                </div>
+                <img :src="pin" class="pin-icon" alt="pin"/>
+                <div class="num-and-info">
+                    <strong><span class="county-info-text"> {{ props.listing.county }}</span></strong>
+                    <span class="tiny-text-below-info">County</span>
+                </div>
+                </div>
         </div>
     </div>
 
@@ -18,6 +32,8 @@
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import location from '../assets/location.png';
+import rooms from '../assets/rooms.png';
+import pin from '../assets/pin.png';
 
 const noImage = ref('');
 const props = defineProps({
@@ -76,6 +92,7 @@ const primaryImage = computed(() => {
 }
 .postcode-town-wrapper {
     display: flex;
+    align-items: center;
     flex-direction: row;
     margin-top: 10px;
     gap: 5px;
@@ -83,9 +100,40 @@ const primaryImage = computed(() => {
 .location-img {
     height: 18px;
 }
+.topic-wrapper {
+    display: flex;
+   margin-right: 30px;
+}
 .town-text {
     font-size: 16px;
     color: #65676b;
 }
+.house-information {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
 
+}
+.num-and-info {
+    display: flex;
+    flex-direction: column;
+   gap: 5px;
+    padding-left: 10px;
+}
+.rooms-icon {
+    height: 28px;
+}
+.rooms-info-text {
+
+}
+.pin-icon {
+    height: 28px;
+}
+.county-info-text {
+
+}
+.tiny-text-below-info {
+    font-size: 12px;
+    color: #65676b;
+}
 </style>
