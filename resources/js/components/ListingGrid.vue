@@ -25,10 +25,16 @@
                     <span class="tiny-text-below-info">County</span>
                 </div>
                 </div>
-            <hr class="horizontal-line"/>
-            <div class="description-wrapper">
+            <div v-if="props.listing.description" class="description-wrapper">
+                <hr class="horizontal-line"/>
                 <p class="description-text"> {{ props.listing.description}}</p>
-
+            </div>
+            <div class="bottom-of-listing">
+             <hr class="horizontal-line" />
+                <div class="listing-stats">
+                    <img :src="logo" alt="niproperties logo" class="logo-img" />
+                    <p class="niproperties-text">NI Properties</p>
+                </div>
             </div>
         </div>
     </div>
@@ -39,6 +45,8 @@ import { ref, reactive, computed } from 'vue';
 import location from '../assets/location.png';
 import rooms from '../assets/rooms.png';
 import pin from '../assets/pin.png';
+import logo from '../assets/nipropertieslogo.png';
+
 
 const noImage = ref('');
 const props = defineProps({
@@ -64,7 +72,7 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 400px;
+    height: 500px;
     background-color: #FFFFFF;
     border-radius: 12px;
 }
@@ -149,10 +157,27 @@ const primaryImage = computed(() => {
     margin-top: 15px;
 }
 .description-wrapper {
-    display: flex;
-    margin-left: 20px;
-    margin-top: 15px;
-    color: #65676b;
 
+    margin-top: 5px;
+    color: #65676b;
+    font-size: 12px;
+
+}
+.bottom-of-listing {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+.listing-stats {
+    display: flex;
+}
+.logo-img {
+    height: 70px;
+    border-radius: 80px;
+    width: 21%;
+}
+.niproperties-text {
+    font-size: 13px;
 }
 </style>
