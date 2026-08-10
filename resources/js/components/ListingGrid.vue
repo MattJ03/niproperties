@@ -61,6 +61,10 @@ const props = defineProps({
 });
 const loading = ref(false);
 const error = ref('');
+const currentPage = ref(1);
+const nextPage = ref(currentPage++);
+
+
 dayjs.extend(relativeTime);
 
 const primaryImage = computed(() => {
@@ -84,7 +88,7 @@ const primaryImage = computed(() => {
 }
 .img-wrapper {
     width: 100%;
-    height: 150px;
+    height: 250px;
     overflow: hidden;
 }
 .listing-img {

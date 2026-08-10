@@ -218,7 +218,7 @@ onMounted(() => {
     display: grid;
     flex-direction: row;
     margin-top: 40px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     align-items: start;
     gap: 20px;
     width: 100%;
