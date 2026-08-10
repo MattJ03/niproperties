@@ -33,7 +33,10 @@
              <hr class="horizontal-line" />
                 <div class="listing-stats">
                     <img :src="logo" alt="niproperties logo" class="logo-img" />
+                    <div class="sitename-time-uploaded">
                     <p class="niproperties-text">NI Properties</p>
+                        <span class="time-since-upload"> {{ dayjs(props.listing.created_at).fromNow() }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,7 +49,8 @@ import location from '../assets/location.png';
 import rooms from '../assets/rooms.png';
 import pin from '../assets/pin.png';
 import logo from '../assets/nipropertieslogo.png';
-
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime.js';
 
 const noImage = ref('');
 const props = defineProps({
@@ -55,6 +59,9 @@ const props = defineProps({
         required: true,
     },
 });
+const loading = ref(false);
+const error = ref('');
+dayjs.extend(relativeTime);
 
 const primaryImage = computed(() => {
     console.log('method running');
@@ -64,7 +71,6 @@ const primaryImage = computed(() => {
     }
     return props.listing.listing_images.find(img => img.is_primary) ?? props.listing.listing_images[0];
 });
-
 
 </script>
 <style scoped>
@@ -176,8 +182,19 @@ const primaryImage = computed(() => {
     height: 70px;
     border-radius: 80px;
     width: 21%;
+    margin-right: 5px;
 }
 .niproperties-text {
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+.sitename-time-uploaded {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.time-since-upload {
+    color: #65676b;
     font-size: 13px;
 }
 </style>
