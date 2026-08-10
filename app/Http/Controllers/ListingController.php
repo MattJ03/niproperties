@@ -78,8 +78,10 @@ class ListingController extends Controller
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
             'sale_status' => 'nullable|in:open',
+            'description' => 'nullable|max:255|min:3',
         ]);
 
+        Log::info('did it make it this far?' . $validatedData['description']);
         $listing = Listing::create([
             'address_line_1' => $validatedData['address_line_1'],
             'address_line_2' => $validatedData['address_line_2'],
@@ -90,9 +92,11 @@ class ListingController extends Controller
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
             'sale_status' => 'open',
-            'description' => $request['description'],
+            'description' => $validatedData['description'],
             'landlord_id' => $request->user()->id,
             ]);
+
+        Log::info('did it get created? ' . $listing['description']);
 
         $cords = $geocodingService->geocode($listing);
 
