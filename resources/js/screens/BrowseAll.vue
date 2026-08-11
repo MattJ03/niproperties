@@ -93,11 +93,16 @@
                 key="listing.id"
                 />
         </div>
+        </div>
+        <div class="pagination-container">
             <div class="pagination-wrapper">
+                <button class="previous-btn">
+                    <span><</span>
+                    <span>Previous</span>
+                </button>
 
             </div>
         </div>
-
     </div>
 </template>
 <script setup>
@@ -494,6 +499,35 @@ onMounted(() => {
     height: 24px;
 
 }
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-
+    width: 100%;
+    height: 8dvh;
+}
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    height: 90%;
+    margin-top: 40px;
+    width: 60%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+.previous-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+}
 </style>
