@@ -61,8 +61,11 @@ const props = defineProps({
 });
 const loading = ref(false);
 const error = ref('');
+
 const currentPage = ref(1);
-const nextPage = ref(currentPage++);
+const nextPage = ref(currentPage + 1);
+
+const pageOneToFive = ref([1, 2, 3, 4, 5]);
 
 
 dayjs.extend(relativeTime);

@@ -93,7 +93,11 @@
                 key="listing.id"
                 />
         </div>
+            <div class="pagination-wrapper">
+
+            </div>
         </div>
+
     </div>
 </template>
 <script setup>
@@ -127,7 +131,7 @@ const filters = reactive({
 
 const search = ref('');
 
-const numRoomsRange = ref([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+const numRoomsRange = ref([1, 2, 3, 4, 5]);
 
 setTimeout(() => {
    console.log(filters.min_num_of_rooms);
@@ -490,4 +494,6 @@ onMounted(() => {
     height: 24px;
 
 }
+
+
 </style>

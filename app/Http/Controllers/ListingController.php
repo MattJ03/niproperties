@@ -44,7 +44,7 @@ class ListingController extends Controller
 
       $listings = $query->with('listingImages')
                          ->orderBy('created_at', 'desc')
-                          ->paginate(25);
+                          ->paginate(16);
 
       if($listings->count() <= 0) {
           return response()->json([
