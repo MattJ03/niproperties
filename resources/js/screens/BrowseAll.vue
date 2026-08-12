@@ -127,7 +127,7 @@ import location from '../assets/location.png';
 import search2 from '../assets/search.png';
 import scaffolding from '../assets/scaffolding2.png';
 import reset from '../assets/reset.png';
-
+import api from '../axios.js';
 
 const loading = ref(false);
 const error = ref('');
@@ -147,6 +147,7 @@ const filters = reactive({
 const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
+const pageNum = ref(0);
 const finalPageNum = ref(0);
 const { listingsCount } = storeToRefs(listingStore);
 
@@ -155,7 +156,7 @@ setTimeout(() => {
 }, 6000);
 
 const getFinalPageNum = () => {
-    finalPageNum.value = listingsCount.value / 16;
+    finalPageNum.value = listingsCount.value / 16 + 1;
     return finalPageNum;
 }
 const resetFilters = async() => {
@@ -186,6 +187,18 @@ async function applyFilters() {
         max_num_of_rooms: filters.max_num_of_rooms || null,
         sear: filters.search || null,
     });
+}
+
+async function getPaginatedListings(pageNum) {
+    loading.value = true;
+    try {
+        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
+        listingStore.listing = res.data.listings;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated results from api';
+    } finally {
+        loading.value = false;
+    }
 }
 
 
