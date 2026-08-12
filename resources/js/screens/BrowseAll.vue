@@ -163,7 +163,7 @@ setTimeout(() => {
 }, 6000);
 
 const getFinalPageNum = () => {
-    finalPageNum.value = listingsCount.value / 16 + 1;
+    finalPageNum.value = listingsCount.value / 16;
     return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
 }
 const resetFilters = async() => {
