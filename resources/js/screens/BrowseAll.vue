@@ -107,6 +107,9 @@
                     <div class="more-btn">
                         ...
                     </div>
+                    <button class="final-page-num">
+                        {{ getFinalPageNum() }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -144,11 +147,17 @@ const filters = reactive({
 const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
+const finalPageNum = ref(0);
+const { listingsCount } = storeToRefs(listingStore);
 
 setTimeout(() => {
    console.log(filters.min_num_of_rooms);
 }, 6000);
 
+const getFinalPageNum = () => {
+    finalPageNum.value = listingsCount.value / 16;
+    return finalPageNum;
+}
 const resetFilters = async() => {
     loading.value = true;
     try {
@@ -563,5 +572,19 @@ onMounted(() => {
 .more-btn {
     margin-left: 28px;
     color: #6B46C1;
+}
+.final-page-num {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 6%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
 }
 </style>
