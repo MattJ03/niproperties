@@ -100,7 +100,14 @@
                     <span><</span>
                     <span>Previous</span>
                 </button>
-
+                <div class="num-wrapper">
+                <button v-for="num in numRoomsRange" class="page-num-button">
+                    {{ num }}
+                </button>
+                    <div class="more-btn">
+                        ...
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -503,7 +510,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin-left: 30px;
     width: 100%;
     height: 8dvh;
 }
@@ -512,7 +519,7 @@ onMounted(() => {
     align-items: center;
     height: 90%;
     margin-top: 40px;
-    width: 60%;
+    width: 50%;
     background-color: #FFFFFF;
     border-radius: 15px;
 }
@@ -529,5 +536,32 @@ onMounted(() => {
     border-radius: 15px;
     border: 1px solid #D6BCFA;
     padding-left: 20px;
+    margin-right: 40px;
+}
+.num-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+.page-num-button {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 6%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+
+}
+.more-btn {
+    margin-left: 28px;
+    color: #6B46C1;
 }
 </style>
