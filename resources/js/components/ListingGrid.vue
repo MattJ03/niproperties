@@ -174,7 +174,9 @@ const primaryImage = computed(() => {
     margin-top: 5px;
     color: #65676b;
     font-size: 12px;
-
+}
+.description-text {
+    padding-right: 40px;
 }
 .bottom-of-listing {
     display: flex;

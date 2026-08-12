@@ -107,10 +107,16 @@
                     <div class="more-btn">
                         ...
                     </div>
-                    <button class="final-page-num">
+                    <button class="final-page-num" @click="getLastPageListings(finalPageNumRounded)">
                         {{ getFinalPageNum() }}
                     </button>
                 </div>
+
+                <button class="next-btn">
+                    <span>Next</span>
+                    <span>> </span>
+                </button>
+
             </div>
         </div>
     </div>
@@ -149,6 +155,7 @@ const search = ref('');
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
 const pageNum = ref(0);
 const finalPageNum = ref(0);
+const finalPageNumRounded = ref(finalPageNum.value)
 const { listingsCount } = storeToRefs(listingStore);
 
 setTimeout(() => {
@@ -157,7 +164,7 @@ setTimeout(() => {
 
 const getFinalPageNum = () => {
     finalPageNum.value = listingsCount.value / 16 + 1;
-    return finalPageNum;
+    return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
 }
 const resetFilters = async() => {
     loading.value = true;
@@ -196,6 +203,18 @@ async function getPaginatedListings(pageNum) {
         listingStore.allListings = res.data.listings;
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get paginated results from api';
+    } finally {
+        loading.value = false;
+    }
+}
+
+async function getLastPageListings(finalPageNum) {
+    loading.value = true;
+    try {
+        const res = await api.get(`listingsIndex?page=${finalPageNum}`);
+        listingStore.allListings = res.data.listings;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get last paginated listings';
     } finally {
         loading.value = false;
     }
@@ -541,6 +560,7 @@ onMounted(() => {
     align-items: center;
     height: 90%;
     margin-top: 40px;
+    border: 1px solid #f7fafc;
     width: 50%;
     background-color: #FFFFFF;
     border-radius: 15px;
@@ -559,6 +579,7 @@ onMounted(() => {
     border: 1px solid #D6BCFA;
     padding-left: 20px;
     margin-right: 40px;
+    cursor: pointer;
 }
 .num-wrapper {
     display: flex;
@@ -572,7 +593,7 @@ onMounted(() => {
 
     justify-content: center;
     align-items: center;
-    width: 6%;
+    width: 9%;
     height: 75%;
     font-size: 16px;
     border: 1px solid #6B46C1;
@@ -591,13 +612,31 @@ onMounted(() => {
 
     justify-content: center;
     align-items: center;
-    width: 6%;
+    width: 9%;
     height: 75%;
     font-size: 16px;
     border: 1px solid #6B46C1;
     border-radius: 15px;
     background-color: #FFFFFF;
     color: #6B46C1;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.next-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
     cursor: pointer;
 }
 </style>
