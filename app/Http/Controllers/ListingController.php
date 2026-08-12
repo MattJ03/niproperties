@@ -42,6 +42,17 @@ class ListingController extends Controller
           $query->where('no_of_rooms', '<=', $request->max_num_of_rooms);
       }
 
+      if($request->filled('search')) {
+          $search = $request->query('search');
+
+          $query->where(function ($query) use ($search) {
+              $query->where('address_line_1', 'LIKE', '%'. $search . '%')
+                  ->orWhere('address_line_2', 'LIKE', '%'. $search . '%')
+                  ->orWhere('county', 'LIKE', '%'. $search . '%')
+                  ->orWhere('postcode', 'LIKE', '%'. $search . '%');
+          });
+      }
+
       $listings = $query->with('listingImages')
                          ->orderBy('created_at', 'desc')
                           ->paginate(16);
