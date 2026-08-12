@@ -101,7 +101,7 @@
                     <span>Previous</span>
                 </button>
                 <div class="num-wrapper">
-                <button v-for="num in numRoomsRange" class="page-num-button">
+                <button v-for="num in numRoomsRange" class="page-num-button" @click="getPaginatedListings(num)">
                     {{ num }}
                 </button>
                     <div class="more-btn">
@@ -185,15 +185,15 @@ async function applyFilters() {
         county: filters.county || null,
         min_num_of_rooms: filters.min_num_of_rooms || null,
         max_num_of_rooms: filters.max_num_of_rooms || null,
-        sear: filters.search || null,
+        search: filters.search || null,
     });
 }
 
 async function getPaginatedListings(pageNum) {
     loading.value = true;
     try {
-        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
-        listingStore.listing = res.data.listings;
+        const res = await api.get(`listingsIndex?page=${pageNum}`);
+        listingStore.allListings = res.data.listings;
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get paginated results from api';
     } finally {
