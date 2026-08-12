@@ -112,7 +112,7 @@
                     </button>
                 </div>
 
-                <button class="next-btn">
+                <button class="next-btn" @click="getNextPageListings(pageNum)">
                     <span>Next</span>
                     <span>> </span>
                 </button>
@@ -153,7 +153,7 @@ const filters = reactive({
 const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
-const pageNum = ref(0);
+const pageNum = ref(1);
 const finalPageNum = ref(0);
 const finalPageNumRounded = ref(finalPageNum.value)
 const { listingsCount } = storeToRefs(listingStore);
@@ -213,8 +213,25 @@ async function getLastPageListings(finalPageNum) {
     try {
         const res = await api.get(`listingsIndex?page=${finalPageNum}`);
         listingStore.allListings = res.data.listings;
+        pageNum.value = finalPageNum;
+        console.log(pageNum.value);
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get last paginated listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
+async function getNextPageListings() {
+    loading.value = true;
+    try {
+        pageNum.value++;
+        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
+        listingStore.allListings = res.data.listings;
+        console.log(pageNum.value);
+        console.log(pageNum.value);
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get next listings';
     } finally {
         loading.value = false;
     }
