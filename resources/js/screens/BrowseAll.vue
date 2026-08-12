@@ -96,7 +96,7 @@
         </div>
         <div class="pagination-container">
             <div class="pagination-wrapper">
-                <button class="previous-btn">
+                <button class="previous-btn" @click="getPreviousPageListings()">
                     <span><</span>
                     <span>Previous</span>
                 </button>
@@ -112,7 +112,7 @@
                     </button>
                 </div>
 
-                <button class="next-btn" @click="getNextPageListings(pageNum)">
+                <button class="next-btn" @click="getNextPageListings()">
                     <span>Next</span>
                     <span>> </span>
                 </button>
@@ -229,9 +229,22 @@ async function getNextPageListings() {
         const res = await api.get(`listingsIndex?page=${pageNum.value}`);
         listingStore.allListings = res.data.listings;
         console.log(pageNum.value);
-        console.log(pageNum.value);
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get next listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
+async function getPreviousPageListings() {
+    loading.value = true;
+    try {
+        pageNum.value--;
+        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
+        listingStore.allListings = res.data.listings;
+        console.log(pageNum.value);
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get previous listings';
     } finally {
         loading.value = false;
     }
