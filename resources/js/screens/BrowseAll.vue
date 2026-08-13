@@ -101,7 +101,8 @@
                     <span>Previous</span>
                 </button>
                 <div class="num-wrapper">
-                <button v-for="num in numRoomsRange" class="page-num-button" @click="getPaginatedListings(num)">
+                <button v-for="num in numRoomsRange" class="page-num-button" @click="getPaginatedListings(num)"
+                :class="{ active: num === pageNum}">
                     {{ num }}
                 </button>
                     <div class="more-btn">
@@ -618,6 +619,9 @@ onMounted(() => {
     margin-right: 40px;
     cursor: pointer;
 }
+.previous-btn:hover {
+    background-color: #CBC3E3;
+}
 .previous-btn:disabled {
     background-color: #E0E0E0;
     cursor : not-allowed;
@@ -643,6 +647,13 @@ onMounted(() => {
     color: #6B46C1;
     cursor: pointer;
 
+}
+.page-num-button:hover {
+    background-color: #CBC3E3;
+}
+.page-num-button.active {
+    background-color: #6B46C1;
+    color: #FFFFFF;
 }
 .more-btn {
     margin-left: 28px;
@@ -679,6 +690,9 @@ onMounted(() => {
     padding-left: 20px;
     margin-right: 40px;
     cursor: pointer;
+}
+.next-btn:hover {
+    background-color: #CBC3E3;
 }
 .next-btn:disabled {
     background-color: #E0E0E0;
