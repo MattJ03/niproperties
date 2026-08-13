@@ -307,6 +307,7 @@ onMounted(() => {
     padding: 10px 10px;
     border-radius: 10px;
     margin-right: 65px;
+    cursor: pointer;
 }
 
 .listings-rows {
