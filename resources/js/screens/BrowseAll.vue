@@ -112,13 +112,13 @@
                     </button>
                 </div>
 
-                <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum === finalPageNumRounded">
+                <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum >= finalPageNumRounded">
                     <span>Next</span>
                     <span>> </span>
                 </button>
-
             </div>
         </div>
+        <span class="info-number-listings-page">Showing 1 - 16 of {{ listingsCount }} properties</span>
     </div>
 </template>
 <script setup>
@@ -683,5 +683,11 @@ onMounted(() => {
 .next-btn:disabled {
     background-color: #E0E0E0;
     cursor: not-allowed;
+}
+.info-number-listings-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 }
 </style>
