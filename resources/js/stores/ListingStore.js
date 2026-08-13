@@ -53,6 +53,20 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const getListingsOrderedByViews = async (filters = {}) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`listingsIndexByViews`, {
+               params: filters,
+           });
+           allListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get listings by views';
+       } finally {
+           loading.value = false;
+       }
+   }
+
    return {
        loading,
        error,
@@ -64,5 +78,6 @@ export const useListingStore = defineStore('listings', () => {
        storeListing,
        getAllListings,
        get3RecentListings,
+       getListingsOrderedByViews,
    };
 });
