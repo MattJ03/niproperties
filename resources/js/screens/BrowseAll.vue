@@ -96,7 +96,7 @@
         </div>
         <div class="pagination-container">
             <div class="pagination-wrapper">
-                <button class="previous-btn" @click="getPreviousPageListings()">
+                <button class="previous-btn" @click="getPreviousPageListings()" :disabled="pageNum === 1">
                     <span><</span>
                     <span>Previous</span>
                 </button>
@@ -112,7 +112,7 @@
                     </button>
                 </div>
 
-                <button class="next-btn" @click="getNextPageListings()">
+                <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum === finalPageNumRounded">
                     <span>Next</span>
                     <span>> </span>
                 </button>
@@ -196,11 +196,18 @@ async function applyFilters() {
     });
 }
 
-async function getPaginatedListings(pageNum) {
+async function getPaginatedListings(page) {
     loading.value = true;
     try {
-        const res = await api.get(`listingsIndex?page=${pageNum}`);
+        pageNum.value = page;
+        const res = await api.get(`listingsIndex`, {
+            params: {
+                page: pageNum.value,
+            },
+        });
         listingStore.allListings = res.data.listings;
+
+        console.log(pageNum.value);
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get paginated results from api';
     } finally {
@@ -611,6 +618,10 @@ onMounted(() => {
     margin-right: 40px;
     cursor: pointer;
 }
+.previous-btn:disabled {
+    background-color: #E0E0E0;
+    cursor : not-allowed;
+}
 .num-wrapper {
     display: flex;
     align-items: center;
@@ -668,5 +679,9 @@ onMounted(() => {
     padding-left: 20px;
     margin-right: 40px;
     cursor: pointer;
+}
+.next-btn:disabled {
+    background-color: #E0E0E0;
+    cursor: not-allowed;
 }
 </style>
