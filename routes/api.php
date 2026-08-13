@@ -11,6 +11,7 @@ Route::post('/registerBuyer', [AuthController::class, 'registerBuyer']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/listingsIndex', [ListingController::class, 'index']);
 Route::get('listingsIndexByViews', [ListingController::class, 'getListingsOrderedByViews']);
+Route::get('listingsIndexByPrice', [ListingController::class, 'getListingsOrderedByPrice']);
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
 Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListings']);
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);

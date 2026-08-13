@@ -6,8 +6,9 @@
                <h1>Browse Properties</h1>
                 <span class="total-listings-text">Total listings across Northern Ireland: {{ listingStore.listingsCount }}</span>
             </div>
-            <select class="sort-dropdown">
-            <option> Sort: Most recent</option>
+            <select v-model="sortOption" class="sort-dropdown" @change="sortingCalls">
+                <option value="recent">Sort: Most recent</option>
+                <option value="views">Sort: Most viewed</option>
             </select>
         </div>
         <div class="listing-and-filter-container">
@@ -156,7 +157,8 @@ const search = ref('');
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
 const pageNum = ref(1);
 const finalPageNum = ref(0);
-const finalPageNumRounded = ref(finalPageNum.value)
+const finalPageNumRounded = ref(finalPageNum.value);
+const sortOption = ref('recent');
 const { listingsCount } = storeToRefs(listingStore);
 
 setTimeout(() => {
@@ -258,11 +260,21 @@ async function getPreviousPageListings() {
     }
 }
 
+async function sortingCalls() {
+    if(sortOption.value === 'recent') {
+        await listingStore.getAllListings(filters);
+    }
+    if(sortOption.value === 'views') {
+        await listingStore.getListingsOrderedByViews(filters);
+    }
+}
+
 
 onMounted(() => {
     console.log('onMounted running')
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
+
 });
 
 
