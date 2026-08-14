@@ -82,7 +82,7 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
-   const getListingsOrderedByPriceLowestToHIghest = async (filters = {}) => {
+   const getListingsOrderedByPriceLowestToHighest = async (filters = {}) => {
        loading.value = true;
        try {
            const res = await api.get(`listingsIndexLowestToHighest`, {
@@ -107,6 +107,6 @@ export const useListingStore = defineStore('listings', () => {
        get3RecentListings,
        getListingsOrderedByViews,
        getListingsOrderedByPrice,
-       getListingsOrderedByPriceLowestToHIghest,
+       getListingsOrderedByPriceLowestToHighest,
    };
 });

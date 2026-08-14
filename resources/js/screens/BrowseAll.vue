@@ -126,7 +126,7 @@
     </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue';
+import {ref, reactive, computed, onMounted, watch} from 'vue';
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import ListingGrid from "../components/ListingGrid.vue";
@@ -204,17 +204,33 @@ async function applyFilters() {
 async function getPaginatedListings(page) {
     loading.value = true;
     try {
-        pageNum.value = page;
-        const res = await api.get(`listingsIndex`, {
-            params: {
-                page: pageNum.value,
-            },
-        });
-        listingStore.allListings = res.data.listings;
-
-        console.log(pageNum.value);
+        pageNum.value++;
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsIndex?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
     } catch(err) {
-        error.value = error.response?.data?.message || 'failed to get paginated results from api';
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
     } finally {
         loading.value = false;
     }
@@ -234,29 +250,75 @@ async function getLastPageListings(finalPageNum) {
     }
 }
 
+watch(sortOption, (newValue, oldValue) => {
+    console.log('Sort option changed to ' + newValue);
+});
+
 async function getNextPageListings() {
-    loading.value = true;
-    try {
-        pageNum.value++;
-        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
-        listingStore.allListings = res.data.listings;
-        console.log(pageNum.value);
-    } catch(err) {
-        error.value = error.response?.data?.message || 'failed to get next listings';
-    } finally {
-        loading.value = false;
-    }
+  loading.value = true;
+  try {
+      pageNum.value++;
+      if(sortOption.value === 'recent') {
+          const res = await api.get(`listingsIndex?page=${pageNum.value}`, {
+              params: filters,
+          });
+          listingStore.allListings = res.data.listings;
+      }
+      if(sortOption.value === 'views') {
+          const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+              params: filters,
+          });
+          listingStore.allListings = res.data.listings;
+      }
+      if(sortOption.value === 'price-high-to-low') {
+          const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+              params: filters,
+          });
+          listingStore.allListings = res.data.listings;
+      }
+      if(sortOption.value === 'price-low-to-high') {
+          const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+              params: filters,
+          });
+          listingStore.allListings = res.data.listings;
+      }
+  } catch(err) {
+      error.value = error.response?.data?.message || 'failed to get paginated values next page';
+  } finally {
+      loading.value = false;
+  }
 }
 
 async function getPreviousPageListings() {
     loading.value = true;
     try {
         pageNum.value--;
-        const res = await api.get(`listingsIndex?page=${pageNum.value}`);
-        listingStore.allListings = res.data.listings;
-        console.log(pageNum.value);
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsIndex?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
     } catch(err) {
-        error.value = error.response?.data?.message || 'failed to get previous listings';
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
     } finally {
         loading.value = false;
     }
@@ -273,7 +335,7 @@ async function sortingCalls() {
         await listingStore.getListingsOrderedByPrice(filters);
     }
     if(sortOption.value === 'price-low-to-high') {
-        await listingStore.getListingsOrderedByPriceLowestToHIghest(filters);
+        await listingStore.getListingsOrderedByPriceLowestToHighest(filters);
     }
 }
 

@@ -85,7 +85,7 @@ class ListingController extends Controller
             'town' => 'required|string|max:255|min:3',
             'county' => 'required|string|max:40|min:3',
             'postcode' => 'required|string|max:40|min:3',
-            'price' => 'required|numeric|min:1|max:100000000',
+            'price' => 'required|numeric|min:1|max:10000000000',
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
             'sale_status' => 'nullable|in:open',
