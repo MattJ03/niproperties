@@ -16,7 +16,7 @@
             <button class="login-btn" v-if="!role" @click="moveToLogin()">
                 Log in
             </button>
-            <button v-if="checkIfLoggedIn"  class="login-btn">Log out</button>
+            <button v-if="authStore.loggedIn" @click="logout()" class="login-btn">Log out</button>
         </div>
     </nav>
 </template>
@@ -104,10 +104,15 @@ const logout = async() => {
     loading.value = true;
     try {
        await authStore.logout();
+       await router.push({
+           name: 'login',
+       });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to login';
+    } finally {
+        loading.value = false;
     }
 }
-
-const checkIfLoggedIn = computed(() => authStore.loggedIn !== true);
 </script>
 <style scoped>
 .nav-bar {

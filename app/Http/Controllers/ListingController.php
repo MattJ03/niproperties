@@ -16,13 +16,13 @@ class ListingController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(Request $request) {
-      $user = auth()->id();
+      $user = auth('sanctum')->id();
 
       $query = Listing::where('sale_status', 'open');
+
       if($user) {
           $query->where('landlord_id', '!=', $user);
       }
-
       if($request->filled('rent_or_buy')) {
           $query->where('type', $request->rent_or_buy);
       }
@@ -68,8 +68,8 @@ class ListingController extends Controller
           'listings' => $listings->items(),
           'listings_count' => $listings->total(),
           'message' => 'listings found.',
-      ]);
 
+      ]);
 
   }
 
