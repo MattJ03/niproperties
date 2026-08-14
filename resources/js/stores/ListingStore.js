@@ -82,6 +82,18 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const getListingsOrderedByPriceLowestToHIghest = async (filters = {}) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`listingsIndexLowestToHighest`, {
+               params: filters,
+           });
+           allListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get listings ordered by low to high price';
+       }
+   }
+
    return {
        loading,
        error,
@@ -95,5 +107,6 @@ export const useListingStore = defineStore('listings', () => {
        get3RecentListings,
        getListingsOrderedByViews,
        getListingsOrderedByPrice,
+       getListingsOrderedByPriceLowestToHIghest,
    };
 });

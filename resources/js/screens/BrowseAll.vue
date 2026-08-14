@@ -9,7 +9,8 @@
             <select v-model="sortOption" class="sort-dropdown" @change="sortingCalls">
                 <option value="recent">Sort: Most recent</option>
                 <option value="views">Sort: Most viewed</option>
-                <option value="price">Sort: Price - Highest to lowest</option>
+                <option value="price-high-to-low">Sort: Price - High to low</option>
+                <option value="price-low-to-high">Sort: Price - low to high</option>
             </select>
         </div>
         <div class="listing-and-filter-container">
@@ -268,8 +269,11 @@ async function sortingCalls() {
     if(sortOption.value === 'views') {
         await listingStore.getListingsOrderedByViews(filters);
     }
-    if(sortOption.value === 'price') {
+    if(sortOption.value === 'price-high-to-low') {
         await listingStore.getListingsOrderedByPrice(filters);
+    }
+    if(sortOption.value === 'price-low-to-high') {
+        await listingStore.getListingsOrderedByPriceLowestToHIghest(filters);
     }
 }
 

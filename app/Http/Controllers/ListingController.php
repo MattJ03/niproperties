@@ -340,4 +340,60 @@ class ListingController extends Controller
             'message' => 'listings found.',
         ]);
     }
+
+    public function getListingsOrderedByPriceLowToHigh(Request $request) {
+        $user = auth()->id();
+
+        $query = Listing::where('sale_status', 'open');
+        if($user) {
+            $query->where('landlord_id', '!=', $user);
+        }
+
+        if($request->filled('rent_or_buy')) {
+            $query->where('type', $request->rent_or_buy);
+        }
+        if($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        if($request->filled('county')) {
+            $query->where('county', $request->county);
+        }
+        if($request->filled('min_num_of_rooms')) {
+            $query->where('no_of_rooms', '>=', $request->min_num_of_rooms);
+        }
+        if($request->filled('max_num_of_rooms')) {
+            $query->where('no_of_rooms', '<=', $request->max_num_of_rooms);
+        }
+
+        if($request->filled('search')) {
+            $search = $request->query('search');
+
+            $query->where(function ($query) use ($search) {
+                $query->where('address_line_1', 'LIKE', '%'. $search . '%')
+                    ->orWhere('address_line_2', 'LIKE', '%'. $search . '%')
+                    ->orWhere('county', 'LIKE', '%'. $search . '%')
+                    ->orWhere('postcode', 'LIKE', '%'. $search . '%');
+            });
+        }
+
+        $listings = $query->with('listingImages')
+            ->orderBy('price', 'asc')
+            ->paginate(16);
+
+        if($listings->count() <= 0) {
+            return response()->json([
+                'message' => 'No listings found.',
+                'listings' => $listings->items(),
+            ]);
+        }
+
+        return response()->json([
+            'listings' => $listings->items(),
+            'listings_count' => $listings->total(),
+            'message' => 'listings found.',
+        ]);
+    }
 }
