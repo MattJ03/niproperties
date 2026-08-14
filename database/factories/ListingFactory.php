@@ -30,6 +30,7 @@ class ListingFactory extends Factory
             'no_of_rooms' => fake()->numberBetween(1, 10),
             'type' => fake()->randomElement(['house', 'apartment', 'commercial']),
             'sale_status' => 'open',
+            'description' => fake()->text(),
             'landlord_id' => User::factory(),
         ];
     }

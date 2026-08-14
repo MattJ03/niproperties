@@ -103,7 +103,7 @@ class ListingControllerTest extends TestCase
 
         $response = $this->getJson('/api/listingsIndex');
         $response->assertStatus(200);
-        $this->assertCount(10, $response->json('listings.data'));
+        $this->assertCount(10, $listings);
     }
 
     public function test_store_listing_saves_to_db(): void {

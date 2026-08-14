@@ -59,7 +59,7 @@ class ListingController extends Controller
 
       if($listings->count() <= 0) {
           return response()->json([
-              'message' => 'No listings found.',
+              'message' => 'there are no listings',
               'listings' => $listings->items(),
           ]);
       }
