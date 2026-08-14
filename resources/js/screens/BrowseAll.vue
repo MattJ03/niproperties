@@ -204,7 +204,7 @@ async function applyFilters() {
 async function getPaginatedListings(page) {
     loading.value = true;
     try {
-        pageNum.value++;
+        pageNum.value = page;
         if(sortOption.value === 'recent') {
             const res = await api.get(`listingsIndex?page=${pageNum.value}`, {
                 params: filters,
@@ -239,12 +239,32 @@ async function getPaginatedListings(page) {
 async function getLastPageListings(finalPageNum) {
     loading.value = true;
     try {
-        const res = await api.get(`listingsIndex?page=${finalPageNum}`);
-        listingStore.allListings = res.data.listings;
-        pageNum.value = finalPageNum;
-        console.log(pageNum.value);
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsIndex?page=${finalPageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
     } catch(err) {
-        error.value = error.response?.data?.message || 'failed to get last paginated listings';
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
     } finally {
         loading.value = false;
     }
