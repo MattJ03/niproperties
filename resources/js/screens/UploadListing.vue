@@ -43,9 +43,14 @@
                 </div>
                 </div>
             <div class="row-details">
-                <div class="field">
+                <div v-if="form.type === 'buy'" class="field">
                 <strong><label class="field-text">Price (£)</label></strong>
                 <input type="number" v-model="form.price" class="input-text-town" placeholder="£">
+                    <span class="error-message" v-if="errors.price"> {{ errors.price }}</span>
+                </div>
+                <div v-if="form.type === 'rent'" class="field">
+                    <strong><label class="field-text">Rent per month (£)</label></strong>
+                    <input type="number" v-model="form.rent_per_month" class="input-text-town" placeholder="£">
                     <span class="error-message" v-if="errors.price"> {{ errors.price }}</span>
                 </div>
                 <div class="field">
@@ -119,6 +124,7 @@ const form = reactive({
     county: '',
     postcode: '',
     price: '',
+    rent_per_month: '',
     no_of_rooms: '',
     type: '',
     description: '',
