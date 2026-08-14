@@ -4,10 +4,10 @@
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
         <div class="headings-selector">
-            <strong><span @click="moveToBrowseAll()">Browse all</span></strong>
-            <strong><span>Rent</span></strong>
-            <strong><span>Commercial</span></strong>
-            <strong><span>Dashboard & Analytics</span></strong>
+            <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
+            <strong><span class="headings">Rent</span></strong>
+            <strong><span class="headings">Commercial</span></strong>
+            <strong><span class="headings">Dashboard & Analytics</span></strong>
         </div>
         <div class="btn-section-nav">
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
@@ -115,18 +115,29 @@ const checkIfLoggedIn = computed(() => authStore.loggedIn === true);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 500px;
+    margin-left: 25%;
     gap: 20px;
 }
-.headings-selector span {
-    font-size: 17px;
-    cursor: pointer;
 
-    padding-right: 50px;
-    color: #2d6e53;
+.headings {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: #6B46C1;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
 }
-.headings-selector span:hover {
-    color: #1F4D3A;
+
+.headings:hover {
+    background-color: #553C9A;
 }
 .btn-section-nav {
     display: flex;
