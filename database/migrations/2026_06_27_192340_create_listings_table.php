@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('town');
             $table->string('county');
             $table->string('postcode');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('rent_per_month', 10, 2)->nullable();
             $table->integer('no_of_rooms');
             $table->string('type');
             $table->enum('sale_status', ['open', 'closed'])->default('open');
