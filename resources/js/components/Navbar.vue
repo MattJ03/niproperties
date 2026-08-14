@@ -5,7 +5,7 @@
         </div>
         <div class="headings-selector">
             <strong><span @click="moveToBrowseAll()">Browse all</span></strong>
-            <strong><span>Buy</span></strong>
+            <strong><span>Rent</span></strong>
             <strong><span>Commercial</span></strong>
             <strong><span>Dashboard & Analytics</span></strong>
         </div>
