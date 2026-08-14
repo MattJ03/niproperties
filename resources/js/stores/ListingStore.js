@@ -67,6 +67,21 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const getListingsOrderedByPrice = async (filters = {}) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`listingsIndexByPrice`, {
+               params: filters,
+           });
+           allListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.data?.message || 'failed to get listings by price';
+       }
+       finally {
+           loading.value = false;
+       }
+   }
+
    return {
        loading,
        error,
@@ -79,5 +94,6 @@ export const useListingStore = defineStore('listings', () => {
        getAllListings,
        get3RecentListings,
        getListingsOrderedByViews,
+       getListingsOrderedByPrice,
    };
 });
