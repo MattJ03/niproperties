@@ -129,7 +129,7 @@ const checkIfLoggedIn = computed(() => authStore.loggedIn === true);
     border-radius: 16px;
     background-color: #6B46C1;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     cursor: pointer;
     white-space: nowrap;
