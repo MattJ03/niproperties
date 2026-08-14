@@ -434,6 +434,7 @@ class ListingController extends Controller
             });
         }
         $listings = $query->with('listingImages')
+            ->where('type', 'rent')
             ->orderBy('created_at', 'desc')
             ->paginate(16);
 

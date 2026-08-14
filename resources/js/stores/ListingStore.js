@@ -94,6 +94,20 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const getRentListings = async (filters = {}) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`listingsRent`, {
+               params: filters,
+           });
+           allListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get rent listing';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -108,5 +122,6 @@ export const useListingStore = defineStore('listings', () => {
        getListingsOrderedByViews,
        getListingsOrderedByPrice,
        getListingsOrderedByPriceLowestToHighest,
+       getRentListings,
    };
 });

@@ -372,4 +372,14 @@ class ListingControllerTest extends TestCase
         $response->assertJsonCount(2, 'listings');
         }
 
+        public function test_get_rent_listings(): void {
+        $listings = Listing::factory()->count(16)->create([
+            'type' => 'rent',
+        ]);
+
+        $response = $this->getJson('/api/listingsRent');
+
+        $response->assertStatus(200);
+        $this->assertCount(16, $response->json('listings'));
+        }
 }
