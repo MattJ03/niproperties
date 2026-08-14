@@ -231,7 +231,7 @@ class ListingController extends Controller
 
     public function getListingsOrderedByViews(Request $request) {
 
-        $user = auth()->id();
+        $user = auth('sanctum')->id();
 
         $query = Listing::where('sale_status', 'open');
         if($user) {
@@ -287,7 +287,7 @@ class ListingController extends Controller
     }
 
     public function getListingsOrderedByPrice(Request $request) {
-        $user = auth()->id();
+        $user = auth('sanctum')->id();
 
         $query = Listing::where('sale_status', 'open');
         if($user) {
@@ -343,7 +343,7 @@ class ListingController extends Controller
     }
 
     public function getListingsOrderedByPriceLowToHigh(Request $request) {
-        $user = auth()->id();
+        $user = auth('sanctum')->id();
 
         $query = Listing::where('sale_status', 'open');
         if($user) {
@@ -399,7 +399,7 @@ class ListingController extends Controller
     }
 
     public function rentListings(Request $request) {
-      $user = auth()->id();
+      $user = auth('sanctum')->id();
 
       $query = Listing::where('sale_status', 'open');
 
