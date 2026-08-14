@@ -122,7 +122,7 @@
                 </button>
             </div>
         </div>
-        <span class="info-number-listings-page">Showing 1 - 16 of {{ listingsCount }} properties</span>
+        <span class="info-number-listings-page">Showing 1 - {{ listingStore.allListings.length }} of {{ listingsCount }} properties</span>
     </div>
 </template>
 <script setup>
