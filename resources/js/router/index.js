@@ -12,7 +12,7 @@ const routes = [
     { path: '/home', component: Home, name: 'home'},
     { path: '/upload-listing', component: UploadListing, name: 'upload listing'},
     { path: '/browse-all', component: BrowseAll, name: 'browse'},
-    { path: 'rent-listings', component: Rent, name: 'rent'},
+    { path: '/rent-listings', component: Rent, name: 'rent'},
 ];
 
 const router = createRouter({

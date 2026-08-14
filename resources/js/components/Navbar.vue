@@ -5,7 +5,7 @@
         </div>
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
-            <strong><span class="headings">Rent</span></strong>
+            <strong><span class="headings" @click="moveToRent()">Rent</span></strong>
             <strong><span class="headings">Commercial</span></strong>
             <strong><span class="headings">Dashboard & Analytics</span></strong>
         </div>
@@ -83,6 +83,19 @@ const moveToBrowseAll = async () => {
         error.value = error.response?.data?.message || 'failed to move to browse';
     }
     finally {
+        loading.value = false;
+    }
+}
+
+const moveToRent = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'rent',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.nessage || 'failed to move to rent';
+    } finally {
         loading.value = false;
     }
 }
