@@ -61,6 +61,14 @@
                             Apply filters</button>
                     </div>
                 </div>
+        <div class="rent-listings-container">
+            <RentGrid
+                v-for="listing in listingStore.allListings"
+                :listing="listing"
+                key="listing.id"
+            />
+
+        </div>
     </div>
 
 </template>
@@ -73,6 +81,7 @@ import keys from "../assets/keys2.png";
 import housesquare from "../assets/housesquare.png";
 import search2 from "../assets/search.png";
 import scaffolding from "../assets/scaffolding2.png";
+import RentGrid from "../components/RentGrid.vue";
 
 const filters = reactive({
     min_price: '',
@@ -83,6 +92,11 @@ const filters = reactive({
     search: '',
 });
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
+const listingStore = useListingStore();
+
+onMounted(async () => {
+    await listingStore.getRentListings();
+});
 
 </script>
 <style scoped>
@@ -353,5 +367,9 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
 .img-in-btn {
     height: 24px;
 
+}
+.rent-listings-container {
+    display: flex;
+    flex-direction: column;
 }
 </style>

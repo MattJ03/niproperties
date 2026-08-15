@@ -140,6 +140,7 @@ const errors = reactive({
     county: '',
     postcode: '',
     price: '',
+    rent_per_month: '',
     no_of_rooms: '',
     type: '',
     description: '',
@@ -193,7 +194,7 @@ function validate() {
     errors.no_of_rooms = form.no_of_rooms ? '' : 'Please enter the number of rooms';
     errors.type =  form.type ? '': 'Please select the type of listing';
 
-    if(!form.address_line_1 || !form.county || !form.postcode || !form.price || !form.no_of_rooms || !form.type) {
+    if(!form.address_line_1 || !form.county || !form.postcode|| (!form.price && !form.rent_per_month) || !form.no_of_rooms || !form.type) {
         valid = false
     }
     return valid;
