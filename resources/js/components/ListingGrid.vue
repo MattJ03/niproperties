@@ -4,7 +4,8 @@
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
         <div class="listing-details">
-            <strong><p class="price-listing">£{{ props.listing.price}}</p></strong>
+            <strong><p v-if="props.listing.price" class="price-listing">£{{ props.listing.price}}</p></strong>
+            <strong><p v-if="props.listing.rent_per_month" class="price-listing"> £{{ props.listing.rent_per_month }} per month</p> </strong>
             <strong><span class="address-line-1-text">{{ props.listing.address_line_1}}</span></strong>
             <div class="postcode-town-wrapper">
               <img :src="location" alt="location pointer" class="location-img"/>

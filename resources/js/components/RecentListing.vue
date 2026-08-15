@@ -7,7 +7,7 @@
         <div class="listing-details-wrapper">
         <div class="listing-details">
             <span v-if="props.listing.price" class="details-price"> {{ formatPrice(props.listing.price) }} </span>
-            <span v-if="props.listing.rent_per_month" class="details-price"> {{ formatPrice(props.listing.rent_per_month) }} </span>
+            <span v-if="props.listing.rent_per_month" class="details-price"> {{ formatPrice(props.listing.rent_per_month) }} per month </span>
             <span> {{ props.listing.address_line_1 }}</span>
             <span v-if="props.listing.address_line_2" class="address-text"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">
