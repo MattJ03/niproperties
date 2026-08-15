@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="img-wrapper">
             <img  v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" alt="listing image" class="listing-img"/>
@@ -6,7 +6,8 @@
         </div>
         <div class="listing-details-wrapper">
         <div class="listing-details">
-            <span class="details-price"> {{ formatPrice(props.listing.price) }} </span>
+            <span v-if="props.listing.price" class="details-price"> {{ formatPrice(props.listing.price) }} </span>
+            <span v-if="props.listing.rent_per_month" class="details-price"> {{ formatPrice(props.listing.rent_per_month) }} </span>
             <span> {{ props.listing.address_line_1 }}</span>
             <span v-if="props.listing.address_line_2" class="address-text"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">

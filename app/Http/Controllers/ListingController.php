@@ -101,6 +101,7 @@ class ListingController extends Controller
             'county' => $validatedData['county'],
             'postcode' => $validatedData['postcode'],
             'price' => $validatedData['price'],
+            'rent_per_month' => $validatedData['rent_per_month'],
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
             'sale_status' => 'open',
