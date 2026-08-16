@@ -1,6 +1,7 @@
 <template>
     <Navbar></Navbar>
     <div class="container">
+        <div class="filter-and-listings-container">
                 <div class="filter-container">
                     <div class="top-of-filters">
                         <h2 class="filters-header">Filters</h2>
@@ -67,13 +68,39 @@
                 :listing="listing"
                 key="listing.id"
             />
-
         </div>
+        </div>
+        <div class="pagination-container">
+            <div class="pagination-wrapper">
+                <button class="previous-btn" @click="getPreviousPageListings()" :disabled="pageNum === 1">
+                    <span><</span>
+                    <span>Previous</span>
+                </button>
+                <div class="num-wrapper">
+                    <button v-for="num in numRoomsRange" class="page-num-button" @click="getPaginatedListings(num)"
+                            :class="{ active: num === pageNum}">
+                        {{ num }}
+                    </button>
+                    <div class="more-btn">
+                        ...
+                    </div>
+                    <button class="final-page-num" @click="getLastPageListings(finalPageNumRounded)">
+                        {{ getFinalPageNum() }}
+                    </button>
+                </div>
+
+                <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum >= finalPageNumRounded">
+                    <span>Next</span>
+                    <span>> </span>
+                </button>
+            </div>
+        </div>
+        <span class="info-number-listings-page">Showing 1 - {{ listingStore.allListings.length }} of {{ listingsCount }} properties</span>
     </div>
 
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+import {ref, reactive, computed, onMounted, watch} from "vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import Navbar from "../components/Navbar.vue";
 import reset from "../assets/reset.png";
@@ -82,6 +109,8 @@ import housesquare from "../assets/housesquare.png";
 import search2 from "../assets/search.png";
 import scaffolding from "../assets/scaffolding2.png";
 import RentGrid from "../components/RentGrid.vue";
+import {storeToRefs} from "pinia";
+import api from "../axios.js";
 
 const filters = reactive({
     min_price: '',
@@ -95,6 +124,16 @@ const loading = ref(false);
 const error = ref('');
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 const listingStore = useListingStore();
+const numRoomsRange = ref([1, 2, 3, 4, 5]);
+const pageNum = ref(1);
+const finalPageNum = ref(0);
+const finalPageNumRounded = ref(finalPageNum.value);
+const sortOption = ref('recent');
+const { listingsCount } = storeToRefs(listingStore);
+const getFinalPageNum = () => {
+    finalPageNum.value = listingsCount.value / 16;
+    return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
+}
 
 onMounted(async () => {
     await listingStore.getRentListings();
@@ -119,13 +158,160 @@ async function resetFilters() {
     filters.max_price = '';
     filters.search = '';
 }
+async function getPaginatedListings(page) {
+    loading.value = true;
+    try {
+        pageNum.value = page;
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsRent?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
+    } finally {
+        loading.value = false;
+    }
+}
+
+async function getLastPageListings(finalPageNum) {
+    loading.value = true;
+    try {
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsRent?page=${finalPageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${finalPageNum}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
+    } finally {
+        loading.value = false;
+    }
+}
+
+watch(sortOption, (newValue, oldValue) => {
+    console.log('Sort option changed to ' + newValue);
+});
+
+async function getNextPageListings() {
+    loading.value = true;
+    try {
+        pageNum.value++;
+        if(sortOption.value === 'recent' || undefined) {
+            const res = await api.get(`listingsRent?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
+    } finally {
+        loading.value = false;
+    }
+}
+
+async function getPreviousPageListings() {
+    loading.value = true;
+    try {
+        pageNum.value--;
+        if(sortOption.value === 'recent') {
+            const res = await api.get(`listingsRent?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'views') {
+            const res = await api.get(`listingsIndexByViews?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-high-to-low') {
+            const res = await api.get(`listingsIndexByPrice?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+        if(sortOption.value === 'price-low-to-high') {
+            const res = await api.get(`listingsIndexLowestToHighest?page=${pageNum.value}`, {
+                params: filters,
+            });
+            listingStore.allListings = res.data.listings;
+        }
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated values next page';
+    } finally {
+        loading.value = false;
+    }
+}
 
 </script>
 <style scoped>
 .container {
     display: flex;
+    flex-direction: column;
     width: 100%;
 
+}
+.filter-and-listings-container {
+    display: flex;
+    flex-direction: row;
 }
 .filter-container {
     display: flex;
@@ -397,5 +583,125 @@ async function resetFilters() {
     width: 100%;
     margin: 150px 40px 0 35px;
     align-items: start;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    width: 100%;
+    height: 8dvh;
+}
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    height: 90%;
+    margin-top: 40px;
+    border: 1px solid #f7fafc;
+    width: 50%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+.previous-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.previous-btn:hover {
+    background-color: #CBC3E3;
+}
+.previous-btn:disabled {
+    background-color: #E0E0E0;
+    cursor : not-allowed;
+}
+.num-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+.page-num-button {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+
+}
+.page-num-button:hover {
+    background-color: #CBC3E3;
+}
+.page-num-button.active {
+    background-color: #6B46C1;
+    color: #FFFFFF;
+}
+.more-btn {
+    margin-left: 28px;
+    color: #6B46C1;
+}
+.final-page-num {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.next-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.next-btn:hover {
+    background-color: #CBC3E3;
+}
+.next-btn:disabled {
+    background-color: #E0E0E0;
+    cursor: not-allowed;
+}
+.info-number-listings-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 }
 </style>
