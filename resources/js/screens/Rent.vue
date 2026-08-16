@@ -111,6 +111,15 @@ async function applyFilters() {
     });
 }
 
+async function resetFilters() {
+    filters.county = '';
+    filters.max_num_of_rooms = '';
+    filters.min_num_of_rooms = '';
+    filters.min_price = '';
+    filters.max_price = '';
+    filters.search = '';
+}
+
 </script>
 <style scoped>
 .container {
