@@ -85,126 +85,141 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 500px;
+    /* REMOVED height: 200px so height grows dynamically based on content */
+    height: auto;
     background-color: #FFFFFF;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Keeps image corners rounded */
 }
+
 .img-wrapper {
     width: 100%;
-    height: 250px;
+    height: 180px; /* Standard card image height */
     overflow: hidden;
+    background-color: #f3f4f6;
 }
+
 .listing-img {
     width: 100%;
     height: 100%;
-    border-radius: 12px;
     object-fit: cover;
 }
+
 .listing-details {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-left: 20px;
-    margin-top: 20px;
+    padding: 16px; /* Replaced manual margins with clean padding */
+    box-sizing: border-box;
 }
-.price-listing {
-    font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 17px;
 
-}
-.address-line-1-text {
+.price-listing {
     font-size: 18px;
+    margin: 0 0 8px 0;
 }
+
+.address-line-1-text {
+    font-size: 15px;
+    color: #1c1e21;
+}
+
 .postcode-town-wrapper {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    margin-top: 10px;
+    margin-top: 6px;
     gap: 5px;
 }
+
 .location-img {
-    height: 18px;
+    height: 16px;
 }
-.topic-wrapper {
-    display: flex;
-    margin-right: 30px;
-}
+
 .town-text {
-    font-size: 16px;
+    font-size: 14px;
     color: #65676b;
 }
+
 .house-information {
     display: flex;
     align-items: center;
-    margin-top: 30px;
-    width: 100%;
-
+    margin-top: 16px;
+    gap: 20px;
 }
+
+.topic-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .num-and-info {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding-left: 10px;
+    padding-left: 8px;
 }
-.rooms-icon {
-    height: 28px;
-}
-.rooms-info-text {
 
-}
+.rooms-icon,
 .pin-icon {
-    height: 28px;
+    height: 24px;
 }
-.county-info-text {
 
-}
 .tiny-text-below-info {
     font-size: 12px;
     color: #65676b;
 }
+
 .horizontal-line {
     width: 100%;
-    color: #1c1e21;
-    margin-left: -20px;
-    margin-top: 15px;
+    border: none;
+    border-top: 1px solid #e4e6eb;
+    margin: 12px 0;
 }
-.description-wrapper {
 
-    margin-top: 5px;
+.description-wrapper {
+    margin-top: 4px;
     color: #65676b;
-    font-size: 12px;
+    font-size: 13px;
 }
+
 .description-text {
-    padding-right: 40px;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Truncates long descriptions to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
+
 .bottom-of-listing {
     display: flex;
     flex-direction: column;
-    width: 100%;
-
+    margin-top: auto;
 }
+
 .listing-stats {
     display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
 .logo-img {
-    height: 70px;
-    border-radius: 80px;
-    width: 21%;
-    margin-right: 5px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    object-fit: cover;
 }
-.niproperties-text {
-    font-size: 13px;
-    margin-bottom: 3px;
-}
+
 .sitename-time-uploaded {
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
+
+.niproperties-text {
+    font-size: 13px;
+    margin: 0;
+    font-weight: 600;
+}
+
 .time-since-upload {
     color: #65676b;
-    font-size: 13px;
+    font-size: 12px;
 }
 </style>
-

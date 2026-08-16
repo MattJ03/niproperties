@@ -91,6 +91,8 @@ const filters = reactive({
     max_num_of_rooms: '',
     search: '',
 });
+const loading = ref(false);
+const error = ref('');
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 const listingStore = useListingStore();
 
@@ -98,12 +100,23 @@ onMounted(async () => {
     await listingStore.getRentListings();
 });
 
+async function applyFilters() {
+    await listingStore.getRentListings({
+        min_price: filters.min_price || null,
+        max_price: filters.max_price || null,
+        county: filters.county || null,
+        min_num_of_rooms: filters.min_num_of_rooms || null,
+        max_num_of_rooms: filters.max_num_of_rooms || null,
+        search: filters.search || null,
+    });
+}
+
 </script>
 <style scoped>
 .container {
     display: flex;
     width: 100%;
-    height: 100dvh;
+
 }
 .filter-container {
     display: flex;
@@ -369,7 +382,11 @@ onMounted(async () => {
 
 }
 .rent-listings-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin: 150px 40px 0 35px;
+    align-items: start;
 }
 </style>
