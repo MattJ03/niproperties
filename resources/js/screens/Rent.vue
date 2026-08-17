@@ -496,6 +496,7 @@ async function getPreviousPageListings() {
     flex-direction: row;
     gap: 10px;
     width: 100%;
+    padding-right: 10px;
 }
 .square-num-rooms {
     display: flex;
