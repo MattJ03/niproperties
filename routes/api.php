@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingImageController;
+use App\Http\Controllers\UserDirectoryController;
 
 Route::post('/registerLandlord', [AuthController::class, 'registerLandlord']);
 Route::post('/registerBuyer', [AuthController::class, 'registerBuyer']);
@@ -18,6 +19,7 @@ Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListing
 Route::get('/listingsRent', [ListingController::class, 'rentListings']);
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
+Route::get('/getAllLandlords', [UserDirectoryController::class, 'getAllLandlords']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);

@@ -7,6 +7,7 @@
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
             <strong><span class="headings" @click="moveToRent()">Rent</span></strong>
             <strong><span class="headings">Commercial</span></strong>
+            <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
             <strong><span class="headings">Dashboard & Analytics</span></strong>
         </div>
         <div class="btn-section-nav">
@@ -100,6 +101,18 @@ const moveToRent = async () => {
     }
 }
 
+const moveToOurLandlords = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'our landlords',
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to our landlords';
+    } finally {
+        loading.value = false;
+    }
+}
 const logout = async() => {
     loading.value = true;
     try {

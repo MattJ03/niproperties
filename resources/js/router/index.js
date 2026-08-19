@@ -5,6 +5,7 @@ import Home from "../screens/Home.vue";
 import UploadListing from "../screens/UploadListing.vue";
 import BrowseAll from "../screens/BrowseAll.vue";
 import Rent from "../screens/Rent.vue";
+import OurLandlords from "../screens/OurLandlords.vue";
 
 const routes = [
     { path: '/register', component: Register, name: 'register' },
@@ -13,6 +14,7 @@ const routes = [
     { path: '/upload-listing', component: UploadListing, name: 'upload listing', meta:{ role: 'landlord'}},
     { path: '/browse-all', component: BrowseAll, name: 'browse'},
     { path: '/rent-listings', component: Rent, name: 'rent'},
+    { path: '/our-landlords', component: OurLandlords, name: 'our landlords' },
 ];
 
 const router = createRouter({
