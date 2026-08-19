@@ -9,7 +9,9 @@ use App\Models\User;
 class UserDirectoryController extends Controller
 {
     public function getAllLandlords() {
-        $landlords = User::role('landlord')->get();
+        $landlords = User::role('landlord')
+                               ->with('listings')
+            ->get();
 
         if($landlords->count() <= 0) {
             return response()->json([
