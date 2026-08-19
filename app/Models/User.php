@@ -34,7 +34,7 @@ class User extends Authenticatable
         ];
     }
 
-    protected function listings() {
+    public function listings() {
         return $this->hasMany(Listing::class, 'landlord_id');
     }
 }

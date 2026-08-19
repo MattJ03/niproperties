@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Log;
+use App\Models\Listing;
 
 
 class UserDirectoryController extends Controller
@@ -15,9 +16,11 @@ class UserDirectoryController extends Controller
     public function getAllLandlords() {
         Log::info('starts of method');
 
-        $landlords = User::role('landlord')->paginate(15);
+        $landlords = User::role('landlord')
+                               ->with('listings')
+                               ->paginate(15);
 
-Log::info( 'this number of landlords ' . $landlords->count());
+      Log::info( 'this number of landlords ' . $landlords->count());
 
         if($landlords->count() <= 0) {
             return response()->json([
@@ -26,7 +29,8 @@ Log::info( 'this number of landlords ' . $landlords->count());
             ]);
         }
 
-        $landlordCount = $landlords->count();
+        $landlordCount = $landlords->total();
+
         Log::info('landlords ' . $landlordCount);
 
         return response()->json([
