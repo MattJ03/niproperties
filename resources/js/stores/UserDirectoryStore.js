@@ -11,7 +11,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    async function getLandlords() {
        loading.value = true;
        try {
-           const res = await api.get('getAllLandlords');
+           const res = await api.get(`getLandlords`);
            landlords.value = res.data.landlords;
            landlordCount.value = res.data.landlord_count;
        } catch(err) {

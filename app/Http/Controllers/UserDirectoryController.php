@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Log;
+
 
 class UserDirectoryController extends Controller
 {
     public function getAllLandlords() {
-        $landlords = User::role('landlord')
-                               ->with('listings')
-            ->get();
+        Log::info('starts of method');
+
+        $landlords = User::role('landlord')->paginate(15);
+
+Log::info( 'this number of landlords ' . $landlords->count());
 
         if($landlords->count() <= 0) {
             return response()->json([
@@ -21,10 +27,12 @@ class UserDirectoryController extends Controller
         }
 
         $landlordCount = $landlords->count();
+        Log::info('landlords ' . $landlordCount);
+
         return response()->json([
-            'landlords' => $landlords,
+            'landlords' => $landlords->items(),
             'message' => 'Landlords Found',
-            'landlords_count' => $landlordCount,
+            'landlord_count' => $landlordCount,
         ]);
 
     }

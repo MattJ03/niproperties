@@ -19,7 +19,7 @@ Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListing
 Route::get('/listingsRent', [ListingController::class, 'rentListings']);
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
-Route::get('/getAllLandlords', [UserDirectoryController::class, 'getAllLandlords']);
+Route::get('/getLandlords', [UserDirectoryController::class, 'getAllLandlords']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);

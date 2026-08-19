@@ -20,6 +20,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
+
     /**
      * Get the attributes that should be cast.
      *
