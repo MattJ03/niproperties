@@ -7,6 +7,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    const error = ref('');
    const landlords = ref([]);
    const landlordCount = ref('');
+   const totalListingsLandlord = ref('');
 
    async function getLandlords() {
        loading.value = true;
@@ -14,6 +15,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
            const res = await api.get(`getLandlords`);
            landlords.value = res.data.landlords;
            landlordCount.value = res.data.landlord_count;
+           totalListingsLandlord.value = res.data.listings_count;
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get the landlord info';
        } finally {
@@ -26,6 +28,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
        error,
        landlords,
        landlordCount,
+       totalListingsLandlord,
        getLandlords,
    }
 

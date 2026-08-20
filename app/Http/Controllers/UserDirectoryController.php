@@ -17,7 +17,7 @@ class UserDirectoryController extends Controller
         Log::info('starts of method');
 
         $landlords = User::role('landlord')
-                               ->with('listings')
+                               ->withCount('listings')
                                ->paginate(15);
 
       Log::info( 'this number of landlords ' . $landlords->count());
