@@ -165,7 +165,7 @@ const logout = async() => {
 
     padding: 8px 16px;
     border-radius: 16px;
-    background-color: #6B46C1;
+    background-color: #2d6e53;
     color: #ffffff;
     font-size: 17px;
     font-weight: bold;

@@ -10,7 +10,7 @@
                     <button class="next-btn">Next</button>
                 </div>
             </div>
-            <div class="line-below-pagination"></div>
+
             <div class="landlords-section" v-for="landlord in userDirectoryStore.landlords">
                 <div class="landlord-info">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
@@ -92,6 +92,9 @@ userDirectoryStore.getLandlords();
     cursor: pointer;
     color: #000000;
 }
+.prev-btn:hover {
+    background-color: #FDFBD4;
+}
 .next-btn {
     display: flex;
     align-items: center;
@@ -106,16 +109,14 @@ userDirectoryStore.getLandlords();
     padding: 16px 16px;
     border: 1px solid #2d6e53;
 }
-.line-below-pagination {
-    width: 100%;
-    height: 1px;
-    background-color: #000000;
+.next-btn:hover {
+    background-color: #FDFBD4;
 }
+
 .landlords-section {
     display: flex;
-
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -124,13 +125,16 @@ userDirectoryStore.getLandlords();
     align-items: center;
     flex-direction: row;
     width: 100%;
-    height: 50px;
+    height: 60px;
     border-radius: 14px;
     border: 1px solid #000000;
+
 }
 .landlord-image {
     height: 26px;
     width: 28px;
+    margin-left: 20px;
+
 }
 .landlord-name {
     padding-left: 50px;
@@ -149,5 +153,6 @@ userDirectoryStore.getLandlords();
     cursor: pointer;
     border-radius: 12px;
     margin-right: 20px;
+    font-size: 15px;
 }
 </style>
