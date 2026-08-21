@@ -16,10 +16,12 @@
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
-                    <button class="view-info-btn">View info</button>
+                    <button class="view-info-btn" @click="showInfoModal = true">View info</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div v-if="showInfoModal" class="landlord-modal">
 
     </div>
 </template>
@@ -35,6 +37,7 @@ const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
 const loading = ref(false);
 const error = ref('');
+const showInfoModal = ref(false);
 
 const getNextPageLandlords = async () => {
     loading.value = true;
@@ -189,5 +192,17 @@ onMounted(() => {
     border-radius: 12px;
     margin-right: 20px;
     font-size: 15px;
+}
+.landlord-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
 </style>

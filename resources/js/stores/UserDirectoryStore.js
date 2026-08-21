@@ -10,7 +10,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    const totalListingsLandlord = ref('');
    const finalPage = ref(0);
    const finalPageNumRounded = ref(0);
-
+   const selectedLandlord = ref('');
    const finalPageNum = computed(() => {
       finalPage.value = landlordCount.value / 10;
      return finalPageNumRounded.value = Math.ceil(finalPage.value);
@@ -37,6 +37,10 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
        landlords,
        landlordCount,
        totalListingsLandlord,
+       selectedLandlord,
+       finalPage,
+       finalPageNumRounded,
+       finalPageNum,
        getLandlords,
    }
 
