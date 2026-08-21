@@ -34,13 +34,23 @@
                 <h2 class="landlord-name-square"> {{selectedlandlord.name }}</h2>
                 <span class="landlord-text">Landlord</span>
                 <div class="horizontal-line-below-landlord"></div>
+
                 <div class="specific-details-wrapper">
+                    <div class="landlord-stats">
                     <img :src="calandar" alt="calander" class="img-in-details" />
                     <div class="text-and-answer">
                     <span class="member-since-text">Member since</span>
                         <span class="member-since-answer"> {{ dayjs(selectedlandlord.created_at).format('DD/MM/YYYY') }}</span>
                     </div>
                     </div>
+                <div class="landlord-stats">
+                    <img :src="house" class="home-img-in-details" alt="house" />
+                    <div class="text-and-answer">
+                    <span class="member-since-text">Properties listed</span>
+                    <span class="member-since-answer"> {{ selectedlandlord.listings_count}}</span>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -58,7 +68,7 @@ import agent from '../assets/agent.png';
 import calandar from '../assets/calander.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
-
+import house from '../assets/home.png';
 
 
 const userDirectoryStore = useUserDirectoryStore();
@@ -275,11 +285,10 @@ onMounted(() => {
     flex-direction: column;
     width: 30%;
     height: 100%;
-    background-color: #FFFFFF;
+    background-color: #F2EFE6;
     border-radius: 12px;
 }
 .landlord-profile-pic {
-
     margin-top: 10px;
     height: 120px;
     width: 140px;
@@ -301,6 +310,12 @@ onMounted(() => {
 }
 .specific-details-wrapper {
     display: flex;
+    flex-direction: column;
+}
+.landlord-stats {
+    display: flex;
+    margin-bottom: 30px;
+    flex-direction: row;
 }
 .img-in-details {
     height: 40px;
@@ -321,5 +336,12 @@ onMounted(() => {
 }
 .member-since-answer {
     color: #000000;
+}
+.home-img-in-details {
+    height: 30px;
+    width: 30px;
+    background-color: #f3f4f6;
+    padding: 10px 10px;
+    border-radius: 40px;
 }
 </style>
