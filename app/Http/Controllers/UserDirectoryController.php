@@ -24,7 +24,7 @@ class UserDirectoryController extends Controller
 
         if($landlords->count() <= 0) {
             return response()->json([
-                'landlords' => $landlords,
+                'landlords' => $landlords->items(),
                 'message' => 'No Landlords Found',
             ]);
         }

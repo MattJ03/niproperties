@@ -7,11 +7,11 @@
                 <div class="pagination-buttons">
                     <div class="vertical-line"></div>
                     <button class="prev-btn">Prev</button>
-                    <button class="next-btn">Next</button>
+                    <button class="next-btn" @click="getNextPageLandlords()">Next</button>
                 </div>
             </div>
 
-            <div class="landlords-section" v-for="landlord in userDirectoryStore.landlords">
+            <div class="landlords-section" v-for="landlord in userDirectoryStore.landlords" :key="landlord.id">
                 <div class="landlord-info">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
@@ -29,9 +29,31 @@ import Navbar from "../components/Navbar.vue";
 import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 import peopleIcon from '../assets/agent.png';
 import {useListingStore} from "../stores/ListingStore.js";
+import api from '../axios.js';
 
 const userDirectoryStore = useUserDirectoryStore();
-userDirectoryStore.getLandlords();
+const pageNum = ref(1);
+const loading = ref(false);
+const error = ref('');
+
+const getNextPageLandlords = async () => {
+    loading.value = true;
+    pageNum.value++;
+    try {
+        const res = await api.get(`getLandlords?page=${pageNum.value}`);
+        userDirectoryStore.landlords = res.data.landlords;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to next page landlords';
+    } finally {
+        loading.value = false;
+        console.log('pageNum = ' + pageNum.value);
+    }
+}
+
+onMounted(() => {
+    userDirectoryStore.getLandlords();
+
+});
 </script>
 <style scoped>
 .container {
@@ -56,7 +78,7 @@ userDirectoryStore.getLandlords();
     border-radius: 14px;
     width: 100%;
     height: 10%;
-    background-color: #2d6e53;
+    background-color: #2dcc95;
 }
 .landlord-amount-pulled {
     font-size: 16px;
@@ -148,8 +170,8 @@ userDirectoryStore.getLandlords();
     align-items: center;
     margin-left: auto;
     height: 80%;
-    color: #FFFFFF;
-    background-color: #2d6e53;
+    color: #000000;
+    background-color: #2dcc95;
     cursor: pointer;
     border-radius: 12px;
     margin-right: 20px;

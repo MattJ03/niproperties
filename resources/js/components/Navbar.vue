@@ -162,11 +162,10 @@ const logout = async() => {
     align-items: center;
     justify-content: center;
     align-items: center;
-
     padding: 8px 16px;
     border-radius: 16px;
-    background-color: #2d6e53;
-    color: #ffffff;
+    background-color: #2dcc95;
+    color: #000000;
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;

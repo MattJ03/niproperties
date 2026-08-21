@@ -8,6 +8,14 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    const landlords = ref([]);
    const landlordCount = ref('');
    const totalListingsLandlord = ref('');
+   const finalPage = ref(0);
+   const finalPageNumRounded = ref(0);
+
+   const finalPageNum = computed(() => {
+      finalPage.value = landlordCount.value / 10;
+     return finalPageNumRounded.value = Math.ceil(finalPage.value);
+
+   });
 
    async function getLandlords() {
        loading.value = true;
