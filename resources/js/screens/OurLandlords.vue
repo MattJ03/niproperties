@@ -16,12 +16,20 @@
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
-                    <button class="view-info-btn" @click="showInfoModal = true">View info</button>
+                    <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord" >View info</button>
                 </div>
             </div>
         </div>
     </div>
     <div v-if="showInfoModal" class="landlord-modal">
+        <div class="modal-square">
+            <div class="top-of-modal">
+            <h2 class="landlord-info-header">Landlord information: {{ selectedlandlord.name }}</h2>
+                <button @click="showInfoModal = false; selectedlandlord = null" class="x-btn">
+                    <img :src="x" class="close-modal-img" alt="close image"/>
+                </button>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -32,12 +40,14 @@ import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 import peopleIcon from '../assets/agent.png';
 import {useListingStore} from "../stores/ListingStore.js";
 import api from '../axios.js';
+import x from '../assets/x.png';
 
 const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
 const loading = ref(false);
 const error = ref('');
 const showInfoModal = ref(false);
+const selectedlandlord = ref(null);
 
 const getNextPageLandlords = async () => {
     loading.value = true;
@@ -204,5 +214,38 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     z-index: 999;
+}
+.modal-square {
+    display: flex;
+    border-radius: 12px;
+    width: 70%;
+    height: 70%;
+
+    background-color: #2dcc95;
+
+}
+.landlord-info-header {
+    padding: 3px 30px;
+}
+.top-of-modal {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    background-color: #2d6e53;
+    border-radius: 12px;
+}
+.x-btn {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    background-color: #2d6e53;
+    border: none;
+
+}
+.close-modal-img {
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
 }
 </style>
