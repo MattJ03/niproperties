@@ -24,10 +24,23 @@
     <div v-if="showInfoModal" class="landlord-modal">
         <div class="modal-square">
             <div class="top-of-modal">
-            <h2 class="landlord-info-header">Landlord information: {{ selectedlandlord.name }}</h2>
+
                 <button @click="showInfoModal = false; selectedlandlord = null" class="x-btn">
                     <img :src="x" class="close-modal-img" alt="close image"/>
                 </button>
+            </div>
+            <div class="landlord-details-square">
+                <img :src="agent" class="landlord-profile-pic" alt="landlord image" />
+                <h2 class="landlord-name-square"> {{selectedlandlord.name }}</h2>
+                <span class="landlord-text">Landlord</span>
+                <div class="horizontal-line-below-landlord"></div>
+                <div class="specific-details-wrapper">
+                    <img :src="calandar" alt="calander" class="img-in-details" />
+                    <div class="text-and-answer">
+                    <span class="member-since-text">Member since</span>
+                        <span class="member-since-text"> {{ selectedlandlord.created_at }}</span>
+                    </div>
+                    </div>
             </div>
         </div>
 
@@ -41,6 +54,12 @@ import peopleIcon from '../assets/agent.png';
 import {useListingStore} from "../stores/ListingStore.js";
 import api from '../axios.js';
 import x from '../assets/x.png';
+import agent from '../assets/agent.png';
+import calandar from '../assets/calander.png';
+import dayjs from "dayjs";
+import RelativeTime from 'dayjs/plugin/relativeTime.js';
+
+
 
 const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
@@ -48,7 +67,7 @@ const loading = ref(false);
 const error = ref('');
 const showInfoModal = ref(false);
 const selectedlandlord = ref(null);
-
+dayjs.extend(RelativeTime);
 const getNextPageLandlords = async () => {
     loading.value = true;
     pageNum.value++;
@@ -217,11 +236,12 @@ onMounted(() => {
 }
 .modal-square {
     display: flex;
+    flex-direction: column;
     border-radius: 12px;
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 75%;
 
-    background-color: #2dcc95;
+    background-color: #FFFFFF;
 
 }
 .landlord-info-header {
@@ -229,17 +249,18 @@ onMounted(() => {
 }
 .top-of-modal {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     width: 100%;
     height: fit-content;
-    background-color: #2d6e53;
+    background-color: #FFFFFF;
     border-radius: 12px;
 }
 .x-btn {
     display: flex;
     align-items: center;
     margin-right: 30px;
-    background-color: #2d6e53;
+    background-color: #FFFFFF;
+    padding-top: 20px;
     border: none;
 
 }
@@ -247,5 +268,53 @@ onMounted(() => {
     height: 36px;
     width: 36px;
     cursor: pointer;
+}
+.landlord-details-square {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+}
+.landlord-profile-pic {
+
+    margin-top: 10px;
+    height: 120px;
+    width: 140px;
+    border-radius: 60px;
+}
+.landlord-name-square {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+.landlord-text {
+    color: #65676b;
+    font-size: 16px;
+}
+.horizontal-line-below-landlord {
+    border-top: 1px solid #D3D3D3;
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.specific-details-wrapper {
+    display: flex;
+}
+.img-in-details {
+    height: 40px;
+    width: 40px;
+   background-color: #f3f4f6;
+    padding: 8px 8px;
+    border-radius: 60px;
+}
+.text-and-answer {
+    display: flex;
+    padding-left: 10px;
+    flex-direction: column;
+}
+.member-since-text {
+    color: #65676b;
 }
 </style>
