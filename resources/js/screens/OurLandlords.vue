@@ -6,7 +6,7 @@
                 <span class="landlord-amount-pulled"> 1 - {{ userDirectoryStore.landlords.length }} of {{ userDirectoryStore.landlordCount }} landlords</span>
                 <div class="pagination-buttons">
                     <div class="vertical-line"></div>
-                    <button class="prev-btn">Prev</button>
+                    <button class="prev-btn" @click="getPreviousPageLandlords()">Prev</button>
                     <button class="next-btn" @click="getNextPageLandlords()">Next</button>
                 </div>
             </div>
@@ -47,6 +47,19 @@ const getNextPageLandlords = async () => {
     } finally {
         loading.value = false;
         console.log('pageNum = ' + pageNum.value);
+    }
+}
+
+const getPreviousPageLandlords = async () => {
+    loading.value = false;
+    pageNum.value--;
+    try {
+        const res = await api.get(`getLandlords?page=${pageNum.value}`);
+        userDirectoryStore.landlords = res.data.landlords;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get previous page landlords';
+    } finally {
+        loading.value = false;
     }
 }
 
