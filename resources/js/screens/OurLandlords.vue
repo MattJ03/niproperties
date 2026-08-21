@@ -38,7 +38,7 @@
                     <img :src="calandar" alt="calander" class="img-in-details" />
                     <div class="text-and-answer">
                     <span class="member-since-text">Member since</span>
-                        <span class="member-since-text"> {{ selectedlandlord.created_at }}</span>
+                        <span class="member-since-answer"> {{ dayjs(selectedlandlord.created_at).format('DD/MM/YYYY') }}</span>
                     </div>
                     </div>
             </div>
@@ -311,10 +311,15 @@ onMounted(() => {
 }
 .text-and-answer {
     display: flex;
-    padding-left: 10px;
+    padding-left: 15px;
     flex-direction: column;
 }
 .member-since-text {
+    display: flex;
+    padding-bottom: 10px;
     color: #65676b;
+}
+.member-since-answer {
+    color: #000000;
 }
 </style>
