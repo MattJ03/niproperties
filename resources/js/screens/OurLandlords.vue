@@ -50,6 +50,20 @@
                     <span class="member-since-answer"> {{ selectedlandlord.listings_count}}</span>
                     </div>
                     </div>
+                    <div class="landlord-stats">
+                        <img :src="mail" class="home-img-in-details" alt="mail"/>
+                        <div class="text-and-answer">
+                            <span class="member-since-text">Email</span>
+                            <span class="member-since-answer"> {{ selectedlandlord.email }}</span>
+                        </div>
+                    </div>
+                    <div class="landlord-stats">
+                        <img :src="phone" class="home-img-in-details" alt="phone" />
+                        <div class="text-and-answer">
+                            <span class="member-since-text">Phone number</span>
+                            <span class="member-since-answer"> {{ selectedlandlord.contact }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,7 +83,8 @@ import calandar from '../assets/calander.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import house from '../assets/home.png';
-
+import mail from '../assets/mail.png';
+import phone from '../assets/phone.png';
 
 const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
