@@ -16,7 +16,7 @@
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
-                    <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord" >View info</button>
+                    <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings()" >View info</button>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                     <button class="view-all-btn">View all properties</button>
                 </div>
                 <div class="listings-row">
-                    hey
+
                 </div>
                 </div>
             </div>
@@ -96,6 +96,7 @@ import house from '../assets/home.png';
 import mail from '../assets/mail.png';
 import phone from '../assets/phone.png';
 
+
 const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
 const loading = ref(false);
@@ -103,6 +104,10 @@ const error = ref('');
 const showInfoModal = ref(false);
 const selectedlandlord = ref(null);
 dayjs.extend(RelativeTime);
+const listingStore = useListingStore();
+
+
+
 const getNextPageLandlords = async () => {
     loading.value = true;
     pageNum.value++;
