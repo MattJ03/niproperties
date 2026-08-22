@@ -71,6 +71,9 @@
                 <h3 class="about-header">Their properties</h3>
                     <button class="view-all-btn">View all properties</button>
                 </div>
+                <div class="listings-row">
+                    hey
+                </div>
                 </div>
             </div>
         </div>
@@ -418,5 +421,10 @@ onMounted(() => {
 }
 .view-all-btn:hover {
     background-color: #F0F0F0;
+}
+.listings-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 </style>

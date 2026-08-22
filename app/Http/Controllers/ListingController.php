@@ -455,4 +455,29 @@ class ListingController extends Controller
         ]);
 
     }
+
+    public function getRecentListingsForLandlord(Request $request) {
+
+      $validatedData = $request->validate([
+          'landlord_id' => 'required|integer',
+      ]);
+
+      $listings = Listing::where('sale_status', 'open')
+                           ->where('landlord_id', $validatedData['landlord_id'])
+                           ->orderBy('created_at', 'desc')
+                           ->with('listingImages')
+                            ->take(3)
+                            ->get();
+
+                           if($listings->isEmpty()) {
+                               return response()->json([
+                                   'message' => 'no listings found',
+                                   'listings' => [],
+                               ]);
+                           }
+       return response()->json([
+           'listings' => $listings,
+           'message' => 'listings found.',
+       ]);
+    }
 }
