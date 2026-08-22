@@ -60,12 +60,19 @@
                     </div>
                 </div>
             </div>
+            <div class="description-and-listings-container">
             <div class="landlord-description-wrapper">
                 <h3 class="about-header">About {{ selectedlandlord.name }}</h3>
                 <p class="landlord-description">Ill do this later</p>
                 <div class="horizontal-line-below-about"></div>
             </div>
-
+            <div class="listings-wrapper">
+                <div class="listings-header">
+                <h3 class="about-header">Their properties</h3>
+                    <button class="view-all-btn">View all properties</button>
+                </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -361,6 +368,12 @@ onMounted(() => {
     padding: 10px 10px;
     border-radius: 40px;
 }
+.description-and-listings-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-right: 30px;
+}
 .landlord-description-wrapper {
     display: flex;
     flex-direction: column;
@@ -379,5 +392,31 @@ onMounted(() => {
 
     width: 80%;
     margin-top: 20px;
+}
+.listings-wrapper {
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.listings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+}
+.view-all-btn {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #65676b;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #2d6e53;
+    cursor: pointer;
+}
+.view-all-btn:hover {
+    background-color: #F0F0F0;
 }
 </style>
