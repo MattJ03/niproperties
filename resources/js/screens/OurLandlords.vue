@@ -23,12 +23,6 @@
     </div>
     <div v-if="showInfoModal" class="landlord-modal">
         <div class="modal-square">
-            <div class="top-of-modal">
-
-                <button @click="showInfoModal = false; selectedlandlord = null" class="x-btn">
-                    <img :src="x" class="close-modal-img" alt="close image"/>
-                </button>
-            </div>
             <div class="landlord-details-square">
                 <img :src="agent" class="landlord-profile-pic" alt="landlord image" />
                 <h2 class="landlord-name-square"> {{selectedlandlord.name }}</h2>
@@ -66,6 +60,12 @@
                     </div>
                 </div>
             </div>
+            <div class="landlord-description-wrapper">
+                <h3 class="about-header">About {{ selectedlandlord.name }}</h3>
+                <p class="landlord-description">Ill do this later</p>
+                <div class="horizontal-line-below-about"></div>
+            </div>
+
         </div>
 
     </div>
@@ -249,6 +249,7 @@ onMounted(() => {
 }
 .landlord-modal {
     position: fixed;
+    flex-direction: row;
     top: 0;
     left: 0;
     width: 100vw;
@@ -261,7 +262,7 @@ onMounted(() => {
 }
 .modal-square {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border-radius: 12px;
     width: 60%;
     height: 75%;
@@ -274,8 +275,9 @@ onMounted(() => {
 }
 .top-of-modal {
     display: flex;
-    justify-content: end;
-    width: 100%;
+    justify-content: right;
+    flex-direction: row;
+    width: 10%;
     height: fit-content;
     background-color: #FFFFFF;
     border-radius: 12px;
@@ -358,5 +360,24 @@ onMounted(() => {
     background-color: #f3f4f6;
     padding: 10px 10px;
     border-radius: 40px;
+}
+.landlord-description-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 100%;
+}
+.about-header {
+    font-size: 23px;
+}
+.landlord-description {
+    color: #65676b;
+}
+.horizontal-line-below-about {
+    border-top: 1px solid #65676b;
+
+    width: 80%;
+    margin-top: 20px;
 }
 </style>
