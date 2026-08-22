@@ -382,4 +382,20 @@ class ListingControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(16, $response->json('listings'));
         }
+
+        public function test_get_recent_listings_for_landlord(): void {
+        $landlord = User::factory()->create();
+        $landlord->assignRole('landlord');
+
+        $listings = Listing::factory()->count(5)->create([
+            'landlord_id' => $landlord->id,
+        ]);
+
+        $listings2 = Listing::factory()->count(5)->create([
+            'landlord_id' => $landlord->id,
+        ]);
+
+        $response = $this->getJson('/api/getRecentListingsForLandlord/' . $landlord->id);
+        $response->assertStatus(200);
+        }
 }

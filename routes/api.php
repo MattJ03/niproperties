@@ -16,6 +16,7 @@ Route::get('listingsIndexByPrice', [ListingController::class, 'getListingsOrdere
 Route::get('listingsIndexLowestToHighest', [ListingController::class, 'getListingsOrderedByPriceLowToHigh']);
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
 Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListings']);
+Route::get('getRecentListingsForLandlord', [ListingController::class, 'getRecentListingsForLandlord']);
 Route::get('/listingsRent', [ListingController::class, 'rentListings']);
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
