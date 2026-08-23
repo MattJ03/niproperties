@@ -16,7 +16,7 @@
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
-                    <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings()" >View info</button>
+                    <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings(selectedlandlord.id)" >View info</button>
                 </div>
             </div>
         </div>
@@ -72,7 +72,11 @@
                     <button class="view-all-btn">View all properties</button>
                 </div>
                 <div class="listings-row">
-
+                    <ListingGridLandlord
+                        v-for="listing in listingStore.landlordsRecentListings"
+                        :listing="listing"
+                        :key="listing.id"
+                        />
                 </div>
                 </div>
             </div>
@@ -95,7 +99,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import house from '../assets/home.png';
 import mail from '../assets/mail.png';
 import phone from '../assets/phone.png';
-
+import ListingGridLandlord from "../components/ListingGridLandlord.vue";
 
 const userDirectoryStore = useUserDirectoryStore();
 const pageNum = ref(1);
@@ -279,7 +283,7 @@ onMounted(() => {
     display: flex;
     flex-direction: row;
     border-radius: 12px;
-    width: 60%;
+    width: 55%;
     height: 75%;
 
     background-color: #FFFFFF;
@@ -430,6 +434,7 @@ onMounted(() => {
 .listings-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 20px;
+    width: 90%;
 }
 </style>

@@ -458,12 +458,8 @@ class ListingController extends Controller
 
     public function getRecentListingsForLandlord(Request $request) {
 
-      $validatedData = $request->validate([
-          'landlord_id' => 'required|integer',
-      ]);
-
       $listings = Listing::where('sale_status', 'open')
-                           ->where('landlord_id', $validatedData['landlord_id'])
+                           ->where('landlord_id', $request['id'])
                            ->orderBy('created_at', 'desc')
                            ->with('listingImages')
                             ->take(3)

@@ -10,6 +10,7 @@ export const useListingStore = defineStore('listings', () => {
    const listingId = ref(null);
    const recentListings = ref([]);
    const listingsCount = ref('');
+   const landlordsRecentListings = ref([]);
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -111,11 +112,14 @@ export const useListingStore = defineStore('listings', () => {
     const getLandlordsRecentListings = async (landlordId) => {
        loading.value = true;
        try {
+           console.log('recent method running');
            const res = await api.get(`getRecentListingsForLandlord/${landlordId}`);
-           recentListings.value = res.data.listings;
+           landlordsRecentListings.value = res.data.listings;
+           console.log('recent value changed' + landlordsRecentListings.value.length);
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to getRecentListings';
        } finally {
+           console.log('method over');
            loading.value = false;
        }
     }
@@ -128,6 +132,7 @@ export const useListingStore = defineStore('listings', () => {
        listingId,
        recentListings,
        listingsCount,
+       landlordsRecentListings,
        storeListing,
        getAllListings,
        get3RecentListings,

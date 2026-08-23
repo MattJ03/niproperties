@@ -85,17 +85,17 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* REMOVED height: 200px so height grows dynamically based on content */
+
     height: auto;
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden; /* Keeps image corners rounded */
+    overflow: hidden;
 }
 
 .img-wrapper {
     width: 100%;
-    height: 180px; /* Standard card image height */
+    height: 180px;
     overflow: hidden;
     background-color: #f3f4f6;
 }
@@ -109,7 +109,7 @@ const primaryImage = computed(() => {
 .listing-details {
     display: flex;
     flex-direction: column;
-    padding: 16px; /* Replaced manual margins with clean padding */
+    padding: 16px;
     box-sizing: border-box;
 }
 
@@ -183,7 +183,7 @@ const primaryImage = computed(() => {
 .description-text {
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Truncates long descriptions to 2 lines */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
