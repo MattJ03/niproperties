@@ -6,6 +6,7 @@ import UploadListing from "../screens/UploadListing.vue";
 import BrowseAll from "../screens/BrowseAll.vue";
 import Rent from "../screens/Rent.vue";
 import OurLandlords from "../screens/OurLandlords.vue";
+import LandlordsListings from "../screens/LandlordsListings.vue";
 
 const routes = [
     { path: '/register', component: Register, name: 'register' },
@@ -15,6 +16,7 @@ const routes = [
     { path: '/browse-all', component: BrowseAll, name: 'browse'},
     { path: '/rent-listings', component: Rent, name: 'rent'},
     { path: '/our-landlords', component: OurLandlords, name: 'our landlords' },
+    { path: '/landlords-listings', component: LandlordsListings, name: 'landlords listings' },
 ];
 
 const router = createRouter({

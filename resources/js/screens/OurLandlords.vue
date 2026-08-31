@@ -72,7 +72,7 @@
             <div class="listings-wrapper">
                 <div class="listings-header">
                 <h3 class="about-header">Their properties</h3>
-                    <button class="view-all-btn">View all properties</button>
+                    <button class="view-all-btn" @click="moveToLandlordsListings()">View all properties</button>
                 </div>
                 <div class="listings-row">
                     <ListingGridLandlord
@@ -91,6 +91,7 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import Navbar from "../components/Navbar.vue";
 import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
+import router from "../router/index.js";
 import peopleIcon from '../assets/agent.png';
 import {useListingStore} from "../stores/ListingStore.js";
 import api from '../axios.js';
@@ -146,6 +147,23 @@ onMounted(() => {
     userDirectoryStore.getLandlords();
 
 });
+
+const moveToLandlordsListings = async() => {
+    loading.value = true;
+
+    listingStore.landlordId = selectedlandlord.value.id;
+    try {
+        await router.push({
+            name: 'landlords listings',
+        });
+    }
+        catch(err) {
+            error.value = error.response?.data?.message || 'failed to move to landlords listings';
+        } finally {
+            loading.value = false;
+        }
+
+}
 </script>
 <style scoped>
 .container {
