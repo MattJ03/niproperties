@@ -11,6 +11,7 @@ export const useListingStore = defineStore('listings', () => {
    const recentListings = ref([]);
    const listingsCount = ref('');
    const landlordsRecentListings = ref([]);
+   const landlordListings = ref([]);
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -124,6 +125,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getLandlordsListings = async (landlordId) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`getLandlordsListings/${landlordId}`);
+           landlordListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get landlords listings';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -133,6 +146,7 @@ export const useListingStore = defineStore('listings', () => {
        recentListings,
        listingsCount,
        landlordsRecentListings,
+       landlordListings
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -141,5 +155,6 @@ export const useListingStore = defineStore('listings', () => {
        getListingsOrderedByPriceLowestToHighest,
        getRentListings,
        getLandlordsRecentListings,
+       getLandlordsListings,
    };
 });
