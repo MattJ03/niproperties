@@ -62,7 +62,7 @@
             </div>
             <div class="description-and-listings-container">
                 <div class="close-modal">
-                    <img :src="x" alt="close button" class="close-btn" />
+                    <img :src="x" alt="close button" class="close-btn" @click.self="showInfoModal = false"/>
                 </div>
             <div class="landlord-description-wrapper">
                 <h3 class="about-header">About {{ selectedlandlord.name }}</h3>
@@ -313,11 +313,6 @@ onMounted(() => {
     border: none;
 
 }
-.close-modal-img {
-    height: 36px;
-    width: 36px;
-    cursor: pointer;
-}
 .landlord-details-square {
     display: flex;
     align-items: center;
@@ -396,6 +391,8 @@ onMounted(() => {
     justify-content: right;
     margin-top: 30px;
     margin-bottom: 0;
+
+
 }
 .landlord-description-wrapper {
     display: flex;
