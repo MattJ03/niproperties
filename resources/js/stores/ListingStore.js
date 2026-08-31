@@ -12,6 +12,7 @@ export const useListingStore = defineStore('listings', () => {
    const listingsCount = ref('');
    const landlordsRecentListings = ref([]);
     const landlordId = ref('');
+    const landlord = ref('');
    const landlordListings = ref([]);
 
    const storeListing = async (payload) => {
@@ -148,6 +149,7 @@ export const useListingStore = defineStore('listings', () => {
        listingsCount,
        landlordsRecentListings,
        landlordId,
+       landlord,
        landlordListings,
        storeListing,
        getAllListings,

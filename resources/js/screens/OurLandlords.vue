@@ -152,6 +152,7 @@ const moveToLandlordsListings = async() => {
     loading.value = true;
 
     listingStore.landlordId = selectedlandlord.value.id;
+    listingStore.landlord = selectedlandlord.value;
     try {
         await router.push({
             name: 'landlords listings',
