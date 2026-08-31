@@ -476,4 +476,26 @@ class ListingController extends Controller
            'message' => 'listings found.',
        ]);
     }
+
+    public function getLandlordsListings(Request $request) {
+      $landlord = $request->landlordId;
+
+      $listings = Listing::where('landlord_id', $landlord)
+                          ->where('sale_status', 'open')
+                           ->orderBy('created_at', 'desc')
+                            ->with('listingImages')
+                            ->paginate(25);
+
+      if($listings->count() <= 0) {
+          return response()->json([
+              'listings' => $listings->items(),
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $listings->items(),
+          'message' => 'listings found',
+      ]);
+    }
 }
