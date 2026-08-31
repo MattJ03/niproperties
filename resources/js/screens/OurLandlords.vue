@@ -61,6 +61,9 @@
                 </div>
             </div>
             <div class="description-and-listings-container">
+                <div class="close-modal">
+                    <img :src="x" alt="close button" class="close-btn" />
+                </div>
             <div class="landlord-description-wrapper">
                 <h3 class="about-header">About {{ selectedlandlord.name }}</h3>
                 <p class="landlord-description">Ill do this later</p>
@@ -386,11 +389,19 @@ onMounted(() => {
     flex-direction: column;
     margin-right: 30px;
 }
+.close-modal {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
 .landlord-description-wrapper {
     display: flex;
     flex-direction: column;
     margin-left: 40px;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
 }
 .about-header {
@@ -436,5 +447,9 @@ onMounted(() => {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 90%;
+}
+.close-btn {
+    height: 40px;
+    cursor: pointer;
 }
 </style>
