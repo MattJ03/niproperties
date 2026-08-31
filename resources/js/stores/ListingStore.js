@@ -146,7 +146,7 @@ export const useListingStore = defineStore('listings', () => {
        recentListings,
        listingsCount,
        landlordsRecentListings,
-       landlordListings
+       landlordListings,
        storeListing,
        getAllListings,
        get3RecentListings,
