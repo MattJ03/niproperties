@@ -139,6 +139,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const fetchLandlordById = async (id) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`getLandlord/${id}`);
+           landlord.value = res.data.landlord;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get landlord by id';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -160,5 +172,6 @@ export const useListingStore = defineStore('listings', () => {
        getRentListings,
        getLandlordsRecentListings,
        getLandlordsListings,
+       fetchLandlordById,
    };
 });

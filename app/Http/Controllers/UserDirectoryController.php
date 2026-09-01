@@ -40,4 +40,14 @@ class UserDirectoryController extends Controller
         ]);
 
     }
+
+    public function showLandlord($id) {
+
+        Log::info('starts of method');
+        $landlord = User::with('listings')->findOrFail($id);
+        Log::info('landlord found ' . $id);
+        return response()->json([
+            'landlord' => $landlord,
+        ]);
+}
 }

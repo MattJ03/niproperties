@@ -3,7 +3,7 @@
   <div class="container">
       <div class="landlord-header-wrapper">
           <img :src="profilePicture" alt="profile picture" class="profile-picture" />
-          <h2 class="landlord-name"> {{ listingStore.landlord.name }}</h2>
+          <h2 class="landlord-name"> {{  landlord.name }}</h2>
           <div class="filters-container">
               <div class="field">
                   <label class="field-text">County</label>
@@ -48,7 +48,7 @@
 <script setup>
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
-import { onMounted, reactive, ref } from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 import profilePicture from '../assets/agent.png';
 import search2 from '../assets/search.png';
 import {useRoute} from "vue-router";
@@ -67,9 +67,21 @@ const filters = reactive({
 });
 const search = ref('');
 const rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-onMounted(async ()=> {
-    console.log('landlord id ' + route.params.landlordId);
-    await listingStore.getLandlordsListings();
+
+const props = defineProps({
+    landlordId: {
+        type: String,
+        required: true,
+    },
+});
+
+const landlord = computed(() => listingStore.landlord);
+
+onMounted(async () => {
+
+    if (!landlord.value || landlord.value.id !== props.landlordId) {
+        await listingStore.fetchLandlordById(props.landlordId);
+    }
 });
 </script>
 <style scoped>
@@ -237,7 +249,7 @@ onMounted(async ()=> {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70px;
+    height: 50px;
     width: 120px;
     font-size: 16px;
     margin-left: 60px;

@@ -22,6 +22,7 @@ Route::get('landlordsListing', [ListingController::class, 'getLandlordsListings'
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('/getLandlords', [UserDirectoryController::class, 'getAllLandlords']);
+Route::get('/getLandlord/{id}', [UserDirectoryController::class, 'showLandlord']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);
