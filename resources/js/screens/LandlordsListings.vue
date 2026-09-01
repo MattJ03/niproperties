@@ -97,6 +97,7 @@ const removeFilters = () => {
         filters.max_price = '';
         filters.min_price = '';
         filters.min_num_rooms = '';
+        search.value = '';
 };
 </script>
 <style scoped>
