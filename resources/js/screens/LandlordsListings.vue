@@ -94,13 +94,16 @@ onMounted(async () => {
 .landlord-header-wrapper {
     display: flex;
     align-items: center;
+   margin: 0 auto;
     margin-top: 150px;
     height: 100px;
-    width: 95%;
-    margin-left: 20px;
+    width: fit-content;
+    gap: 40px;
+
+
     padding-left: 30px;
-    padding-right: 20px;
-    margin-right: 20px;
+    padding-right: 30px;
+
     background-color: #FFFFFF;
     border-radius: 12px;
 }
@@ -114,13 +117,13 @@ onMounted(async () => {
     background-color: #F2EFE6;
 }
 .landlord-name {
-    margin-left: 15px;
+
 }
 .filters-container {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-left: 200px;
+    gap: 40px;
 }
 .county-dropdown {
     font-size: 16px;
@@ -146,7 +149,7 @@ onMounted(async () => {
 .rent-buy-wrapper {
     display: flex;
     flex-direction: row;
-    margin-left: 120px;
+
 }
 .rent-buy-btn {
     display: flex;
@@ -206,7 +209,7 @@ onMounted(async () => {
 }
 .min-rooms-wrapper {
     display: flex;
-    margin-left: 120px;
+
 }
 .min-rooms-dropdown {
     font-size: 16px;
@@ -220,7 +223,7 @@ onMounted(async () => {
 }
 .search-wrapper {
     display: flex;
-    margin-left: 120px;
+
 
     position: relative;
 
@@ -252,7 +255,8 @@ onMounted(async () => {
     height: 50px;
     width: 120px;
     font-size: 16px;
-    margin-left: 60px;
+
+
     border-radius: 14px;
     color: #FFFFFF;
     background-color: #2dcc95;
