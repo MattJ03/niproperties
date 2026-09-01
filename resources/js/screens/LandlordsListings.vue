@@ -237,6 +237,9 @@ const removeFilters = () => {
     border: 1px solid #FFFFFF;
 
 }
+.min-rooms-dropdown:hover {
+    border: 1px solid #FF0000;
+}
 .search-wrapper {
     display: flex;
 
@@ -255,6 +258,9 @@ const removeFilters = () => {
     padding-left: 30px;
     font-size: 16px;
     border: none;
+}
+.search-input:hover {
+    border: 1px solid #FF0000;
 }
 .search-img {
     position: absolute;

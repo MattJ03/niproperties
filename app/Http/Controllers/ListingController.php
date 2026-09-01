@@ -484,7 +484,7 @@ class ListingController extends Controller
                           ->where('sale_status', 'open')
                            ->orderBy('created_at', 'desc')
                             ->with('listingImages')
-                            ->paginate(25);
+                            ->paginate(20);
 
       if($listings->count() <= 0) {
           return response()->json([
