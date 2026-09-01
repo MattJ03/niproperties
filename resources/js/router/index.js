@@ -16,7 +16,7 @@ const routes = [
     { path: '/browse-all', component: BrowseAll, name: 'browse'},
     { path: '/rent-listings', component: Rent, name: 'rent'},
     { path: '/our-landlords', component: OurLandlords, name: 'our landlords' },
-    { path: '/landlords-listings', component: LandlordsListings, name: 'landlords listings' },
+    { path: '/landlords-listings/:landlordId', component: LandlordsListings, name: 'landlords listings' },
 ];
 
 const router = createRouter({

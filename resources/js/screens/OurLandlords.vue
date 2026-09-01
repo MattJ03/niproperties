@@ -156,6 +156,7 @@ const moveToLandlordsListings = async() => {
     try {
         await router.push({
             name: 'landlords listings',
+            params: { landlordId: selectedlandlord.value.id },
         });
     }
         catch(err) {

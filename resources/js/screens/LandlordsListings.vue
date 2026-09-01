@@ -35,10 +35,11 @@
           </div>
               <div class="search-wrapper">
                   <div class="search-bar">
-                  <img :src="search" class="search-img" alt="search image"/>
-                  <input type="text" class="search-input" placeholder="postcode, town, county..."/>
+                  <img :src="search2" class="search-img" alt="search image"/>
+                  <input type="text"  v-model="search" class="search-input" placeholder="postcode, town, county..."/>
                   </div>
                   </div>
+              <button class="apply-filters-btn">Apply filters</button>
           </div>
       </div>
   </div>
@@ -49,10 +50,13 @@ import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import { onMounted, reactive, ref } from "vue";
 import profilePicture from '../assets/agent.png';
-import search from '../assets/search.png';
+import search2 from '../assets/search.png';
+import {useRoute} from "vue-router";
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
+
+const route = useRoute();
 
 const filters = reactive({
     county: '',
@@ -61,9 +65,11 @@ const filters = reactive({
     max_price: '',
     min_num_rooms: '',
 });
+const search = ref('');
 const rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-onMounted(()=> {
-    console.log('landlord id ' + listingStore.landlordId);
+onMounted(async ()=> {
+    console.log('landlord id ' + route.params.landlordId);
+    await listingStore.getLandlordsListings();
 });
 </script>
 <style scoped>
@@ -216,7 +222,8 @@ onMounted(()=> {
     width: 300px;
     background-color: #f3f4f6;
     padding-left: 30px;
-    font-size: 15px;
+    font-size: 16px;
+    border: none;
 }
 .search-img {
     position: absolute;
@@ -225,5 +232,22 @@ onMounted(()=> {
     height: 18px;
 
     transform: translateY(-50%);
+}
+.apply-filters-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 120px;
+    font-size: 16px;
+    margin-left: 60px;
+    border-radius: 14px;
+    color: #FFFFFF;
+    background-color: #2dcc95;
+    cursor: pointer;
+    border: 1px solid #FFFFFF;
+}
+.apply-filters-btn:hover {
+    background-color: #2d6e53;
 }
 </style>
