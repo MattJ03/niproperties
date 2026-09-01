@@ -39,8 +39,14 @@
                   <input type="text"  v-model="search" class="search-input" placeholder="postcode, town, county..."/>
                   </div>
                   </div>
+              <div class="filters-wrapper">
               <button class="apply-filters-btn">Apply filters</button>
-          </div>
+                  <span class="remove-filters-text" @click="removeFilters()">
+                      <img :src="reset" class="reset-img" alt="reset"/>
+                  Reset Filters
+                  </span>
+              </div>
+              </div>
       </div>
   </div>
 
@@ -52,6 +58,7 @@ import {computed, onMounted, reactive, ref} from "vue";
 import profilePicture from '../assets/agent.png';
 import search2 from '../assets/search.png';
 import {useRoute} from "vue-router";
+import reset from '../assets/reset.png';
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
@@ -83,6 +90,14 @@ onMounted(async () => {
         await listingStore.fetchLandlordById(props.landlordId);
     }
 });
+
+const removeFilters = () => {
+    filters.rent_or_buy = '';
+        filters.county = '';
+        filters.max_price = '';
+        filters.min_price = '';
+        filters.min_num_rooms = '';
+};
 </script>
 <style scoped>
 .container {
@@ -265,5 +280,28 @@ onMounted(async () => {
 }
 .apply-filters-btn:hover {
     background-color: #2d6e53;
+}
+.filters-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.remove-filters-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #6b7280;
+    cursor: pointer;
+    gap: 3px;
+}
+.remove-filters-text:hover {
+    color: #2d6e53;
+}
+.reset-img {
+    height: 20px;
+    width: 20px;
 }
 </style>
