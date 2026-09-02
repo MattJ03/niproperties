@@ -35,6 +35,9 @@
              </div>
              <div class="horizontal-line-below-address"></div>
      <p class="description-paragraph"> {{ props.listing.description }}</p>
+     <div class="bottom-of-listng">
+
+     </div>
  </div>
 
 </template>
@@ -59,7 +62,9 @@ const primaryImage = computed(() => {
         return null;
     }
     return props.listing.listing_images.find(img => img.isPrimary) ?? props.listing.listing_images[0];
-})
+});
+
+
 
 </script>
 <style scoped>
