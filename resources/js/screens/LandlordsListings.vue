@@ -48,6 +48,13 @@
               </div>
               </div>
       </div>
+      <div class="listings-list">
+          <LandlordListing
+              v-for="listing in listingStore.landlordListings"
+              :listing="listing"
+              :id="listing.id"
+              />
+      </div>
   </div>
 
 </template>
@@ -59,6 +66,7 @@ import profilePicture from '../assets/agent.png';
 import search2 from '../assets/search.png';
 import {useRoute} from "vue-router";
 import reset from '../assets/reset.png';
+import LandlordListing from "../components/LandlordListing.vue";
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
@@ -89,6 +97,7 @@ onMounted(async () => {
     if (!landlord.value || landlord.value.id !== props.landlordId) {
         await listingStore.fetchLandlordById(props.landlordId);
     }
+    console.log('listings:', listingStore.landlordListings);
 });
 
 const removeFilters = () => {
@@ -103,9 +112,12 @@ const removeFilters = () => {
 <style scoped>
 .container {
     display: flex;
+    flex-direction: column;
+
+    align-items: center;
     width: 100%;
     min-height: 100dvh;
-    background-color: #6B46C1;
+
 }
 .landlord-header-wrapper {
     display: flex;
@@ -310,5 +322,15 @@ const removeFilters = () => {
 .reset-img {
     height: 20px;
     width: 20px;
+}
+.listings-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-top: 30px;
+    gap: 40px;
+    flex-direction: column;
+
 }
 </style>

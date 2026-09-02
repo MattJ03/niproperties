@@ -18,9 +18,9 @@ Route::get('/listing/{listing}', [ListingController::class, 'show']);
 Route::get('/listingsRecent3', [ListingController::class, 'get3MostRecentListings']);
 Route::get('/getRecentListingsForLandlord/{id}', [ListingController::class, 'getRecentListingsForLandlord']);
 Route::get('/listingsRent', [ListingController::class, 'rentListings']);
-Route::get('landlordsListing', [ListingController::class, 'getLandlordsListings']);
+Route::get('/landlordsListings/{landlordId}', [ListingController::class, 'getLandlordsListings']);
 Route::get('/listings/listing-images/{listingImage}', [ListingImageController::class, 'show']);
-Route::get('listings/images/{listingImage}', [ListingImageController::class, 'show']);
+Route::get('/listings/images/{listingImage}', [ListingImageController::class, 'show']);
 Route::get('/getLandlords', [UserDirectoryController::class, 'getAllLandlords']);
 Route::get('/getLandlord/{id}', [UserDirectoryController::class, 'showLandlord']);
 

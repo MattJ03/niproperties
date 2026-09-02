@@ -130,7 +130,7 @@ export const useListingStore = defineStore('listings', () => {
     const getLandlordsListings = async (landlordId) => {
        loading.value = true;
        try {
-           const res = await api.get(`getLandlordsListings/${landlordId}`);
+           const res = await api.get(`landlordsListings/${landlordId}`);
            landlordListings.value = res.data.listings;
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get landlords listings';
@@ -144,7 +144,11 @@ export const useListingStore = defineStore('listings', () => {
        try {
            const res = await api.get(`getLandlord/${id}`);
            landlord.value = res.data.landlord;
+           console.log('heejfwejfewf');
+          await  getLandlordsListings(landlord.value.id);
+          console.log(landlordListings.value);
        } catch(err) {
+           console.log('fetchLandlordById caught:', err);
            error.value = error.response?.data?.message || 'failed to get landlord by id';
        } finally {
            loading.value = false;
