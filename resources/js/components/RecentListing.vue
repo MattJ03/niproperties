@@ -62,7 +62,6 @@ function formatPrice(price) {
     height: 49dvh;
     border-radius: 12px;
     border: 1px solid #000000;
-    flex-direction: column;
     cursor: pointer;
 
 }

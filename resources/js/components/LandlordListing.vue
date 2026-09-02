@@ -3,9 +3,9 @@
      <div class="img-wrapper">
          <img :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-image" alt="listing image" />
      </div>
-     <span v-if="props.listing.price" class="price-text"> £{{ props.listing.price }} </span>
+     <span v-if="props.listing.price" class="price-text"> {{ formatPrice }} </span>
      <div v-if="props.listing.rent_per_month" class="rent-section">
-     <span class="rent-text"> {{ props.listing.rent_per_month }}</span>
+     <span class="rent-text"> {{ formatPrice }}</span>
      <span class="rent-suffix">/month</span>
      </div>
          <div class="address-section">
@@ -45,6 +45,7 @@
          </div>
          <div class="created-at-view-listing-wrapper">
              <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
+             <button class="view-btn">View listing</button>
          </div>
      </div>
  </div>
@@ -59,6 +60,7 @@ import bathroom from '../assets/bathroom.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
 
+dayjs.extend(RelativeTime);
 
 const noImage = ref('')
 const props = defineProps({
@@ -83,6 +85,25 @@ const firstLetterName = computed(() => {
     }
     return name.value.charAt(0).toUpperCase();
 });
+
+const formatPrice = computed(() => {
+
+    if(props.listing.price) {
+    console.log('running');
+    return new Intl.NumberFormat('en-GB',
+        {
+            style: 'currency',
+            currency: 'GBP',
+        }).format(props.listing.price);
+        }
+    if(props.listing.rent_per_month) {
+        return new Intl.NumberFormat('en-GB', {
+            style: 'currency',
+            currency: 'GBP',
+        }).format(props.listing.rent_per_month);
+    }
+
+});
 </script>
 <style scoped>
 .listing-card {
@@ -91,19 +112,21 @@ const firstLetterName = computed(() => {
     background-color: #f3f4f6;
     width: 80%;
     height: 550px;
+    max-width: 720px;
     border-radius: 12px;
-
     cursor: pointer;
 
 }
 .img-wrapper {
     overflow: hidden;
-    height: 40%;
+    height: 100%;
     width: 100%;
+
 }
 .listing-image {
     height: 100%;
     width: 100%;
+    display: block;
     object-fit: cover;
     border-radius: 12px;
 }
@@ -203,6 +226,7 @@ const firstLetterName = computed(() => {
     margin-top: 20px;
     margin-left: 20px;
     width: 100%;
+    margin-bottom: 30px;
 
 }
 .landlord-info-wrapper {
@@ -236,10 +260,24 @@ const firstLetterName = computed(() => {
 }
 .created-at-view-listing-wrapper {
     display: flex;
+    align-items: center;
     justify-content: right;
 }
 .created-at-text {
     color: #88807b;
     margin-right: 20px;
+}
+.view-btn {
+    padding: 12px 8px;
+    background-color: #2dcc95;
+    border-radius: 12px;
+    margin-right: 40px;
+    font-size: 16px;
+    color: #f3f4f6;
+    border: none;
+}
+.view-btn:hover {
+    cursor: pointer;
+    background-color: #2d6e53;
 }
 </style>
