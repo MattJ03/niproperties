@@ -3,16 +3,31 @@
      <div class="img-wrapper">
          <img :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-image" alt="listing image" />
      </div>
-     <span v-if="props.listing.price" class="price-text"> £{{ props.listing.price }}</span>
-     <div class="address-section">
+     <span v-if="props.listing.price" class="price-text"> £{{ props.listing.price }} </span>
+     <div v-if="props.listing.rent_per_month" class="rent-section">
+     <span class="rent-text"> {{ props.listing.rent_per_month }}</span>
+     <span class="rent-suffix">/month</span>
+     </div>
+         <div class="address-section">
          <span class="address-line-1"> {{ props.listing.address_line_1 }}</span>
+             <span v-if="props.listing.address_line_2" class="address-line-2"> {{ props.listing.address_line_2 }}</span>
+             <div class="town-postcode-wrapper">
+                 <img :src="location" class="location-img" alt="location" />
+                 <span> {{ props.listing.county }}</span>
+                 <span> {{ props.listing.town }},</span>
+                 <span> {{ props.listing.postcode }}</span>
+             </div>
+             <div class="horizontal-line-below-address"></div>
+             <div class="housing-info-wrapper">
+
+             </div>
      </div>
  </div>
 
 </template>
 <script setup>
 import { ref, reactive, computed } from 'vue';
-
+import location from '../assets/location.png';
 
 const noImage = ref('')
 const props = defineProps({
@@ -54,8 +69,10 @@ const primaryImage = computed(() => {
 }
 .address-section {
     display: flex;
+    flex-direction: column;
     margin-left: 20px;
     margin-top: 10px;
+    width: 100%;
 }
 .price-text {
     font-weight: bold;
@@ -63,7 +80,40 @@ const primaryImage = computed(() => {
     margin-left: 20px;
     font-size: 22px;
 }
+.rent-text {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 20px;
+    font-size: 22px;
+}
+.rent-section {
+    margin-top: 15px;
+
+
+}
+.rent-suffix {
+    color: #65676b;
+    margin-left: 3px;
+}
 .address-line-1 {
     font-weight: bold;
+}
+.horizontal-line-below-address {
+    border-top: 1px solid #A9A9A9;
+    width: 95%;
+    margin-top: 20px;
+}
+.town-postcode-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: #A9A9A9;
+    margin-top: 7px;
+}
+.town-postcode-wrapper span {
+    font-size: 14px;
+}
+.location-img {
+    height: 16px;
 }
 </style>
