@@ -14,7 +14,7 @@
          </div>
              <div class="town-postcode-wrapper">
                  <img :src="location" class="location-img" alt="location" />
-                 <span> {{ props.listing.county }}</span>
+                 <span> {{ props.listing.county }},</span>
                  <span> {{ props.listing.town }},</span>
                  <span> {{ props.listing.postcode }}</span>
              </div>
@@ -34,7 +34,7 @@
                  </div>
              </div>
              <div class="horizontal-line-below-address"></div>
-
+     <p class="description-paragraph"> {{ props.listing.description }}</p>
  </div>
 
 </template>
@@ -163,5 +163,9 @@ const primaryImage = computed(() => {
 .bathroom-img {
     height: 20px;
     width: 20px;
+}
+.description-paragraph {
+    margin-left: 20px;
+    text-wrap: auto;
 }
 </style>
