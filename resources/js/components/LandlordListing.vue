@@ -35,8 +35,17 @@
              </div>
              <div class="horizontal-line-below-address"></div>
      <p class="description-paragraph"> {{ props.listing.description }}</p>
-     <div class="bottom-of-listng">
-
+     <div class="bottom-of-listing">
+         <div class="landlord-info-wrapper">
+         <span class="letter-of-name"> {{ firstLetterName }}</span>
+         <div class="managed-by-wrapper">
+             <span class="managed-by-text">Managed by</span>
+             <span class="landlord-name"> {{ name }}</span>
+         </div>
+         </div>
+         <div class="created-at-view-listing-wrapper">
+             <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
+         </div>
      </div>
  </div>
 
@@ -47,6 +56,9 @@ import location from '../assets/location.png';
 import rooms from '../assets/rooms2.png';
 import bed from '../assets/bed.png';
 import bathroom from '../assets/bathroom.png';
+import dayjs from "dayjs";
+import RelativeTime from 'dayjs/plugin/relativeTime.js';
+
 
 const noImage = ref('')
 const props = defineProps({
@@ -56,6 +68,7 @@ const props = defineProps({
     },
 });
 
+const name = ref(props.listing.landlord.name);
 const primaryImage = computed(() => {
     if(props.listing.listing_images === null || props.listing.listing_images === undefined) {
         noImage.value = 'no listing images';
@@ -64,8 +77,12 @@ const primaryImage = computed(() => {
     return props.listing.listing_images.find(img => img.isPrimary) ?? props.listing.listing_images[0];
 });
 
-
-
+const firstLetterName = computed(() => {
+    if(!name.value) {
+        return '';
+    }
+    return name.value.charAt(0).toUpperCase();
+});
 </script>
 <style scoped>
 .listing-card {
@@ -73,8 +90,10 @@ const primaryImage = computed(() => {
     flex-direction: column;
     background-color: #f3f4f6;
     width: 80%;
-    height: 400px;
+    height: 550px;
     border-radius: 12px;
+
+    cursor: pointer;
 
 }
 .img-wrapper {
@@ -92,6 +111,7 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+
     margin-top: 10px;
     width: 100%;
 }
@@ -121,11 +141,12 @@ const primaryImage = computed(() => {
 }
 .horizontal-line-below-address {
     border-top: 1px solid #A9A9A9;
-    width: 95%;
+    width: 100%;
     margin-top: 20px;
 }
 .town-postcode-wrapper {
     display: flex;
+    width: 100%;
     flex-direction: row;
     gap: 5px;
     color: #A9A9A9;
@@ -148,7 +169,7 @@ const primaryImage = computed(() => {
 }
 .housing-info-wrapper span {
     font-size: 15px;
-    color: #A9A9A9;
+    color: #808080;
 
 }
 .field-and-img {
@@ -172,5 +193,53 @@ const primaryImage = computed(() => {
 .description-paragraph {
     margin-left: 20px;
     text-wrap: auto;
+    color: #808080;
+}
+.bottom-of-listing {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 100%;
+
+}
+.landlord-info-wrapper {
+    display: flex;
+
+}
+.letter-of-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background-color: #000000;
+    padding: 12px 18px;
+    border-radius: 50%;
+    color: #f3f4f6;
+}
+.managed-by-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    padding-left: 2px;
+
+}
+.managed-by-text {
+    font-size: 12px;
+    color: #88807b;
+}
+.landlord-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+.created-at-view-listing-wrapper {
+    display: flex;
+    justify-content: right;
+}
+.created-at-text {
+    color: #88807b;
+    margin-right: 20px;
 }
 </style>
