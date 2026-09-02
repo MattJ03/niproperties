@@ -111,7 +111,7 @@ const formatPrice = computed(() => {
     flex-direction: column;
     background-color: #f3f4f6;
     width: 80%;
-    height: 550px;
+    height: 600px;
     max-width: 720px;
     border-radius: 12px;
     cursor: pointer;
@@ -121,7 +121,7 @@ const formatPrice = computed(() => {
     overflow: hidden;
     height: 100%;
     width: 100%;
-
+    aspect-ratio: 16 / 9;
 }
 .listing-image {
     height: 100%;
