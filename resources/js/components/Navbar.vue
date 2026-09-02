@@ -131,6 +131,7 @@ const logout = async() => {
 .nav-bar {
     position: absolute;
     top: 0;
+
     width: 100%;
     height: 10dvh;
     display: flex;

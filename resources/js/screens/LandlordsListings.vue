@@ -57,8 +57,8 @@
       </div>
       <div class="pagination-container">
           <div class="pagination-wrapper">
-              <button class="previous-btn">
-                  <span>></span>
+              <button class="previous-btn" @click="getPrevPageListings()">
+                  <span>< </span>
                   <span>Previous</span>
               </button>
               <div class="num-wrapper">
@@ -69,9 +69,13 @@
                       ...
                   </div>
                   <div class="final-page-num">
-
+                      {{ finalPageNumRounded }}
                   </div>
               </div>
+              <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum >= finalPageNumRounded">
+                  <span> ></span>
+                  <span>Next</span>
+              </button>
           </div>
       </div>
   </div>
@@ -87,18 +91,20 @@ import {useRoute} from "vue-router";
 import reset from '../assets/reset.png';
 import LandlordListing from "../components/LandlordListing.vue";
 import {storeToRefs} from "pinia";
+import api from "axios";
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
 
 const route = useRoute();
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
-const finalPageNum = ref(0);
-const finalPageNumRounded = ref(finalPageNum.value);
+const loading = ref(false);
+const error = ref('');
+const pageNum = ref(1);
 const { landlordListings } = storeToRefs(listingStore)
 
-const getFinalPageNum = computed(() => {
-
+const finalPageNumRounded = computed(() => {
+    return Math.ceil(landlordListings.value.length / 20);
 });
 
 const filters = reactive({
@@ -136,6 +142,44 @@ const removeFilters = () => {
         filters.min_num_rooms = '';
         search.value = '';
 };
+
+
+const getNextPageListings = async () =>  {
+    loading.value = true;
+    pageNum.value++;
+    try {
+        const res = await api.get(`landlordsListings/${landlord.value.id}`, {
+            params: {
+                page: pageNum.value, ...filters, search: search.value,
+            },
+        });
+        listingStore.landlordListings = res.data.listings;
+        console.log('page num ' + pageNum.value);
+        console.log('next listings receieved');
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get landlord listings paginated';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const getPrevPageListings = async () => {
+    loading.value = true;
+    pageNum.value--;
+    try {
+        const res = await api.get(`landlordsListings/${landlord.value.id}`, {
+            params: {
+                page: pageNum.value, ...filters, search: search.value,
+            }
+            });
+    listingStore.landlordListings = res.data.listings;
+    console.log('page num ' + pageNum.value);
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to get landlord prev paginated listings';
+    } finally {
+        loading.value = false;
+    }
+}
 </script>
 <style scoped>
 .container {
