@@ -57,7 +57,7 @@
       </div>
       <div class="pagination-container">
           <div class="pagination-wrapper">
-              <button class="previous-btn" @click="getPrevPageListings()">
+              <button class="previous-btn" @click="getPrevPageListings()" :disabled="pageNum <= 1">
                   <span>< </span>
                   <span>Previous</span>
               </button>
