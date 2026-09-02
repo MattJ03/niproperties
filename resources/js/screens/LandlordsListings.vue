@@ -55,6 +55,25 @@
               :id="listing.id"
               />
       </div>
+      <div class="pagination-container">
+          <div class="pagination-wrapper">
+              <button class="previous-btn">
+                  <span>></span>
+                  <span>Previous</span>
+              </button>
+              <div class="num-wrapper">
+                  <button v-for="num in numRoomsRange" class="page-num-button">
+                      {{ num }}
+                  </button>
+                  <div class="more-btn">
+                      ...
+                  </div>
+                  <div class="final-page-num">
+
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 
 </template>
@@ -67,11 +86,20 @@ import search2 from '../assets/search.png';
 import {useRoute} from "vue-router";
 import reset from '../assets/reset.png';
 import LandlordListing from "../components/LandlordListing.vue";
+import {storeToRefs} from "pinia";
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
 
 const route = useRoute();
+const numRoomsRange = ref([1, 2, 3, 4, 5]);
+const finalPageNum = ref(0);
+const finalPageNumRounded = ref(finalPageNum.value);
+const { landlordListings } = storeToRefs(listingStore)
+
+const getFinalPageNum = computed(() => {
+
+});
 
 const filters = reactive({
     county: '',
@@ -332,5 +360,118 @@ const removeFilters = () => {
     gap: 40px;
     flex-direction: column;
 
+}
+.pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30px;
+        width: 100%;
+        height: 8dvh;
+    }
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    height: 90%;
+    margin-top: 40px;
+    border: 1px solid #f7fafc;
+    width: 50%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+.previous-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.previous-btn:hover {
+    background-color: #CBC3E3;
+}
+.previous-btn:disabled {
+    background-color: #E0E0E0;
+    cursor : not-allowed;
+}
+.num-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+.page-num-button {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+
+}
+.page-num-button:hover {
+    background-color: #CBC3E3;
+}
+.page-num-button.active {
+    background-color: #6B46C1;
+    color: #FFFFFF;
+}
+.more-btn {
+    margin-left: 28px;
+    color: #6B46C1;
+}
+.final-page-num {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.next-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.next-btn:hover {
+    background-color: #CBC3E3;
+}
+.next-btn:disabled {
+    background-color: #E0E0E0;
+    cursor: not-allowed;
 }
 </style>
