@@ -62,7 +62,7 @@
                   <span>Previous</span>
               </button>
               <div class="num-wrapper">
-                  <button v-for="num in numRoomsRange" class="page-num-button">
+                  <button v-for="num in numRoomsRange" class="page-num-button" @click="getSpecificPageListings(num)">
                       {{ num }}
                   </button>
                   <div class="more-btn">
@@ -91,7 +91,7 @@ import {useRoute} from "vue-router";
 import reset from '../assets/reset.png';
 import LandlordListing from "../components/LandlordListing.vue";
 import {storeToRefs} from "pinia";
-import api from "axios";
+import api from '../axios.js';
 
 const listingStore = useListingStore();
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
@@ -155,7 +155,7 @@ const getNextPageListings = async () =>  {
         });
         listingStore.landlordListings = res.data.listings;
         console.log('page num ' + pageNum.value);
-        console.log('next listings receieved');
+        console.log('next listings received');
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get landlord listings paginated';
     } finally {
@@ -176,6 +176,23 @@ const getPrevPageListings = async () => {
     console.log('page num ' + pageNum.value);
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to get landlord prev paginated listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const getSpecificPageListings = async (page) => {
+    loading.value = true;
+    pageNum.value = page;
+    try {
+        const res = await api.get(`landlordsListings/${landlord.value.id}`, {
+            params: {
+                page: pageNum.value, ...filters, search: search.value,
+            }
+        });
+        listingStore.landlordListings = res.data.listings;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get paginated listings';
     } finally {
         loading.value = false;
     }
