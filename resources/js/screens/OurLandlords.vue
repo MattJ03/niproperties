@@ -220,13 +220,13 @@ const moveToLandlordsListings = async() => {
     height: 52px;
     width: 80px;
     border-radius: 14px;
-    background-color: #FFFFFF;
-    border: 1px solid #2d6e53;
+    background-color: #2d6e53;
+    border: 1px solid #f3f4f6;
     cursor: pointer;
     color: #000000;
 }
 .prev-btn:hover {
-    background-color: #FDFBD4;
+    background-color: #2dcc95;
 }
 .next-btn {
     display: flex;
@@ -236,14 +236,14 @@ const moveToLandlordsListings = async() => {
     height: 52px;
     width: 80px;
     border-radius: 14px;
-    background-color: #FFFFFF;
+    background-color: #2d6e53;
     color: #000000;
     cursor: pointer;
     padding: 16px 16px;
-    border: 1px solid #2d6e53;
+    border: 1px solid #f3f4f6;
 }
 .next-btn:hover {
-    background-color: #FDFBD4;
+    background-color: #2dcc95;
 }
 
 .landlords-section {
@@ -260,6 +260,7 @@ const moveToLandlordsListings = async() => {
     width: 100%;
     height: 60px;
     border-radius: 14px;
+    background-color: #f3f4f6;
     border: 1px solid #000000;
 
 }
@@ -281,12 +282,15 @@ const moveToLandlordsListings = async() => {
     align-items: center;
     margin-left: auto;
     height: 80%;
-    color: #000000;
     background-color: #2dcc95;
     cursor: pointer;
     border-radius: 12px;
     margin-right: 20px;
+    color: #f3f4f6;
     font-size: 15px;
+}
+.view-info-btn:hover {
+    background-color: #2d6e53;
 }
 .landlord-modal {
     position: fixed;
