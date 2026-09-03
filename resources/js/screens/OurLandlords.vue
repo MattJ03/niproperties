@@ -393,6 +393,7 @@ const moveToLandlordsListings = async() => {
     border-radius: 60px;
 }
 .landlord-name-square {
+    word-break: break-all;
     font-size: 32px;
     margin-bottom: 15px;
 }
