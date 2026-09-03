@@ -90,6 +90,7 @@ class ListingController extends Controller
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
             'sale_status' => 'nullable|in:open',
+            'is_commercial' => 'nullable',
             'description' => 'nullable|max:255|min:3',
         ]);
 
@@ -105,6 +106,7 @@ class ListingController extends Controller
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
             'sale_status' => 'open',
+            'is_commercial' => $validatedData['is_commercial'],
             'description' => $validatedData['description'],
             'landlord_id' => $request->user()->id,
             ]);
