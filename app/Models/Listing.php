@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Listing extends Model
 {
    use hasFactory;
-    protected $fillable = ['address_line_1', 'address_line_2', 'town', 'county', 'postcode', 'price', 'rent_per_month', 'no_of_rooms', 'type', 'sale_status', 'description', 'latitude', 'longitude', 'landlord_id'];
+    protected $fillable = ['address_line_1', 'address_line_2', 'town', 'county', 'postcode', 'price', 'rent_per_month', 'no_of_rooms', 'type', 'sale_status', 'is_commercial', 'description', 'latitude', 'longitude', 'landlord_id'];
 
 
     public function landlord() {
