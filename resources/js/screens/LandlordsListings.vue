@@ -142,6 +142,7 @@ const applyFilters = () => {
         min_price: filters.min_price || null,
         max_price:  filters.max_price || null,
         min_num_rooms: filters.min_num_rooms || null,
+        search: search.value || null,
     });
 
 }

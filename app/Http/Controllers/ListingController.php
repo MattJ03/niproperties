@@ -499,6 +499,17 @@ class ListingController extends Controller
         $query->where('no_of_rooms', '>=', $request->min_num_rooms);
     }
 
+    if($request->filled('search')) {
+        $search = $request->query('search');
+        $query->where(function ($query) use ($search) {
+            $query->where('address_line_1', 'LIKE', '%'. $search . '%')
+                ->orWhere('address_line_2', 'LIKE', '%'. $search . '%')
+                    ->orWhere('county', 'LIKE', '%'. $search . '%')
+                    ->orWhere('postcode', 'LIKE', '%'. $search . '%')
+                     ->orWhere('description', 'LIKE', '%' . $search . '%');
+        });
+    }
+
     if($query->count() <= 0) {
         return response()->json([
             'message' => 'no listings found',
