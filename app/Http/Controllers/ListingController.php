@@ -478,26 +478,42 @@ class ListingController extends Controller
     }
 
     public function getLandlordsListings(Request $request) {
-      $landlord = $request->landlordId;
+    $landlord = $request->landlordId;
 
-      $listings = Listing::where('landlord_id', $landlord)
-                          ->where('sale_status', 'open')
-                           ->orderBy('created_at', 'desc')
-                            ->with('listingImages')
-                            ->with('landlord')
-                            ->paginate(20);
+    $query = Listing::where('sale_status', 'open');
+    $query->where('landlord_id', $landlord);
 
-      if($listings->count() <= 0) {
-          return response()->json([
-              'listings' => $listings->items(),
-              'message' => 'no listings found',
-          ]);
-      }
+    if($request->filled('rent_or_buy')) {
+        $query->where('type', $request->rent_or_buy);
+    }
+    if($request->filled('min_price')) {
+        $query->where('price', '>=', $request->min_price);
+    }
+    if($request->filled('max_price')) {
+        $query->where('price', '<=', $request->max_price);
+    }
+    if($request->filled('county')) {
+        $query->where('county', $request->county);
+    }
+    if($request->filled('min_num_rooms')) {
+        $query->where('no_of_rooms', '>=', $request->min_num_rooms);
+    }
 
-      return response()->json([
-          'listings' => $listings->items(),
-          'listings_count' => $listings->total(),
-          'message' => 'listings found',
-      ]);
+    if($query->count() <= 0) {
+        return response()->json([
+            'message' => 'no listings found',
+            'listings' => $query->items(),
+        ]);
+    }
+       $listings = $query->with('listingImages')
+                          ->with('landlord');
+    $listings->orderBy('created_at', 'desc');
+    $listings = $listings->paginate(20);
+
+    return response()->json([
+        'listings' => $listings->items(),
+        'listings_count' => $listings->total(),
+        'message' => 'listings found.',
+    ]);
     }
 }
