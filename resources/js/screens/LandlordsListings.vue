@@ -77,6 +77,7 @@
                   <span>Next</span>
               </button>
           </div>
+          <span class="listings-text">Showing 1 - {{ listingStore.landlordListings.length }} of {{ listingStore.totalLandlordListings }}</span>
       </div>
   </div>
 
@@ -424,16 +425,18 @@ const getSpecificPageListings = async (page) => {
 }
 .pagination-container {
         display: flex;
+    flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-left: 30px;
         width: 100%;
-        height: 8dvh;
+
     }
 .pagination-wrapper {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    height: 90%;
+    height: 60px;
     margin-top: 40px;
     border: 1px solid #f7fafc;
     width: 50%;
