@@ -40,7 +40,7 @@
                   </div>
                   </div>
               <div class="filters-wrapper">
-              <button class="apply-filters-btn">Apply filters</button>
+              <button class="apply-filters-btn" @click="applyFilters(landlord.id, filters)">Apply filters</button>
                   <span class="remove-filters-text" @click="removeFilters()">
                       <img :src="reset" class="reset-img" alt="reset"/>
                   Reset Filters
@@ -135,6 +135,16 @@ onMounted(async () => {
     console.log('listings:', listingStore.landlordListings);
 });
 
+const applyFilters = () => {
+    listingStore.getLandlordsListings(landlord.value.id, {
+        county: filters.county || null,
+        rent_or_buy: filters.rent_or_buy || null,
+        min_price: filters.min_price || null,
+        max_price:  filters.max_price || null,
+        min_num_rooms: filters.min_num_rooms || null,
+    });
+
+}
 const removeFilters = () => {
     filters.rent_or_buy = '';
         filters.county = '';
@@ -142,6 +152,8 @@ const removeFilters = () => {
         filters.min_price = '';
         filters.min_num_rooms = '';
         search.value = '';
+
+        listingStore.getLandlordsListings(landlord.value.id);
 };
 
 

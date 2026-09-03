@@ -129,10 +129,12 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
-    const getLandlordsListings = async (landlordId) => {
+    const getLandlordsListings = async (landlordId, filters = {}) => {
        loading.value = true;
        try {
-           const res = await api.get(`landlordsListings/${landlordId}`);
+           const res = await api.get(`landlordsListings/${landlordId}`, {
+               params: filters,
+           });
            landlordListings.value = res.data.listings;
            totalLandlordListings.value = res.data.listings_count;
        } catch(err) {
