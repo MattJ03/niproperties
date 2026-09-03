@@ -95,6 +95,7 @@ class ListingController extends Controller
         ]);
 
         Log::info('did it make it this far?' . $validatedData['description']);
+
         $listing = Listing::create([
             'address_line_1' => $validatedData['address_line_1'],
             'address_line_2' => $validatedData['address_line_2'],

@@ -7,6 +7,12 @@
         </div>
         <div class="property-details-card">
             <strong><span class="property-details-header">Property details</span></strong>
+            <div class="row-details-property-type">
+                <div class="pill-selection">
+                    <button class="residential-btn">Residential</button>
+                    <button class="commericial-btn">Commercial</button>
+                </div>
+            </div>
             <div class="row-details-address">
                 <div class="field">
                     <strong><label class="field-tex">Address line 1</label></strong>
@@ -127,6 +133,7 @@ const form = reactive({
     rent_per_month: '',
     no_of_rooms: '',
     type: '',
+    is_commercial: '',
     description: '',
 });
 
@@ -241,6 +248,13 @@ function validate() {
 .property-details-header {
     padding-bottom: 25px;
     font-size: 18px;
+}
+.row-details-property-type {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-top: 20px;
+    width: 100%;
 }
 .row-details-address {
     display: flex;
