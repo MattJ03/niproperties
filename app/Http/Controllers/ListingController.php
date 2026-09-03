@@ -496,6 +496,7 @@ class ListingController extends Controller
 
       return response()->json([
           'listings' => $listings->items(),
+          'listings_count' => $listings->total(),
           'message' => 'listings found',
       ]);
     }
