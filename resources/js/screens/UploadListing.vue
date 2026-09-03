@@ -9,8 +9,12 @@
             <strong><span class="property-details-header">Property details</span></strong>
             <div class="row-details-property-type">
                 <div class="pill-selection">
-                    <button class="residential-btn">Residential</button>
-                    <button class="commericial-btn">Commercial</button>
+                    <button class="residential-btn" @click="form.is_commercial = false"
+                    :class="{ active: form.is_commercial === false }"
+                    >Residential</button>
+                    <button class="commericial-btn" @click="form.is_commercial = true"
+                    :class="{ active: form.is_commercial === true }"
+                    >Commercial</button>
                 </div>
             </div>
             <div class="row-details-address">
@@ -133,7 +137,7 @@ const form = reactive({
     rent_per_month: '',
     no_of_rooms: '',
     type: '',
-    is_commercial: '',
+    is_commercial: false,
     description: '',
 });
 
@@ -255,6 +259,32 @@ function validate() {
     justify-content: right;
     margin-top: 20px;
     width: 100%;
+}
+.residential-btn {
+    padding: 14px 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #2d6e53;
+    background-color: #FFFFFF;
+    border: 1px solid #2d6e53;
+    cursor: pointer;
+}
+.residential-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.commericial-btn {
+    padding: 14px 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #2d6e53;
+    background-color: #FFFFFF;
+    border: 1px solid #2d6e53;
+    cursor: pointer;
+}
+.commericial-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
 }
 .row-details-address {
     display: flex;
