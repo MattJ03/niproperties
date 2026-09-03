@@ -209,6 +209,7 @@ const getSpecificPageListings = async (page) => {
     min-height: 100dvh;
 
 }
+
 .landlord-header-wrapper {
     display: flex;
     align-items: center;
@@ -436,7 +437,7 @@ const getSpecificPageListings = async (page) => {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 60px;
+    height: 70px;
     margin-top: 40px;
     border: 1px solid #f7fafc;
     width: 50%;
@@ -537,5 +538,8 @@ const getSpecificPageListings = async (page) => {
 .next-btn:disabled {
     background-color: #E0E0E0;
     cursor: not-allowed;
+}
+.listings-text {
+    margin-top: 30px;
 }
 </style>

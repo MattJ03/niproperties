@@ -39,6 +39,7 @@ export const useListingStore = defineStore('listings', () => {
            allListings.value = res.data.listings;
            console.log(allListings.value.length + 'checking in store');
            listingsCount.value = res.data.listings_count;
+           console.log('listings count is ' + listingsCount.value);
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get all listings';
        } finally {

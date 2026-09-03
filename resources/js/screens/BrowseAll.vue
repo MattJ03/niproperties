@@ -161,6 +161,7 @@ const pageNum = ref(1);
 const finalPageNum = ref(0);
 const finalPageNumRounded = ref(finalPageNum.value);
 const sortOption = ref('recent');
+
 const { listingsCount } = storeToRefs(listingStore);
 
 setTimeout(() => {
