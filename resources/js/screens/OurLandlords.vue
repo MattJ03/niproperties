@@ -19,7 +19,9 @@
                     <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings(selectedlandlord.id)" >View info</button>
                 </div>
             </div>
+
         </div>
+
     </div>
     <div v-if="showInfoModal" class="landlord-modal">
         <div class="modal-square">
@@ -189,7 +191,8 @@ const moveToLandlordsListings = async() => {
     border-radius: 14px;
     width: 100%;
     height: 10%;
-    background-color: #2dcc95;
+    background-color: #f3f4f6;
+    border: 1px solid #f3f4f6;
 }
 .landlord-amount-pulled {
     font-size: 16px;
@@ -261,7 +264,7 @@ const moveToLandlordsListings = async() => {
     height: 60px;
     border-radius: 14px;
     background-color: #f3f4f6;
-    border: 1px solid #000000;
+    border: 1px solid #f3f4f6;
 
 }
 .landlord-image {
@@ -291,6 +294,44 @@ const moveToLandlordsListings = async() => {
 }
 .view-info-btn:hover {
     background-color: #2d6e53;
+}
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    background-color: #f3f4f6;
+    border-radius: 12px;
+}
+.nav-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+.previous-btn {
+    display: flex;
+    gap: 4px;
+    color: #6B46C1;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    padding: 2px 10px;
+    background-color: #f3f4f6;
+    border: 1px solid #6B46C1;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.current-page {
+    display: flex;
+    padding: 10px 14px;
+    border: 1px solid #6B46C1;
+    border-radius: 12px;
 }
 .landlord-modal {
     position: fixed;
