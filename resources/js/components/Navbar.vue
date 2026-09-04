@@ -6,7 +6,7 @@
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
             <strong><span class="headings" @click="moveToRent()">Rent</span></strong>
-            <strong><span class="headings">Commercial</span></strong>
+            <strong><span class="headings" @click="moveToCommercial()">Commercial</span></strong>
             <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
             <strong><span class="headings">Dashboard & Analytics</span></strong>
         </div>
@@ -105,8 +105,12 @@ const moveToCommercial = async () => {
     loading.value = true;
     try {
         await router.push({
-            name: ''
-        })
+            name: 'commercial',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to commercial';
+    } finally {
+        loading.value = false;
     }
 }
 
