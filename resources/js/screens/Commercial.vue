@@ -25,16 +25,20 @@
                     <div class="numbers-wrapper">
                         <div class="num-square">Any</div>
 
-                    <div class="num-square" @click="filters.min_num_rooms = '1'; filters.max_num_rooms = '4'">
+                    <div class="num-square" @click="filters.min_num_rooms = '1'; filters.max_num_rooms = '4'"
+                    :class="{ active: filters.min_num_rooms === '1' }">
                         1-4
                     </div>
-                    <div class="num-square" @click="filters.min_num_rooms = '5'; filters.max_num_rooms = '7'">
+                    <div class="num-square" @click="filters.min_num_rooms = '5'; filters.max_num_rooms = '7'"
+                    :class="{ active: filters.min_num_rooms === '5'}">
                         5-7
                     </div>
-                    <div class="num-square" @click="filters.min_num_rooms = '8'; filters.max_num_rooms = '10'">
+                    <div class="num-square" @click="filters.min_num_rooms = '8'; filters.max_num_rooms = '10'"
+                    :class="{ active: filters.min_num_rooms === '8'}">
                         8-10
                     </div>
-                    <div class="num-square" @click="filters.min_num_rooms = '11'">
+                    <div class="num-square" @click="filters.min_num_rooms = '11'"
+                    :class="{ active: filters.min_num_rooms === '11'}">
                         11+
                     </div>
                     </div>
@@ -164,12 +168,7 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     color: #FFFFFF;
     font-size: 16px;
 }
-.numbers-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+
 .numbers-wrapper {
     display: flex;
     margin-left: 30px;
@@ -190,6 +189,10 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 }
 .num-square:hover {
     border: 1px solid #FF0000;
+}
+.num-square.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
 }
 .search-input-wrapper {
     position: relative;
