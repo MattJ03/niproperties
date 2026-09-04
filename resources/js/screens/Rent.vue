@@ -53,7 +53,7 @@
                         <p class="filter-topic">Keywords</p>
                         <div class="keywords-input-wrapper">
                             <img :src="search2" class="search-icon" alt="search"/>
-                            <input v-model="filters.search" type="text" class="keywords-input" />
+                            <input v-model="filters.search" type="text" class="keywords-input" placeholder="search rental properties"/>
                         </div>
                     </div>
                     <div class="button-wrapper">

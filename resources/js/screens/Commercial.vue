@@ -14,24 +14,58 @@
                 <div class="row">
                    <input v-model="filters.min_price" type="number" placeholder="min-price" class="min-price-range-box"/>
                     <input v-model="filters.max_price" type="number" placeholder="max-price" class="max-price-range-box"/>
-
                     </div>
+                <p class="filter-topic">County</p>
+                <div class="row">
+                    <select v-model="filters.county" class="county-dropdown">
+                        <option class="county-value-text" v-for="county in counties"> {{ county }} </option>
+                    </select>
+                </div>
+                <p class="filter-topic">Number of rooms</p>
+                    <div class="numbers-wrapper">
+                        <div class="num-square">Any</div>
+
+                    <div class="num-square" @click="filters.min_num_rooms = '1'; filters.max_num_rooms = '4'">
+                        1-4
+                    </div>
+                    <div class="num-square" @click="filters.min_num_rooms = '5'; filters.max_num_rooms = '7'">
+                        5-7
+                    </div>
+                    <div class="num-square" @click="filters.min_num_rooms = '8'; filters.max_num_rooms = '10'">
+                        8-10
+                    </div>
+                    <div class="num-square" @click="filters.min_num_rooms = '11'">
+                        11+
+                    </div>
+                    </div>
+                <div class="keywords-section">
+                    <p class="filter-topic">Search</p>
+                    <div class="search-input-wrapper">
+                        <img :src="search2" class="search-img" alt="search" />
+                        <input type="text" v-model="search" class="search-input" placeholder="search commercial properties"/>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue';
+import {ref, reactive, computed, onMounted, watch} from 'vue';
 import Navbar from "../components/Navbar.vue";
 import reset from '../assets/reset.png';
-
+import search2 from '../assets/search.png';
 const filters = reactive({
     min_price: '',
     max_price: '',
     min_num_rooms: '',
+    max_num_rooms: '',
     county: '',
 });
+const search = ref('');
+
+const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
+const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 </script>
 <style scoped>
 .container {
@@ -86,6 +120,7 @@ const filters = reactive({
 
 }
 .filter-topic {
+    margin-top: 30px;
     margin-left: 30px;
     font-weight: bold;
     font-size: 18px;
@@ -98,6 +133,9 @@ const filters = reactive({
     border: 1px solid #F2EFE6;
     font-size: 16px;
 }
+.min-price-range-box:hover {
+    border: 1px solid #FF0000;
+}
 .max-price-range-box {
     height: 55px;
     width: 45%;
@@ -106,4 +144,77 @@ const filters = reactive({
     border: 1px solid #F2EFE6;
     font-size: 16px;
 }
+.max-price-range-box:hover {
+    border: 1px solid #FF0000;
+}
+.county-dropdown {
+    height: 55px;
+    width: 90%;
+    border: 1px solid #F2EFE6;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding-left: 15px;
+}
+.county-dropdown:hover {
+    border: 1px solid #FF0000;
+    cursor: pointer;
+}
+.county-value-text {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+.numbers-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.numbers-wrapper {
+    display: flex;
+    margin-left: 30px;
+    padding-right: 10px;
+    width: 100%;
+    flex-direction: row;
+    gap: 10px;
+}
+.num-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 60px;
+    border: 1px solid #F2EFE6;
+    border-radius: 14px;
+    cursor: pointer;
+}
+.num-square:hover {
+    border: 1px solid #FF0000;
+}
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+    margin-left: 30px;
+}
+.search-img {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 22px;
+}
+.search-input {
+        width: 85%;
+        height: 50px;
+        border: 1px solid #F2EFE6;
+        border-radius: 12px;
+        padding: 0 16px 0 45px;
+        font-size: 16px;
+    }
+    .search-input:hover {
+        border: 1px solid #FF0000;
+    }
+
 </style>
