@@ -49,6 +49,12 @@
                         <input type="text" v-model="search" class="search-input" placeholder="search commercial properties"/>
                     </div>
                 </div>
+                <div class="apply-filters-section">
+                <button class="apply-filters-button">
+                    <img :src="filtersImg" class="filters-img" alt="scaffold"/>
+                    <span class="apply-filters-text">Apply filters</span>
+                </button>
+                </div>
             </div>
         </div>
 
@@ -59,6 +65,9 @@ import {ref, reactive, computed, onMounted, watch} from 'vue';
 import Navbar from "../components/Navbar.vue";
 import reset from '../assets/reset.png';
 import search2 from '../assets/search.png';
+import filtersImg from '../assets/scaffolding2.png';
+
+
 const filters = reactive({
     min_price: '',
     max_price: '',
@@ -85,6 +94,7 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     display: flex;
     flex-direction: column;
     width: 22%;
+
     border-radius: 12px;
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
@@ -219,5 +229,26 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     .search-input:hover {
         border: 1px solid #FF0000;
     }
-
+    .apply-filters-section {
+        display: flex;
+        justify-content: center;
+    }
+.apply-filters-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 60px;
+    gap: 5px;
+    border-radius: 12px;
+    margin-top: 20px;
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.filters-img {
+    height: 24px;
+}
+.apply-filters-text {
+    font-size: 17px;
+}
 </style>

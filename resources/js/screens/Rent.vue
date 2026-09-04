@@ -559,7 +559,7 @@ async function getPreviousPageListings() {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    gap: 3px;
+    gap: 5px;
     height: 60px;
     padding: 20px 40px;
     width: 70%;
@@ -569,6 +569,7 @@ async function getPreviousPageListings() {
     cursor: pointer;
     margin-bottom: 20px;
     border-radius: 12px;
+
     color: #FFFFFF;
 }
 .apply-filters-btn:hover {
