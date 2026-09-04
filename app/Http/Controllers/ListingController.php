@@ -575,7 +575,8 @@ class ListingController extends Controller
 
 
       $listings = $query->with('listingImages')
-                        ->with('landlord');
+                        ->with('landlord')
+                         ->paginate(16);
 
 
       if($listings->count() <= 0) {

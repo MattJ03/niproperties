@@ -398,4 +398,15 @@ class ListingControllerTest extends TestCase
         $response = $this->getJson('/api/getRecentListingsForLandlord/' . $landlord->id);
         $response->assertStatus(200);
         }
+
+        public function test_get_commercial_listings_returns_listings(): void {
+        $listings = Listing::factory()->count(5)->create([
+            'type' => 'commercial',
+        ]);
+        $listings2 = Listing::factory()->count(5)->create([
+            'type' => 'jumbo',
+        ]);
+        $response = $this->getJson('/api/listingsCommercial');
+        $response->assertStatus(200);
+        }
 }
