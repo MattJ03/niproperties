@@ -13,10 +13,13 @@
                 <p class="filter-topic">Rent or buy</p>
                 <div class="row">
                     <div class="rent-buy-section">
-                    <button class="rent-btn">  <img :src="keys" class="keys-img" alt="keys"/>
+                    <button @click="filters.rent_or_buy = 'rent'" class="rent-btn"
+                    :class="{ active: filters.rent_or_buy === 'rent'}">
+                        <img :src="keys" class="keys-img" alt="keys"/>
                     <span>Rent</span>
                     </button>
-                        <button class="buy-btn">
+                        <button class="buy-btn" @click="filters.rent_or_buy = 'buy'"
+                        :class="{ active: filters.rent_or_buy === 'buy'}">
                             <img :src="housesquare" class="house-img" alt="house"/>
                             <span>Buy</span>
                         </button>
@@ -83,6 +86,7 @@ import keys from '../assets/keys2.png';
 import housesquare from '../assets/housesquare.png';
 
 const filters = reactive({
+    rent_or_buy: '',
     min_price: '',
     max_price: '',
     min_num_rooms: '',
@@ -130,6 +134,7 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     justify-content: center;
     margin-right: 40px;
     gap: 2px;
+    cursor: pointer;
 }
 .reset-img {
     height: 20px;
