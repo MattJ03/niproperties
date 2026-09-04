@@ -408,5 +408,6 @@ onMounted(() => {
     gap: 20px;
     margin-top: 20px;
     flex-direction: row;
+
 }
 </style>

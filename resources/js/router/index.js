@@ -7,6 +7,7 @@ import BrowseAll from "../screens/BrowseAll.vue";
 import Rent from "../screens/Rent.vue";
 import OurLandlords from "../screens/OurLandlords.vue";
 import LandlordsListings from "../screens/LandlordsListings.vue";
+import Commercial from "../screens/Commercial.vue";
 
 const routes = [
     { path: '/register', component: Register, name: 'register' },
@@ -17,6 +18,7 @@ const routes = [
     { path: '/rent-listings', component: Rent, name: 'rent'},
     { path: '/our-landlords', component: OurLandlords, name: 'our landlords' },
     { path: '/landlords-listings/:landlordId', component: LandlordsListings, name: 'landlords listings', props: true},
+    { path: '/commericial-listings', component: Commercial, name: 'commercial' },
 ];
 
 const router = createRouter({

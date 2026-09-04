@@ -101,6 +101,15 @@ const moveToRent = async () => {
     }
 }
 
+const moveToCommercial = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: ''
+        })
+    }
+}
+
 const moveToOurLandlords = async () => {
     loading.value = true;
     try {
