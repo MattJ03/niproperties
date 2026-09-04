@@ -66,7 +66,7 @@ import Navbar from "../components/Navbar.vue";
 import reset from '../assets/reset.png';
 import search2 from '../assets/search.png';
 import filtersImg from '../assets/scaffolding2.png';
-
+import ListingGrid from "../components/ListingGrid.vue";
 
 const filters = reactive({
     min_price: '',
@@ -94,7 +94,7 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     display: flex;
     flex-direction: column;
     width: 22%;
-
+    padding-bottom: 20px;
     border-radius: 12px;
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
