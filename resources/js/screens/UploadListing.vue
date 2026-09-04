@@ -154,7 +154,7 @@ const errors = reactive({
     rent_per_month: '',
     no_of_rooms: '',
     type: '',
-    is_commercial: '',
+    is_commercial: false,
     description: '',
 });
 
@@ -205,9 +205,8 @@ function validate() {
     errors.price = form.price ? '' : 'Please enter a price';
     errors.no_of_rooms = form.no_of_rooms ? '' : 'Please enter the number of rooms';
     errors.type =  form.type ? '': 'Please select the type of listing';
-    errors.is_commercial = form.is_commercial ? '': 'Please enter is the property commercial';
 
-    if(!form.address_line_1 || !form.county || !form.postcode|| (!form.price && !form.rent_per_month) || !form.no_of_rooms || !form.type || !form.is_commercial) {
+    if(!form.address_line_1 || !form.county || !form.postcode|| (!form.price && !form.rent_per_month) || !form.no_of_rooms || !form.type) {
         valid = false
     }
     return valid;

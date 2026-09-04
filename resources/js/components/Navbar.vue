@@ -152,8 +152,8 @@ const logout = async() => {
 .headings-selector {
     display: flex;
     justify-content: center;
+    width: 100%;
     align-items: center;
-    margin-left: 25%;
     gap: 20px;
 }
 
@@ -161,7 +161,7 @@ const logout = async() => {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    align-items: center;
+
     padding: 8px 16px;
     border-radius: 16px;
     background-color: #2dcc95;
@@ -179,7 +179,7 @@ const logout = async() => {
 .btn-section-nav {
     display: flex;
     justify-content: right;
-    width: 90%;
+
     flex-direction: row;
     padding-bottom: 40px;
     padding-top: 50px;
@@ -230,5 +230,6 @@ const logout = async() => {
     color: #1F4D3A;
     cursor: pointer;
     line-height: 1;
+    text-wrap: nowrap;
 }
 </style>
