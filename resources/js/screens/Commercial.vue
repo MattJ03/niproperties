@@ -10,6 +10,18 @@
                         <span class="reset-text">Reset Filters</span>
                     </div>
                 </div>
+                <p class="filter-topic">Rent or buy</p>
+                <div class="row">
+                    <div class="rent-buy-section">
+                    <button class="rent-btn">  <img :src="keys" class="keys-img" alt="keys"/>
+                    <span>Rent</span>
+                    </button>
+                        <button class="buy-btn">
+                            <img :src="housesquare" class="house-img" alt="house"/>
+                            <span>Buy</span>
+                        </button>
+                </div>
+                </div>
                 <p class="filter-topic">Price range</p>
                 <div class="row">
                    <input v-model="filters.min_price" type="number" placeholder="min-price" class="min-price-range-box"/>
@@ -67,6 +79,8 @@ import reset from '../assets/reset.png';
 import search2 from '../assets/search.png';
 import filtersImg from '../assets/scaffolding2.png';
 import ListingGrid from "../components/ListingGrid.vue";
+import keys from '../assets/keys2.png';
+import housesquare from '../assets/housesquare.png';
 
 const filters = reactive({
     min_price: '',
@@ -250,5 +264,82 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 }
 .apply-filters-text {
     font-size: 17px;
+}
+.rent-buy-section {
+    display: flex;
+    margin-left: 30px;
+}
+.keys-img {
+    height: 18px;
+    width: 50%;
+    padding: 6px 6px;
+    background-color: #FDFBD4;
+    border-radius: 80%;
+}
+.rent-buy-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.rent-buy-section {
+    display: flex;
+    gap: 10px;
+}
+.rent-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 48px;
+    padding: 0 34px;
+
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #F2EFE6;
+
+    cursor: pointer;
+    font-size: 16px;
+
+}
+.rent-btn:hover {
+    border: 1px solid #FF0000;
+}
+.rent-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.buy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 48px;
+    padding: 0 34px;
+
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #F2EFE6;
+
+    cursor: pointer;
+    font-size: 16px;
+
+}
+.buy-btn:hover {
+    border: 1px solid #FF0000;
+}
+.buy-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.house-img {
+    height: 18px;
+    width: 50%;
+    padding: 6px 6px;
+    background-color: #FDFBD4;
+    border-radius: 80%;
 }
 </style>

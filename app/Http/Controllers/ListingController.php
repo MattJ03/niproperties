@@ -530,4 +530,19 @@ class ListingController extends Controller
         'message' => 'listings found.',
     ]);
     }
+
+    public function getCommercialListings(Request $request) {
+      $user = auth('sanctum')->id();
+
+
+      $query = Listing::where('sale_status', 'open');
+      if($user) {
+          $query->where('landlord_id', '!=', $user);
+      }
+
+      $query->where('is_commercial', true);
+
+      if($request->filled(''))
+
+    }
 }
