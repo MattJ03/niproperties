@@ -542,7 +542,54 @@ class ListingController extends Controller
 
       $query->where('is_commercial', true);
 
-      if($request->filled(''))
+      if($request->filled('rent_or_buy')) {
+          $query->where('type', $request->rent_or_buy);
+      }
+      if($request->filled('min_price')) {
+          $query->where('price', '=>', $request->min_price);
+      }
+
+      if($request->filled('max_price')) {
+          $query->where('price', '<=', $request->max_price);
+      }
+      if($request->filled('county')) {
+          $query->where('county', $request->county);
+      }
+      if($request->filled('min_num_rooms')) {
+          $query->where('no_of_rooms', '=>', $request->min_num_rooms);
+      }
+      if($request->filled('max_num_rooms')) {
+          $query->where('no_of_rooms', '<=', $request->max_num_rooms);
+      }
+
+      if($request->filled('search')) {
+          $search = $request->query('search');
+          $query->where(function ($query) use ($search) {
+              $query->where('address_line_1', 'LIKE', '%'. $search . '%')
+                  ->orWhere('address_line_2', 'LIKE', '%' . $search . '%')
+                  ->orWhere('county', 'LIKE', '%' . $search . '%')
+                  ->orWhere('postcode', 'LIKE', '%' . $search . '%')
+                  ->orWhere('description', 'LIKE', '%' . $search . '%');
+          });
+      }
+
+
+      $listings = $query->with('listingImages')
+                        ->with('landlord');
+
+
+      if($listings->count() <= 0) {
+            return response()->json([
+                'listings' => $listings->items(),
+                'message' => 'no listings found',
+            ]);
+        }
+
+      return response()->json([
+          'listings' => $listings->items(),
+          'message' => 'listings found',
+      ]);
+
 
     }
 }
