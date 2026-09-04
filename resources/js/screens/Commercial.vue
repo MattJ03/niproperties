@@ -10,10 +10,12 @@
                         <span class="reset-text">Reset Filters</span>
                     </div>
                 </div>
+                <p class="filter-topic">Price range</p>
                 <div class="row">
-                    <p class="filter-topic">Price range</p>
+                   <input v-model="filters.min_price" type="number" placeholder="min-price" class="min-price-range-box"/>
+                    <input v-model="filters.max_price" type="number" placeholder="max-price" class="max-price-range-box"/>
 
-                </div>
+                    </div>
             </div>
         </div>
 
@@ -23,6 +25,13 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import Navbar from "../components/Navbar.vue";
 import reset from '../assets/reset.png';
+
+const filters = reactive({
+    min_price: '',
+    max_price: '',
+    min_num_rooms: '',
+    county: '',
+});
 </script>
 <style scoped>
 .container {
@@ -47,6 +56,7 @@ import reset from '../assets/reset.png';
 }
 .top-of-container {
     display: flex;
+    width: 100%;
     justify-content: space-between;
 }
 .filter-header {
@@ -69,12 +79,31 @@ import reset from '../assets/reset.png';
 .row {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    margin-top: 15px
+
+
+    margin-left: 30px;
+    gap: 15px;
+
 }
 .filter-topic {
     margin-left: 30px;
     font-weight: bold;
     font-size: 18px;
+}
+.min-price-range-box {
+    height: 55px;
+    width: 45%;
+    padding-left: 15px;
+    border-radius: 12px;
+    border: 1px solid #F2EFE6;
+    font-size: 16px;
+}
+.max-price-range-box {
+    height: 55px;
+    width: 45%;
+    padding-left: 15px;
+    border-radius: 12px;
+    border: 1px solid #F2EFE6;
+    font-size: 16px;
 }
 </style>
