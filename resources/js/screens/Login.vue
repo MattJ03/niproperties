@@ -20,7 +20,10 @@
                 <button type="button" @click="moveToRegister()" class="create-account-btn">Create an account</button>
             </form>
             <router-link class="forgot-password" to="reset-password">forgot your password?</router-link>
-
+            <div class="guest-wrapper">
+            <span class="continue-as-guest-text">Continue as guest?</span>
+            <button @click="continueAsGuest()" class="continue-guest-btn">Continue</button>
+            </div>
         </div>
     </div>
 </template>
@@ -85,6 +88,18 @@ import { useRouter } from "vue-router";
      }
  }
 
+ async function continueAsGuest() {
+     loading.value = true;
+     try {
+         await router.push({
+             name: 'home'
+         });
+     } catch(error) {
+         error.value = error.response?.data?.message || 'failed to move to home screen as guest';
+     } finally {
+         loading.value = false;
+     }
+ }
 </script>
 <style scoped>
 .container {
@@ -204,5 +219,33 @@ import { useRouter } from "vue-router";
     justify-content: center;
     align-items: center;
     padding-top: 30px;
+}
+.guest-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 32px;
+    width: 100%;
+    gap: 10px;
+}
+.continue-as-guest-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.continue-guest-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    width: 30%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    color: #FFFFFF;
+    font-size: 15px;
+    cursor: pointer;
 }
 </style>
