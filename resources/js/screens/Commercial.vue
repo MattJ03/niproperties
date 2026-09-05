@@ -71,6 +71,14 @@
                 </button>
                 </div>
             </div>
+            <div class="listings-rows">
+                <ListingGrid
+                    v-for="listing in listingStore.allListings"
+                    :listing="listing"
+                    key="listing.id"
+                    />
+                <h2 v-if="listingStore.noListings" class="no-listings-text">No listings found</h2>
+            </div>
         </div>
 
     </div>
@@ -84,6 +92,8 @@ import filtersImg from '../assets/scaffolding2.png';
 import ListingGrid from "../components/ListingGrid.vue";
 import keys from '../assets/keys2.png';
 import housesquare from '../assets/housesquare.png';
+import { useListingStore } from "../stores/ListingStore.js";
+
 
 const filters = reactive({
     rent_or_buy: '',
@@ -94,9 +104,16 @@ const filters = reactive({
     county: '',
 });
 const search = ref('');
-
+const listingStore = useListingStore();
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+
+console.log(listingStore.allListings.length);
+
+onMounted(async () => {
+   await listingStore.getCommercialListings();
+})
 </script>
 <style scoped>
 .container {
@@ -119,6 +136,14 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     margin-top: 150px;
     margin-left: 40px;
 
+}
+.listings-rows {
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 0 50px;
 }
 .top-of-container {
     display: flex;
@@ -346,5 +371,9 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     padding: 6px 6px;
     background-color: #FDFBD4;
     border-radius: 80%;
+}
+.no-listings-text {
+    width: 100%;
+    margin: auto;
 }
 </style>

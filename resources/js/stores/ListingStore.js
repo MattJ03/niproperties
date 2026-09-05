@@ -15,6 +15,7 @@ export const useListingStore = defineStore('listings', () => {
     const landlord = ref('');
    const landlordListings = ref([]);
    const totalLandlordListings = ref('');
+   const noListings = computed(() => allListings.value.length === 0);
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -178,6 +179,7 @@ export const useListingStore = defineStore('listings', () => {
        loading,
        error,
        allListings,
+       noListings,
        listing,
        listingId,
        recentListings,
