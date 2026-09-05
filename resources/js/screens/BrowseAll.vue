@@ -63,7 +63,7 @@
                             1-4
                         </div>
                         <div class="square-num-rooms" @click="filters.min_num_of_rooms = '5'; filters.max_num_of_rooms = '7'"
-                        :class="{ active: filters.min_num_of_rooms === 5}">
+                        :class="{ active: filters.min_num_of_rooms === '5'}">
                             5-7
                         </div>
                         <div class="square-num-rooms" @click="filters.min_num_of_rooms = '8'; filters.max_num_of_rooms = '10'"

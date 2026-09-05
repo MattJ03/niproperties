@@ -52,7 +52,7 @@
                     :class="{ active: filters.min_num_rooms === '8'}">
                         8-10
                     </div>
-                    <div class="num-square" @click="filters.min_num_rooms = '11'"
+                    <div class="num-square" @click="filters.min_num_rooms = '11'; filters.max_num_rooms = ''"
                     :class="{ active: filters.min_num_rooms === '11'}">
                         11+
                     </div>
@@ -119,7 +119,8 @@ const applyFilters = async () => {
         max_price : filters.max_price,
         min_num_rooms: filters.min_num_rooms || null,
         max_num_rooms: filters.max_num_rooms || null,
-        county: filters.county || null
+        county: filters.county || null,
+        search: search.value || null,
     });
 }
 

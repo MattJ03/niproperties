@@ -556,7 +556,7 @@ class ListingController extends Controller
           $query->where('county', $request->county);
       }
       if($request->filled('min_num_rooms')) {
-          $query->where('no_of_rooms', '=>', $request->min_num_rooms);
+          $query->where('no_of_rooms', '>=', $request->min_num_rooms);
       }
       if($request->filled('max_num_rooms')) {
           $query->where('no_of_rooms', '<=', $request->max_num_rooms);
