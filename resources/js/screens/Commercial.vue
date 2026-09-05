@@ -61,8 +61,9 @@
                 <div class="keywords-section">
                     <p class="filter-topic">Search</p>
                     <div class="search-input-wrapper">
-                        <img :src="search2" class="search-img" alt="search" />
+                        <img :src="search2" @click="search = ''" class="search-img" alt="search" />
                         <input type="text" v-model="search" class="search-input" placeholder="search commercial properties"/>
+                        <img :src="x" @click="search = ''" class="delete-search" alt="x" />
                     </div>
                 </div>
                 <div class="apply-filters-section">
@@ -122,6 +123,7 @@ import keys from '../assets/keys2.png';
 import housesquare from '../assets/housesquare.png';
 import { useListingStore } from "../stores/ListingStore.js";
 import {storeToRefs} from "pinia";
+import x from '../assets/x2.png';
 
 
 const filters = reactive({
@@ -314,6 +316,7 @@ onMounted(async () => {
 .county-dropdown {
     height: 55px;
     width: 90%;
+    font-size: 16px;
     border: 1px solid #F2EFE6;
     background-color: #FFFFFF;
     border-radius: 12px;
@@ -379,6 +382,15 @@ onMounted(async () => {
     .search-input:hover {
         border: 1px solid #FF0000;
     }
+    .delete-search {
+        position: absolute;
+        height: 18px;
+        top: 50%;
+        cursor: pointer;
+        transform: translateY(-50%);
+        right: 80px;
+
+    }
     .apply-filters-section {
         display: flex;
         justify-content: center;
@@ -397,6 +409,7 @@ onMounted(async () => {
 }
 .apply-filters-button:hover {
     background-color: #1F4D3A;
+    cursor: pointer;
 }
 .filters-img {
     height: 24px;

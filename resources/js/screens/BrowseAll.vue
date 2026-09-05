@@ -82,6 +82,7 @@
                     <div class="keywords-input-wrapper">
                     <img :src="search2" class="search-icon" alt="search"/>
                     <input v-model="filters.search" type="text" class="keywords-input" />
+                        <img :src="x2" @click="filters.search = ''" class="delete-search" alt="x"/>
                     </div>
                 </div>
                 <div class="button-wrapper">
@@ -139,6 +140,7 @@ import search2 from '../assets/search.png';
 import scaffolding from '../assets/scaffolding2.png';
 import reset from '../assets/reset.png';
 import api from '../axios.js';
+import x2 from '../assets/x2.png';
 
 const loading = ref(false);
 const error = ref('');
@@ -809,5 +811,14 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+}
+.delete-search {
+    position: absolute;
+    height: 18px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    right: 80px;
+
 }
 </style>

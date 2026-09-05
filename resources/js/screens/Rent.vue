@@ -55,6 +55,8 @@
                         <div class="keywords-input-wrapper">
                             <img :src="search2" class="search-icon" alt="search"/>
                             <input v-model="filters.search" type="text" class="keywords-input" placeholder="search rental properties"/>
+                            <img :src="x" @click="filters.search = ''" class="delete-search" alt="x" />
+
                         </div>
                     </div>
                     <div class="button-wrapper">
@@ -112,6 +114,7 @@ import scaffolding from "../assets/scaffolding2.png";
 import RentGrid from "../components/RentGrid.vue";
 import {storeToRefs} from "pinia";
 import api from "../axios.js";
+import x from "../assets/x2.png";
 
 const filters = reactive({
     min_price: '',
@@ -708,4 +711,15 @@ async function getPreviousPageListings() {
     align-items: center;
     margin-top: 40px;
 }
+
+.delete-search {
+    position: absolute;
+    height: 18px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    right: 80px;
+
+}
+
 </style>
