@@ -81,8 +81,35 @@
                 <h2 v-if="listingStore.noListings" class="no-listings-text">No listings found</h2>
             </div>
         </div>
+        <div class="pagination-container">
+            <div class="pagination-wrapper">
+                <button class="previous-btn" @click="getPreviousPageListings()" :disabled="pageNum === 1">
+                    <span><</span>
+                    <span>Previous</span>
+                </button>
+                <div class="num-wrapper">
+                    <button v-for="num in numRoomsRange" class="page-num-button" @click="getPaginatedListings(num)"
+                            :class="{ active: num === pageNum}">
+                        {{ num }}
+                    </button>
+                    <div class="more-btn">
+                        ...
+                    </div>
+                    <button class="final-page-num" @click="getLastPageListings(finalPageNumRounded)">
+                        {{ getFinalPageNum() }}
+                    </button>
+                </div>
 
+                <button class="next-btn" @click="getNextPageListings()" :disabled="pageNum >= finalPageNumRounded">
+                    <span>Next</span>
+                    <span>> </span>
+                </button>
+            </div>
+        </div>
+        <span class="info-number-listings-page">Showing 1 - {{ listingStore.allListings.length }} of {{ listingsCount }} properties</span>
     </div>
+
+
 </template>
 <script setup>
 import {ref, reactive, computed, onMounted, watch} from 'vue';
@@ -94,6 +121,7 @@ import ListingGrid from "../components/ListingGrid.vue";
 import keys from '../assets/keys2.png';
 import housesquare from '../assets/housesquare.png';
 import { useListingStore } from "../stores/ListingStore.js";
+import {storeToRefs} from "pinia";
 
 
 const filters = reactive({
@@ -109,7 +137,17 @@ const search = ref('');
 const listingStore = useListingStore();
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
+const pageNum = ref(1);
+const finalPageNum = ref(0);
+const finalPageNumRounded = ref(finalPageNum.value);
+const numRoomsRange = ref([1, 2, 3, 4, 5]);
+const { listingsCount } = storeToRefs(listingStore);
+const loading = ref(false);
+const error = ref('');
+const getFinalPageNum = () => {
+    finalPageNum.value = listingsCount.value / 16;
+    return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
+}
 
 console.log(listingStore.allListings.length);
 
@@ -135,9 +173,40 @@ const resetFilters = async () => {
     await listingStore.getCommercialListings();
 }
 
+const getNextPageListings = async () => {
+    loading.value = true;
+    pageNum.value++;
+    try {
+        await listingStore.getCommercialListings({
+            ...filters,
+                page: pageNum.value,
+        });
+    } catch (error) {
+        error.value = error.response?.data?.message || 'failed to get next paginated commercial listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const getPreviousPageListings = async () => {
+    loading.value = true;
+    pageNum.value--;
+    try {
+        await listingStore.getCommercialListings({
+            ...filters,
+            page: pageNum.value,
+        });
+    } catch(error) {
+        error.value = error.response?.data?.message || 'failed to get previous paginated listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
+
 onMounted(async () => {
    await listingStore.getCommercialListings();
-})
+});
 </script>
 <style scoped>
 .container {
@@ -404,5 +473,124 @@ onMounted(async () => {
 .no-listings-text {
     width: 100%;
     margin: auto;
+}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    width: 100%;
+    height: 8dvh;
+}
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    height: 90%;
+    margin-top: 40px;
+    border: 1px solid #f7fafc;
+    width: 50%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+.previous-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.previous-btn:hover {
+    background-color: #CBC3E3;
+}
+.previous-btn:disabled {
+    background-color: #E0E0E0;
+    cursor : not-allowed;
+}
+.num-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+.page-num-button {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+
+}
+.page-num-button:hover {
+    background-color: #CBC3E3;
+}
+.page-num-button.active {
+    background-color: #6B46C1;
+    color: #FFFFFF;
+}
+.more-btn {
+    margin-left: 28px;
+    color: #6B46C1;
+}
+.final-page-num {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 9%;
+    height: 75%;
+    font-size: 16px;
+    border: 1px solid #6B46C1;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.next-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 75%;
+    width: 13%;
+    margin-left: 15px;
+    background-color: #FFFFFF;
+    color: #6B46C1;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #D6BCFA;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.next-btn:hover {
+    background-color: #CBC3E3;
+}
+.next-btn:disabled {
+    background-color: #E0E0E0;
+    cursor: not-allowed;
+}
+.info-number-listings-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 }
 </style>
