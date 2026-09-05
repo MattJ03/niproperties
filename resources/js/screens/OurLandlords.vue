@@ -6,8 +6,8 @@
                 <span class="landlord-amount-pulled"> 1 - {{ userDirectoryStore.landlords.length }} of {{ userDirectoryStore.landlordCount }} landlords</span>
                 <div class="pagination-buttons">
                     <div class="vertical-line"></div>
-                    <button class="prev-btn" @click="getPreviousPageLandlords()">Prev</button>
-                    <button class="next-btn" @click="getNextPageLandlords()">Next</button>
+                    <button class="prev-btn" @click="getPreviousPageLandlords()" :disabled="pageNum <= 1">Prev</button>
+                    <button class="next-btn" @click="getNextPageLandlords()" :disabled="userDirectoryStore.landlordCount <= 10">Next</button>
                 </div>
             </div>
 
@@ -226,7 +226,7 @@ const moveToLandlordsListings = async() => {
     background-color: #2d6e53;
     border: 1px solid #f3f4f6;
     cursor: pointer;
-    color: #000000;
+    color: #FFFFFF;
 }
 .prev-btn:hover {
     background-color: #2dcc95;
@@ -240,7 +240,7 @@ const moveToLandlordsListings = async() => {
     width: 80px;
     border-radius: 14px;
     background-color: #2d6e53;
-    color: #000000;
+    color: #FFFFFF;
     cursor: pointer;
     padding: 16px 16px;
     border: 1px solid #f3f4f6;
