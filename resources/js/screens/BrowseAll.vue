@@ -182,6 +182,7 @@ const resetFilters = async() => {
             filters.min_num_of_rooms = '';
             filters.max_num_of_rooms = '';
             filters.search = '';
+            sortOption.value = 'recent';
            await listingStore.getAllListings();
     } catch(err) {
         error.value = error.response?.data?.message || 'cant reset values';
