@@ -317,6 +317,7 @@ async function getPreviousPageListings() {
 }
 .filter-and-listings-container {
     display: flex;
+    margin-top: 40px;
     flex-direction: row;
 }
 .filter-container {

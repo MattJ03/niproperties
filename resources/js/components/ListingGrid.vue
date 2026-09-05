@@ -30,8 +30,8 @@
                 <hr class="horizontal-line"/>
                 <p class="description-text"> {{ props.listing.description}}</p>
             </div>
+            <hr class="horizontal-line" />
             <div class="bottom-of-listing">
-             <hr class="horizontal-line" />
                 <div class="listing-stats">
                     <img :src="logo" alt="niproperties logo" class="logo-img" />
                     <div class="sitename-time-uploaded">
@@ -39,6 +39,7 @@
                         <span class="time-since-upload"> {{ dayjs(props.listing.created_at).fromNow() }}</span>
                     </div>
                 </div>
+                <button class="view-btn">View</button>
             </div>
         </div>
     </div>
@@ -105,22 +106,26 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-left: 20px;
+
     margin-top: 20px;
 }
 .price-listing {
     font-size: 20px;
+    margin-left: 20px;
     margin-top: 0;
     margin-bottom: 17px;
 
 }
 .address-line-1-text {
     font-size: 18px;
+    margin-left: 20px;
 }
 .postcode-town-wrapper {
     display: flex;
+
     align-items: center;
     flex-direction: row;
+    margin-left: 20px;
     margin-top: 10px;
     gap: 5px;
 }
@@ -129,7 +134,10 @@ const primaryImage = computed(() => {
 }
 .topic-wrapper {
     display: flex;
-   margin-right: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+
 }
 .town-text {
     font-size: 16px;
@@ -167,11 +175,10 @@ const primaryImage = computed(() => {
 .horizontal-line {
     width: 100%;
     color: #1c1e21;
-    margin-left: -20px;
     margin-top: 15px;
 }
 .description-wrapper {
-
+    margin-left: 20px;
     margin-top: 5px;
     color: #65676b;
     font-size: 12px;
@@ -181,21 +188,26 @@ const primaryImage = computed(() => {
 }
 .bottom-of-listing {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    margin-left: 20px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
 
 }
 .listing-stats {
     display: flex;
+
 }
 .logo-img {
     height: 70px;
     border-radius: 80px;
-    width: 21%;
+    width: 60px;
     margin-right: 5px;
 }
 .niproperties-text {
     font-size: 13px;
+    font-weight: bold;
     margin-bottom: 3px;
 }
 .sitename-time-uploaded {
@@ -206,5 +218,21 @@ const primaryImage = computed(() => {
 .time-since-upload {
     color: #65676b;
     font-size: 13px;
+}
+.view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    width: 70px;
+    border-radius: 12px;
+    background-color: #2dcc95;
+    cursor: pointer;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+.view-btn:hover {
+    background-color: #2d6e53;
 }
 </style>

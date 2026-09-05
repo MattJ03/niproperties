@@ -29,8 +29,9 @@
                 <hr class="horizontal-line"/>
                 <p class="description-text"> {{ props.listing.description}}</p>
             </div>
+            <hr class="horizontal-line" />
             <div class="bottom-of-listing">
-                <hr class="horizontal-line" />
+
                 <div class="listing-stats">
                     <img :src="logo" alt="niproperties logo" class="logo-img" />
                     <div class="sitename-time-uploaded">
@@ -38,6 +39,7 @@
                         <span class="time-since-upload"> {{ dayjs(props.listing.created_at).fromNow() }}</span>
                     </div>
                 </div>
+                <button class="view-btn">View</button>
             </div>
         </div>
     </div>
@@ -190,12 +192,14 @@ const primaryImage = computed(() => {
 
 .bottom-of-listing {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
     margin-top: auto;
 }
 
 .listing-stats {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 10px;
 }
@@ -221,5 +225,22 @@ const primaryImage = computed(() => {
 .time-since-upload {
     color: #65676b;
     font-size: 12px;
+}
+
+.view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    width: 70px;
+    border-radius: 12px;
+    background-color: #2dcc95;
+    cursor: pointer;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+.view-btn:hover {
+    background-color: #2d6e53;
 }
 </style>

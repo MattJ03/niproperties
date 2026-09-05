@@ -230,7 +230,7 @@ onMounted(async () => {
 }
 .filter-and-listings-container {
     display: flex;
-    margin-top: 150px;
+    margin-top: 190px;
     flex-direction: row;
 }
 .filter-container {
