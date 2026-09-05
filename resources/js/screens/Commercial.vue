@@ -202,7 +202,18 @@ const getPreviousPageListings = async () => {
         loading.value = false;
     }
 }
-
+const getPaginatedListings = async (page) => {
+    loading.value = true;
+    pageNum.value = page;
+    try {
+        await listingStore.getCommercialListings({
+            ...filters,
+            page: pageNum.value,
+        });
+    } catch(error) {
+        error.value = error.response?.data?.message || 'failed to get paginated listings';
+    }
+}
 
 onMounted(async () => {
    await listingStore.getCommercialListings();
