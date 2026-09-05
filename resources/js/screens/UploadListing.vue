@@ -230,6 +230,7 @@ function validate() {
     flex-direction: column;
     height: fit-content;
     width: 100%;
+    margin-top: 30px;
 
 }
 .header-group {
