@@ -27,7 +27,8 @@
                     <div class="room-number-selection">
                         <strong><p class="filter-topic">Number of rooms</p></strong>
                         <div class="row-of-numbers">
-                            <div class="square-num-rooms">
+                            <div class="square-num-rooms" @click="filters.min_num_of_rooms = ''; filters.max_num_of_rooms = ''"
+                            :class="{ active: filters.min_num_of_rooms === ''}">
                                 Any
                             </div>
                             <div class="square-num-rooms" @click="filters.min_num_of_rooms = '1'; filters.max_num_of_rooms = '4'"
@@ -43,7 +44,7 @@
                                  :class="{ active: filters.min_num_of_rooms === '8'}">
                                 8-10
                             </div>
-                            <div class="square-num-rooms" @click="filters.min_num_of_rooms = '11'"
+                            <div class="square-num-rooms" @click="filters.min_num_of_rooms = '11'; filters.max_num_of_rooms = ''"
                                  :class="{ active: filters.min_num_of_rooms === '11'}">
                                 11+
                             </div>

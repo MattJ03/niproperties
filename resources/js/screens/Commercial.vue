@@ -38,7 +38,8 @@
                 </div>
                 <p class="filter-topic">Number of rooms</p>
                     <div class="numbers-wrapper">
-                        <div class="num-square">Any</div>
+                        <div class="num-square" @click="filters.min_num_rooms = ''; filters.max_num_rooms = ''"
+                        :class="{ active: filters.min_num_rooms === '' }">Any</div>
 
                     <div class="num-square" @click="filters.min_num_rooms = '1'; filters.max_num_rooms = '4'"
                     :class="{ active: filters.min_num_rooms === '1' }">
