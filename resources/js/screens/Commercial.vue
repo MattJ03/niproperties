@@ -172,6 +172,7 @@ const resetFilters = async () => {
     filters.min_num_rooms = '';
     filters.max_num_rooms = '';
     filters.county = '';
+    pageNum.value = 1;
     await listingStore.getCommercialListings();
 }
 

@@ -161,7 +161,8 @@ async function resetFilters() {
     filters.min_price = '';
     filters.max_price = '';
     filters.search = '';
-    listingStore.getRentListings();
+    pageNum.value = 1;
+   await listingStore.getRentListings();
 }
 async function getPaginatedListings(page) {
     loading.value = true;
