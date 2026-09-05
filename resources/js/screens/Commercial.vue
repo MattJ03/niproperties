@@ -123,6 +123,7 @@ onMounted(async () => {
 }
 .filter-and-listings-container {
     display: flex;
+    margin-top: 150px;
     flex-direction: row;
 }
 .filter-container {
@@ -133,7 +134,7 @@ onMounted(async () => {
     border-radius: 12px;
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
-    margin-top: 150px;
+
     margin-left: 40px;
 
 }
@@ -142,7 +143,8 @@ onMounted(async () => {
     flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
     gap: 20px;
-    width: 100%;
+    min-height: 0;
+    min-width: 0;
     padding: 0 50px;
 }
 .top-of-container {
