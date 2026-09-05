@@ -5,7 +5,7 @@
             <div class="filter-container">
                 <div class="top-of-container">
                     <h2 class="filter-header">Filters</h2>
-                    <div class="reset-wrapper">
+                    <div class="reset-wrapper" @click="resetFilters()">
                         <img :src="reset" class="reset-img" alt="reset" />
                         <span class="reset-text">Reset Filters</span>
                     </div>
@@ -104,14 +104,6 @@ const filters = reactive({
     county: '',
 });
 
-const errors = reactive({
-    rent_or_buy: '',
-    min_price: '',
-    max_price: '',
-    min_num_rooms: '',
-    max_num_rooms: '',
-    county: '',
-});
 const search = ref('');
 const listingStore = useListingStore();
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
@@ -126,9 +118,19 @@ const applyFilters = async () => {
         min_price: filters.min_price || null,
         max_price : filters.max_price,
         min_num_rooms: filters.min_num_rooms || null,
-        max_num_roons: filters.max_num_rooms || null,
+        max_num_rooms: filters.max_num_rooms || null,
         county: filters.county || null
     });
+}
+
+const resetFilters = async () => {
+    filters.rent_or_buy = '';
+    filters.min_price = '';
+    filters.max_price = '';
+    filters.min_num_rooms = '';
+    filters.max_num_rooms = '';
+    filters.county = '';
+    await listingStore.getCommercialListings();
 }
 
 onMounted(async () => {

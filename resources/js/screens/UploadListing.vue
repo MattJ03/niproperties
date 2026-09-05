@@ -58,7 +58,7 @@
                 <input type="number" v-model="form.price" class="input-text-town" placeholder="£">
                     <span class="error-message" v-if="errors.price"> {{ errors.price }}</span>
                 </div>
-                <div v-if="form.type === 'rent'" class="field">
+                <div v-if="form.type === 'rent' " class="field">
                     <strong><label class="field-text">Rent per month (£)</label></strong>
                     <input type="number" v-model="form.rent_per_month" class="input-text-town" placeholder="£">
                     <span class="error-message" v-if="errors.price"> {{ errors.price }}</span>
@@ -71,10 +71,10 @@
                 <div class="field">
                     <strong><label class="field-text">Rent/Buy</label></strong>
                     <div class="rent-or-buy-button-wrapper">
-                    <button class="rent-select-btn" @click="form.type = 'rent'"
+                    <button class="rent-select-btn" @click="form.type = 'rent'; cleanPrice()"
                     :class=" { active: form.type === 'rent'}"
                     >Rent</button>
-                    <button class="buy-select-btn" @click="form.type = 'buy'"
+                    <button class="buy-select-btn" @click="form.type = 'buy'; cleanPrice()"
                     :class=" { active: form.type === 'buy'}"
                     >Buy</button>
                     </div>
@@ -193,6 +193,15 @@ async function submitListing() {
         loading.value = false;
     }
 
+}
+
+const cleanPrice = () => {
+    if(form.type === 'rent') {
+        form.price = '';
+    }
+    if(form.type === 'buy') {
+        form.rent_per_month = '';
+    }
 }
 
 function validate() {
