@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="apply-filters-section">
-                <button class="apply-filters-button">
+                <button class="apply-filters-button" @click="applyFilters()">
                     <img :src="filtersImg" class="filters-img" alt="scaffold"/>
                     <span class="apply-filters-text">Apply filters</span>
                 </button>
@@ -103,6 +103,15 @@ const filters = reactive({
     max_num_rooms: '',
     county: '',
 });
+
+const errors = reactive({
+    rent_or_buy: '',
+    min_price: '',
+    max_price: '',
+    min_num_rooms: '',
+    max_num_rooms: '',
+    county: '',
+});
 const search = ref('');
 const listingStore = useListingStore();
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
@@ -110,6 +119,17 @@ const numOfRooms = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
 
 console.log(listingStore.allListings.length);
+
+const applyFilters = async () => {
+    await listingStore.getCommercialListings({
+        rent_or_buy: filters.rent_or_buy || null,
+        min_price: filters.min_price || null,
+        max_price : filters.max_price,
+        min_num_rooms: filters.min_num_rooms || null,
+        max_num_roons: filters.max_num_rooms || null,
+        county: filters.county || null
+    });
+}
 
 onMounted(async () => {
    await listingStore.getCommercialListings();
@@ -290,6 +310,9 @@ onMounted(async () => {
     margin-top: 20px;
     background-color: #2d6e53;
     color: #FFFFFF;
+}
+.apply-filters-button:hover {
+    background-color: #1F4D3A;
 }
 .filters-img {
     height: 24px;
