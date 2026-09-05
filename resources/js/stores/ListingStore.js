@@ -108,10 +108,24 @@ export const useListingStore = defineStore('listings', () => {
            });
            allListings.value = res.data.listings;
        } catch(err) {
-           error.value = error.response?.data?.message || 'failed to get rent listing';
+           error.value = error.response?.data?.message || 'failed to get rent listings';
        } finally {
            loading.value = false;
        }
+    }
+
+    const getCommercialListings = async (filters = {}) => {
+       loading.value = true
+        try {
+           const res = await api.get(`listingsCommercial`, {
+               params: filters,
+           });
+           allListings.value = res.data.listings;
+        } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get commercial listings';
+        } finally {
+           loading.value = false;
+        }
     }
 
     const getLandlordsRecentListings = async (landlordId) => {
@@ -149,7 +163,6 @@ export const useListingStore = defineStore('listings', () => {
        try {
            const res = await api.get(`getLandlord/${id}`);
            landlord.value = res.data.landlord;
-           console.log('heejfwejfewf');
           await  getLandlordsListings(landlord.value.id);
           console.log(landlordListings.value);
        } catch(err) {
@@ -159,6 +172,7 @@ export const useListingStore = defineStore('listings', () => {
            loading.value = false;
        }
     }
+
 
    return {
        loading,
@@ -180,6 +194,7 @@ export const useListingStore = defineStore('listings', () => {
        getListingsOrderedByPrice,
        getListingsOrderedByPriceLowestToHighest,
        getRentListings,
+       getCommercialListings,
        getLandlordsRecentListings,
        getLandlordsListings,
        fetchLandlordById,
