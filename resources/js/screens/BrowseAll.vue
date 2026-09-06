@@ -96,6 +96,7 @@
                 v-for="listing in listingStore.allListings"
                 :listing="listing"
                 key="listing.id"
+
                 />
         </div>
         </div>
@@ -132,6 +133,7 @@ import {ref, reactive, computed, onMounted, watch} from 'vue';
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import ListingGrid from "../components/ListingGrid.vue";
+import router from '../axios.js';
 import {storeToRefs} from "pinia";
 import housesquare from '../assets/housesquare.png';
 import keys from '../assets/keys2.png';
@@ -164,7 +166,7 @@ const pageNum = ref(1);
 const finalPageNum = ref(0);
 const finalPageNumRounded = ref(finalPageNum.value);
 const sortOption = ref('recent');
-
+const selectedListing = ref(null);
 const { listingsCount } = storeToRefs(listingStore);
 
 setTimeout(() => {

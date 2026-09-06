@@ -39,7 +39,7 @@
                         <span class="time-since-upload"> {{ dayjs(props.listing.created_at).fromNow() }}</span>
                     </div>
                 </div>
-                <button class="view-btn">View</button>
+                <button @click="selectedListing = props.listing; moveToListingInfo()" class="view-btn">View</button>
             </div>
         </div>
     </div>
@@ -53,6 +53,8 @@ import pin from '../assets/pin.png';
 import logo from '../assets/nipropertieslogo.png';
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js';
+import { useListingStore } from "../stores/ListingStore.js";
+import router from '../router/index.js';
 
 const noImage = ref('');
 const props = defineProps({
@@ -63,10 +65,10 @@ const props = defineProps({
 });
 const loading = ref(false);
 const error = ref('');
-
+const listingStore = useListingStore();
 const currentPage = ref(1);
 const nextPage = ref(currentPage + 1);
-
+const selectedListing = ref(null);
 const pageOneToFive = ref([1, 2, 3, 4, 5]);
 
 
@@ -81,6 +83,25 @@ const primaryImage = computed(() => {
     return props.listing.listing_images.find(img => img.is_primary) ?? props.listing.listing_images[0];
 });
 
+const moveToListingInfo = async () => {
+    loading.value = true;
+
+    try {
+        console.log('running 1');
+        await router.push({
+            name: 'listing info',
+            params: { listingId: selectedListing.value.id },
+        });
+        console.log('running 2 ');
+
+    } catch(error) {
+        error.value = error.response?.data?.message || 'failed to move to listing info';
+        console.log(error.value);
+    } finally {
+        loading.value = false;
+        console.log('method complete');
+    }
+}
 </script>
 <style scoped>
 .container {
