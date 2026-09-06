@@ -20,7 +20,7 @@ const routes = [
     { path: '/our-landlords', component: OurLandlords, name: 'our landlords' },
     { path: '/landlords-listings/:landlordId', component: LandlordsListings, name: 'landlords listings', props: true},
     { path: '/commericial-listings', component: Commercial, name: 'commercial' },
-    { path: '/listing/:listingId', component: ListingInfo, name: 'listing info', props: true },
+    { path: '/listing/:listingId', component: ListingInfo, name: 'listing info' },
 ];
 
 const router = createRouter({
