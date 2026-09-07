@@ -86,6 +86,7 @@ const primaryImage = computed(() => {
 const moveToListingInfo = async () => {
     loading.value = true;
     listingStore.listing = selectedListing.value;
+
     try {
         console.log('running 1');
         await router.push({
