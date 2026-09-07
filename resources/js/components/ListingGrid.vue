@@ -4,8 +4,8 @@
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
         <div class="listing-details">
-            <strong><p v-if="props.listing.price" class="price-listing">£{{ props.listing.price}}</p></strong>
-            <strong><p v-if="props.listing.rent_per_month" class="price-listing"> £{{ props.listing.rent_per_month }} per month</p> </strong>
+            <strong><p v-if="props.listing.price" class="price-listing">{{ formatPrice(props.listing.price) }}</p></strong>
+            <strong><p v-if="props.listing.rent_per_month" class="price-listing"> {{ formatPrice(props.listing.rent_per_month) }} per month</p> </strong>
             <strong><span class="address-line-1-text">{{ props.listing.address_line_1}}</span></strong>
             <div class="postcode-town-wrapper">
               <img :src="location" alt="location pointer" class="location-img"/>
@@ -55,6 +55,7 @@ import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
+import {format} from "pathe";
 
 const noImage = ref('');
 const props = defineProps({
@@ -102,6 +103,14 @@ const moveToListingInfo = async () => {
         loading.value = false;
         console.log('method complete');
     }
+}
+
+function formatPrice(price) {
+    return Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+    }).format(price);
+
 }
 </script>
 <style scoped>

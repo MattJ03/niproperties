@@ -367,6 +367,13 @@ async function sortingCalls() {
     }
 }
 
+function formatPrice(price) {
+    return Intl.NumberFormat('en-GB', {
+        style: "currency",
+        currency: 'GBP'
+    }).format(price);
+}
+
 
 onMounted(() => {
     console.log('onMounted running')
