@@ -8,6 +8,14 @@
             <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{  landlord.name }}
             <span class="arrow-beside-name">> </span>
             </button>
+            <div v-if="listing.sale_status === 'open'" class="is_active-text">
+                <img :src="greenCircle" class="green-circle-img" alt="green circle"/>
+                <span>Active</span>
+            </div>
+            <div v-if="listing.sale_status === 'closed'" class="is_not_active-text">
+                <img :src="redCircle" class="red-circle-img" alt="red circle"/>
+                <span>Unavailable</span>
+            </div>
             <div class="listing-details-specifics">
                 <span v-if="listing.price" class="price-text"> {{ formatPrice(listing.price) }}</span>
                 <span v-if="listing.rent_per_month" class="rent-text"> {{ formatPrice(listing.rent_per_month) }}
@@ -28,10 +36,12 @@
             </div>
             </div>
             <div class="listing-address-area">
+                <img :src="redpin" class="pin-img" alt="red pin" />
                 <span class="address-line-1-text"> {{ listing.address_line_1 }},</span>
                 <span v-if="listing.address_line_2" class="address-line-1-text"> {{ listing.address_line_2 }},</span>
                 <span class="town-text"> {{ listing.town }}</span>
             </div>
+
         </div>
     </div>
 </template>
@@ -42,7 +52,9 @@ import { useListingStore } from "../stores/ListingStore.js";
 import { useRoute } from "vue-router";
 import {storeToRefs} from "pinia";
 import router from "../router/index.js";
-
+import redpin from '../assets/red_pin.png';
+import greenCircle from '../assets/green_circle.png';
+import redCircle from '../assets/red_circle.png';
 
 const listingStore = useListingStore();
 const route = useRoute();
@@ -94,7 +106,7 @@ function formatPrice(price) {
 }
 .img-wrapper {
     width: 100%;
-
+    height: 70%;
     aspect-ratio: 16 / 9;
     border-radius: 12px;
     overflow: hidden;
@@ -103,15 +115,49 @@ function formatPrice(price) {
 .listing-card {
     display: flex;
     flex-direction: column;
-    height: 80dvh;
+    min-height: 80dvh;
+    width: 1200px;
     border: 1px solid #F2EFE6;
    margin-top: 180px;
     background-color: #FFFFFF;
+    border-radius: 12px;
 }
 .listing-img {
-    width: 1000px;
-    height: 100%;
+    width: 100%;
+
     object-fit: cover;
+}
+.is_active-text {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-weight: bold;
+    padding: 6px 6px;
+    background-color: #F2EFE6;
+    border-radius: 60px;
+}
+.is_not_active-text {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-weight: bold;
+    padding: 6px 6px;
+    background-color: #F2EFE6;
+    border-radius: 60px;
+}
+.green-circle-img {
+    height: 16px;
+}
+.red-circle-img {
+    height: 16px;
 }
 .landlord-name-btn {
     display: flex;
@@ -119,7 +165,7 @@ function formatPrice(price) {
     justify-content: space-between;
     height: 60px;
     align-items: center;
-    width: 600px;
+    width: 70%;
     font-size: 18px;
     background-color: #FFFFFF;
     font-weight: bold;
@@ -135,11 +181,12 @@ function formatPrice(price) {
 }
 .listing-details-specifics {
     display: flex;
+    width: 70%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-left: 30px;
-    margin-top: 50px;
+    margin-top: 15px;
     margin-right: 30px;
 }
 .listing-info {
@@ -157,6 +204,9 @@ function formatPrice(price) {
 }
 .per-mont-text {
     font-size: 20px;
+}
+.pin-img {
+    height: 16px;
 }
 .field {
     display: flex;
