@@ -133,6 +133,7 @@ class ListingController extends Controller
     {
         $user = $request->user();
         if(auth()->check() && $user->hasRole('landlord') && $user->id === $listing->landlord_id) {
+            $listing->load(['listingImages', 'landlord']);
             return response()->json([
                 'listing' => $listing,
                 'message' => 'listing found',
@@ -142,6 +143,7 @@ class ListingController extends Controller
             'views' => $listing->increment('views'),
         ]);
         $listing->refresh();
+       $listing->load(['listingImages', 'landlord']);
 
         return response()->json([
             'listing' => $listing,

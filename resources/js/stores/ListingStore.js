@@ -179,6 +179,7 @@ export const useListingStore = defineStore('listings', () => {
        try {
            const res = await api.get(`listing/${id}`);
            listing.value = res.data.listing;
+           landlord.value = res.data.listing.landlord.name;
        } catch(error) {
            error.value = error.response?.data?.message || 'failed to get listing';
        } finally {
