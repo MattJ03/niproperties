@@ -6,11 +6,11 @@
             <img v-if="currentImage" :src="`/api/listings/listing-images/${currentImage.id}`" class="listing-img" alt="listing"/>
         </div>
             <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{  landlord.name }}
-            <span>> </span>
+            <span class="arrow-beside-name">> </span>
             </button>
             <div class="listing-details-specifics">
-                <span v-if="listing.price" class="price-text"> £{{ listing.price }}</span>
-                <span v-if="listing.rent_per_month" class="rent-text"> £{{ listing.rent_per_month }}
+                <span v-if="listing.price" class="price-text"> {{ formatPrice(listing.price) }}</span>
+                <span v-if="listing.rent_per_month" class="rent-text"> {{ formatPrice(listing.rent_per_month) }}
                 <span class="per-mont-text">per month</span></span>
             <div class="listing-info">
                 <div class="field">
@@ -26,6 +26,11 @@
                     <span class="field-topic">To be added</span>
                 </div>
             </div>
+            </div>
+            <div class="listing-address-area">
+                <span class="address-line-1-text"> {{ listing.address_line_1 }},</span>
+                <span v-if="listing.address_line_2" class="address-line-1-text"> {{ listing.address_line_2 }},</span>
+                <span class="town-text"> {{ listing.town }}</span>
             </div>
         </div>
     </div>
@@ -71,6 +76,14 @@ const moveToLandlordsDetails = async (landlordArg) => {
         loading.value = false;
     }
 }
+
+function formatPrice(price) {
+    return Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP",
+    }
+    ).format(price);
+}
 </script>
 <style scoped>
 .container {
@@ -91,8 +104,7 @@ const moveToLandlordsDetails = async (landlordArg) => {
     display: flex;
     flex-direction: column;
     height: 80dvh;
-
-
+    border: 1px solid #F2EFE6;
    margin-top: 180px;
     background-color: #FFFFFF;
 }
@@ -118,6 +130,9 @@ const moveToLandlordsDetails = async (landlordArg) => {
 .landlord-name-btn:hover {
     cursor: pointer;
 }
+.arrow-beside-name {
+    padding-right: 16px;
+}
 .listing-details-specifics {
     display: flex;
     flex-direction: row;
@@ -125,6 +140,7 @@ const moveToLandlordsDetails = async (landlordArg) => {
     justify-content: space-between;
     margin-left: 30px;
     margin-top: 50px;
+    margin-right: 30px;
 }
 .listing-info {
     display: flex;
@@ -133,9 +149,11 @@ const moveToLandlordsDetails = async (landlordArg) => {
 }
 .price-text {
     font-size: 40px;
+    font-weight: bold;
 }
 .rent-text {
     font-size: 40px;
+    font-weight: bold;
 }
 .per-mont-text {
     font-size: 20px;
@@ -151,5 +169,17 @@ const moveToLandlordsDetails = async (landlordArg) => {
 }
 .field-topic {
     font-size: 18px;
+}
+.listing-address-area {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 30px;
+    margin-top: 15px;
+    font-size: 22px;
+    color: #2d6e53;
+    gap: 5px;
+}
+.address-line-1-text {
 }
 </style>
