@@ -54,7 +54,7 @@
                        <strong><span>Listings in all 6 counties</span></strong>
                        <p class="smaller-text-in-square">Find hundreds of properties all across the 6 counties of Northern Ireland.</p>
                        <div class="bottom-square">
-                       <span class="bottom-of-square-text">View locations</span>
+                       <span @click="moveToBrowseAll()" class="bottom-of-square-text">View locations</span>
                            <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
                        </div>
                    </div>
@@ -157,6 +157,18 @@ const moveToOurLandlord = async () => {
     }
 }
 
+const moveToBrowseAll = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse'
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to browse all';
+    } finally {
+        loading.value = false;
+    }
+}
 
 </script>
 <style scoped>
