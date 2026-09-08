@@ -2,48 +2,64 @@
     <Navbar></Navbar>
     <div class="container">
         <div class="listing-card">
-        <div class="img-wrapper">
-            <img v-if="currentImage" :src="`/api/listings/listing-images/${currentImage.id}`" class="listing-img" alt="listing"/>
-        </div>
-            <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{  landlord.name }}
-            <span class="arrow-beside-name">> </span>
-            </button>
-            <div v-if="listing.sale_status === 'open'" class="is_active-text">
-                <img :src="greenCircle" class="green-circle-img" alt="green circle"/>
-                <span>Active</span>
-            </div>
-            <div v-if="listing.sale_status === 'closed'" class="is_not_active-text">
-                <img :src="redCircle" class="red-circle-img" alt="red circle"/>
-                <span>Unavailable</span>
-            </div>
-            <div class="listing-details-specifics">
-                <span v-if="listing.price" class="price-text"> {{ formatPrice(listing.price) }}</span>
-                <span v-if="listing.rent_per_month" class="rent-text"> {{ formatPrice(listing.rent_per_month) }}
-                <span class="per-mont-text">per month</span></span>
-            <div class="listing-info">
-                <div class="field">
-                <span class="field-answer"> {{ listing.no_of_rooms }}</span>
-                    <span class="field-topic">Rooms</span>
-                </div>
-                <div class="field">
-                    <span class="field-answer">To be added</span>
-                    <span class="field-topic">Beds</span>
-                </div>
-                <div class="field">
-                    <span class="field-answer">Sqft</span>
-                    <span class="field-topic">To be added</span>
-                </div>
-            </div>
-            </div>
-            <div class="listing-address-area">
-                <img :src="redpin" class="pin-img" alt="red pin" />
-                <span class="address-line-1-text"> {{ listing.address_line_1 }},</span>
-                <span v-if="listing.address_line_2" class="address-line-1-text"> {{ listing.address_line_2 }},</span>
-                <span class="town-text"> {{ listing.town }}</span>
+
+            <div class="img-wrapper">
+                <img v-if="currentImage" :src="`/api/listings/listing-images/${currentImage.id}`" class="listing-img" alt="listing"/>
             </div>
 
+            <div class="listing-card-body">
+
+                <div class="listing-card-main">
+                    <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{ landlord.name }}
+                        <span class="arrow-beside-name">> </span>
+                    </button>
+
+                    <div v-if="listing.sale_status === 'open'" class="is_active-text">
+                        <img :src="greenCircle" class="green-circle-img" alt="green circle"/>
+                        <span>Active</span>
+                    </div>
+                    <div v-if="listing.sale_status === 'closed'" class="is_not_active-text">
+                        <img :src="redCircle" class="red-circle-img" alt="red circle"/>
+                        <span>Unavailable</span>
+                    </div>
+
+                    <div class="listing-details-specifics">
+                        <span v-if="listing.price" class="price-text"> {{ formatPrice(listing.price) }}</span>
+                        <span v-if="listing.rent_per_month" class="rent-text"> {{ formatPrice(listing.rent_per_month) }}
+                <span class="per-mont-text">per month</span></span>
+                        <div class="listing-info">
+                            <div class="field">
+                                <span class="field-answer"> {{ listing.no_of_rooms }}</span>
+                                <span class="field-topic">Rooms</span>
+                            </div>
+                            <div class="field">
+                                <span class="field-answer">To be added</span>
+                                <span class="field-topic">Beds</span>
+                            </div>
+                            <div class="field">
+                                <span class="field-answer">Sqft</span>
+                                <span class="field-topic">To be added</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-address-area">
+                        <img :src="redpin" class="pin-img" alt="red pin" />
+                        <span class="address-line-1-text"> {{ listing.address_line_1 }},</span>
+                        <span v-if="listing.address_line_2" class="address-line-1-text"> {{ listing.address_line_2 }},</span>
+                        <span class="town-text"> {{ listing.town }}</span>
+                    </div>
+                </div>
+
+                <div class="listing-card-side">
+                    <div class="landlord-details-card">
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+        </div>
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
@@ -106,26 +122,45 @@ function formatPrice(price) {
 }
 .img-wrapper {
     width: 100%;
-    height: 70%;
+    height: 500px;
     aspect-ratio: 16 / 9;
     border-radius: 12px;
     overflow: hidden;
     position: relative;
 }
+.page-layout {
+    display: flex;
+    flex-direction: row;
+}
+.landlord-name {
+    margin-top: 200px;
+}
+
 .listing-card {
     display: flex;
     flex-direction: column;
     min-height: 80dvh;
     width: 1200px;
     border: 1px solid #F2EFE6;
-   margin-top: 180px;
+    margin-top: 180px;
     background-color: #FFFFFF;
     border-radius: 12px;
+    overflow: hidden;
+}
+.listing-card-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
 }
 .listing-img {
     width: 100%;
+    height: 100%;
 
     object-fit: cover;
+}
+.listing-card-body {
+    display: flex;
+    flex-direction: row;
 }
 .is_active-text {
     display: flex;
@@ -179,6 +214,7 @@ function formatPrice(price) {
 .arrow-beside-name {
     padding-right: 16px;
 }
+
 .listing-details-specifics {
     display: flex;
     width: 70%;
@@ -188,6 +224,11 @@ function formatPrice(price) {
     margin-left: 30px;
     margin-top: 15px;
     margin-right: 30px;
+}
+.landlord-card {
+    position: absolute;
+    flex-direction: column;
+    height: 300px;
 }
 .listing-info {
     display: flex;
@@ -231,5 +272,23 @@ function formatPrice(price) {
     gap: 5px;
 }
 .address-line-1-text {
+}
+.listing-card-side {
+    flex: 0 0 20%;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    width: 100%;
+    margin-right: 20px;
+
+}
+.landlord-details-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+   border: 1px solid #000000;
+
+    width: 100%;
 }
 </style>
