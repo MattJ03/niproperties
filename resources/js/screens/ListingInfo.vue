@@ -62,6 +62,9 @@
                             <button class="contact-landlord"> Contact {{ landlord.name }}</button>
                         </div>
                     </div>
+                    <div class="purchase-card">
+                        <button>Purchase</button>
+                    </div>
                 </div>
 
             </div>
@@ -125,7 +128,7 @@ function formatPrice(price) {
     display: flex;
     width: 100%;
     justify-content: center;
-    min-height: 200dvh;
+
 }
 .img-wrapper {
     width: 100%;
@@ -146,7 +149,7 @@ function formatPrice(price) {
 .listing-card {
     display: flex;
     flex-direction: column;
-    min-height: 80dvh;
+    height: fit-content;
     width: 1200px;
     border: 1px solid #F2EFE6;
     margin-top: 180px;
@@ -157,7 +160,7 @@ function formatPrice(price) {
 .listing-card-main {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
+    flex: 2 1 auto;
 }
 .listing-img {
     width: 100%;
@@ -330,7 +333,42 @@ function formatPrice(price) {
     color: #88807b;
 }
 .contact-landlord {
-    font-size: 16px;
-    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 25px;
+    padding: 10px 8px;
+    border-radius: 6px;
+    color: #FFFFFF;
+    background-color: #2dcc95;
+    cursor: pointer;
+    border: 1px solid #2dcc95;
+    margin-bottom: 20px;
+}
+.purchase-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    height: 80px;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+.purchase-card button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #006AFF;
+    height: 55%;
+    width: 85%;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: #FFFFFF;
+    font-weight: bold;
+    cursor: pointer;
+}
+.purchase-card button:hover {
+    background-color: #006affcc;
 }
 </style>
