@@ -53,7 +53,14 @@
 
                 <div class="listing-card-side">
                     <div class="landlord-details-card">
-
+                        <span class="listed-by-text">Listed by: </span>
+                        <div class="landlord-details">
+                            <div class="pfp-img-wrapper">
+                                <img :src="profilePicture" class="profile-picture-img" alt="agent picture"/>
+                            </div>
+                            <span class="landlord-name-box"> {{ landlord.name }}</span>
+                            <button class="contact-landlord"> Contact {{ landlord.name }}</button>
+                        </div>
                     </div>
                 </div>
 
@@ -71,7 +78,7 @@ import router from "../router/index.js";
 import redpin from '../assets/red_pin.png';
 import greenCircle from '../assets/green_circle.png';
 import redCircle from '../assets/red_circle.png';
-
+import profilePicture from '../assets/agent.png';
 const listingStore = useListingStore();
 const route = useRoute();
 const currentIndex = ref(0);
@@ -118,7 +125,7 @@ function formatPrice(price) {
     display: flex;
     width: 100%;
     justify-content: center;
-
+    min-height: 200dvh;
 }
 .img-wrapper {
     width: 100%;
@@ -287,8 +294,43 @@ function formatPrice(price) {
     display: flex;
     flex-direction: column;
     height: 100%;
-   border: 1px solid #000000;
-
+   border: 1px solid #D3D3D3;
     width: 100%;
+    border-radius: 10px;
+}
+.listed-by-text {
+    color: #88807b;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.landlord-details {
+    display: flex;
+    align-items: center;
+
+    flex-direction: column;
+}
+.pfp-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.profile-picture-img {
+    width: 55px;
+    border-radius: 60px;
+    background-color: #FDFBD4;
+    padding: 12px 12px;
+    height: 55px;
+    cursor: pointer;
+}
+.landlord-name-box {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #88807b;
+}
+.contact-landlord {
+    font-size: 16px;
+    margin-top: 15px;
 }
 </style>
