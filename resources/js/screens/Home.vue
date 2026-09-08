@@ -80,7 +80,7 @@
                         <strong><span>Trusted vendors</span></strong>
                         <p class="smaller-text-in-square">Vendors have to be approved before being able to list their properties.</p>
                       <div class="bottom-square">
-                          <span class="bottom-of-square-text">View Landlords</span>
+                          <span @click="moveToOurLandlord()" class="bottom-of-square-text">View Landlords</span>
                           <img :src="rightarrow" class="bottom-square-icon" alt="right arrow"/>
                       </div>
                     </div>
@@ -129,17 +129,33 @@ import agent from '../assets/agent.png';
 import shield from '../assets/shield.png';
 import RecentListing from "../components/RecentListing.vue";
 import { useListingStore } from "../stores/ListingStore.js";
+import router from '../router/index.js';
+
 
 const authStore = useAuthStore();
 const listingStore = useListingStore();
-
+const loading = ref(false);
+const error = ref('');
 const { role, name} = storeToRefs(authStore);
 const search = ref('');
 
 onMounted(() => {
     listingStore.get3RecentListings();
     console.log('api call made to get 3 recent listings');
-})
+});
+
+const moveToOurLandlord = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'our landlords',
+        });
+    } catch (err) {
+        error.value = err.response?.data?.message || 'failed to move to our landlords screen';
+    } finally {
+        loading.value = false;
+    }
+}
 
 
 </script>
