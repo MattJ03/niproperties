@@ -11,13 +11,13 @@
             <span> {{ props.listing.address_line_1 }}</span>
             <span v-if="props.listing.address_line_2" class="address-text"> {{ props.listing.address_line_2 }}</span>
             <div class="small-info-wrapper">
-                <div class="town-postcode-background">
-            <span class="town-text"> {{ props.listing.town }}</span>
+                <div class="town-postcode-wrapper">
+              <span class="town-text"> {{ props.listing.town }}</span>
+                    <span class="town-text"> {{ props.listing.postcode }}</span>
                 </div>
-                <div class="town-postcode-background">
-                <span class="town-text"> {{ props.listing.postcode}}</span>
+                <button @click="selectedListing = props.listing; moveToListingInfo()" class="view-btn">View</button>
                 </div>
-                </div>
+
         </div>
         </div>
 
@@ -26,7 +26,8 @@
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
-
+import router from '../router/index.js';
+import { useListingStore } from "../stores/ListingStore.js";
 
 const props = defineProps({
     listing: {
@@ -34,8 +35,12 @@ const props = defineProps({
         required: true,
     },
 });
-
+const selectedListing = ref(null);
+const error = ref('');
+const loading = ref(false);
 const noImage = ref('');
+const listingStore = useListingStore();
+
 
 const primaryImage = computed(() => {
     if(props.listing.listing_images === null) {
@@ -53,6 +58,22 @@ function formatPrice(price) {
                  currency: "GBP"},
 
     ).format(price);
+}
+
+const moveToListingInfo = async () => {
+    loading.value = true;
+    listingStore.listing = selectedListing.value;
+    try {
+        await router.push({
+            name: 'listing info',
+            params: { listingId: selectedListing.value.id },
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to listing info';
+        console.log(error.value);
+    } finally {
+        loading.value = false;
+    }
 }
 </script>
 <style scoped>
@@ -101,8 +122,17 @@ function formatPrice(price) {
 .address-text {
     font-size: 16px;
 }
+.town-postcode-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
 .small-info-wrapper {
     display: flex;
+
+
     flex-direction: row;
     gap: 15px;
     padding-bottom: 15px;
@@ -111,6 +141,9 @@ function formatPrice(price) {
 
     color: #000000;
     font-size: 16px;
+   padding: 8px 8px;
+    background-color: #FFFFFF;
+    border-radius: 80px;
 }
 .town-postcode-background {
     display: flex;
@@ -140,5 +173,22 @@ function formatPrice(price) {
 .details-price {
     font-size: 36px;
     color: #2d6e53;
+}
+.view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    margin-right: 30px;
+    border-radius: 12px;
+    background-color: #2dcc95;
+    cursor: pointer;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 18px;
+
+}
+.view-btn:hover {
+    background-color: #2d6e53;
 }
 </style>
