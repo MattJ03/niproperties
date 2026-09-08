@@ -54,6 +54,17 @@
                         <h2 class="description-header">A brief description on the property</h2>
                         <p v-if="listing.description" class="description-text"> {{ listing.description }}</p>
                         <span v-if="!listing.description" class="no-description">No description provided</span>
+                        <div class="horizontal-line-above-description"></div>
+                    </div>
+                    <div class="listing-stats">
+                        <div class="data-point">
+                            <span>County: </span>
+                            <span class="data-point-answer"> {{ listing.county }}</span>
+                        </div>
+                        <div class="data-point">
+                            <span>Views: </span>
+                            <span class="data-point-answer"> {{ listing.views }}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -410,5 +421,25 @@ function formatPrice(price) {
 .no-description {
     font-size: 24px;
     font-weight: bold;
+}
+.listing-stats {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 30px;
+    flex-direction: row;
+    margin-left: 30px;
+}
+.data-point {
+    font-size: 16px;
+    background-color: #2dcc95;
+    padding: 5px 8px;
+    border-radius: 60px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+.data-point-answer {
+    font-size: 16px;
+    color: #000000;
 }
 </style>
