@@ -70,6 +70,17 @@
                             <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MMMM/YYYY')}}</span>
                         </div>
                     </div>
+                    <div class="street-view-section">
+                        <h2 class="street-view-header">Street view of property</h2>
+                        <iframe
+                        width="400px"
+                        height="400"
+                        frameborder="0" style="border: 0"
+                        referrerpolicy="origin-when-cross-origin"
+                        :src="`${streetViewUrl}`"
+                        allowfullscreen
+                        ></iframe>
+                    </div>
                 </div>
 
                 <div class="listing-card-side">
@@ -119,13 +130,20 @@ const listingStore = useListingStore();
 const route = useRoute();
 const currentIndex = ref(0);
 const currentLandlord = ref(null);
+
 dayjs.extend(RelativeTime);
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
 
 const currentImage = computed(() => {
     return listing.value?.listing_images?.[currentIndex.value] ?? null;
-})
+});
+
+const streetViewKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+const streetViewUrl = computed(() => {
+    if (!listing.value?.latitude || !listing.value?.longitude) return '';
+    return `https://www.google.com/maps/embed/v1/streetview?key=${streetViewKey}&location=${listing.value.latitude},${listing.value.longitude}&heading=210&pitch=5&fov=90`;
+});
 
 onMounted(async () => {
     await listingStore.showListing(route.params.listingId);
@@ -142,7 +160,7 @@ const moveToLandlordsDetails = async (landlordArg) => {
             params: { landlordId: landlordArg.id },
         });
     } catch(err) {
-        console.error('Navigation failed:', err); // <-- add this
+        console.error('Navigation failed:', err); //
         error.value = err.response?.data?.message || 'failed to move to landlords listings';
     } finally {
         loading.value = false;
@@ -438,7 +456,7 @@ function formatPrice(price) {
     margin-left: 30px;
 }
 .data-point {
-    font-size: 16px;
+    font-size: 17px;
     background-color: #2dcc95;
     padding: 5px 8px;
     border-radius: 60px;
@@ -446,7 +464,17 @@ function formatPrice(price) {
     color: #FFFFFF;
 }
 .data-point-answer {
-    font-size: 16px;
+    font-size: 17px;
     color: #000000;
+}
+.street-view-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 30px;
+    gap: 20px;
+}
+.street-view-header {
+
 }
 </style>
