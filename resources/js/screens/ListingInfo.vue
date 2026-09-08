@@ -49,6 +49,12 @@
                         <span v-if="listing.address_line_2" class="address-line-1-text"> {{ listing.address_line_2 }},</span>
                         <span class="town-text"> {{ listing.town }}</span>
                     </div>
+                    <div class="horizontal-line-above-description"></div>
+                    <div class="description-section">
+                        <h2 class="description-header">A brief description on the property</h2>
+                        <p v-if="listing.description" class="description-text"> {{ listing.description }}</p>
+                        <span v-if="!listing.description" class="no-description">No description provided</span>
+                    </div>
                 </div>
 
                 <div class="listing-card-side">
@@ -63,11 +69,16 @@
                         </div>
                     </div>
                     <div class="purchase-card">
-                        <button>Purchase</button>
+                        <button>
+                            <img :src="cart" alt="cart"/>
+                            <span>Purchase</span>
+
+                        </button>
+
                     </div>
                 </div>
-
             </div>
+
         </div>
         </div>
 </template>
@@ -82,10 +93,15 @@ import redpin from '../assets/red_pin.png';
 import greenCircle from '../assets/green_circle.png';
 import redCircle from '../assets/red_circle.png';
 import profilePicture from '../assets/agent.png';
+import cart from '../assets/cart.png';
+
+
 const listingStore = useListingStore();
+
 const route = useRoute();
 const currentIndex = ref(0);
 const currentLandlord = ref(null);
+
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
 
@@ -149,7 +165,7 @@ function formatPrice(price) {
 .listing-card {
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    height: 150dvh;
     width: 1200px;
     border: 1px solid #F2EFE6;
     margin-top: 180px;
@@ -214,7 +230,7 @@ function formatPrice(price) {
     font-size: 18px;
     background-color: #FFFFFF;
     font-weight: bold;
-    border: 1px solid #2d6e53;
+    border: 1px solid #D3D3D3;
     padding-left: 30px;
     border-radius: 8px;
 }
@@ -296,7 +312,7 @@ function formatPrice(price) {
 .landlord-details-card {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 230px;
    border: 1px solid #D3D3D3;
     width: 100%;
     border-radius: 10px;
@@ -349,7 +365,7 @@ function formatPrice(price) {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000000;
+    border: 1px solid #D3D3D3;
     height: 80px;
     margin-top: 30px;
     border-radius: 8px;
@@ -361,6 +377,7 @@ function formatPrice(price) {
     background-color: #006AFF;
     height: 55%;
     width: 85%;
+    gap: 6px;
     border-radius: 8px;
     border: none;
     font-size: 18px;
@@ -368,7 +385,30 @@ function formatPrice(price) {
     font-weight: bold;
     cursor: pointer;
 }
+.purchase-card img {
+    height: 18px;
+}
 .purchase-card button:hover {
     background-color: #006affcc;
+}
+.horizontal-line-above-description {
+    border-top: 1px solid #D3D3D3;
+    width: 100%;
+    margin-top: 30px;
+}
+.description-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.description-header {
+    font-size: 26px;
+}
+.description-text {
+    font-size: 18px;
+}
+.no-description {
+    font-size: 24px;
+    font-weight: bold;
 }
 </style>
