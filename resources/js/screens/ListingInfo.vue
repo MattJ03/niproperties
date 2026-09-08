@@ -65,6 +65,10 @@
                             <span>Views: </span>
                             <span class="data-point-answer"> {{ listing.views }}</span>
                         </div>
+                        <div class="data-point">
+                            <span>Uploaded: </span>
+                            <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MMMM/YYYY')}}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -105,6 +109,9 @@ import greenCircle from '../assets/green_circle.png';
 import redCircle from '../assets/red_circle.png';
 import profilePicture from '../assets/agent.png';
 import cart from '../assets/cart.png';
+import dayjs from "dayjs";
+import RelativeTime from 'dayjs/plugin/relativeTime.js';
+
 
 
 const listingStore = useListingStore();
@@ -112,7 +119,7 @@ const listingStore = useListingStore();
 const route = useRoute();
 const currentIndex = ref(0);
 const currentLandlord = ref(null);
-
+dayjs.extend(RelativeTime);
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
 
