@@ -13,6 +13,9 @@
                 <div class="search-wrapper">
                     <input type="text" v-model="search" class="search-bar" placeholder="what are you looking for..."/>
                     <button class="search-btn">Search</button>
+                    <div class="search-results">
+
+                    </div>
                 </div>
 
                 <div class="type-of-home-selection">
@@ -113,7 +116,7 @@
 
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+import {ref, reactive, computed, onMounted, watch} from "vue";
 import house4k from '../assets/house4k.jpg';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
@@ -169,6 +172,14 @@ const moveToBrowseAll = async () => {
         loading.value = false;
     }
 }
+
+watch(search, async (newValue, oldValue) => {
+    if(newValue !== oldValue) {
+        await listingStore.getAllListings({
+            search: search.value,
+        });
+    }
+});
 
 </script>
 <style scoped>
@@ -296,6 +307,11 @@ const moveToBrowseAll = async () => {
 }
 .search-btn:hover {
     background-color:  #2d6e53;
+}
+.search-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .popular-search-text {
     z-index: 1;
