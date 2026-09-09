@@ -18,9 +18,9 @@
                     </button>
                 </div>
                     <div v-if="search" class="search-results">
-                        <div v-for="listing in listingStore.allListings" v-if="!listing" class="search-result-item">
+                        <div v-for="listing in listingStore.allListings" v-if="!listing" @click="selectedListing = listing; moveToListingInfo()" class="search-result-item">
                             <span class="address-line-text"> {{ listing.address_line_1 }} </span>
-                            <span class="town-text-in-search"> {{ listing.town }} </span>
+                                <span class="town-text-in-search"> {{ listing.town }} </span>
                         </div>
                     </div>
                 </div>
@@ -149,6 +149,7 @@ const loading = ref(false);
 const error = ref('');
 const { role, name} = storeToRefs(authStore);
 const search = ref('');
+const selectedListing = ref(null);
 
 onMounted(() => {
     listingStore.get3RecentListings();
@@ -197,6 +198,21 @@ const cancelSearch = () => {
         search.value = '';
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to cancel search';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToListingInfo = async () => {
+    loading.value = true;
+    listingStore.listing = selectedListing.value.id;
+    try {
+        await router.push({
+            name: 'listing info',
+            params: { listingId: selectedListing.value.id },
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to listing info page';
     } finally {
         loading.value = false;
     }
@@ -296,6 +312,10 @@ const cancelSearch = () => {
 
     margin-right: 0;
 }
+.horizontal-line-below-result {
+    border-top: 1px solid #cccccc;
+    width: 100%;
+}
 .search-bar-wrapper {
     display: flex;
     flex-direction: row;
@@ -351,6 +371,10 @@ const cancelSearch = () => {
     z-index: 2;
     overflow-y: auto;
 
+}
+.results-values {
+    display: flex;
+    flex-direction: row;
 }
 .search-result-item {
     display: flex;
