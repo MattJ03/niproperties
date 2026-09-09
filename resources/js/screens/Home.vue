@@ -67,7 +67,7 @@
                         <strong><span>Over 3000 sales as of 2026</span></strong>
                         <p class="smaller-text-in-square">Thousands of houses to choose from, to meet any possible need.</p>
                         <div class="bottom-square">
-                            <span class="bottom-of-square-text">Browse Properties</span>
+                            <span class="bottom-of-square-text" @click="moveToBrowseAll()">Browse Properties</span>
                             <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
                         </div>
                     </div>

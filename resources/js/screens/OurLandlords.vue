@@ -6,8 +6,12 @@
                 <span class="landlord-amount-pulled"> 1 - {{ userDirectoryStore.landlords.length }} of {{ userDirectoryStore.landlordCount }} landlords</span>
                 <div class="pagination-buttons">
                     <div class="vertical-line"></div>
-                    <button class="prev-btn" @click="getPreviousPageLandlords()" :disabled="pageNum <= 1">Prev</button>
-                    <button class="next-btn" @click="getNextPageLandlords()" :disabled="userDirectoryStore.landlordCount <= 10">Next</button>
+                    <button class="prev-btn" @click="getPreviousPageLandlords()" :disabled="pageNum <= 1"
+                    :class="{ disabled: pageNum === 1}"
+                    >Prev</button>
+                    <button class="next-btn" @click="getNextPageLandlords()" :disabled="userDirectoryStore.landlordCount <= 10"
+                    :class="{ disabled: userDirectoryStore.landlords.length < 10}"
+                    >Next</button>
                 </div>
             </div>
 
@@ -231,6 +235,11 @@ const moveToLandlordsListings = async() => {
 .prev-btn:hover {
     background-color: #2dcc95;
 }
+.prev-btn.disabled {
+    background-color: #cccccc;
+    color: #000000;
+    cursor: not-allowed;
+}
 .next-btn {
     display: flex;
     align-items: center;
@@ -248,7 +257,11 @@ const moveToLandlordsListings = async() => {
 .next-btn:hover {
     background-color: #2dcc95;
 }
-
+.next-btn.disabled {
+    background-color: #cccccc;
+    color: #000000;
+    cursor: not-allowed;
+}
 .landlords-section {
     display: flex;
     flex-direction: column;
