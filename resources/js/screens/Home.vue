@@ -19,7 +19,8 @@
                 </div>
                     <div v-if="search" class="search-results">
                         <div v-for="listing in listingStore.allListings" v-if="!listing" class="search-result-item">
-                            <span class="address-line-text"> {{ listing.address_line_1 }}</span>
+                            <span class="address-line-text"> {{ listing.address_line_1 }} </span>
+                            <span class="town-text-in-search"> {{ listing.town }} </span>
                         </div>
                     </div>
                 </div>
@@ -292,6 +293,7 @@ const cancelSearch = () => {
     position: relative;
     height: 50px;
     padding-top: 30px;
+
     margin-right: 0;
 }
 .search-bar-wrapper {
@@ -342,7 +344,7 @@ const cancelSearch = () => {
     border-radius: 12px;
 
     gap: 10px;
-    z-index: 5;
+    z-index: 0;
 
 }
 .search-result-item {
@@ -351,6 +353,15 @@ const cancelSearch = () => {
     align-items: center;
     padding: 5px 8px;
     flex-direction: row;
+}
+.address-line-text {
+    margin-right: 50px;
+}
+.town-text-in-search {
+
+}
+.search-result-item:hover {
+    background-color: #cccccc;
 }
 .cancel-search {
     height: 26px;

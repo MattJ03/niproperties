@@ -48,6 +48,7 @@ class ListingController extends Controller
           $query->where(function ($query) use ($search) {
               $query->where('address_line_1', 'LIKE', '%'. $search . '%')
                   ->orWhere('address_line_2', 'LIKE', '%'. $search . '%')
+                  ->orWhere('town', 'LIKE', '%' . $search . '%')
                   ->orWhere('county', 'LIKE', '%'. $search . '%')
                   ->orWhere('postcode', 'LIKE', '%'. $search . '%');
           });
@@ -326,6 +327,7 @@ class ListingController extends Controller
             $query->where(function ($query) use ($search) {
                 $query->where('address_line_1', 'LIKE', '%'. $search . '%')
                     ->orWhere('address_line_2', 'LIKE', '%'. $search . '%')
+                    ->orWhere('town', 'LIKE', '%' . $search . '%')
                     ->orWhere('county', 'LIKE', '%'. $search . '%')
                     ->orWhere('postcode', 'LIKE', '%'. $search . '%');
             });
