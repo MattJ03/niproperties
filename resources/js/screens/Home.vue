@@ -14,11 +14,11 @@
                     <div class="search-bar-wrapper">
                     <input type="text" v-model="search" class="search-bar" placeholder="what are you looking for..."/>
                     <button class="search-btn">
-                        <img :src="x" class="cancel-search" alt="x"/>
+                        <img @click="cancelSearch()" :src="x" class="cancel-search" alt="x"/>
                     </button>
                 </div>
-                    <div v-if="listingStore.allListings >= 1" class="search-results">
-                        <div v-for="listing in listingStore.allListings" class="search-result-item">
+                    <div v-if="search" class="search-results">
+                        <div v-for="listing in listingStore.allListings" v-if="!listing" class="search-result-item">
                             <span class="address-line-text"> {{ listing.address_line_1 }}</span>
                         </div>
                     </div>
@@ -181,16 +181,25 @@ const moveToBrowseAll = async () => {
 }
 
 watch(search, async (newValue, oldValue) => {
-    if(newValue !== oldValue) {
+    if(newValue !== oldValue && newValue !== '') {
         await listingStore.getAllListings({
             search: search.value,
         });
     }
-    if(newValue === null) {
 
-    }
+
 });
 
+const cancelSearch = () => {
+    loading.value = true;
+    try {
+        search.value = '';
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to cancel search';
+    } finally {
+        loading.value = false;
+    }
+}
 </script>
 <style scoped>
 .container {
@@ -331,7 +340,7 @@ watch(search, async (newValue, oldValue) => {
     margin-bottom: 40px;
     margin-top: 17px;
     border-radius: 12px;
-    padding: 5px 8px;
+
     gap: 10px;
     z-index: 5;
 
@@ -340,7 +349,7 @@ watch(search, async (newValue, oldValue) => {
     display: flex;
     cursor: pointer;
     align-items: center;
-
+    padding: 5px 8px;
     flex-direction: row;
 }
 .cancel-search {
