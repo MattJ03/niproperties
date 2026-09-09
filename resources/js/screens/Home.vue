@@ -272,6 +272,7 @@ const cancelSearch = () => {
     justify-content: center;
     align-items: center;
     gap: 3px;
+    z-index: 0;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 12px;
@@ -289,9 +290,8 @@ const cancelSearch = () => {
 .search-wrapper {
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 3;
     position: relative;
-    height: 50px;
     padding-top: 30px;
 
     margin-right: 0;
@@ -337,6 +337,10 @@ const cancelSearch = () => {
 }
 .search-results {
     display: flex;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
     background-color: #FFFFFF;
     flex-direction: column;
     margin-bottom: 40px;
@@ -344,7 +348,8 @@ const cancelSearch = () => {
     border-radius: 12px;
 
     gap: 10px;
-    z-index: 0;
+    z-index: 2;
+    overflow-y: auto;
 
 }
 .search-result-item {
@@ -353,9 +358,11 @@ const cancelSearch = () => {
     align-items: center;
     padding: 5px 8px;
     flex-direction: row;
+    z-index: 1;
 }
 .address-line-text {
     margin-right: 50px;
+    z-index: 1;
 }
 .town-text-in-search {
 
@@ -367,7 +374,7 @@ const cancelSearch = () => {
     height: 26px;
 }
 .popular-search-text {
-    z-index: 1;
+    z-index: 0;
     font-size: 16px;
     white-space: nowrap;
 }
@@ -379,10 +386,10 @@ const cancelSearch = () => {
     justify-content: center;
     align-items: center;
 
-    z-index: 1;
+    z-index: 0;
     position: relative;
     margin: auto;
-    color: #D3D3D3;
+    color: #ffffff;
 }
 .row-of-popular-searches {
     display: flex;
