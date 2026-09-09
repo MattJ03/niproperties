@@ -45,7 +45,7 @@
          </div>
          <div class="created-at-view-listing-wrapper">
              <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
-             <button class="view-btn">View listing</button>
+             <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View listing</button>
          </div>
      </div>
  </div>
@@ -59,6 +59,8 @@ import bed from '../assets/bed.png';
 import bathroom from '../assets/bathroom.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
+import router from '../router/index.js';
+import { useListingStore } from "../stores/ListingStore.js";
 
 dayjs.extend(RelativeTime);
 
@@ -69,7 +71,9 @@ const props = defineProps({
         require: true,
     },
 });
-
+const loading = ref(false);
+const listingStore = useListingStore();
+const selectedListing = ref(null);
 const name = ref(props.listing.landlord.name);
 const primaryImage = computed(() => {
     if(props.listing.listing_images === null || props.listing.listing_images === undefined) {
@@ -102,8 +106,22 @@ const formatPrice = computed(() => {
             currency: 'GBP',
         }).format(props.listing.rent_per_month);
     }
-
 });
+
+const moveToListingInfo = async () => {
+    loading.value = true;
+    listingStore.listing = selectedListing.value;
+    try {
+        await router.push({
+            name: 'listing info',
+            params: { listingId: selectedListing.value.id },
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to listing info';
+    } finally {
+        loading.value = false;
+    }
+}
 </script>
 <style scoped>
 .listing-card {
