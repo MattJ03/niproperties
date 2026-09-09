@@ -11,10 +11,16 @@
                 </div>
 
                 <div class="search-wrapper">
+                    <div class="search-bar-wrapper">
                     <input type="text" v-model="search" class="search-bar" placeholder="what are you looking for..."/>
-                    <button class="search-btn">Search</button>
-                    <div class="search-results">
-
+                    <button class="search-btn">
+                        <img :src="x" class="cancel-search" alt="x"/>
+                    </button>
+                </div>
+                    <div v-if="listingStore.allListings >= 1" class="search-results">
+                        <div v-for="listing in listingStore.allListings" class="search-result-item">
+                            <span class="address-line-text"> {{ listing.address_line_1 }}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -133,6 +139,7 @@ import shield from '../assets/shield.png';
 import RecentListing from "../components/RecentListing.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
+import x from '../assets/whiteX.png';
 
 
 const authStore = useAuthStore();
@@ -178,6 +185,9 @@ watch(search, async (newValue, oldValue) => {
         await listingStore.getAllListings({
             search: search.value,
         });
+    }
+    if(newValue === null) {
+
     }
 });
 
@@ -268,12 +278,18 @@ watch(search, async (newValue, oldValue) => {
 }
 .search-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     z-index: 1;
     position: relative;
     height: 50px;
     padding-top: 30px;
     margin-right: 0;
+}
+.search-bar-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 .search-bar {
     position: relative;
@@ -310,8 +326,25 @@ watch(search, async (newValue, oldValue) => {
 }
 .search-results {
     display: flex;
+    background-color: #FFFFFF;
     flex-direction: column;
-    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 17px;
+    border-radius: 12px;
+    padding: 5px 8px;
+    gap: 10px;
+    z-index: 5;
+
+}
+.search-result-item {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+
+    flex-direction: row;
+}
+.cancel-search {
+    height: 26px;
 }
 .popular-search-text {
     z-index: 1;
