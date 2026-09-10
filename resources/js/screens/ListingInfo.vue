@@ -130,6 +130,8 @@
                 <div class="field">
                     <span class="field-text">Phone number:</span>
                     <span class="field-answer"> {{ landlord.contact }}</span>
+                    <img v-if="isNumberCopied === false" :src="copy" @click="copyNumber()" class="copy-img" id="copy" alt="copy"/>
+                    <img v-if="isNumberCopied === true" :src="tick" class="copy-img" alt="tick" />
                 </div>
             </div>
 
@@ -164,6 +166,7 @@ const currentIndex = ref(0);
 const currentLandlord = ref(null);
 const showModal = ref(false);
 const isEmailCopied = ref(false);
+const isNumberCopied = ref(false);
 dayjs.extend(RelativeTime);
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
@@ -220,13 +223,30 @@ const copyEmail = async () => {
         loading.value = false;
     }
 }
+const copyNumber = async () => {
+    loading.value = true;
+    try {
+        await navigator.clipboard.writeText(landlord.value.contact);
+        changeSrcNumber();
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to copy landlord number';
+    } finally {
+        loading.value = false;
+    }
+}
 
 function changeSrc() {
     isEmailCopied.value = true;
     setTimeout(() => {
         isEmailCopied.value = false;
     }, 5000);
+}
 
+function changeSrcNumber() {
+    isNumberCopied.value = true;
+    setTimeout(() => {
+        isNumberCopied.value = false;
+    }, 5000);
 }
 </script>
 <style scoped>
