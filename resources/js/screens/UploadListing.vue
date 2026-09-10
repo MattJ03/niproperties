@@ -71,7 +71,9 @@
                     <span class="error-message" v-if="errors.type"> {{ errors.type }}</span>
                 </div>
                 </div>
-            <div class="row-details-property-type">
+            <div class="row-details">
+                <div class="field">
+                <span class="field-text">Is the property commercial?</span>
                 <div class="pill-selection">
                     <button class="residential-btn" @click="form.is_commercial = false"
                             :class="{ active: form.is_commercial === false }"
@@ -80,9 +82,14 @@
                             :class="{ active: form.is_commercial === true }"
                     >Commercial</button>
                 </div>
+                </div>
                 <div class="field">
                     <span class="field-text">Number of beds</span>
-                    <input type="number" class="input-text-town" />
+                    <input type="number" v-model="form.beds" class="input-text-town" />
+                </div>
+                <div class="field">
+                    <span class="field-text">Number of bathrooms</span>
+                    <input type="number" v-model="form.bathrooms" class="input-text-town"/>
                 </div>
             </div>
             <div class="row-details">
@@ -323,6 +330,7 @@ function validate() {
     gap: 1rem;
 }
 .field-text {
+    font-weight: bold;
 
 }
 .input-text-address {
@@ -378,6 +386,11 @@ function validate() {
     background-color: #2d6e53;
     color: #FDFBD4;
     border-color: #2d6e53;
+}
+.pill-selection {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
 }
 .description-text {
     width: 100%;
