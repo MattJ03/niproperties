@@ -155,7 +155,8 @@ const listingStore = useListingStore();
 const route = useRoute();
 const currentIndex = ref(0);
 const currentLandlord = ref(null);
-const showModal = ref(true);
+const showModal = ref(false);
+const isEmailCopied = ref(false);
 dayjs.extend(RelativeTime);
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
@@ -200,13 +201,14 @@ function formatPrice(price) {
     ).format(price);
 }
 
-const copyEmail = () => {
+const copyEmail = async () => {
     loading.value = true;
     try {
-        navigator.clipboard.write(landlord.email);
-        console.log(navigator.clipboard.read());
+       await navigator.clipboard.writeText(landlord.value.email);
+       isEmailCopied.value = true;
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to copy to clipboard';
+        console.log(error.value);
     } finally {
         loading.value = false;
     }
