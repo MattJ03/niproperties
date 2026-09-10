@@ -209,7 +209,7 @@ const moveToBelfastLocations = async () => {
     try {
         await router.push({
             name: 'browse',
-            query: { town: 'Downpatrick' },
+            query: { town: 'Belfast' },
         });
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to move to browse all for listing from Belfast';
