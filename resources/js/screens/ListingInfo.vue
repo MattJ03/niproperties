@@ -127,6 +127,10 @@
                     <img v-if="isEmailCopied === false" :src="copy" @click="copyEmail()" class="copy-img" id="copy" alt="copy"/>
                     <img v-if="isEmailCopied === true" :src="tick" class="copy-img" alt="tick" />
                 </div>
+                <div class="field">
+                    <span class="field-text">Phone number:</span>
+                    <span class="field-answer"> {{ landlord.contact }}</span>
+                </div>
             </div>
 
 
