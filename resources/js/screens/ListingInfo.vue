@@ -116,6 +116,19 @@
                     <img :src="x" class="close-btn" alt="close"/>
                 </div>
             </div>
+            <div class="contact-details">
+                <div class="field">
+                    <span class="field-text">Name:</span>
+                    <span class="field-answer"> {{ landlord.name }}</span>
+                </div>
+                <div class="field">
+                    <span class="field-text">Email:</span>
+                    <span class="field-answer"> {{ landlord.email }}</span>
+
+                </div>
+            </div>
+
+
         </div>
 
     </div>
@@ -504,6 +517,7 @@ function formatPrice(price) {
 }
 .contact-info-square {
     display: flex;
+    flex-direction: column;
     width: 700px;
     height: 600px;
     border-radius: 12px;
@@ -537,5 +551,26 @@ function formatPrice(price) {
 .close-btn:hover {
     background-color: #FDFBD4;
     border-radius: 60px;
+}
+.contact-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-top: 80px;
+    flex-direction: column;
+}
+.field {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 30px;
+}
+.field-text {
+    font-weight: bold;
+    font-size: 22px;
+}
+.field-answer {
+    font-size: 22px;
 }
 </style>
