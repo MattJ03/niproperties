@@ -43,8 +43,8 @@
                         <strong><span @click="moveToPortrush()" class="popular-search-text">Portrush</span></strong>
                     </div>
                     <div class="selection-background">
-                        <img :src="briefcase" class="popular-icons" />
-                        <strong><span class="popular-search-text">Commercial properties</span></strong>
+                        <img :src="bed" class="popular-icons" />
+                        <strong><span class="popular-search-text">Studio apartments</span></strong>
                     </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ import RecentListing from "../components/RecentListing.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
 import x from '../assets/whiteX.png';
-
+import bed from '../assets/whitebed.png';
 
 const authStore = useAuthStore();
 const listingStore = useListingStore();
@@ -227,6 +227,20 @@ const moveToPortrush = async () => {
         });
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to move to browse all Portrush';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToStudio = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse',
+            query:{ max_rooms: 1 },
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to browse for studio apartments';
     } finally {
         loading.value = false;
     }
