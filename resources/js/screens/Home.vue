@@ -63,8 +63,8 @@
                    <div class="info-in-square">
                        <strong><span>Listings in all 6 counties</span></strong>
                        <p class="smaller-text-in-square">Find hundreds of properties all across the 6 counties of Northern Ireland.</p>
-                       <div class="bottom-square">
-                       <span @click="moveToBrowseAll()" class="bottom-of-square-text">View locations</span>
+                       <div @click="moveToBrowseAll()" class="bottom-square">
+                       <span class="bottom-of-square-text">View locations</span>
                            <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
                        </div>
                    </div>
@@ -76,8 +76,8 @@
                     <div class="info-in-square">
                         <strong><span>Over 3000 sales as of 2026</span></strong>
                         <p class="smaller-text-in-square">Thousands of houses to choose from, to meet any possible need.</p>
-                        <div class="bottom-square">
-                            <span class="bottom-of-square-text" @click="moveToBrowseAll()">Browse Properties</span>
+                        <div @click="moveToBrowseAll()" class="bottom-square">
+                            <span class="bottom-of-square-text">Browse Properties</span>
                             <img :src="rightarrow" class="bottom-square-icon" alt="right arrow" />
                         </div>
                     </div>
@@ -89,8 +89,8 @@
                     <div class="info-in-square">
                         <strong><span>Trusted vendors</span></strong>
                         <p class="smaller-text-in-square">Vendors have to be approved before being able to list their properties.</p>
-                      <div class="bottom-square">
-                          <span @click="moveToOurLandlord()" class="bottom-of-square-text">View Landlords</span>
+                      <div @click="moveToOurLandlord()" class="bottom-square">
+                          <span class="bottom-of-square-text">View Landlords</span>
                           <img :src="rightarrow" class="bottom-square-icon" alt="right arrow"/>
                       </div>
                     </div>
