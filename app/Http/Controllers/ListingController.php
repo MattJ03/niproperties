@@ -32,6 +32,9 @@ class ListingController extends Controller
       if($request->filled('max_price')) {
           $query->where('price', '<=', $request->max_price);
       }
+      if($request->filled('town')) {
+          $query->where('town', $request->town);
+      }
       if($request->filled('county')) {
           $query->where('county', $request->county);
       }
