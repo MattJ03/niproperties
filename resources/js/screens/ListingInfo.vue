@@ -98,7 +98,6 @@
                         <button>
                             <img :src="cart" alt="cart"/>
                             <span>Purchase</span>
-
                         </button>
 
                     </div>
@@ -107,6 +106,19 @@
 
         </div>
         </div>
+    <div v-if="showModal === true" class="modal-overlay">
+        <div class="contact-info-square">
+            <div class="top-of-modal">
+                <div class="header-contact-wrapper">
+                <h2 class="contact-info-header">Contact info</h2>
+                </div>
+                <div class="close-modal-wrapper">
+                    <img :src="x" class="close-btn" alt="close"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
@@ -122,7 +134,7 @@ import profilePicture from '../assets/agent.png';
 import cart from '../assets/cart.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
-
+import x from '../assets/x.png';
 
 
 const listingStore = useListingStore();
@@ -130,7 +142,7 @@ const listingStore = useListingStore();
 const route = useRoute();
 const currentIndex = ref(0);
 const currentLandlord = ref(null);
-
+const showModal = ref(true);
 dayjs.extend(RelativeTime);
 
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
@@ -476,5 +488,54 @@ function formatPrice(price) {
 }
 .street-view-header {
 
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+}
+.contact-info-square {
+    display: flex;
+    width: 700px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: #F2EFE6;
+}
+.top-of-modal {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+}
+.header-contact-wrapper {
+    display: flex;
+    width: 100%;
+    padding-top: 10px;
+    justify-content: center;
+}
+.close-modal-wrapper {
+    display: flex;
+    padding-top: 10px;
+    padding-right: 15px;
+    justify-content: end;
+    flex-direction: row;
+}
+.close-btn {
+    height: 40px;
+    cursor: pointer;
+    padding: 8px 8px;
+}
+.close-btn:hover {
+    background-color: #FDFBD4;
+    border-radius: 60px;
 }
 </style>
