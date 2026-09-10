@@ -134,6 +134,7 @@ import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import ListingGrid from "../components/ListingGrid.vue";
 import router from '../axios.js';
+import { useRoute } from "vue-router";
 import {storeToRefs} from "pinia";
 import housesquare from '../assets/housesquare.png';
 import keys from '../assets/keys2.png';
@@ -148,7 +149,7 @@ const loading = ref(false);
 const error = ref('');
 const listingStore = useListingStore();
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
-
+const route = useRoute();
 const filters = reactive({
     rent_or_buy: '',
     min_price: '',
@@ -379,6 +380,10 @@ onMounted(() => {
     console.log('onMounted running')
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
+    if(route.query.price) {
+        filters.max_price = route.query.price;
+        listingStore.getAllListings({...filters});
+    }
 
 });
 
