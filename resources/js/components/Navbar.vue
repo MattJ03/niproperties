@@ -217,7 +217,9 @@ const logout = async() => {
     color: #1F4D3A;
     cursor: pointer;
     line-height: 1;
-
+}
+.sell-btn:hover {
+    background-color: #CCB89D;
 }
 .upload-img {
     height: 16px;
@@ -244,5 +246,8 @@ const logout = async() => {
     cursor: pointer;
     line-height: 1;
     text-wrap: nowrap;
+}
+.login-btn:hover {
+    background-color: #CCB89D;
 }
 </style>
