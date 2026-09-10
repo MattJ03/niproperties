@@ -570,7 +570,7 @@ function changeSrcNumber() {
     width: 700px;
     height: 600px;
     border-radius: 12px;
-    background-color: #F2EFE6;
+    background-color: #FFFFFF;
 }
 .top-of-modal {
     display: flex;
@@ -582,12 +582,12 @@ function changeSrcNumber() {
 .header-contact-wrapper {
     display: flex;
     width: 100%;
-    padding-top: 10px;
+    padding-top: 30px;
     justify-content: center;
 }
 .close-modal-wrapper {
     display: flex;
-    padding-top: 10px;
+    padding-top: 30px;
     padding-right: 15px;
     justify-content: end;
     flex-direction: row;
@@ -614,7 +614,7 @@ function changeSrcNumber() {
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 .field-text {
     font-weight: bold;
