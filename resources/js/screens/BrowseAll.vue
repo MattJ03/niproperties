@@ -391,6 +391,10 @@ onMounted(() => {
         filters.town = route.query.town;
         listingStore.getAllListings({...filters});
     }
+    if(route.query.max_rooms) {
+        filters.max_num_of_rooms  = route.query.max_rooms;
+        listingStore.getAllListings({...filters})
+    }
 
 });
 
