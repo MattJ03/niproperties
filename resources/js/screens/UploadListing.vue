@@ -7,16 +7,6 @@
         </div>
         <div class="property-details-card">
             <strong><span class="property-details-header">Property details</span></strong>
-            <div class="row-details-property-type">
-                <div class="pill-selection">
-                    <button class="residential-btn" @click="form.is_commercial = false"
-                    :class="{ active: form.is_commercial === false }"
-                    >Residential</button>
-                    <button class="commericial-btn" @click="form.is_commercial = true"
-                    :class="{ active: form.is_commercial === true }"
-                    >Commercial</button>
-                </div>
-            </div>
             <div class="row-details-address">
                 <div class="field">
                     <strong><label class="field-tex">Address line 1</label></strong>
@@ -81,6 +71,20 @@
                     <span class="error-message" v-if="errors.type"> {{ errors.type }}</span>
                 </div>
                 </div>
+            <div class="row-details-property-type">
+                <div class="pill-selection">
+                    <button class="residential-btn" @click="form.is_commercial = false"
+                            :class="{ active: form.is_commercial === false }"
+                    >Residential</button>
+                    <button class="commericial-btn" @click="form.is_commercial = true"
+                            :class="{ active: form.is_commercial === true }"
+                    >Commercial</button>
+                </div>
+                <div class="field">
+                    <span class="field-text">Number of beds</span>
+                    <input type="number" class="input-text-town" />
+                </div>
+            </div>
             <div class="row-details">
                 <textarea class="description-text" v-model="form.description" placeholder="Leave a short description about the property...">
 
@@ -136,6 +140,8 @@ const form = reactive({
     price: '',
     rent_per_month: '',
     no_of_rooms: '',
+    beds: '',
+    bathrooms: '',
     type: '',
     is_commercial: false,
     description: '',
@@ -230,7 +236,7 @@ function validate() {
     flex-direction: column;
     height: fit-content;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 110px;
 
 }
 .header-group {
@@ -395,6 +401,9 @@ function validate() {
     background-color: #FFFFFF;
     margin-top: 40px;
     border-radius: 12px;
+}
+input-text-number-beds {
+
 }
 .attach-header {
     display: flex;
