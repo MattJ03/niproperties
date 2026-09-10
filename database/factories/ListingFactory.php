@@ -28,6 +28,8 @@ class ListingFactory extends Factory
             'postcode' => fake()->postcode(),
             'price' => fake()->numberBetween(50000, 100000),
             'no_of_rooms' => fake()->numberBetween(1, 10),
+            'beds' => fake()->numberBetween(1, 1000),
+            'bathrooms' => fake()->numberBetween(1, 1000),
             'type' => fake()->randomElement(['house', 'apartment', 'commercial']),
             'sale_status' => 'open',
             'description' => fake()->text(),
