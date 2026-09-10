@@ -33,12 +33,12 @@
                                 <span class="field-topic">Rooms</span>
                             </div>
                             <div class="field">
-                                <span class="field-answer">To be added</span>
+                                <span class="field-answer"> {{ listing.beds }}</span>
                                 <span class="field-topic">Beds</span>
                             </div>
                             <div class="field">
-                                <span class="field-answer">Sqft</span>
-                                <span class="field-topic">To be added</span>
+                                <span class="field-answer"> {{ listing.bathrooms }}</span>
+                                <span class="field-topic">Bathrooms</span>
                             </div>
                         </div>
                     </div>
