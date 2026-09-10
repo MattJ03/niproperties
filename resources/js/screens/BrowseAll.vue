@@ -92,6 +92,7 @@
                 </div>
                 </div>
         <div class="listings-rows">
+            <h1 v-if="listingStore.allListings.length === 0" class="no-listings-text">No listing found</h1>
             <ListingGrid
                 v-for="listing in listingStore.allListings"
                 :listing="listing"

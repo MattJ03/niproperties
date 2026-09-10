@@ -40,7 +40,7 @@
                     </div>
                     <div class="selection-background">
                         <img :src="keys" class="popular-icons" />
-                        <strong><span class="popular-search-text">Rent</span></strong>
+                        <strong><span @click="moveToPortrush()" class="popular-search-text">Portrush</span></strong>
                     </div>
                     <div class="selection-background">
                         <img :src="briefcase" class="popular-icons" />
@@ -213,6 +213,20 @@ const moveToBelfastLocations = async () => {
         });
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to move to browse all for listing from Belfast';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToPortrush = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse',
+            query: { town: 'Portrush '},
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to move to browse all Portrush';
     } finally {
         loading.value = false;
     }
