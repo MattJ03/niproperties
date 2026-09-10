@@ -91,7 +91,7 @@
                                 <img :src="profilePicture" class="profile-picture-img" alt="agent picture"/>
                             </div>
                             <span class="landlord-name-box"> {{ landlord.name }}</span>
-                            <button class="contact-landlord"> Contact {{ landlord.name }}</button>
+                            <button @click="showModal = true;" class="contact-landlord"> Contact {{ landlord.name }}</button>
                         </div>
                     </div>
                     <div class="purchase-card">
@@ -112,7 +112,7 @@
                 <div class="header-contact-wrapper">
                 <h2 class="contact-info-header">Contact info</h2>
                 </div>
-                <div class="close-modal-wrapper">
+                <div @click="showModal = false;" class="close-modal-wrapper">
                     <img :src="x" class="close-btn" alt="close"/>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                 <div class="field">
                     <span class="field-text">Email:</span>
                     <span class="field-answer"> {{ landlord.email }}</span>
-
+                    <img :src="copy" @click="copyEmail()" class="copy-img" alt="copy"/>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@ import cart from '../assets/cart.png';
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import x from '../assets/x.png';
-
+import copy from '../assets/copy.png';
 
 const listingStore = useListingStore();
 
@@ -198,6 +198,18 @@ function formatPrice(price) {
         currency: "GBP",
     }
     ).format(price);
+}
+
+const copyEmail = () => {
+    loading.value = true;
+    try {
+        navigator.clipboard.write(landlord.email);
+        console.log(navigator.clipboard.read());
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to copy to clipboard';
+    } finally {
+        loading.value = false;
+    }
 }
 </script>
 <style scoped>
@@ -563,6 +575,7 @@ function formatPrice(price) {
 .field {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
     margin-top: 30px;
 }
@@ -572,5 +585,10 @@ function formatPrice(price) {
 }
 .field-answer {
     font-size: 22px;
+}
+.copy-img {
+    height: 18px;
+    margin-left: 24px;
+    cursor: pointer;
 }
 </style>
