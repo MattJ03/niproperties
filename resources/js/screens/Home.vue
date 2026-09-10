@@ -30,19 +30,19 @@
                         <p>Popular searches</p>
                     </div>
                     <div class="row-of-popular-searches">
-                    <div class="selection-background">
+                    <div @click="moveToBelfastLocations()" class="selection-background">
                         <img :src="location" class="popular-icons" />
-                        <strong><span @click="moveToBelfastLocations()" class="popular-search-text">Belfast</span></strong>
+                        <strong><span class="popular-search-text">Belfast</span></strong>
                     </div>
-                    <div class="selection-background">
+                    <div @click="moveTo200K()" class="selection-background">
                         <img :src="priceTag" class="popular-icons" />
-                        <strong><span @click="moveTo200K()" class="popular-search-text">Under £200,000</span></strong>
+                        <strong><span class="popular-search-text">Under £200,000</span></strong>
                     </div>
-                    <div class="selection-background">
+                    <div @click="moveToPortrush()" class="selection-background">
                         <img :src="keys" class="popular-icons" />
-                        <strong><span @click="moveToPortrush()" class="popular-search-text">Portrush</span></strong>
+                        <strong><span class="popular-search-text">Portrush</span></strong>
                     </div>
-                    <div class="selection-background">
+                    <div @click="moveToStudio()" class="selection-background">
                         <img :src="bed" class="popular-icons" />
                         <strong><span class="popular-search-text">Studio apartments</span></strong>
                     </div>
