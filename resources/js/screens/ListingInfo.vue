@@ -124,7 +124,8 @@
                 <div class="field">
                     <span class="field-text">Email:</span>
                     <span class="field-answer"> {{ landlord.email }}</span>
-                    <img :src="copy" @click="copyEmail()" class="copy-img" alt="copy"/>
+                    <img v-if="isEmailCopied === false" :src="copy" @click="copyEmail()" class="copy-img" id="copy" alt="copy"/>
+                    <img v-if="isEmailCopied === true" :src="tick" class="copy-img" alt="tick" />
                 </div>
             </div>
 
@@ -149,6 +150,8 @@ import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import x from '../assets/x.png';
 import copy from '../assets/copy.png';
+import tick from '../assets/greenTick.png';
+
 
 const listingStore = useListingStore();
 
@@ -205,13 +208,21 @@ const copyEmail = async () => {
     loading.value = true;
     try {
        await navigator.clipboard.writeText(landlord.value.email);
-       isEmailCopied.value = true;
+       changeSrc();
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to copy to clipboard';
         console.log(error.value);
     } finally {
         loading.value = false;
     }
+}
+
+function changeSrc() {
+    isEmailCopied.value = true;
+    setTimeout(() => {
+        isEmailCopied.value = false;
+    }, 5000);
+
 }
 </script>
 <style scoped>
