@@ -36,7 +36,7 @@
                     </div>
                     <div class="selection-background">
                         <img :src="priceTag" class="popular-icons" />
-                        <strong><span class="popular-search-text">Under £200,000</span></strong>
+                        <strong><span @click="moveTo200K()" class="popular-search-text">Under £200,000</span></strong>
                     </div>
                     <div class="selection-background">
                         <img :src="keys" class="popular-icons" />
@@ -188,9 +188,21 @@ watch(search, async (newValue, oldValue) => {
             search: search.value,
         });
     }
-
-
 });
+
+const moveTo200K = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse',
+            query: { price: 20000000 },
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to browse all for listings under 200k';
+    } finally {
+        loading.value = false;
+    }
+}
 
 const cancelSearch = () => {
     loading.value = true;
