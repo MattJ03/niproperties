@@ -155,6 +155,7 @@ const filters = reactive({
     min_price: '',
     max_price: '',
     county: '',
+    town: '',
     min_num_of_rooms: '',
     max_num_of_rooms: '',
     search: '',
@@ -380,8 +381,13 @@ onMounted(() => {
     console.log('onMounted running')
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
+
     if(route.query.price) {
         filters.max_price = route.query.price;
+        listingStore.getAllListings({...filters});
+    }
+    if(route.query.town) {
+        filters.town = route.query.town;
         listingStore.getAllListings({...filters});
     }
 
