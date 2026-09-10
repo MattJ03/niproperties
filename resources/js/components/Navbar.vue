@@ -8,7 +8,7 @@
             <strong><span class="headings" @click="moveToRent()">Rent</span></strong>
             <strong><span class="headings" @click="moveToCommercial()">Commercial</span></strong>
             <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
-            <strong><span class="headings">Dashboard & Analytics</span></strong>
+            <strong><span class="headings" @click="moveToDashboard()">Dashboard & Analytics</span></strong>
         </div>
         <div class="btn-section-nav">
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
@@ -126,7 +126,7 @@ const moveToOurLandlords = async () => {
         loading.value = false;
     }
 }
-const logout = async() => {
+const logout = async () => {
     loading.value = true;
     try {
        await authStore.logout();
@@ -135,6 +135,19 @@ const logout = async() => {
        });
     } catch (err) {
         error.value = error.response?.data?.message || 'failed to move to login';
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToDashboard = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'dashboard',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to the dashboard screen';
     } finally {
         loading.value = false;
     }

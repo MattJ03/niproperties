@@ -195,7 +195,7 @@ const moveTo200K = async () => {
     try {
         await router.push({
             name: 'browse',
-            query: { price: 20000000 },
+            query: { price: 200000 },
         });
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to move to browse all for listings under 200k';

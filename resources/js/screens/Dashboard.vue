@@ -1,5 +1,8 @@
 <template>
     <Navbar></Navbar>
+    <div class="container">
+
+    </div>
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted } from "vue";
@@ -15,4 +18,8 @@ const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
 </script>
 <style scoped>
+.container {
+    display: flex;
+    width: 100%;
+}
 </style>
