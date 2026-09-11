@@ -62,7 +62,7 @@ public function getAllUsers() {
 
         return response()->json([
             'users' => $users,
-            'users_count' => $users->count(),
+            'user_count' => $users->count(),
             'message' => 'users Found',
         ]);
 }
