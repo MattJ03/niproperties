@@ -17,6 +17,7 @@ export const useListingStore = defineStore('listings', () => {
    const totalLandlordListings = ref('');
    const noListings = computed(() => allListings.value.length === 0);
    const soldListingsMonth = ref('');
+   const averageRent = ref('');
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -203,6 +204,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getAverageRentOfProperties = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('averageRent');
+           averageRent.value = res.data.average_rent;
+       } catch (err) {
+           error.value = error.response?.data?.message || 'failed to get average rent';
+       } finally {
+           loading.value = false;
+       }
+    }
+
 
    return {
        loading,
@@ -219,6 +232,7 @@ export const useListingStore = defineStore('listings', () => {
        landlordListings,
        totalLandlordListings,
        soldListingsMonth,
+       averageRent,
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -232,5 +246,6 @@ export const useListingStore = defineStore('listings', () => {
        fetchLandlordById,
        showListing,
        getListingsSoldThisMonth,
+       getAverageRentOfProperties,
    };
 });

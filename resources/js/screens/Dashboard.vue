@@ -21,6 +21,7 @@
             </div>
             <div class="analytics-square">
                 <span class="analytics-square-title">Average rent £</span>
+                <span class="analytic-square-value"> {{ formatPrice(averageRent) }}</span>
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@ const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount, soldListingsMonth } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth, averageRent } = storeToRefs(listingStore);
 const { userCount, landlordCount } = storeToRefs(userStore);
 
 const currentMonth = ref('');
@@ -49,6 +50,7 @@ onMounted(async () => {
     await userStore.getLandlords();
     getCurrentMonthAndYear();
     await listingStore.getListingsSoldThisMonth(currentMonth.value, currentYear.value);
+    await listingStore.getAverageRentOfProperties();
 });
 
 function getCurrentMonthAndYear() {
@@ -57,6 +59,13 @@ function getCurrentMonthAndYear() {
     currentYear.value = d.getFullYear();
 }
 console.log(currentMonth.value);
+
+function formatPrice(price) {
+    return Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+    }).format(price);
+}
 </script>
 <style scoped>
 .container {
