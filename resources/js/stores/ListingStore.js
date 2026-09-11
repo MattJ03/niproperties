@@ -16,6 +16,7 @@ export const useListingStore = defineStore('listings', () => {
    const landlordListings = ref([]);
    const totalLandlordListings = ref('');
    const noListings = computed(() => allListings.value.length === 0);
+   const soldListingsMonth = ref('');
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -187,6 +188,21 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getListingsSoldThisMonth = async (dates) => {
+       loading.value = true;
+       try {
+           const res = await api.get(`soldListingsMonth`, {
+               params: { ...dates
+               },
+           });
+           soldListingsMonth.value = res.data.listing_count;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to listings sold this month';
+       } finally {
+           loading.value = false;
+       }
+    }
+
 
    return {
        loading,
@@ -202,6 +218,7 @@ export const useListingStore = defineStore('listings', () => {
        landlord,
        landlordListings,
        totalLandlordListings,
+       soldListingsMonth,
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -214,5 +231,6 @@ export const useListingStore = defineStore('listings', () => {
        getLandlordsListings,
        fetchLandlordById,
        showListing,
+       getListingsSoldThisMonth,
    };
 });

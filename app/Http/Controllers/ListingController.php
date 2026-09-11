@@ -609,11 +609,10 @@ class ListingController extends Controller
           'year' => 'required|integer|between:2050',
       ]);
 
-      $query = Listing::where('sale_status', 'closed')
+      $listings = Listing::where('sale_status', 'closed')
                         ->whereMonth('sold_at', $validatedData['month'])
                         ->whereYear('sold_at', $validatedData['year'])
                         ->get();
-      $listings = $query->items();
 
       if($listings->isEmpty()) {
           return response()->json([
@@ -623,7 +622,7 @@ class ListingController extends Controller
       }
       return response()->json([
           'listings' => $listings,
-          'listing_count' => $listings->total(),
+          'listing_count' => $listings->count(),
           'message' => 'listings found.',
       ]);
 

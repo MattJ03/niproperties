@@ -28,17 +28,20 @@ const userStore = useUserDirectoryStore();
 const { listingsCount } = storeToRefs(listingStore);
 const { userCount } = storeToRefs(userStore);
 const currentMonth = ref('');
+const currentYear = ref('');
+
 onMounted(async () => {
     await listingStore.getAllListings();
     await userStore.getTotalUsers();
-    getCurrentMonth()
-    console.log(currentMonth.value + ' is the month')
+    getCurrentMonthAndYear();
+
+    console.log(currentMonth.value + ' is the month' + currentYear.value)
 });
 
-function getCurrentMonth() {
+function getCurrentMonthAndYear() {
     let d = new Date();
     currentMonth.value = d.getMonth();
-    return currentMonth;
+    currentYear.value = d.getFullYear();
 }
 console.log(currentMonth.value);
 </script>
