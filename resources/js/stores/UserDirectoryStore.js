@@ -7,6 +7,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    const error = ref('');
    const landlords = ref([]);
    const landlordCount = ref('');
+   const userCount = ref('');
    const totalListingsLandlord = ref('');
    const finalPage = ref(0);
    const finalPageNumRounded = ref(0);
@@ -24,24 +25,39 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
            landlords.value = res.data.landlords;
            landlordCount.value = res.data.landlord_count;
            totalListingsLandlord.value = res.data.listings_count;
-       } catch(err) {
+       } catch (err) {
            error.value = error.response?.data?.message || 'failed to get the landlord info';
        } finally {
            loading.value = false;
        }
+
    }
+       async function getTotalUsers() {
+           loading.value = true;
+           try {
+               const res = await api.get('getUsers');
+               userCount.value = res.data.user_count;
+           } catch(err) {
+               error.value = error.response?.data?.message || 'failed to get users count';
+           } finally {
+               loading.value = false;
+           }
+       }
+
 
    return {
        loading,
        error,
        landlords,
        landlordCount,
+       userCount,
        totalListingsLandlord,
        selectedLandlord,
        finalPage,
        finalPageNumRounded,
        finalPageNum,
        getLandlords,
+       getTotalUsers,
    }
 
 });
