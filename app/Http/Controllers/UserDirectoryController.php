@@ -66,4 +66,21 @@ public function getAllUsers() {
             'message' => 'users Found',
         ]);
 }
+
+public function getLandlordsWithLargestPortfolios() {
+        $landlords = User::role('landlord')->withCount('listings')->take(5)->get();
+
+        if($landlords->count() <= 0) {
+            return response()->json([
+                'message' => 'no landlords found',
+                'landlords' => $landlords->items(),
+            ]);
+        }
+
+        return response()->json([
+            'landlords' => $landlords->items(),
+            'landlords_count' => $landlords->count(),
+            'message' => 'landlords found',
+        ]);
+}
 }
