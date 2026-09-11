@@ -17,6 +17,10 @@
             </div>
             <div class="analytics-square">
                 <span class="analytics-square-title">Landlords</span>
+                <span class="analytic-square-value"> {{ landlordCount }}</span>
+            </div>
+            <div class="analytics-square">
+                <span class="analytics-square-title">Average rent £</span>
             </div>
         </div>
     </div>
@@ -34,13 +38,15 @@ const error = ref('');
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
 const { listingsCount, soldListingsMonth } = storeToRefs(listingStore);
-const { userCount } = storeToRefs(userStore);
+const { userCount, landlordCount } = storeToRefs(userStore);
+
 const currentMonth = ref('');
 const currentYear = ref('');
 
 onMounted(async () => {
     await listingStore.getAllListings();
     await userStore.getTotalUsers();
+    await userStore.getLandlords();
     getCurrentMonthAndYear();
     await listingStore.getListingsSoldThisMonth(currentMonth.value, currentYear.value);
 });
@@ -73,13 +79,13 @@ console.log(currentMonth.value);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     height: 200px;
     width: 270px;
-    background-color: #2dcc95;
+    background-color: #FFFFFF;
     border: 1px solid #000000;
 }
 .analytics-square-title {
     margin-left: 15px;
     margin-top: 10px;
-    color: #FFFFFF;
+    color: #000000;
     font-size: 20px;
 }
 .analytic-square-value {
@@ -89,7 +95,7 @@ console.log(currentMonth.value);
     margin: auto;
     font-size: 38px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #000000;
 
 }
 </style>
