@@ -50,4 +50,20 @@ class UserDirectoryController extends Controller
             'landlord' => $landlord,
         ]);
 }
+
+public function getAllUsers() {
+        $users = User::all();
+        if($users->count() <= 0) {
+            return response()->json([
+                'users' => $users,
+                'message' => 'no users found',
+            ]);
+        }
+
+        return response()->json([
+            'users' => $users,
+            'users_count' => $users->count(),
+            'message' => 'users Found',
+        ]);
+}
 }
