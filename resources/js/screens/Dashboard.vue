@@ -24,6 +24,10 @@
                 <span class="analytic-square-value"> {{ formatPrice(averageRent) }}</span>
             </div>
         </div>
+        <div class="landlords-most-listings-wrapper">
+            <span class="top-of-leaderboard-text">Largest portfolios</span>
+            <div class="horizontal-line-below-header"></div>
+        </div>
     </div>
 </template>
 <script setup>
@@ -70,6 +74,7 @@ function formatPrice(price) {
 <style scoped>
 .container {
     display: flex;
+    flex-direction: column;
     width: 100%;
 }
 .row-of-stats {
@@ -80,6 +85,7 @@ function formatPrice(price) {
     gap: 80px;
     margin-top: 180px;
     padding-left: 60px;
+    margin-bottom: 50px;
 }
 .analytics-square {
     display: flex;
@@ -106,5 +112,25 @@ function formatPrice(price) {
     font-weight: bold;
     color: #000000;
 
+}
+.landlords-most-listings-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    border: 1px solid #000000;
+    width: 300px;
+    border-radius: 0 14px 14px 0;
+    margin-top: 40px;
+    padding-top: 8px;
+    background-color: #FFFFFF;
+}
+.top-of-leaderboard-text {
+    font-size: 22px;
+    padding-left: 15px;
+}
+.horizontal-line-below-header {
+    width: 100%;
+    margin-top: 15px;
+    border-top: 1px solid #000000;
 }
 </style>
