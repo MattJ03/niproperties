@@ -604,10 +604,28 @@ class ListingController extends Controller
     }
 
     public function getNumberOfListingsSoldThisMonth(Request $request) {
-      $user = auth()->id();
+      $validatedData = $request->validate([
+          'month' => 'required|integer|between:1,12',
+          'year' => 'required|integer|between:2050',
+      ]);
 
-      $query = Listing::where('sale_status', 'closed');
-                             ->
+      $query = Listing::where('sale_status', 'closed')
+                        ->whereMonth('sold_at', $validatedData['month'])
+                        ->whereYear('sold_at', $validatedData['year'])
+                        ->get();
+      $listings = $query->items();
+
+      if($listings->isEmpty()) {
+          return response()->json([
+              'message' => 'no listings found',
+              'listings' => [],
+          ]);
+      }
+      return response()->json([
+          'listings' => $listings,
+          'listing_count' => $listings->total(),
+          'message' => 'listings found.',
+      ]);
 
     }
 }

@@ -25,6 +25,7 @@ Route::get('/listings/images/{listingImage}', [ListingImageController::class, 's
 Route::get('/getLandlords', [UserDirectoryController::class, 'getAllLandlords']);
 Route::get('/getLandlord/{id}', [UserDirectoryController::class, 'showLandlord']);
 Route::get('/getUsers', [UserDirectoryController::class, 'getAllUsers']);
+Route::get('soldListingsMonth', [ListingController::class, 'getNumberOfListingsSoldThisMonth']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);
