@@ -627,4 +627,20 @@ class ListingController extends Controller
       ]);
 
     }
+
+    public function getAverageRentPrice() {
+      $sum = '';
+      $rentals = Listing::where('sale_status', 'open')
+                          ->where('type', 'rent')
+                           ->where('sale_status', 'open')
+                           ->get();
+      foreach($rentals as $rental) {
+          $sum = $rental->rent_per_mont;
+      }
+      $total = $sum / $rentals->count();
+
+      return response()->json([
+          'average_rent' => $total,
+      ]);
+  }
 }
