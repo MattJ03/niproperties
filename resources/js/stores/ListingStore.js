@@ -188,11 +188,11 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
-    const getListingsSoldThisMonth = async (dates) => {
+    const getListingsSoldThisMonth = async (month, year) => {
        loading.value = true;
        try {
            const res = await api.get(`soldListingsMonth`, {
-               params: { ...dates
+               params: { month, year
                },
            });
            soldListingsMonth.value = res.data.listing_count;

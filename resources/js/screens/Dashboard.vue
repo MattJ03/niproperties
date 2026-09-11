@@ -10,6 +10,14 @@
                 <span class="analytics-square-title">Total users:</span>
                 <span class="analytic-square-value"> {{ userCount }}</span>
             </div>
+            <div class="analytics-square">
+                <span class="analytics-square-title">Sold propperties this month</span>
+                <span v-if="soldListingsMonth" class="analytic-square-value"> {{ soldListingsMonth }}</span>
+                <span v-if="!soldListingsMonth" class="analytic-square-value"> 0 </span>
+            </div>
+            <div class="analytics-square">
+                <span class="analytics-square-title">Landlords</span>
+            </div>
         </div>
     </div>
 </template>
@@ -25,7 +33,7 @@ const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth } = storeToRefs(listingStore);
 const { userCount } = storeToRefs(userStore);
 const currentMonth = ref('');
 const currentYear = ref('');
@@ -34,8 +42,7 @@ onMounted(async () => {
     await listingStore.getAllListings();
     await userStore.getTotalUsers();
     getCurrentMonthAndYear();
-
-    console.log(currentMonth.value + ' is the month' + currentYear.value)
+    await listingStore.getListingsSoldThisMonth(currentMonth.value, currentYear.value);
 });
 
 function getCurrentMonthAndYear() {
@@ -57,28 +64,32 @@ console.log(currentMonth.value);
     width: 100%;
     gap: 80px;
     margin-top: 180px;
-    padding-left: 40px;
+    padding-left: 60px;
 }
 .analytics-square {
     display: flex;
     flex-direction: column;
     border-radius: 14px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    height: 150px;
-    width: 200px;
-
+    height: 200px;
+    width: 270px;
+    background-color: #2dcc95;
     border: 1px solid #000000;
 }
 .analytics-square-title {
     margin-left: 15px;
     margin-top: 10px;
-    color: #88807b;
-    font-size: 18px;
+    color: #FFFFFF;
+    font-size: 20px;
 }
 .analytic-square-value {
     display: flex;
+    align-items: center;
+    justify-content: center;
     margin: auto;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: bold;
+    color: #FFFFFF;
+
 }
 </style>

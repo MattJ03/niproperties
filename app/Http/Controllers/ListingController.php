@@ -606,7 +606,7 @@ class ListingController extends Controller
     public function getNumberOfListingsSoldThisMonth(Request $request) {
       $validatedData = $request->validate([
           'month' => 'required|integer|between:1,12',
-          'year' => 'required|integer|between:2050',
+          'year' => 'required|integer|between:2000,2050',
       ]);
 
       $listings = Listing::where('sale_status', 'closed')
