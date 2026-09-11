@@ -601,7 +601,7 @@ class ListingController extends Controller
           'listings' => $listings->items(),
           'message' => 'listings found',
       ]);
-
-
     }
+
+
 }

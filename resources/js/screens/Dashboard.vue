@@ -8,7 +8,7 @@
             </div>
             <div class="analytics-square">
                 <span class="analytics-square-title">Total users:</span>
-                <span class="analytic-square-value"></span>
+                <span class="analytic-square-value"> {{ userCount }}</span>
             </div>
         </div>
     </div>
@@ -26,11 +26,21 @@ const error = ref('');
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
 const { listingsCount } = storeToRefs(listingStore);
-
+const { userCount } = storeToRefs(userStore);
+const currentMonth = ref('');
 onMounted(async () => {
     await listingStore.getAllListings();
+    await userStore.getTotalUsers();
+    getCurrentMonth()
+    console.log(currentMonth.value + ' is the month')
+});
 
-})
+function getCurrentMonth() {
+    let d = new Date();
+    currentMonth.value = d.getMonth();
+    return currentMonth;
+}
+console.log(currentMonth.value);
 </script>
 <style scoped>
 .container {
@@ -43,7 +53,7 @@ onMounted(async () => {
     height: 15dvh;
     width: 100%;
     gap: 80px;
-    margin-top: 150px;
+    margin-top: 180px;
     padding-left: 40px;
 }
 .analytics-square {
