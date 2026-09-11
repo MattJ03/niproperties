@@ -603,5 +603,11 @@ class ListingController extends Controller
       ]);
     }
 
+    public function getNumberOfListingsSoldThisMonth(Request $request) {
+      $user = auth()->id();
 
+      $query = Listing::where('sale_status', 'closed');
+                             ->
+
+    }
 }
