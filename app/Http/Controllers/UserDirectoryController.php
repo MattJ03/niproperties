@@ -68,7 +68,7 @@ public function getAllUsers() {
 }
 
 public function getLandlordsWithLargestPortfolios() {
-        $landlords = User::role('landlord')->withCount('listings')->take(5)->get();
+        $landlords = User::role('landlord')->withCount('listings')->take(5)->orderBy('listings_count', 'desc')->get();
 
         if($landlords->count() <= 0) {
             return response()->json([
@@ -78,7 +78,7 @@ public function getLandlordsWithLargestPortfolios() {
         }
 
         return response()->json([
-            'landlords' => $landlords->items(),
+            'landlords' => $landlords,
             'landlords_count' => $landlords->count(),
             'message' => 'landlords found',
         ]);

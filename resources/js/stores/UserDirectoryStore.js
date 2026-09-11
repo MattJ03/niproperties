@@ -12,6 +12,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
    const finalPage = ref(0);
    const finalPageNumRounded = ref(0);
    const selectedLandlord = ref('');
+   const landlordLeaderboard = ref([]);
    const finalPageNum = computed(() => {
       finalPage.value = landlordCount.value / 10;
      return finalPageNumRounded.value = Math.ceil(finalPage.value);
@@ -48,7 +49,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
        loading.value = true;
        try {
            const res = await api.get('largestPortfolios');
-           landlords.value = res.data.landlords;
+           landlordLeaderboard.value = res.data.landlords;
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to get landlords with most listings';
        } finally {
@@ -66,6 +67,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
        finalPage,
        finalPageNumRounded,
        finalPageNum,
+       landlordLeaderboard,
        getLandlords,
        getTotalUsers,
        getLandlordsWithLargestPortfolios,

@@ -27,6 +27,12 @@
         <div class="landlords-most-listings-wrapper">
             <span class="top-of-leaderboard-text">Largest portfolios</span>
             <div class="horizontal-line-below-header"></div>
+            <div class="landlord-leaderboard">
+            <div v-for="landlord in landlordLeaderboard" class="landlord-index-info">
+                <span class="position-leaderboard"></span>
+                <span> {{ landlord.name }}</span>
+            </div>
+        </div>
         </div>
     </div>
 </template>
@@ -43,10 +49,12 @@ const error = ref('');
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
 const { listingsCount, soldListingsMonth, averageRent } = storeToRefs(listingStore);
-const { userCount, landlordCount } = storeToRefs(userStore);
+const { userCount, landlordCount, landlordLeaderboard } = storeToRefs(userStore);
 
 const currentMonth = ref('');
 const currentYear = ref('');
+const leaderboardPosition = ref([1, 2, 3, 4, 5]);
+
 
 onMounted(async () => {
     await listingStore.getAllListings();
@@ -55,6 +63,7 @@ onMounted(async () => {
     getCurrentMonthAndYear();
     await listingStore.getListingsSoldThisMonth(currentMonth.value, currentYear.value);
     await listingStore.getAverageRentOfProperties();
+    await userStore.getLandlordsWithLargestPortfolios();
 });
 
 function getCurrentMonthAndYear() {
@@ -132,5 +141,15 @@ function formatPrice(price) {
     width: 100%;
     margin-top: 15px;
     border-top: 1px solid #000000;
+}
+.landlord-leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.landlord-index-info {
+    font-size: 18px;
+
+
 }
 </style>
