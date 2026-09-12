@@ -24,6 +24,7 @@
                 <span class="analytic-square-value"> {{ formatPrice(averageRent) }}</span>
             </div>
         </div>
+        <div class="row">
         <div class="landlords-most-listings-wrapper">
             <span class="top-of-leaderboard-text">Largest portfolios</span>
             <div class="horizontal-line-below-header"></div>
@@ -34,10 +35,13 @@
                 <span> {{ landlord.name }} : </span>
                 <span class="total-listings-count"> {{ landlord.listings_count }}</span>
                 </div>
-
                     <div class="horizontal-line-below-entry"></div>
-
             </div>
+        </div>
+        </div>
+        <div class="listings-most-viewed-wrapper">
+            <span class="top-of-leaderboard-text">Most viewed listings</span>
+            <div class="horizontal-line-below-header"></div>
         </div>
         </div>
     </div>
@@ -130,6 +134,12 @@ function formatPrice(price) {
     color: #000000;
 
 }
+.row {
+    display: flex;
+    width: 100%;
+   flex-direction: row;
+    gap: 80px;
+}
 .landlords-most-listings-wrapper {
     display: flex;
     flex-direction: column;
@@ -190,5 +200,16 @@ function formatPrice(price) {
     border-top: 1px solid #cccccc;
     width: 100%;
 
+}
+.listings-most-viewed-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    border: 1px solid #000000;
+    width: 300px;
+    border-radius: 14px;
+    margin-top: 60px;
+    padding-top: 8px;
+    background-color: #FFFFFF;
 }
 </style>
