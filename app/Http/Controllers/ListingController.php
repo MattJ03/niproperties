@@ -645,13 +645,13 @@ class ListingController extends Controller
 
       if(!$listings->count() <= 0) {
           return response()->json([
-              'listings' => $listings->items(),
+              'listings' => $listings,
               'message' => 'no listings found',
           ]);
       }
 
       return response()->json([
-          'listings' => $listings->items(),
+          'listings' => $listings,
            'message' => 'listings found',
           ]);
     }

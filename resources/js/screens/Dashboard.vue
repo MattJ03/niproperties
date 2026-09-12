@@ -42,6 +42,9 @@
         <div class="listings-most-viewed-wrapper">
             <span class="top-of-leaderboard-text">Most viewed listings</span>
             <div class="horizontal-line-below-header"></div>
+            <div v-for="listing in mostViewedListings" class="listing-index-info">
+                <span class="listing-text-viewed"> {{ listing.address_line_1 }} </span>
+            </div>
         </div>
         </div>
     </div>
@@ -60,7 +63,7 @@ const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount, soldListingsMonth, averageRent } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth, averageRent, mostViewedListings } = storeToRefs(listingStore);
 const { userCount, landlordCount, landlordLeaderboard } = storeToRefs(userStore);
 
 const currentMonth = ref('');
@@ -76,6 +79,7 @@ onMounted(async () => {
     await listingStore.getListingsSoldThisMonth(currentMonth.value, currentYear.value);
     await listingStore.getAverageRentOfProperties();
     await userStore.getLandlordsWithLargestPortfolios();
+    await listingStore.getMostViewedListings();
 });
 
 function getCurrentMonthAndYear() {
@@ -206,10 +210,18 @@ function formatPrice(price) {
     flex-direction: column;
     height: 300px;
     border: 1px solid #000000;
-    width: 300px;
+    width: 350px;
     border-radius: 14px;
     margin-top: 60px;
     padding-top: 8px;
     background-color: #FFFFFF;
+}
+.listing-index-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.listing-text-viewed {
+    font-size: 20px;
 }
 </style>

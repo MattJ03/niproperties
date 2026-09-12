@@ -220,7 +220,7 @@ export const useListingStore = defineStore('listings', () => {
     const getMostViewedListings = async ()  => {
     loading.value = true;
     try {
-        const res = await api.get('most viewedListings');
+        const res = await api.get('mostViewedListings');
         mostViewedListings.value = res.data.listings;
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get the most viewed listings';
