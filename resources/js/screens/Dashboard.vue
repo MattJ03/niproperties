@@ -29,8 +29,14 @@
             <div class="horizontal-line-below-header"></div>
             <div class="landlord-leaderboard">
             <div v-for="landlord in landlordLeaderboard" class="landlord-index-info">
-                <span class="position-leaderboard"></span>
-                <span> {{ landlord.name }}</span>
+                <div class="landlord-details">
+                <img :src="agent" class="agent-pfp" alt="profile picture"/>
+                <span> {{ landlord.name }} : </span>
+                <span class="total-listings-count"> {{ landlord.listings_count }}</span>
+                </div>
+
+                    <div class="horizontal-line-below-entry"></div>
+
             </div>
         </div>
         </div>
@@ -41,7 +47,9 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 import Navbar from "../components/Navbar.vue";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
+import agent from '../assets/agent.png';
+
 
 const loading = ref(false);
 const error = ref('');
@@ -125,11 +133,11 @@ function formatPrice(price) {
 .landlords-most-listings-wrapper {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 300px;
     border: 1px solid #000000;
     width: 300px;
     border-radius: 0 14px 14px 0;
-    margin-top: 40px;
+    margin-top: 60px;
     padding-top: 8px;
     background-color: #FFFFFF;
 }
@@ -145,11 +153,42 @@ function formatPrice(price) {
 .landlord-leaderboard {
     display: flex;
     flex-direction: column;
+    padding-top: 20px;
     gap: 20px;
+
 }
 .landlord-index-info {
-    font-size: 18px;
+    display: flex;
+    flex-direction: column;
 
+    width: 100%;
+    font-size: 20px;
+}
+.landlord-details {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    padding-left: 10px;
+    margin-bottom: 6px;
+}
+.agent-pfp {
+    height: 24px;
+    margin-right: 10px;
+    width: 24px;
+}
+
+.total-listings-count {
+    display: flex;
+    margin-left: 10px;
+}
+.line-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.horizontal-line-below-entry {
+    border-top: 1px solid #cccccc;
+    width: 100%;
 
 }
 </style>
