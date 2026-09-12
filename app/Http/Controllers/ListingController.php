@@ -637,4 +637,22 @@ class ListingController extends Controller
           'average_rent' => round($rentals, 2),
           ]);
     }
+
+    public function getMostViewedProperties() {
+      $listings = Listing::where('sale_status', 'open')
+                          ->orderBy('views', 'desc')
+                          ->take(5)->get();
+
+      if(!$listings->count() <= 0) {
+          return response()->json([
+              'listings' => $listings->items(),
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $listings->items(),
+           'message' => 'listings found',
+          ]);
+    }
 }

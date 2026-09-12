@@ -28,6 +28,7 @@ Route::get('/getUsers', [UserDirectoryController::class, 'getAllUsers']);
 Route::get('/soldListingsMonth', [ListingController::class, 'getNumberOfListingsSoldThisMonth']);
 Route::get('/averageRent', [ListingController::class, 'getAverageRentPrice']);
 Route::get('/largestPortfolios', [UserDirectoryController::class, 'getLandlordsWithLargestPortfolios']);
+Route::get('/mostViewedListings', [ListingController::class, 'getMostViewedProperties']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);
