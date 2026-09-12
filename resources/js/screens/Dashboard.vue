@@ -40,12 +40,24 @@
         </div>
         </div>
         <div class="listings-most-viewed-wrapper">
-            <span class="top-of-leaderboard-text">Most viewed listings</span>
+            <span class="top-of-leaderboard-text">Most viewed listings (active)</span>
             <div class="horizontal-line-below-header"></div>
             <div v-for="listing in mostViewedListings" class="listing-index-info">
+                <div class="listing-details">
                 <span class="listing-text-viewed"> {{ listing.address_line_1 }} </span>
+                <span class="listing-views"> {{ listing.views }} </span>
+                </div>
+                    <div class="horizontal-line-below-entry"></div>
+                    </div>
             </div>
-        </div>
+            <div class="listings-per-county-wrapper">
+                <span class="top-of-leaderboard-text">Listings per county</span>
+                <div class="horizontal-line-below-header"></div>
+                <div v-for="(count, county) in listingsPerCounty" :key="county" class="listing-index-info">
+                    <span class="listing-text-viewed"> {{ county }} {{ count }} </span>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -63,12 +75,13 @@ const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount, soldListingsMonth, averageRent, mostViewedListings } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth, averageRent, mostViewedListings, listingsPerCounty } = storeToRefs(listingStore);
 const { userCount, landlordCount, landlordLeaderboard } = storeToRefs(userStore);
 
 const currentMonth = ref('');
 const currentYear = ref('');
 const leaderboardPosition = ref([1, 2, 3, 4, 5]);
+
 
 
 onMounted(async () => {
@@ -80,6 +93,8 @@ onMounted(async () => {
     await listingStore.getAverageRentOfProperties();
     await userStore.getLandlordsWithLargestPortfolios();
     await listingStore.getMostViewedListings();
+    await listingStore.getListingsPerCounty();
+    console.log(listingsPerCounty.value)
 });
 
 function getCurrentMonthAndYear() {
@@ -142,6 +157,9 @@ function formatPrice(price) {
     display: flex;
     width: 100%;
    flex-direction: row;
+    margin-left: 60px;
+    margin-top: 60px;
+
     gap: 80px;
 }
 .landlords-most-listings-wrapper {
@@ -150,14 +168,17 @@ function formatPrice(price) {
     height: 300px;
     border: 1px solid #000000;
     width: 300px;
-    border-radius: 0 14px 14px 0;
-    margin-top: 60px;
+    border-radius: 14px;
     padding-top: 8px;
     background-color: #FFFFFF;
 }
 .top-of-leaderboard-text {
     font-size: 22px;
     padding-left: 15px;
+}
+.listing-details {
+    display: flex;
+    flex-direction: row;
 }
 .horizontal-line-below-header {
     width: 100%;
@@ -205,6 +226,13 @@ function formatPrice(price) {
     width: 100%;
 
 }
+.listing-details {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    padding-left: 10px;
+    margin-bottom: 6px;
+}
 .listings-most-viewed-wrapper {
     display: flex;
     flex-direction: column;
@@ -212,16 +240,36 @@ function formatPrice(price) {
     border: 1px solid #000000;
     width: 350px;
     border-radius: 14px;
-    margin-top: 60px;
+
     padding-top: 8px;
     background-color: #FFFFFF;
 }
 .listing-index-info {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 3px;
     width: 100%;
 }
 .listing-text-viewed {
     font-size: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
+    width: 90%;
+}
+.listing-views {
+    font-size: 20px;
+    padding-right: 10px;
+}
+.listings-per-county-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 300px;
+    background-color: #FFFFFF;
+
 }
 </style>

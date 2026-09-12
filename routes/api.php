@@ -29,6 +29,7 @@ Route::get('/soldListingsMonth', [ListingController::class, 'getNumberOfListings
 Route::get('/averageRent', [ListingController::class, 'getAverageRentPrice']);
 Route::get('/largestPortfolios', [UserDirectoryController::class, 'getLandlordsWithLargestPortfolios']);
 Route::get('/mostViewedListings', [ListingController::class, 'getMostViewedProperties']);
+Route::get('/listingsPerCounty', [ListingController::class, 'listingsPerCounty']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);

@@ -10,6 +10,7 @@ use App\Services\GeocodingService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class ListingController extends Controller
 {
@@ -655,4 +656,21 @@ class ListingController extends Controller
            'message' => 'listings found',
           ]);
     }
+
+    public function listingsPerCounty() {
+      $listingsCount = Listing::query()
+                               ->select('county', DB::raw('count(*) as total'))
+                               ->groupBy('county')
+                               ->pluck('total', 'county');
+
+      if($listingsCount->count() <= 0) {
+          return response()->json([
+              'listings' => $listingsCount,
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json($listingsCount);
+
+      }
 }

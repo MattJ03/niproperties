@@ -19,6 +19,7 @@ export const useListingStore = defineStore('listings', () => {
    const soldListingsMonth = ref('');
    const averageRent = ref('');
    const mostViewedListings = ref([]);
+   const listingsPerCounty = ref({});
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -229,6 +230,19 @@ export const useListingStore = defineStore('listings', () => {
     }
     }
 
+    const getListingsPerCounty = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('listingsPerCounty');
+           listingsPerCounty.value = res.data;
+       } catch (err) {
+           error.value = error.response?.data?.message || 'failed to get listings per county';
+       }
+       finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -246,6 +260,7 @@ export const useListingStore = defineStore('listings', () => {
        soldListingsMonth,
        averageRent,
        mostViewedListings,
+       listingsPerCounty,
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -261,5 +276,6 @@ export const useListingStore = defineStore('listings', () => {
        getListingsSoldThisMonth,
        getAverageRentOfProperties,
        getMostViewedListings,
+       getListingsPerCounty,
    };
 });
