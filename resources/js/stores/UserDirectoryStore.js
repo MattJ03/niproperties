@@ -56,6 +56,7 @@ export const useUserDirectoryStore = defineStore('user_directory', () => {
            loading.value = false;
        }
        }
+
    return {
        loading,
        error,

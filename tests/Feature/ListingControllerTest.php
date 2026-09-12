@@ -409,4 +409,5 @@ class ListingControllerTest extends TestCase
         $response = $this->getJson('/api/listingsCommercial');
         $response->assertStatus(200);
         }
+
 }
