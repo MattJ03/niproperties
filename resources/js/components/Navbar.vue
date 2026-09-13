@@ -14,11 +14,21 @@
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
                 <img :src="upload" class="upload-img" alt="upload" />
                 Upload listing</button>
+            <button @click="settingsOpen = true" class="settings-btn">
+            <img :src="settings" class="settings-img" alt="settings" />
+                <span>Settings</span>
+            </button>
             <button class="login-btn" v-if="!role" @click="moveToLogin()">
                 Log in
             </button>
             <button v-if="authStore.loggedIn" @click="logout()" class="login-btn">Log out</button>
         </div>
+        <div v-if="settingsOpen === true" class="settings-wrapper">
+            <div class="top-of-wrapper">
+            <h2 class="settings-header">Settings</h2>
+                <img :src="whiteX" class="close-img" alt="whiteX">
+        </div>
+            </div>
     </nav>
 </template>
 <script setup>
@@ -28,12 +38,15 @@ import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
 import upload from '../assets/upload.png';
 import { useRouter } from "vue-router";
+import settings from '../assets/settings.png';
+import whiteX from'../assets/whiteX.png';
 
 const error = ref('');
 const authStore = useAuthStore();
 const router = useRouter();
 const { role } = storeToRefs(authStore);
 const loading = ref(false)
+const settingsOpen = ref(false);
 
 const moveToLogin = async () => {
     loading.value = true;
@@ -261,6 +274,58 @@ const moveToDashboard = async () => {
     text-wrap: nowrap;
 }
 .login-btn:hover {
+    background-color: #CCB89D;
+}
+.settings-btn {
+    display: flex;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: #E7CBA6;
+    gap: 6px;
+    color: #1F4D3A;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 0;
+}
+.settings-btn:hover {
+    background-color: #CCB89D;
+}
+.settings-btn span {
+    font-size: 16px;
+}
+.settings-img {
+    height: 20px;
+}
+.settings-wrapper {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100dvh;
+    min-width: 320px;
+    background-color: #2a2f2c;
+}
+.top-of-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 12px;
+    color: #FFFFFF;
+}
+.settings-header {
+
+}
+.close-img {
+    height: 26px;
+    padding: 8px 8px;
+    border-radius: 60px;
+    background-color: #2d6e53
+}
+.close-img:hover {
+    cursor: pointer;
     background-color: #CCB89D;
 }
 </style>
