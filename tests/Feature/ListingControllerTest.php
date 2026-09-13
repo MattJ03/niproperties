@@ -410,4 +410,20 @@ class ListingControllerTest extends TestCase
         $response->assertStatus(200);
         }
 
+        public function test_rent_to_but_split_returns_correct_numbers(): void {
+        $rent = Listing::factory()->count(5)->create([
+            'type' => 'rent',
+        ]);
+
+        $buy = Listing::factory()->count(5)->create([
+            'type' => 'buy',
+        ]);
+
+        $response = $this->getJson('/api/rentToBuySplit');
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'listings', 'message',
+        ]);
+        $response->dump();
+        }
 }
