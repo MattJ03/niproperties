@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
     const token = ref(localStorage.getItem('token'));
     const role = ref(localStorage.getItem('role'));
     const loading = ref(false);
+    const user = ref('')
     const loggedIn = computed(() => !!token.value)
     const error = ref('');
 
@@ -72,6 +73,18 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function getCurrentUser() {
+        loading.value = true;
+        try {
+            const res = await api.get('me');
+            user.value = res.data.user;
+        } catch(err) {
+            error.value = error.response?.data?.message || 'failed to get current user';
+        } finally {
+            loading.value = false;
+        }
+    }
+
     return {
         name,
         token,
@@ -83,6 +96,7 @@ export const useAuthStore = defineStore('auth', () => {
         registerBuyer,
         login,
         logout,
+        getCurrentUser,
     };
 });
 

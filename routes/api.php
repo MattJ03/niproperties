@@ -10,6 +10,7 @@ use App\Http\Controllers\UserDirectoryController;
 Route::post('/registerLandlord', [AuthController::class, 'registerLandlord']);
 Route::post('/registerBuyer', [AuthController::class, 'registerBuyer']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/me', [AuthController::class, 'currentUser']);
 Route::get('/listingsIndex', [ListingController::class, 'index']);
 Route::get('listingsIndexByViews', [ListingController::class, 'getListingsOrderedByViews']);
 Route::get('listingsIndexByPrice', [ListingController::class, 'getListingsOrderedByPrice']);
