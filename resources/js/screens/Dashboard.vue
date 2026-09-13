@@ -53,8 +53,9 @@
             <div class="listings-per-county-wrapper">
                 <span class="top-of-leaderboard-text">Listings per county</span>
                 <div class="horizontal-line-below-header"></div>
-                <div v-for="(count, county) in listingsPerCounty" :key="county" class="listing-index-info">
-                    <span class="listing-text-viewed"> {{ county }} {{ count }} </span>
+                <div v-for="(count, county) in listingsPerCounty" :key="county" class="county-index-info">
+                    <span class="county-text"> {{ county }}: {{ count }} </span>
+                    <div class="horizontal-line-below-entry"></div>
                 </div>
             </div>
 
@@ -267,9 +268,27 @@ function formatPrice(price) {
 .listings-per-county-wrapper {
     display: flex;
     flex-direction: column;
-    height: 350px;
+    height: 310px;
     width: 300px;
+    padding-top: 8px;
     background-color: #FFFFFF;
+    border-radius: 14px;
+    border: 1px solid #000000;
+}
+.county-text {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+}
 
+.county-index-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 3px;
+    width: 100%;
 }
 </style>

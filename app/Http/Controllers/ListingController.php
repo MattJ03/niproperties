@@ -671,6 +671,26 @@ class ListingController extends Controller
       }
 
       return response()->json($listingsCount);
+      }
+
+      public function rentToBuySplit() {
+      $listings = Listing::query()
+                             ->where('sale_status', 'open')
+                           ->select('type', DB::raw('count(*) as total'))
+                            ->groupBy('type')
+                            ->pluck('total', 'type');
+
+      if($listings->count() <= 0) {
+          return response()->json([
+              'listings' => $listings,
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $listings,
+          'message' => 'listings found',
+      ]);
 
       }
 }
