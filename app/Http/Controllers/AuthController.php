@@ -95,4 +95,21 @@ class AuthController extends Controller
         ]);
     }
 
+    public function currentUser(Request $request) {
+        $user = auth()->id();
+        if(!$user) {
+            return response()->json([
+                'message' => 'currently not logged in',
+            ]);
+        }
+
+        $authenticatedUser = User::findOrFail($user);
+
+
+        return response()->json([
+            'user' => $authenticatedUser,
+            'message' => 'user returned successfully',
+        ]);
+    }
+
 }

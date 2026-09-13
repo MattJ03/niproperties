@@ -26,13 +26,20 @@
         <div v-if="settingsOpen === true" class="settings-wrapper">
             <div class="top-of-wrapper">
             <h2 class="settings-header">Settings</h2>
-                <img :src="whiteX" class="close-img" alt="whiteX">
+                <img @click="settingsOpen = false" :src="whiteX" class="close-img" alt="whiteX">
         </div>
+            <div class="horizontal-line-settings"></div>
+            <div class="user-details">
+              <span class="user-initial"> {{ initial }}</span>
+                <div class="user-email-and-name">
+                    <span class="user-name"> {{ landlord.name }}</span>
+                </div>
+            </div>
             </div>
     </nav>
 </template>
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import {ref, reactive, computed, onMounted} from 'vue';
 import nipropertieslogo from '../assets/nipropertieslogo.png';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
@@ -40,6 +47,7 @@ import upload from '../assets/upload.png';
 import { useRouter } from "vue-router";
 import settings from '../assets/settings.png';
 import whiteX from'../assets/whiteX.png';
+import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -47,6 +55,10 @@ const router = useRouter();
 const { role } = storeToRefs(authStore);
 const loading = ref(false)
 const settingsOpen = ref(false);
+const userStore = useUserDirectoryStore();
+const { landlord } = storeToRefs(userStore);
+
+const initial = localStorage.getItem('name').charAt(0).toUpperCase();
 
 const moveToLogin = async () => {
     loading.value = true;
@@ -165,6 +177,11 @@ const moveToDashboard = async () => {
         loading.value = false;
     }
 }
+
+onMounted( async () => {
+    console.log(localStorage.getItem('name'));
+});
+
 </script>
 <style scoped>
 .nav-bar {
@@ -312,7 +329,7 @@ const moveToDashboard = async () => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 12px;
+    padding: 15px 18px;
     color: #FFFFFF;
 }
 .settings-header {
@@ -327,5 +344,25 @@ const moveToDashboard = async () => {
 .close-img:hover {
     cursor: pointer;
     background-color: #CCB89D;
+}
+.horizontal-line-settings {
+    width: 100%;
+    border-top: 1px solid #88807b;
+}
+.user-details {
+    display: flex;
+    padding: 26px 18px;
+    flex-direction: row;
+}
+.user-initial {
+    font-size: 24px;
+    padding: 12px 16px;
+    background-color: #eeb462;
+    border-radius: 60px;
+}
+.user-email-and-name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 </style>
