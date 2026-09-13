@@ -182,7 +182,8 @@ class AuthControllerTest extends TestCase
 
     }
 
-    public function test_login_requires_same_password(): void {
+    public function test_login_requires_same_password(): void
+    {
         $user = User::factory()->create([
             'password' => Hash::make('password123'),
         ]);
@@ -192,6 +193,19 @@ class AuthControllerTest extends TestCase
             'password' => 'password123',
         ]);
         $response->assertStatus(200);
+    }
+
+    public function test_the_me_method(): void {
+        $user = User::factory()->create([
+            'name' => 'wassup',
+        ]);
+        $this->actingAs($user);
+
+        $response = $this->getJson('/api/me');
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'name' => 'wassup',
+        ]);
     }
 
 }
