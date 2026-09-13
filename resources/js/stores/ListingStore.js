@@ -20,6 +20,7 @@ export const useListingStore = defineStore('listings', () => {
    const averageRent = ref('');
    const mostViewedListings = ref([]);
    const listingsPerCounty = ref({});
+   const listingsPerType = ref({});
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -243,6 +244,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getListingsPerTypeSplit = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('rentToBuySplit');
+           listingsPerType.value = res.data;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get listings per type';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -261,6 +274,7 @@ export const useListingStore = defineStore('listings', () => {
        averageRent,
        mostViewedListings,
        listingsPerCounty,
+       listingsPerType,
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -277,5 +291,6 @@ export const useListingStore = defineStore('listings', () => {
        getAverageRentOfProperties,
        getMostViewedListings,
        getListingsPerCounty,
+       getListingsPerTypeSplit,
    };
 });

@@ -681,16 +681,10 @@ class ListingController extends Controller
                             ->pluck('total', 'type');
 
       if($listings->count() <= 0) {
-          return response()->json([
-              'listings' => $listings,
-              'message' => 'no listings found',
-          ]);
+          return response()->json($listings);
       }
 
-      return response()->json([
-          'listings' => $listings,
-          'message' => 'listings found',
-      ]);
+      return response()->json($listings);
 
       }
 }
