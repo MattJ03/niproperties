@@ -58,7 +58,14 @@
                     <div class="horizontal-line-below-entry"></div>
                 </div>
             </div>
-
+            <div class="rent-to-buy-square">
+                <div class="chart-card">
+                    <span class="chart-title">Buy vs Rent split</span>
+                    <div style="height: 200px">
+                        <Doughnut :data="chartData" :options="chartOptions" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -69,14 +76,15 @@ import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 import Navbar from "../components/Navbar.vue";
 import { storeToRefs } from "pinia";
 import agent from '../assets/agent.png';
-
+import { Doughnut } from 'vue-chartjs';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 
 const loading = ref(false);
 const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount, soldListingsMonth, averageRent, mostViewedListings, listingsPerCounty } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth, averageRent, mostViewedListings, listingsPerCounty, listingsPerType } = storeToRefs(listingStore);
 const { userCount, landlordCount, landlordLeaderboard } = storeToRefs(userStore);
 
 const currentMonth = ref('');
@@ -96,7 +104,32 @@ onMounted(async () => {
     await listingStore.getMostViewedListings();
     await listingStore.getListingsPerCounty();
     console.log(listingsPerCounty.value)
+    await listingStore.getListingsPerTypeSplit();
 });
+;
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const props = defineProps({
+    buyCount: Number,
+    rentCount: Number,
+});
+
+const chartData = computed(() => ({
+    labels: Object.keys(listingsPerType.value),
+    datasets: [{
+        data: Object.values(listingsPerType.value),
+        backgroundColor: ['#C89B3C', '#2dcc95'],
+    }],
+}));
+
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: { position: 'bottom' },
+    },
+};
 
 function getCurrentMonthAndYear() {
     let d = new Date();
@@ -111,6 +144,8 @@ function formatPrice(price) {
         currency: 'GBP',
     }).format(price);
 }
+
+
 </script>
 <style scoped>
 .container {
@@ -290,5 +325,31 @@ function formatPrice(price) {
     padding-top: 20px;
     padding-bottom: 3px;
     width: 100%;
+}
+.rent-to-buy-square {
+    height: 300px;
+    width: 300px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.rent-buy-stats {
+    display: flex;
+
+}
+.answer-row {
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+}
+.chart-title {
+    padding-left: 10px;
+    font-size: 20px;
+
 }
 </style>
