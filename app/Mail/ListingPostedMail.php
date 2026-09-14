@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -14,12 +15,13 @@ class ListingPostedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $listing;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($listing)
     {
-        //
+        $this->listing = $listing;
     }
 
     /**
@@ -28,7 +30,8 @@ class ListingPostedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Listing Posted Mail',
+            from: new Address('NIProperties@gmail.com'),
+            subject: 'Listing Posted',
         );
     }
 
