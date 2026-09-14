@@ -57,8 +57,12 @@
                                <span class="slider round"></span>
                     </label>
                 </div>
+                <div class="language-row">
+                    <img :src="language" class="language-img" alt="language"/>
+                    <span>Change language</span>
+                </div>
             </div>
-            </div>
+        </div>
     </nav>
 </template>
 <script setup>
@@ -74,7 +78,7 @@ import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
 import agent from '../assets/whiteAgent.png';
 import lock from '../assets/whiteLock.png';
 import bell from '../assets/bell.png';
-
+import language from '../assets/language.png';
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -412,10 +416,11 @@ onMounted( async () => {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 0;
+    padding: 10px 0px;
     cursor: pointer;
 
 }
+
 .settings-selection-row span {
     color: #FFFFFF;
 }
@@ -445,6 +450,9 @@ onMounted( async () => {
     margin-top: 12px;
     gap: 8px;
     flex-direction: row;
+}
+.notifications-row:hover {
+
 }
 .notifications-row span {
     color: #FFFFFF;
@@ -509,5 +517,19 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+.language-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin-top: 26px;
+}
+.language-row span {
+    color: #FFFFFF;
+}
+.language-img {
+    height: 22px;
+    width: 22px;
 }
 </style>
