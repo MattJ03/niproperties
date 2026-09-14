@@ -32,8 +32,14 @@
             <div class="user-details">
               <span class="user-initial"> {{ initial }}</span>
                 <div class="user-email-and-name">
-                    <span class="user-name"> {{ landlord.name }}</span>
+                    <span class="user-name"> {{ user.name }} </span>
+                    <span class="user-email"> {{ user.email }}</span>
+
                 </div>
+            </div>
+            <div class="horizontal-line-settings"></div>
+            <div class="landlord-settings">
+                <span class="secondary-header">Account</span>
             </div>
             </div>
     </nav>
@@ -57,7 +63,7 @@ const loading = ref(false)
 const settingsOpen = ref(false);
 const userStore = useUserDirectoryStore();
 const { landlord } = storeToRefs(userStore);
-
+const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
 
 const moveToLogin = async () => {
@@ -179,7 +185,7 @@ const moveToDashboard = async () => {
 }
 
 onMounted( async () => {
-    console.log(localStorage.getItem('name'));
+    await authStore.getCurrentUser();
 });
 
 </script>
@@ -356,13 +362,27 @@ onMounted( async () => {
 }
 .user-initial {
     font-size: 24px;
-    padding: 12px 16px;
+    padding: 12px 18px;
     background-color: #eeb462;
     border-radius: 60px;
 }
 .user-email-and-name {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
     gap: 4px;
+}
+.user-name {
+    color: #FFFFFF;
+}
+.user-email {
+    color: #88807b;
+}
+.landlord-settings {
+    padding: 26px 18px;
+
+}
+.secondary-header {
+    color: #88807b;
 }
 </style>

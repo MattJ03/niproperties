@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -96,18 +97,17 @@ class AuthController extends Controller
     }
 
     public function currentUser(Request $request) {
-        $user = auth()->id();
+        $user = User::findOrFail(auth('sanctum')->id());
+
         if(!$user) {
             return response()->json([
                 'message' => 'currently not logged in',
             ]);
         }
 
-        $authenticatedUser = User::findOrFail($user);
-
 
         return response()->json([
-            'user' => $authenticatedUser,
+            'user' => $user,
             'message' => 'user returned successfully',
         ]);
     }

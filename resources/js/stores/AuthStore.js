@@ -78,6 +78,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
             const res = await api.get('me');
             user.value = res.data.user;
+            console.log(user.value.name);
         } catch(err) {
             error.value = error.response?.data?.message || 'failed to get current user';
         } finally {
@@ -92,6 +93,7 @@ export const useAuthStore = defineStore('auth', () => {
         loading,
         error,
         loggedIn,
+        user,
         registerLandlord,
         registerBuyer,
         login,
