@@ -40,6 +40,23 @@
             <div class="horizontal-line-settings"></div>
             <div class="landlord-settings">
                 <span class="secondary-header">Account</span>
+                <div class="settings-selection-row">
+                    <img :src="agent" class="agent-img" alt="agent"/>
+                    <span>Edit profile</span>
+                </div>
+                <div class="security-selection-row">
+                    <img :src="lock" class="lock-img" alt="lock"/>
+                    <span>Password & security</span>
+                </div>
+                <span class="secondary-header-preferences">Preferences</span>
+                <div class="notifications-row">
+                    <img :src="bell" class="bell-img" alt="bell"/>
+                    <span>Email notifications</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                               <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
             </div>
     </nav>
@@ -54,6 +71,10 @@ import { useRouter } from "vue-router";
 import settings from '../assets/settings.png';
 import whiteX from'../assets/whiteX.png';
 import { useUserDirectoryStore } from "../stores/UserDirectoryStore.js";
+import agent from '../assets/whiteAgent.png';
+import lock from '../assets/whiteLock.png';
+import bell from '../assets/bell.png';
+
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -65,6 +86,7 @@ const userStore = useUserDirectoryStore();
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
+
 
 const moveToLogin = async () => {
     loading.value = true;
@@ -329,6 +351,7 @@ onMounted( async () => {
     height: 100dvh;
     min-width: 320px;
     background-color: #2a2f2c;
+
 }
 .top-of-wrapper {
     display: flex;
@@ -384,5 +407,107 @@ onMounted( async () => {
 }
 .secondary-header {
     color: #88807b;
+}
+.settings-selection-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    cursor: pointer;
+
+}
+.settings-selection-row span {
+    color: #FFFFFF;
+}
+.agent-img {
+    height: 24px;
+    width: 24px;
+}
+.lock-img {
+    height: 24px;
+    width: 22px;
+}
+.security-selection-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #FFFFFF;
+    margin-bottom: 26px;
+    margin-top: 12px;
+}
+.secondary-header-preferences {
+
+    color: #88807b;
+}
+.notifications-row {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+    gap: 8px;
+    flex-direction: row;
+}
+.notifications-row span {
+    color: #FFFFFF;
+}
+.bell-img {
+    height: 22px;
+    width: 22px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    margin-left: 56px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 </style>
