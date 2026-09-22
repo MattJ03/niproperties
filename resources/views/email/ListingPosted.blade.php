@@ -14,7 +14,7 @@
             <h2 style="color: #4856f2; margin: 0 0 10px 0;">Hello, email confirming that {{ $listing->address_line_1 }} has been uploaded successfully</h2>
             <p style="font-size: 16px; color: #333; margin: 0;">
                 Posted on
-                <strong>{{ \Carbon\Carbon::parse($listings->created_at) }}</strong>.
+                <strong>{{ \Carbon\Carbon::parse($listing->created_at) }}</strong>.
             </p>
         </td>
     </tr>

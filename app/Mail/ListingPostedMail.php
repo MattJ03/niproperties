@@ -45,7 +45,7 @@ class ListingPostedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.ListingPosted',
+            view: 'email.ListingPosted',
         );
     }
 
