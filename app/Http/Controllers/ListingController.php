@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\SendListingPostedEmail;
+use App\Mail\ListingPostedMail;
 
 class ListingController extends Controller
 {
@@ -131,6 +133,8 @@ class ListingController extends Controller
                 'longitude' => $cords['lng'],
             ]);
         }
+
+        SendListingPostedEmail::dispatch($request->user());
 
         return response()->json([
             'listing' => $listing,
