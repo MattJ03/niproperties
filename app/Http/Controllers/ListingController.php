@@ -134,7 +134,7 @@ class ListingController extends Controller
             ]);
         }
 
-        SendListingPostedEmail::dispatch($request->user());
+        SendListingPostedEmail::dispatch($request->user(), $listing);
 
         return response()->json([
             'listing' => $listing,

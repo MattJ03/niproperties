@@ -11,6 +11,7 @@ use App\Mail\ListingPostedMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Listing;
+use Illuminate\Support\Facades\Log;
 class SendListingPostedEmail implements ShouldQueue
 {
     use Queueable, SerializesModels, InteractsWithQueue, Dispatchable;
@@ -31,6 +32,7 @@ class SendListingPostedEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new ListingPostedMail($this->user, $listing));
+        Mail::to($this->user->email)->send(new ListingPostedMail($this->user, $this->listing));
+        Log::info('mail sent to ' . $this->user->email);
     }
 }

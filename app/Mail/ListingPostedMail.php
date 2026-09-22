@@ -10,17 +10,21 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
+use App\Models\Listing;
 
 class ListingPostedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $listing;
+    public User $user;
+    public Listing $listing;
     /**
      * Create a new message instance.
      */
-    public function __construct($listing)
+    public function __construct($user, $listing)
     {
+        $this->user = $user;
         $this->listing = $listing;
     }
 
