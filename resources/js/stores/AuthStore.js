@@ -86,6 +86,19 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function updateUserAccount(payload) {
+        loading.value = true;
+        try {
+            const res = api.patch(`updateAccount`, { ...payload
+            });
+            user.value = res.data.user;
+        } catch(err) {
+            error.value = error.response?.data?.message || 'failed to update user';
+        } finally {
+            loading.value = false;
+        }
+    }
+
     return {
         name,
         token,
@@ -99,6 +112,7 @@ export const useAuthStore = defineStore('auth', () => {
         login,
         logout,
         getCurrentUser,
+        updateUserAccount,
     };
 });
 
