@@ -101,12 +101,12 @@
             <div class="edit-profile-row">
                 <div class="field">
                     <span class="field-name">Enter current password</span>
-                    <input type="password"  class="name-field" />
+                    <input type="password" v-model="current_password" class="name-field" />
                 </div>
             </div>
             <div class="bottom-square">
             <div class="buttons-update-wrapper">
-                <button class="update-profile">Save changes</button>
+                <button class="update-profile" @click="updateAccount()">Save changes</button>
                 <span class="reset-profile">Reset</span>
             </div>
         </div>
@@ -142,7 +142,7 @@ const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
 const editProfileModal = ref(false);
-
+const current_password = ref('');
 
 const formDraft = ref({ ... user.value});
 watch(user, (newUser) => {
@@ -260,7 +260,25 @@ const moveToDashboard = async () => {
             name: 'dashboard',
         });
     } catch(err) {
-        error.value = error.response?.data?.message || 'failed to move to the dashboard screen';
+
+    } finally {
+        loading.value = false;
+    }
+}
+
+const updateAccount = async () => {
+    loading.value = true;
+    try {
+        await authStore.updateUserAccount({
+            name: formDraft.value.name,
+            email: formDraft.value.email,
+            contact: formDraft.value.contact,
+            password: current_password.value,
+        });
+        current_password.value = '';
+        editProfileModal.value = false;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to update user account';
     } finally {
         loading.value = false;
     }

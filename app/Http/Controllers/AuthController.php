@@ -122,7 +122,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        if(Hash::check($validatedData['password'], $user['password'])) {
+        if(!Hash::check($validatedData['password'], $user['password'])) {
             return response()->json([
                 'message' => 'these credentials do not match our records.',
             ]);

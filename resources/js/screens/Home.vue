@@ -7,7 +7,7 @@
             <div class="hello-user-wrapper">
                 <div class="hello-row">
                 <h2 class="hello-message">Find your new home</h2>
-                    <h2 class="hello-message-name" v-if="name"> {{ name }}</h2>
+                    <h2 class="hello-message-name"> {{ authStore.user.name }}</h2>
                 </div>
 
                 <div class="search-wrapper">
@@ -147,7 +147,7 @@ const authStore = useAuthStore();
 const listingStore = useListingStore();
 const loading = ref(false);
 const error = ref('');
-const { role, name} = storeToRefs(authStore);
+
 const search = ref('');
 const selectedListing = ref(null);
 
@@ -271,6 +271,9 @@ const moveToListingInfo = async () => {
         loading.value = false;
     }
 }
+onMounted(async () => {
+    await authStore.getCurrentUser();
+})
 </script>
 <style scoped>
 .container {
