@@ -98,8 +98,13 @@
                     <div class="not-allowed-box">Unable to change account role</div>
                 </div>
             </div>
-            <div class="horizontal-line-edit-profile"></div>
+            <div class="bottom-square">
+            <div class="buttons-update-wrapper">
+                <button class="update-profile">Save changes</button>
+                <span class="reset-profile">Reset</span>
+            </div>
         </div>
+            </div>
     </div>
 </template>
 <script setup>
@@ -588,7 +593,7 @@ input:checked + .slider:before {
 .edit-profile-square {
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 550px;
     width: 700px;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
@@ -711,5 +716,35 @@ input:checked + .slider:before {
     width: 100%;
     border-top: 1px solid #88807b;
     margin-top: 25px;
+}
+.bottom-square {
+    width: 100%;
+    height: 100%;
+}
+.buttons-update-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+   gap: 10px;
+    justify-content: right;
+    margin-right: 25px;
+
+}
+.update-profile {
+    background-color: #2dcc95;
+    height: 48px;
+    width: fit-content;
+    font-size: 16px;
+    color: #2d6e53;
+    border-radius: 10px;
+    text-wrap: nowrap;
+}
+.update-profile:hover {
+    cursor: pointer;
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.reset-profile {
 }
 </style>
