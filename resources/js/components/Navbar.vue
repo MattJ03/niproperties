@@ -69,7 +69,7 @@
         <div class="edit-profile-square">
             <div class="top-of-square-row">
                 <span class="modal-title-text">Edit profile</span>
-                <img @click="editProfileModal = false" :src="x" class="close-modal" alt="close modal"/>
+                <img @click="closeModal(); authStore.getCurrentUser()" :src="x" class="close-modal" alt="close modal"/>
             </div>
             <div class="horizontal-line-settings"></div>
             <div class="profile-photo-row">
@@ -282,6 +282,11 @@ const updateAccount = async () => {
     } finally {
         loading.value = false;
     }
+}
+
+const closeModal = () => {
+    formDraft.value = user.value;
+    editProfileModal.value = false;
 }
 
 onMounted( async () => {
