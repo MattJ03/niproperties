@@ -64,6 +64,15 @@
             </div>
         </div>
     </nav>
+
+    <div v-if="editProfileModal === true" class="modal-overlay">
+        <div class="edit-profile-square">
+            <div class="top-of-square-row">
+
+            </div>
+
+        </div>
+    </div>
 </template>
 <script setup>
 import {ref, reactive, computed, onMounted} from 'vue';
@@ -90,7 +99,7 @@ const userStore = useUserDirectoryStore();
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
-
+const editProfileModal = ref(true);
 
 const moveToLogin = async () => {
     loading.value = true;
@@ -531,5 +540,32 @@ input:checked + .slider:before {
 .language-img {
     height: 22px;
     width: 22px;
+}
+.modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        z-index: 65;
+}
+.edit-profile-square {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 800px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 12px;
+}
+.top-of-square-row {
+    display: flex;
+    width: 100%;
+
 }
 </style>
