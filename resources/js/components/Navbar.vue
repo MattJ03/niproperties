@@ -14,7 +14,7 @@
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
                 <img :src="upload" class="upload-img" alt="upload" />
                 Upload listing</button>
-            <button @click="settingsOpen = true" class="settings-btn">
+            <button @click="settingsOpen = true; authStore.getCurrentUser()" class="settings-btn">
             <img :src="settings" class="settings-img" alt="settings" />
                 <span>Settings</span>
             </button>
@@ -80,22 +80,28 @@
             <div class="edit-profile-row">
                 <div class="field">
                     <span class="field-name">Name</span>
-                    <input v-model="user.name" type="text" class="name-field"/>
+                    <input v-model="formDraft.name" type="text" class="name-field"/>
                 </div>
                 <div class="field">
                     <span class="field-name">Email</span>
-                    <input v-model="user.email" type="email" class="name-field" />
+                    <input v-model="formDraft.email" type="email" class="name-field" />
                 </div>
             </div>
             <div class="edit-profile-row">
                 <div class="field">
                     <span class="field-name">Contact number</span>
-                    <input type="number" v-model="user.contact" class="name-field" />
+                    <input type="number" v-model="formDraft.contact" class="name-field" />
                 </div>
                 <div class="field">
                     <span class="field-role">Role</span>
                     <span class="role-text"> {{ authStore.role }}</span>
                     <div class="not-allowed-box">Unable to change account role</div>
+                </div>
+            </div>
+            <div class="edit-profile-row">
+                <div class="field">
+                    <span class="field-name">Enter current password</span>
+                    <input type="password"  class="name-field" />
                 </div>
             </div>
             <div class="bottom-square">
@@ -108,7 +114,7 @@
     </div>
 </template>
 <script setup>
-import {ref, reactive, computed, onMounted} from 'vue';
+import {ref, reactive, computed, onMounted, watch } from 'vue';
 import nipropertieslogo from '../assets/nipropertieslogo.png';
 import { useAuthStore } from "../stores/AuthStore.js";
 import { storeToRefs } from "pinia";
@@ -135,8 +141,13 @@ const userStore = useUserDirectoryStore();
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
-const editProfileModal = ref(true);
+const editProfileModal = ref(false);
 
+
+const formDraft = ref({ ... user.value});
+watch(user, (newUser) => {
+    formDraft.value = {... newUser };
+})
 const moveToLogin = async () => {
     loading.value = true;
     try {
