@@ -75,6 +75,26 @@
             <div class="profile-photo-row">
                 <img :src="agent2" class="edit-profile-photo" alt="pfp"/>
                 <button class="change-photo-btn">Change photo</button>
+                <span class="remove-photo-text">Remove photo</span>
+            </div>
+            <div class="edit-profile-row">
+                <div class="field">
+                    <span class="field-name">Name</span>
+                    <input v-model="user.name" type="text" class="name-field"/>
+                </div>
+                <div class="field">
+                    <span class="field-name">Email</span>
+                    <input v-model="user.email" type="email" class="name-field" />
+                </div>
+            </div>
+            <div class="edit-profile-row">
+                <div class="field">
+                    <span class="field-name">Contact number</span>
+                    <input type="number" v-model="user.contact" class="name-field" />
+                </div>
+                <div class="field">
+
+                </div>
             </div>
         </div>
     </div>
@@ -619,5 +639,32 @@ input:checked + .slider:before {
     border: none;
     color: #1F4D3A;
     cursor: pointer;
+    font-size: 15px;
+}
+.remove-photo-text {
+    cursor: pointer;
+}
+.edit-profile-row {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    margin-top: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+
+}
+.name-field {
+    height: 50px;
+    border-radius: 10px;
+    background-color: #000000;
+    padding-left: 5px;
+    color: #FFFFFF;
+    margin-top: 3px;
+    font-size: 16px;
 }
 </style>
