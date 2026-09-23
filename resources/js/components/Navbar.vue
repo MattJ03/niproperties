@@ -93,9 +93,12 @@
                     <input type="number" v-model="user.contact" class="name-field" />
                 </div>
                 <div class="field">
-
+                    <span class="field-role">Role</span>
+                    <span class="role-text"> {{ authStore.role }}</span>
+                    <div class="not-allowed-box">Unable to change account role</div>
                 </div>
             </div>
+            <div class="horizontal-line-edit-profile"></div>
         </div>
     </div>
 </template>
@@ -656,15 +659,57 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     width: 45%;
+    position: relative;
 
 }
 .name-field {
     height: 50px;
     border-radius: 10px;
     background-color: #000000;
-    padding-left: 5px;
+    padding-left: 6px;
     color: #FFFFFF;
     margin-top: 3px;
     font-size: 16px;
+}
+.field-role {
+
+}
+.role-text {
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #000000;
+    padding-left: 6px;
+    color: #FFFFFF;
+    margin-top: 3px;
+    font-size: 16px;
+}
+.role-text:hover {
+    cursor: not-allowed;
+}
+.not-allowed-box {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: fit-content;
+    font-size: 16px;
+    margin-top: 3px;
+    z-index: 99;
+    background-color: #333;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+.role-text:hover + .not-allowed-box {
+    display: block;
+}
+.horizontal-line-edit-profile {
+    width: 100%;
+    border-top: 1px solid #88807b;
+    margin-top: 25px;
 }
 </style>
