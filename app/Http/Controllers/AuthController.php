@@ -112,5 +112,32 @@ class AuthController extends Controller
         ]);
     }
 
+    public function updateUserAccount(Request $request) {
+        $user = auth('sanctum')->user();
+
+        $validatedData = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'contact' => 'sometimes|string|max:20',
+            'email' => 'sometimes|string|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if(Hash::check($validatedData['password'], $user['password'])) {
+            return response()->json([
+                'message' => 'these credentials do not match our records.',
+            ]);
+        }
+
+        $user->update(array_filter([
+            'name' => $validatedData['name'] ?? null,
+            'email' => $validatedData['email'] ?? null,
+            'contact' => $validatedData['contact'] ?? null,
+        ]));
+
+        return response()->json([
+            'message' => 'user values updated',
+            'user' => $user->fresh(),
+        ]);
+    }
 
 }

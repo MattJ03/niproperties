@@ -208,4 +208,19 @@ class AuthControllerTest extends TestCase
         ]);
     }
 
+    public function test_update_user_account(): void {
+        $user = User::factory()->create([
+            'email' => 'fake@gmail.com',
+            'password' => 'password',
+        ]);
+        $this->actingAs($user);
+
+        $response = $this->patchJson('/api/updateAccount', [
+            'name' => 'fakeahhname',
+            'password' => 'password',
+        ]);
+        $response->assertStatus(200);
+
+    }
+
 }
