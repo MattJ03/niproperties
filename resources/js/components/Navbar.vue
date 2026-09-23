@@ -40,7 +40,7 @@
             <div class="horizontal-line-settings"></div>
             <div class="landlord-settings">
                 <span class="secondary-header">Account</span>
-                <div class="settings-selection-row">
+                <div class="settings-selection-row" @click="editProfileModal = true">
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
@@ -68,9 +68,14 @@
     <div v-if="editProfileModal === true" class="modal-overlay">
         <div class="edit-profile-square">
             <div class="top-of-square-row">
-
+                <span class="modal-title-text">Edit profile</span>
+                <img @click="editProfileModal = false" :src="x" class="close-modal" alt="close modal"/>
             </div>
-
+            <div class="horizontal-line-settings"></div>
+            <div class="profile-photo-row">
+                <img :src="agent2" class="edit-profile-photo" alt="pfp"/>
+                <button class="change-photo-btn">Change photo</button>
+            </div>
         </div>
     </div>
 </template>
@@ -88,6 +93,9 @@ import agent from '../assets/whiteAgent.png';
 import lock from '../assets/whiteLock.png';
 import bell from '../assets/bell.png';
 import language from '../assets/language.png';
+import x from '../assets/x2.png';
+import agent2 from '../assets/agent.png';
+
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -558,7 +566,7 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     height: 600px;
-    width: 800px;
+    width: 700px;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 12px;
@@ -566,6 +574,50 @@ input:checked + .slider:before {
 .top-of-square-row {
     display: flex;
     width: 100%;
+    justify-content: space-between;
+    align-items: center;
+   margin-top: 25px;
+    margin-bottom: 20px;
 
+}
+.modal-title-text {
+    font-size: 22px;
+    padding-left: 20px;
+}
+.close-modal {
+    height: 24px;
+    padding: 8px 8px;
+    margin-right: 20px;
+}
+.close-modal:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+    border-radius: 60px;
+}
+.profile-photo-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 25px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.edit-profile-photo {
+    height: 55px;
+    padding: 12px 12px;
+    border-radius: 60px;
+    background-color: #E7CBA6;
+}
+.change-photo-btn {
+    height: 40px;
+    width: fit-content;
+    text-wrap: nowrap;
+    border-radius: 10px;
+    background-color: #2dcc95;
+    border: none;
+    color: #1F4D3A;
+    cursor: pointer;
 }
 </style>
