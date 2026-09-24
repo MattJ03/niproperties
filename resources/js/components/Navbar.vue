@@ -123,6 +123,17 @@
                 <img :src="x" @click="closeModal()" class="close-modal" alt="close modal" />
             </div>
             <div class="horizontal-line-edit-profile"></div>
+            <span class="new-password-title">Change password</span>
+            <div class="password-entries">
+                <div class="field">
+                    <span class="field-name">Enter password</span>
+                    <input type="password" v-model="oldPassword" class="name-field" />
+                </div>
+                <div class="field">
+                    <span class="field-name">New Password</span>
+                    <input type="password" v-model="newPassword" class="name-field"/>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -165,6 +176,8 @@ const errors = reactive({
     contact: '',
     password: '',
 });
+const oldPassword = ref('');
+const newPassword = ref('');
 watch(user, (newUser) => {
     formDraft.value = {... newUser };
 })
@@ -846,5 +859,17 @@ input:checked + .slider:before {
     height: 550px;
     background-color: #FFFFFF;
     border-radius: 10px;
+}
+.new-password-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    font-size: 20px;
+}
+.password-entries {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
 }
 </style>

@@ -140,4 +140,26 @@ class AuthController extends Controller
         ]);
     }
 
+    public function changePassword(Request $request) {
+        $user = auth('sanctum')->user();
+
+       $validatedData = $request->validate([
+           'oldPassword' => 'required|string|min:8',
+           'newPassword' => 'required|string|min:8',
+       ]);
+
+        if(!Hash::check($validatedData['oldPassword'], $user['password'])) {
+            return response()->json([
+                'message' => 'these credentials do not match our records',
+            ]);
+        }
+
+
+        $user->update(['password' => Hash::make($validatedData['newPassword'])]);
+        return response()->json([
+            'message' => 'password updated',
+            'user' => $user,
+        ]);
+    }
+
 }
