@@ -81,16 +81,19 @@
                 <div class="field">
                     <span class="field-name">Name</span>
                     <input v-model="formDraft.name" type="text" class="name-field"/>
+                    <span class="error-text" v-if="errors.name"> {{ errors.name }}</span>
                 </div>
                 <div class="field">
                     <span class="field-name">Email</span>
                     <input v-model="formDraft.email" type="email" class="name-field" />
+                    <span class="erro-text" v-if="errors.email"> {{ errors.email }}</span>
                 </div>
             </div>
             <div class="edit-profile-row">
                 <div class="field">
                     <span class="field-name">Contact number</span>
                     <input type="number" v-model="formDraft.contact" class="name-field" />
+                    <span class="error-text" v-if="errors.contact"> {{ errors.contact }}</span>
                 </div>
                 <div class="field">
                     <span class="field-role">Role</span>
@@ -102,6 +105,7 @@
                 <div class="field">
                     <span class="field-name">Enter current password</span>
                     <input type="password" v-model="current_password" class="name-field" />
+                    <span class="error-text" v-if="errors.password"> {{ errors.password }}</span>
                 </div>
             </div>
             <div class="bottom-square">
@@ -819,5 +823,9 @@ input:checked + .slider:before {
 }
 .reset-profile {
     cursor: pointer;
+}
+.error-text {
+    color: #FF0000;
+    margin-top: 2px;
 }
 </style>
