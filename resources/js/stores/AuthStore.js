@@ -101,7 +101,7 @@ export const useAuthStore = defineStore('auth', () => {
     async function changePassword(payload) {
         loading.value = true;
         try {
-            const res = await api.put(`changePassword`, payload);
+            const res = await api.patch(`updatePassword`, payload);
             user.values = res.data.user;
         } catch(err) {
             error.value = error.response?.data?.message || 'failed to change password';

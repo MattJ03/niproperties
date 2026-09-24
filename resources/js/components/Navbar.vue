@@ -127,12 +127,16 @@
             <div class="password-entries">
                 <div class="field">
                     <span class="field-name">Enter password</span>
-                    <input type="password" v-model="oldPassword" class="name-field" />
+                    <input type="password" v-model="passwords.oldPassword" class="name-field" />
                 </div>
                 <div class="field">
                     <span class="field-name">New Password</span>
-                    <input type="password" v-model="newPassword" class="name-field"/>
+                    <input type="password" v-if="passwords.oldPassword" v-model="passwords.newPassword" class="name-field"/>
                 </div>
+            </div>
+            <div class="buttons-wrapper">
+                <button class="update-profile" @click="updatePassword()">Update password</button>
+                <span class="reset-profile">Reset</span>
             </div>
         </div>
     </div>
@@ -176,8 +180,10 @@ const errors = reactive({
     contact: '',
     password: '',
 });
-const oldPassword = ref('');
-const newPassword = ref('');
+const passwords = reactive({
+    oldPassword: '',
+    newPassword: '',
+});
 watch(user, (newUser) => {
     formDraft.value = {... newUser };
 })
@@ -219,7 +225,9 @@ const moveToHome = async () => {
         loading.value = false;
     }
 }
-
+setTimeout(() => {
+    console.log(passwords.oldPassword, '  old password value');
+}, 6000);
 const moveToBrowseAll = async () => {
     loading.value = true;
     try {
@@ -321,6 +329,21 @@ const updateAccount = async () => {
     }
 }
 
+const updatePassword = async () => {
+    loading.value = true;
+    try {
+        await authStore.changePassword({
+            oldPassword: passwords.oldPassword,
+            newPassword: passwords.newPassword,
+        });
+    } catch (err) {
+
+    }
+    finally {
+        loading.value = false;
+    }
+}
+
 const resetEditProfileConfiguration = async () => {
     loading.value = false;
     try {
@@ -351,6 +374,8 @@ function passwordCheck() {
 
 const closeModal = () => {
     formDraft.value = user.value;
+    passwords.newPassword = '';
+    passwords.oldPassword = '';
     editProfileModal.value = false;
     passwordAndSecurityModal.value = false;
 }
@@ -855,8 +880,8 @@ input:checked + .slider:before {
 .password-security-square {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    height: 550px;
+    width: 550px;
+    height: 400px;
     background-color: #FFFFFF;
     border-radius: 10px;
 }
@@ -871,5 +896,14 @@ input:checked + .slider:before {
     justify-content: center;
     gap: 30px;
     margin-top: 25px;
+}
+.buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+    justify-content: right;
+    margin-right: 25px;
 }
 </style>
