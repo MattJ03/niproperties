@@ -136,7 +136,7 @@
             </div>
             <div class="buttons-wrapper">
                 <button class="update-profile" @click="updatePassword()">Update password</button>
-                <span class="reset-profile">Reset</span>
+                <span class="reset-profile" @click="resetEditProfileConfiguration()">Reset</span>
             </div>
         </div>
     </div>
@@ -348,6 +348,8 @@ const resetEditProfileConfiguration = async () => {
     loading.value = false;
     try {
         await authStore.getCurrentUser();
+        passwords.oldPassword = '';
+        passwords.newPassword = '';
     } catch(err) {
 
     }
