@@ -107,7 +107,7 @@
             <div class="bottom-square">
             <div class="buttons-update-wrapper">
                 <button class="update-profile" @click="updateAccount()">Save changes</button>
-                <span class="reset-profile">Reset</span>
+                <span class="reset-profile" @click="resetEditProfileConfiguration()">Reset</span>
             </div>
         </div>
             </div>
@@ -143,8 +143,14 @@ const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
 const editProfileModal = ref(false);
 const current_password = ref('');
-
+const errorText = ref('');
 const formDraft = ref({ ... user.value});
+const errors = reactive({
+    name: '',
+    email: '',
+    contact: '',
+    password: '',
+});
 watch(user, (newUser) => {
     formDraft.value = {... newUser };
 })
@@ -277,13 +283,40 @@ const updateAccount = async () => {
         });
         current_password.value = '';
         editProfileModal.value = false;
-        authStore.getCurrentUser();
+       await authStore.getCurrentUser();
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to update user account';
     } finally {
         loading.value = false;
     }
 }
+
+const resetEditProfileConfiguration = async () => {
+    loading.value = false;
+    try {
+        await authStore.getCurrentUser();
+    } catch(err) {
+
+    }
+    finally {
+        loading.value = false;
+
+    }
+}
+
+function passwordCheck() {
+    let valid = true;
+    errors.name = formDraft.value.name.trim() ? '' : 'name cannot be null';
+    errors.email = formDraft.value.email.trim() ? '' : 'email cannot be null';
+    errors.contact = formDraft.value.contact.trim() ? '' : 'contact cannot be null';
+    errors.password = current_password.value.trim() ? '' : 'password cannot be null';
+
+    if(!formDraft.value.name || !formDraft.value.email || !formDraft.value.contact || !current_password.value) {
+        valid = false;
+    }
+    return valid;
+}
+
 
 const closeModal = () => {
     formDraft.value = user.value;
@@ -781,5 +814,6 @@ input:checked + .slider:before {
     color: #FFFFFF;
 }
 .reset-profile {
+    cursor: pointer;
 }
 </style>
