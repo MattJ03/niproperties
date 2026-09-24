@@ -128,10 +128,12 @@
                 <div class="field">
                     <span class="field-name">Enter password</span>
                     <input type="password" v-model="passwords.oldPassword" class="name-field" />
+                    <span class="error-text" v-if="passwordsErrors.oldPassword"> {{ passwordsErrors.oldPassword }}</span>
                 </div>
                 <div class="field">
                     <span class="field-name">New Password</span>
                     <input type="password" v-if="passwords.oldPassword" v-model="passwords.newPassword" class="name-field"/>
+                    <span class="error-text" v-if="passwordsErrors.newPassword && passwords.oldPassword"> {{ passwordsErrors.newPassword }}</span>
                 </div>
             </div>
             <div class="buttons-wrapper">
@@ -179,6 +181,10 @@ const errors = reactive({
     email: '',
     contact: '',
     password: '',
+});
+const passwordsErrors = reactive({
+    oldPassword: '',
+    newPassword: '',
 });
 const passwords = reactive({
     oldPassword: '',
@@ -331,6 +337,9 @@ const updateAccount = async () => {
 
 const updatePassword = async () => {
     loading.value = true;
+    if(!validatePassword()) {
+        return null;
+    }
     try {
         await authStore.changePassword({
             oldPassword: passwords.oldPassword,
@@ -380,6 +389,18 @@ const closeModal = () => {
     passwords.oldPassword = '';
     editProfileModal.value = false;
     passwordAndSecurityModal.value = false;
+}
+const validatePassword = () => {
+    let validate = true;
+
+    passwordsErrors.oldPassword = passwords.oldPassword ? '' : 'please enter your password';
+    passwordsErrors.newPassword = passwords.newPassword ? '' : 'please enter a new password';
+
+    if(!passwords.oldPassword || !passwords.newPassword) {
+        validate = false;
+    }
+
+    return validate;
 }
 
 onMounted( async () => {
