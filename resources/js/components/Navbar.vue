@@ -44,7 +44,7 @@
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
-                <div class="security-selection-row">
+                <div class="security-selection-row" @click="passwordAndSecurityModal = true">
                     <img :src="lock" class="lock-img" alt="lock"/>
                     <span>Password & security</span>
                 </div>
@@ -116,6 +116,15 @@
         </div>
             </div>
     </div>
+    <div class="modal-overlay" v-if="passwordAndSecurityModal === true">
+        <div class="password-security-square">
+            <div class="top-of-square-row">
+                <span class="modal-title-text">Password & security</span>
+                <img :src="x" @click="closeModal()" class="close-modal" alt="close modal" />
+            </div>
+            <div class="horizontal-line-edit-profile"></div>
+        </div>
+    </div>
 </template>
 <script setup>
 import {ref, reactive, computed, onMounted, watch } from 'vue';
@@ -146,6 +155,7 @@ const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = localStorage.getItem('name').charAt(0).toUpperCase();
 const editProfileModal = ref(false);
+const passwordAndSecurityModal = ref(false);
 const current_password = ref('');
 const errorText = ref('');
 const formDraft = ref({ ... user.value});
@@ -329,6 +339,7 @@ function passwordCheck() {
 const closeModal = () => {
     formDraft.value = user.value;
     editProfileModal.value = false;
+    passwordAndSecurityModal.value = false;
 }
 
 onMounted( async () => {
@@ -791,7 +802,7 @@ input:checked + .slider:before {
 .horizontal-line-edit-profile {
     width: 100%;
     border-top: 1px solid #88807b;
-    margin-top: 25px;
+
 }
 .bottom-square {
     width: 100%;
@@ -827,5 +838,13 @@ input:checked + .slider:before {
 .error-text {
     color: #FF0000;
     margin-top: 2px;
+}
+.password-security-square {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 550px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
 </style>
