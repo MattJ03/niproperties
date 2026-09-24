@@ -33,6 +33,7 @@ Route::get('/mostViewedListings', [ListingController::class, 'getMostViewedPrope
 Route::get('/listingsPerCounty', [ListingController::class, 'listingsPerCounty']);
 Route::get('/rentToBuySplit', [ListingController::class, 'rentToBuySplit']);
 Route::patch('/updateAccount', [AuthController::class, 'updateUserAccount']);
+Route::put('/updatePassword', [AuthController::class, 'changePassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);

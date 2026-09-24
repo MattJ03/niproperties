@@ -98,6 +98,19 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function changePassword(payload) {
+        loading.value = true;
+        try {
+            const res = await api.put(`changePassword`, payload);
+            user.values = res.data.user;
+        } catch(err) {
+            error.value = error.response?.data?.message || 'failed to change password';
+        }
+        finally {
+            loading.value = false;
+        }
+    }
+
     return {
         name,
         token,
@@ -112,6 +125,7 @@ export const useAuthStore = defineStore('auth', () => {
         logout,
         getCurrentUser,
         updateUserAccount,
+        changePassword,
     };
 });
 
