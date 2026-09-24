@@ -303,7 +303,7 @@ function formatPrice(price) {
 .listings-per-county-wrapper {
     display: flex;
     flex-direction: column;
-    height: 310px;
+    height: fit-content;
     width: 300px;
     padding-top: 8px;
     background-color: #FFFFFF;
