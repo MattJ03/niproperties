@@ -274,6 +274,9 @@ const moveToDashboard = async () => {
 
 const updateAccount = async () => {
     loading.value = true;
+    if(!passwordCheck()) {
+        return null;
+    }
     try {
         await authStore.updateUserAccount({
             name: formDraft.value.name,
@@ -314,6 +317,7 @@ function passwordCheck() {
     if(!formDraft.value.name || !formDraft.value.email || !formDraft.value.contact || !current_password.value) {
         valid = false;
     }
+    console.log('validation value ' + valid);
     return valid;
 }
 
