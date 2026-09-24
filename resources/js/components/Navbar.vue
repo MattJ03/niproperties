@@ -812,7 +812,7 @@ input:checked + .slider:before {
     height: 48px;
     width: fit-content;
     font-size: 16px;
-    color: #2d6e53;
+    color: #FFFFFF;
     border-radius: 10px;
     text-wrap: nowrap;
 }
