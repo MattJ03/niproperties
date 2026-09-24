@@ -277,6 +277,7 @@ const updateAccount = async () => {
         });
         current_password.value = '';
         editProfileModal.value = false;
+        authStore.getCurrentUser();
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to update user account';
     } finally {
