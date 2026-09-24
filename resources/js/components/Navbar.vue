@@ -40,11 +40,11 @@
             <div class="horizontal-line-settings"></div>
             <div class="landlord-settings">
                 <span class="secondary-header">Account</span>
-                <div class="settings-selection-row" @click="editProfileModal = true">
+                <div class="settings-selection-row" @click="editProfileModal = true; passwordAndSecurityModal = false;">
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
-                <div class="security-selection-row" @click="passwordAndSecurityModal = true">
+                <div class="security-selection-row" @click="passwordAndSecurityModal = true; editProfileModal = false;">
                     <img :src="lock" class="lock-img" alt="lock"/>
                     <span>Password & security</span>
                 </div>
