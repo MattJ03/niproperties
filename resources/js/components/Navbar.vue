@@ -170,7 +170,10 @@ const settingsOpen = ref(false);
 const userStore = useUserDirectoryStore();
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
-const initial = localStorage.getItem('name').charAt(0).toUpperCase();
+const initial = computed(() => {
+    const name = localStorage.getItem('name');
+    return name ? name.charAt(0).toUpperCase() : '';
+});
 const editProfileModal = ref(false);
 const passwordAndSecurityModal = ref(false);
 const current_password = ref('');
