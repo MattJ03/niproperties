@@ -381,7 +381,7 @@ function formatPrice(price) {
 onMounted(() => {
     console.log('onMounted running')
     listingStore.getAllListings();
-    console.log(listingStore.allListings.length);
+
 
     if(route.query.price) {
         filters.max_price = route.query.price;
