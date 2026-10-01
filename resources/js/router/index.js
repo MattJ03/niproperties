@@ -15,7 +15,7 @@ import Dashboard from "../screens/Dashboard.vue";
 const routes = [
     { path: '/register', component: Register, name: 'register' },
     { path: '/login', component: Login, name: 'login'},
-    { path: '/home', component: Home, name: 'home'},
+    { path: '/', component: Home, name: 'home'},
     { path: '/upload-listing', component: UploadListing, name: 'upload listing', meta:{ role: 'landlord'}},
     { path: '/browse-all', component: BrowseAll, name: 'browse'},
     { path: '/rent-listings', component: Rent, name: 'rent'},
