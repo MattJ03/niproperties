@@ -691,4 +691,19 @@ class ListingController extends Controller
       return response()->json($listings);
 
       }
+
+      public function totalListingsCount() {
+      $listings = Listing::all()->count();
+      if(!$listings <= 0) {
+          return response()->json([
+              'listings' => $listings,
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $listings,
+          'message' => 'listings found',
+      ]);
+      }
 }
