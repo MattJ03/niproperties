@@ -103,8 +103,7 @@ const moveToListingInfo = async () => {
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    height: auto;
+    height: 500px;
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -127,18 +126,21 @@ const moveToListingInfo = async () => {
 .listing-details {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding-top: 16px;
+
     box-sizing: border-box;
 }
 
 .price-listing {
     font-size: 18px;
     margin: 0 0 8px 0;
+    margin-left: 20px;
 }
 
 .address-line-1-text {
     font-size: 15px;
     color: #1c1e21;
+    margin-left: 20px;
 }
 
 .postcode-town-wrapper {
@@ -146,6 +148,7 @@ const moveToListingInfo = async () => {
     align-items: center;
     margin-top: 6px;
     gap: 5px;
+    margin-left: 20px;
 }
 
 .location-img {
@@ -162,6 +165,7 @@ const moveToListingInfo = async () => {
     align-items: center;
     margin-top: 16px;
     gap: 20px;
+    margin-left: 20px;
 }
 
 .topic-wrapper {
@@ -188,8 +192,9 @@ const moveToListingInfo = async () => {
 .horizontal-line {
     width: 100%;
     border: none;
+    margin-left: 0;
     border-top: 1px solid #e4e6eb;
-    margin: 12px 0;
+
 }
 
 .description-wrapper {
@@ -199,10 +204,10 @@ const moveToListingInfo = async () => {
 }
 
 .description-text {
-    margin: 0;
+    margin-top: 3px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    margin-left: 20px;
+
     overflow: hidden;
 }
 
