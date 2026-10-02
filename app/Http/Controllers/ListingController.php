@@ -693,7 +693,8 @@ class ListingController extends Controller
       }
 
       public function totalListingsCount() {
-      $listings = Listing::all()->count();
+      $listings = Listing::query()->get()->count();
+
       if(!$listings <= 0) {
           return response()->json([
               'listings' => $listings,
