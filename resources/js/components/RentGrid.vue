@@ -207,8 +207,8 @@ const moveToListingInfo = async () => {
     margin-top: 3px;
     display: -webkit-box;
     margin-left: 20px;
-
-    overflow: hidden;
+    margin-right: 20px;
+    overflow-wrap: break-word;
 }
 
 .bottom-of-listing {

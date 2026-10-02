@@ -216,6 +216,7 @@ function formatPrice(price) {
 }
 .description-text {
     margin-left: 20px;
+    overflow-wrap: break-word;
     padding-right: 40px;
 }
 .bottom-of-listing {
