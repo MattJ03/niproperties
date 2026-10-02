@@ -441,4 +441,5 @@ class ListingControllerTest extends TestCase
             'listings' => 15,
         ]);
         }
+
 }
