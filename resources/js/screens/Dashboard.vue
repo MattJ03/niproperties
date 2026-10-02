@@ -4,7 +4,7 @@
         <div class="row-of-stats">
             <div class="analytics-square">
                 <span class="analytics-square-title">Total listings</span>
-                <span class="analytic-square-value"> {{ listingsCount }}</span>
+                <span class="analytic-square-value"> {{ totalListings }}</span>
             </div>
             <div class="analytics-square">
                 <span class="analytics-square-title">Total users:</span>
@@ -84,7 +84,7 @@ const error = ref('');
 
 const listingStore = useListingStore();
 const userStore = useUserDirectoryStore();
-const { listingsCount, soldListingsMonth, averageRent, mostViewedListings, listingsPerCounty, listingsPerType } = storeToRefs(listingStore);
+const { listingsCount, soldListingsMonth, averageRent, mostViewedListings, listingsPerCounty, listingsPerType, totalListings } = storeToRefs(listingStore);
 const { userCount, landlordCount, landlordLeaderboard } = storeToRefs(userStore);
 
 const currentMonth = ref('');
@@ -105,8 +105,8 @@ onMounted(async () => {
     await listingStore.getListingsPerCounty();
     console.log(listingsPerCounty.value)
     await listingStore.getListingsPerTypeSplit();
+    await listingStore.getTotalListings();
 });
-;
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
