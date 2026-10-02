@@ -103,8 +103,7 @@ const moveToListingInfo = async () => {
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    height: auto;
+    height: 500px;
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -127,25 +126,29 @@ const moveToListingInfo = async () => {
 .listing-details {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding-top: 16px;
+
     box-sizing: border-box;
 }
 
 .price-listing {
     font-size: 18px;
     margin: 0 0 8px 0;
+    margin-left: 20px;
 }
 
 .address-line-1-text {
-    font-size: 15px;
+    font-size: 18px;
     color: #1c1e21;
+    margin-left: 20px;
 }
 
 .postcode-town-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 6px;
+    margin-top: 20px;
     gap: 5px;
+    margin-left: 20px;
 }
 
 .location-img {
@@ -153,15 +156,16 @@ const moveToListingInfo = async () => {
 }
 
 .town-text {
-    font-size: 14px;
+    font-size: 16px;
     color: #65676b;
 }
 
 .house-information {
     display: flex;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 30px;
     gap: 20px;
+    margin-left: 20px;
 }
 
 .topic-wrapper {
@@ -177,7 +181,7 @@ const moveToListingInfo = async () => {
 
 .rooms-icon,
 .pin-icon {
-    height: 24px;
+    height: 28px;
 }
 
 .tiny-text-below-info {
@@ -188,8 +192,10 @@ const moveToListingInfo = async () => {
 .horizontal-line {
     width: 100%;
     border: none;
+    margin-top: 15px;
+    margin-left: 0;
     border-top: 1px solid #e4e6eb;
-    margin: 12px 0;
+
 }
 
 .description-wrapper {
@@ -199,50 +205,46 @@ const moveToListingInfo = async () => {
 }
 
 .description-text {
-    margin: 0;
+    margin-top: 3px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow-wrap: break-word;
 }
 
 .bottom-of-listing {
     display: flex;
+    margin-left: 20px;
+    align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: auto;
-}
+    width: 90%;
 
+}
 .listing-stats {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
 
+}
 .logo-img {
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 70px;
+    border-radius: 80px;
+    width: 60px;
+    margin-right: 5px;
 }
-
-.sitename-time-uploaded {
-    display: flex;
-    flex-direction: column;
-}
-
 .niproperties-text {
     font-size: 13px;
-    margin: 0;
-    font-weight: 600;
+    font-weight: bold;
+    margin-bottom: 3px;
 }
-
+.sitename-time-uploaded {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .time-since-upload {
     color: #65676b;
-    font-size: 12px;
+    font-size: 13px;
 }
-
 .view-btn {
     display: flex;
     align-items: center;

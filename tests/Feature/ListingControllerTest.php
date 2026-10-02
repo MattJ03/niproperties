@@ -426,4 +426,20 @@ class ListingControllerTest extends TestCase
         ]);
         $response->dump();
         }
+
+        public function test_total_listings_count_returns_correct_numbers(): void {
+        $landlord = User::factory()->create()->assignRole('landlord');
+        $this->actingAs($landlord);
+
+        $listings = Listing::factory()->count(15)->create([
+            'landlord_id' => $landlord->id,
+        ]);
+
+        $response = $this->getJson('/api/totalListings');
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'listings' => 15,
+        ]);
+        }
+
 }

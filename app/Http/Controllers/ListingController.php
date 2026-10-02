@@ -19,7 +19,7 @@ class ListingController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(Request $request) {
-      $user = auth()->id();
+      $user = auth('sanctum')->id();
 
       $query = Listing::where('sale_status', 'open');
 
@@ -690,5 +690,21 @@ class ListingController extends Controller
 
       return response()->json($listings);
 
+      }
+
+      public function totalListingsCount() {
+      $listings = Listing::query()->get()->count();
+
+      if(!$listings <= 0) {
+          return response()->json([
+              'listings' => $listings,
+              'message' => 'no listings found',
+          ]);
+      }
+
+      return response()->json([
+          'listings' => $listings,
+          'message' => 'listings found',
+      ]);
       }
 }

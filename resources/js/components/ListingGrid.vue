@@ -209,12 +209,14 @@ function formatPrice(price) {
     margin-top: 15px;
 }
 .description-wrapper {
-    margin-left: 20px;
+    margin-left: 0px;
     margin-top: 5px;
     color: #65676b;
     font-size: 12px;
 }
 .description-text {
+    margin-left: 20px;
+    overflow-wrap: break-word;
     padding-right: 40px;
 }
 .bottom-of-listing {

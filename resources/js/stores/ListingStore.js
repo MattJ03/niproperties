@@ -21,6 +21,7 @@ export const useListingStore = defineStore('listings', () => {
    const mostViewedListings = ref([]);
    const listingsPerCounty = ref({});
    const listingsPerType = ref({});
+   const totalListings = ref();
 
    const storeListing = async (payload) => {
        loading.value = true;
@@ -256,6 +257,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getTotalListings = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('totalListings');
+           totalListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get total listings count';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -275,6 +288,7 @@ export const useListingStore = defineStore('listings', () => {
        mostViewedListings,
        listingsPerCounty,
        listingsPerType,
+       totalListings,
        storeListing,
        getAllListings,
        get3RecentListings,
@@ -292,5 +306,6 @@ export const useListingStore = defineStore('listings', () => {
        getMostViewedListings,
        getListingsPerCounty,
        getListingsPerTypeSplit,
+       getTotalListings,
    };
 });

@@ -32,6 +32,7 @@ Route::get('/largestPortfolios', [UserDirectoryController::class, 'getLandlordsW
 Route::get('/mostViewedListings', [ListingController::class, 'getMostViewedProperties']);
 Route::get('/listingsPerCounty', [ListingController::class, 'listingsPerCounty']);
 Route::get('/rentToBuySplit', [ListingController::class, 'rentToBuySplit']);
+Route::get('/totalListings', [ListingController::class, 'totalListingsCount']);
 Route::patch('/updateAccount', [AuthController::class, 'updateUserAccount']);
 Route::patch('/updatePassword', [AuthController::class, 'changePassword']);
 
