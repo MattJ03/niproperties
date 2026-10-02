@@ -60,6 +60,7 @@
                 <div class="language-row">
                     <img :src="language" class="language-img" alt="language"/>
                     <span>Change language</span>
+                    <div class="not-allowed-box">Not supporting other languages currently</div>
                 </div>
             </div>
         </div>
@@ -715,14 +716,17 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 .language-row {
+    position: relative;
     display: flex;
     flex-direction: row;
     gap: 8px;
-
     margin-top: 26px;
 }
 .language-row span {
     color: #FFFFFF;
+}
+.language-row span:hover + .not-allowed-box {
+    display: block;
 }
 .language-img {
     height: 22px;
