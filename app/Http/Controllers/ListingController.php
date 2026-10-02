@@ -19,7 +19,7 @@ class ListingController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(Request $request) {
-      $user = auth()->id();
+      $user = auth('sanctum')->id();
 
       $query = Listing::where('sale_status', 'open');
 
