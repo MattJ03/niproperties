@@ -138,7 +138,7 @@ const moveToListingInfo = async () => {
 }
 
 .address-line-1-text {
-    font-size: 15px;
+    font-size: 18px;
     color: #1c1e21;
     margin-left: 20px;
 }
@@ -146,7 +146,7 @@ const moveToListingInfo = async () => {
 .postcode-town-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 6px;
+    margin-top: 20px;
     gap: 5px;
     margin-left: 20px;
 }
@@ -156,14 +156,14 @@ const moveToListingInfo = async () => {
 }
 
 .town-text {
-    font-size: 14px;
+    font-size: 16px;
     color: #65676b;
 }
 
 .house-information {
     display: flex;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 30px;
     gap: 20px;
     margin-left: 20px;
 }
@@ -181,7 +181,7 @@ const moveToListingInfo = async () => {
 
 .rooms-icon,
 .pin-icon {
-    height: 24px;
+    height: 28px;
 }
 
 .tiny-text-below-info {
@@ -192,6 +192,7 @@ const moveToListingInfo = async () => {
 .horizontal-line {
     width: 100%;
     border: none;
+    margin-top: 15px;
     margin-left: 0;
     border-top: 1px solid #e4e6eb;
 
@@ -213,41 +214,37 @@ const moveToListingInfo = async () => {
 
 .bottom-of-listing {
     display: flex;
+    margin-left: 20px;
+    align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: auto;
-}
+    width: 90%;
 
+}
 .listing-stats {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
 
+}
 .logo-img {
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 70px;
+    border-radius: 80px;
+    width: 60px;
+    margin-right: 5px;
 }
-
-.sitename-time-uploaded {
-    display: flex;
-    flex-direction: column;
-}
-
 .niproperties-text {
     font-size: 13px;
-    margin: 0;
-    font-weight: 600;
+    font-weight: bold;
+    margin-bottom: 3px;
 }
-
+.sitename-time-uploaded {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .time-since-upload {
     color: #65676b;
-    font-size: 12px;
+    font-size: 13px;
 }
-
 .view-btn {
     display: flex;
     align-items: center;
