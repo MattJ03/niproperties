@@ -181,7 +181,7 @@ setTimeout(() => {
     flex-direction: column;
     background-color: #ffffff;
     height: 85%;
-    width: 45%;
+    width: 55%;
     border:  solid 1px #ffffff;
     border-radius: 14px;
     margin-left: 90px;
@@ -202,8 +202,7 @@ setTimeout(() => {
 }
 .input-field {
     height: 60px;
-    margin-left: auto;
-    margin-right: auto;
+    padding-left: 20px;
     width: 90%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
@@ -219,6 +218,7 @@ setTimeout(() => {
 }
 .form-field {
     position: relative;
+
 }
 .form-field label {
     position: absolute;
@@ -274,6 +274,7 @@ setTimeout(() => {
     font-size: 18px;
     cursor: pointer;
     border-radius: 12px;
+    box-sizing: border-box;
 }
 .buyer-square:hover {
     border-color: #1F4D3A;
@@ -403,9 +404,35 @@ setTimeout(() => {
         width: 100%;
         height: auto;
         padding: 0;
+
+    }
+    .form-field {
+        display: flex;
+        justify-content: center;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .form-field label {
+       left: 40px;
     }
     .image-container {
         visibility: hidden;
+    }
+    .logo-img {
+        height: 100px;
+    }
+    .buyer-square {
+        width: 30%;
+        font-size: 17px;
+        padding: 3px 6px;
+    }
+    .buyer-square img {
+        width: 30px;
+    }
+    .landlord-square {
+        font-size: 17px;
+        width: 30%;
+        padding: 0px 6px;
     }
 }
 </style>
