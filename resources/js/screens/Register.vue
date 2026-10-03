@@ -5,7 +5,6 @@
                 <img :src="niproperties" class="logo-img" alt="logo" />
             <h2 class="header-reg">Get started on NI Properties</h2>
             </div>
-            <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
                 <div class="buyer-square"
                      :class="{ active: role === 'buyer'}"
@@ -192,20 +191,24 @@ setTimeout(() => {
 .form-card {
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+
     flex-direction: column;
     gap: 25px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 25px;
+    box-sizing: border-box;
 }
 .input-field {
     height: 60px;
+    margin-left: auto;
+    margin-right: auto;
     width: 90%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
     font-size: 16px;
-    box-sizing: border-box;
+
 }
 .input-field:focus {
     outline: none;
@@ -316,6 +319,8 @@ setTimeout(() => {
     width: 80%;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 30px;
     background-color: #1F4D3A;
     color: #ffffff;
@@ -346,6 +351,8 @@ setTimeout(() => {
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #fffffff3;
     color: #0064e0;
     font-size: 15px;
@@ -384,6 +391,8 @@ setTimeout(() => {
     .container {
         max-width: 85%;
         flex-direction: column;
+        gap: 24px;
+        padding: 16px;
     }
     .form-container {
         width: 100%;
@@ -392,6 +401,8 @@ setTimeout(() => {
     }
     .form-card {
         width: 100%;
+        height: auto;
+        padding: 0;
     }
     .image-container {
         visibility: hidden;
