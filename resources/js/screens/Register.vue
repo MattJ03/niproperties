@@ -169,7 +169,7 @@ setTimeout(() => {
 .container {
     display: flex;
     gap: 60px;
-
+    width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     padding: 30px;
@@ -201,11 +201,11 @@ setTimeout(() => {
 }
 .input-field {
     height: 60px;
-    width: 540px;
+    width: 90%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
     font-size: 16px;
-    padding-left: 20px;
+    box-sizing: border-box;
 }
 .input-field:focus {
     outline: none;
@@ -379,5 +379,22 @@ setTimeout(() => {
     object-fit: cover;
    width: 100%;
     border-radius: 12px;
+}
+@media(max-width: 900px) {
+    .container {
+        max-width: 85%;
+        flex-direction: column;
+    }
+    .form-container {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .form-card {
+        width: 100%;
+    }
+    .image-container {
+        visibility: hidden;
+    }
 }
 </style>

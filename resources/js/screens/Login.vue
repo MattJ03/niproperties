@@ -114,8 +114,8 @@ import { useRouter } from "vue-router";
 .form-card {
     height: 80%;
     width: 32%;
-    padding: 0 24px;  /* add this */
-    box-sizing: border-box;  /* needed so padding doesn't push .form-card itself wider than 32% */
+    padding: 0 24px;
+    box-sizing: border-box;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 14px;
