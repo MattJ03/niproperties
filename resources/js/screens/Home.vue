@@ -593,6 +593,10 @@ onMounted(async () => {
     gap: 20px;
 
     flex-direction: row;
-
+}
+@media(max-width: 900px) {
+    .hello-user-wrapper {
+        width: 90%;
+    }
 }
 </style>

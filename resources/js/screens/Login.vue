@@ -258,15 +258,27 @@ import { useRouter } from "vue-router";
 }
 @media(max-width: 900px) {
     .container {
+        align-items: flex-start;
         flex-direction: column;
         max-width: 85%;
         gap: 24px;
+
         padding: 16px;
     }
     .form-card {
+
         width: 100%;
         height: auto;
         padding: 24px;
+    }
+    .guest-wrapper {
+        margin-top: 15px;
+    }
+    .continue-as-guest-text {
+        margin-top: 35px;
+    }
+    .continue-guest-btn {
+        margin-top: 10px;
     }
 }
 </style>
