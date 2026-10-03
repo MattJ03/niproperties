@@ -109,11 +109,13 @@ import { useRouter } from "vue-router";
     margin: auto;
     height: 100dvh;
     width: 100%;
+    max-width: 1900px;
 }
 .form-card {
-
     height: 80%;
     width: 32%;
+    padding: 0 24px;  /* add this */
+    box-sizing: border-box;  /* needed so padding doesn't push .form-card itself wider than 32% */
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 14px;
@@ -135,16 +137,18 @@ import { useRouter } from "vue-router";
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+
     gap: 35px;
 }
 .input-field {
     height: 60px;
-    width: 540px;
+    width: 100%;
+    max-width: 100%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
     font-size: 16px;
     padding-left: 20px;
+    box-sizing: border-box;
 }
 .input-field:focus {
     outline: none;
@@ -247,5 +251,17 @@ import { useRouter } from "vue-router";
     color: #FFFFFF;
     font-size: 15px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .container {
+        flex-direction: column;
+        gap: 24px;
+        padding: 16px;
+    }
+    .form-card {
+        width: 100%;
+        height: auto;
+        padding: 24px;
+    }
 }
 </style>
