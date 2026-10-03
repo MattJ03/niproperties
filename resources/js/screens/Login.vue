@@ -183,6 +183,8 @@ import { useRouter } from "vue-router";
     width: 80%;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 30px;
     background-color: #1F4D3A;
     color: #ffffff;
@@ -201,6 +203,8 @@ import { useRouter } from "vue-router";
     border-radius: 30px;
     background-color: #fffffff3;
     color: #1877f2;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 15px;
     cursor: pointer;
     border: solid 1px #0064e0;
@@ -255,6 +259,7 @@ import { useRouter } from "vue-router";
 @media(max-width: 900px) {
     .container {
         flex-direction: column;
+        max-width: 85%;
         gap: 24px;
         padding: 16px;
     }
