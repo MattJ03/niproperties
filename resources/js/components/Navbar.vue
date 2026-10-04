@@ -3,6 +3,9 @@
         <div class="logo-wrapper">
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
+        <div class="hamburger-menu">
+
+        </div>
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
             <strong><span class="headings" @click="moveToRent()">Rent</span></strong>
@@ -935,5 +938,28 @@ input:checked + .slider:before {
     gap: 10px;
     justify-content: right;
     margin-right: 25px;
+}
+@media(max-width: 900px) {
+    .nav-bar {
+        height: auto;
+        padding-left: 15px;
+    }
+    .logo {
+        height: 80px;
+    }
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+    }
+    .headings-selector {
+        visibility: hidden;
+    }
+    .headings {
+        font-size: 15px;
+    }
+    .settings-btn {
+        height: auto;
+        width: fit-content;
+    }
 }
 </style>
