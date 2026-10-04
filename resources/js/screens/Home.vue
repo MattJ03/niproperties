@@ -620,9 +620,13 @@ onMounted(async () => {
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
         margin-bottom: 20px;
+        gap: 15px;
+
+
     }
     .-info-square {
-        width: 80%;
+        width: 100%;
+        box-sizing: border-box;
         padding-bottom: 20px;
     }
     .info-container {
