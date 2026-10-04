@@ -595,8 +595,39 @@ onMounted(async () => {
     flex-direction: row;
 }
 @media(max-width: 900px) {
+    .container {
+        height: auto;
+    }
     .hello-user-wrapper {
         width: 90%;
+    }
+    .row-of-popular-searches {
+        display: grid;
+        margin-top: 15px;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .selection-background {
+        padding: 12px 8px;
+        font-size: 16px;
+    }
+    .row-info-squares {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+
+    }
+    .-info-square {
+        width: 80%;
+    }
+    .info-in-square {
+        font-size: 15px;
+    }
+    .bottom-of-square-text {
+        font-size: 16px;
+    }
+    .bottom-square-icon {
+        width: 30px;
     }
 }
 </style>
