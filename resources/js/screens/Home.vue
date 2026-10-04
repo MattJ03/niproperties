@@ -513,6 +513,7 @@ onMounted(async () => {
     flex-direction: row;
     width: 100%;
     gap: 30px;
+    z-index: 1;
 
 }
 .-info-square {
@@ -587,10 +588,11 @@ onMounted(async () => {
    height: 50dvh;
     margin-left: 30px;
     margin-right: 30px;
+    z-index: 1;
 }
 .row-recent-uploads {
     display: flex;
-    gap: 20px;
+    gap: 25px;
 
     flex-direction: row;
 }
@@ -615,7 +617,7 @@ onMounted(async () => {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
-
+        margin-bottom: 60px;
     }
     .-info-square {
         width: 80%;
@@ -628,6 +630,9 @@ onMounted(async () => {
     }
     .bottom-square-icon {
         width: 30px;
+    }
+    .recent-uploads-container {
+
     }
 }
 </style>
