@@ -280,6 +280,7 @@ onMounted(async () => {
     display: flex;
     width: 100%;
     flex-direction: column;
+
 }
 
 .top-container {
@@ -585,10 +586,11 @@ onMounted(async () => {
     padding-left: 10px;
 }
 .recent-uploads-container {
-   height: 50dvh;
+   height: auto;
     margin-left: 30px;
     margin-right: 30px;
-    z-index: 1;
+
+
 }
 .row-recent-uploads {
     display: flex;
@@ -598,7 +600,7 @@ onMounted(async () => {
 }
 @media(max-width: 900px) {
     .container {
-        height: auto;
+
     }
     .hello-user-wrapper {
         width: 90%;
@@ -617,10 +619,15 @@ onMounted(async () => {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
     }
     .-info-square {
         width: 80%;
+        padding-bottom: 20px;
+    }
+    .info-container {
+        height: auto;
+        overflow: visible;
     }
     .info-in-square {
         font-size: 15px;
@@ -632,7 +639,12 @@ onMounted(async () => {
         width: 30px;
     }
     .recent-uploads-container {
-
+        display: flex;
+        justify-content: center;
+    }
+    .row-recent-uploads {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 </style>
