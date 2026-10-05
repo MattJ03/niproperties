@@ -4,6 +4,12 @@
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
         <div class="hamburger-menu">
+        <img :src="hamburger" class="hamburger-img" alt="hamburger menu"/>
+            <div class="hamburger-dropdown-values">
+                <select>
+                <option>hey</option>
+                </select>
+            </div>
 
         </div>
         <div class="headings-selector">
@@ -163,6 +169,7 @@ import bell from '../assets/bell.png';
 import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
+import hamburger from '../assets/hamburger.png';
 
 
 const error = ref('');
@@ -889,6 +896,12 @@ input:checked + .slider:before {
     margin-right: 25px;
 
 }
+.hamburger-menu {
+    display: none;
+}
+.hamburger-img {
+    display: none;
+}
 .update-profile {
     background-color: #2dcc95;
     height: 48px;
@@ -948,8 +961,19 @@ input:checked + .slider:before {
         height: 80px;
     }
     .hamburger-menu {
+        margin-left: 10px;
         display: flex;
         flex-direction: column;
+    }
+    .hamburger-img {
+        height:  35px;
+        display: flex;
+        padding: 8px 8px;
+        background-color: #FFFFFF;
+        border: 1px solid #000000;
+        border-radius: 60px;
+        visibility: visible;
+        cursor: pointer;
     }
     .headings-selector {
         visibility: hidden;
