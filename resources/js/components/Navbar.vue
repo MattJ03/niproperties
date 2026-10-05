@@ -16,10 +16,16 @@
         </div>
             <div class="btn-section-nav">
                 <button class="settings-mobile">
-                    <img :src="settings" class="settings-img-mobile" alt="settings"/>
+                    <img @click="settingsOpen = !settingsOpen" :src="settings" class="settings-img-mobile" alt="settings"/>
                 </button>
-                <button class="upload-mobile">
+                <button class="upload-mobile" v-if="authStore.role === 'landlord'">
                     <img :src="upload" class="upload-img-mobile" alt="upload"/>
+                </button>
+                <button class="login-mobile" v-if="!authStore.loggedIn" @click="moveToLogin()">
+                    <span class="login-mobile-text">Login</span>
+                </button>
+                <button class="logout-mobil" v-if="authStore.loggedIn" @click="logout()">
+                    <span class="login-mobile-text">Logout</span>
                 </button>
             </div>
         </div>
@@ -1029,10 +1035,11 @@ input:checked + .slider:before {
         flex-direction: row;
         align-items: center;
         margin-left: auto;
-        margin-right: 0;
+
         padding-top: 0;
         padding-bottom: 0;
         gap: 10px;
+        margin-right: 18px;
     }
 
 
@@ -1044,7 +1051,7 @@ input:checked + .slider:before {
         border: none;
         cursor: pointer;
         padding: 0;
-        padding-right: 16px;
+
     }
 
     .settings-img-mobile {
@@ -1065,10 +1072,25 @@ input:checked + .slider:before {
         height: 32px;
         width: 32px;
     }
+    .login-mobile {
+        height: 32px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .login-mobile-text {
+        font-size: 16px;
 
+    }
+    .logout-mobil {
+        height: 32px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
     .headings-selector,
     .nav-bar > .btn-section-nav {
         display: none;
+
     }
 
 
