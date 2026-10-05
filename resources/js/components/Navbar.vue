@@ -7,16 +7,19 @@
         <div class="hamburger-menu">
         <img :src="hamburger" @click="showBurgerOptions = !showBurgerOptions" class="hamburger-img" alt="hamburger menu"/>
             <div class="hamburger-dropdown-values" v-if="showBurgerOptions === true">
-                <span>Browse all</span>
-                <span>Rent</span>
-                <span>Commercial</span>
-                <span>Landlords</span>
-                <span>Dashboard</span>
+                <span @click="moveToBrowseAll()">Browse all</span>
+                <span @click="moveToRent()">Rent</span>
+                <span @click="moveToCommercial()">Commercial</span>
+                <span @click="moveToOurLandlords()">Landlords</span>
+                <span @click="moveToDashboard()">Dashboard</span>
             </div>
         </div>
             <div class="btn-section-nav">
                 <button class="settings-mobile">
                     <img :src="settings" class="settings-img-mobile" alt="settings"/>
+                </button>
+                <button class="upload-mobile">
+                    <img :src="upload" class="upload-img-mobile" alt="upload"/>
                 </button>
             </div>
         </div>
@@ -1049,7 +1052,19 @@ input:checked + .slider:before {
         height: 32px;
         width: 32px;
     }
-
+    .upload-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    .upload-img-mobile {
+        display: block;
+        height: 32px;
+        width: 32px;
+    }
 
     .headings-selector,
     .nav-bar > .btn-section-nav {
