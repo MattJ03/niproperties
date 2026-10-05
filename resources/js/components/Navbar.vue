@@ -1,16 +1,19 @@
 <template>
     <nav class="nav-bar">
+        <div class="mobile-top">
         <div class="logo-wrapper">
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
         </div>
         <div class="hamburger-menu">
-        <img :src="hamburger" class="hamburger-img" alt="hamburger menu"/>
-            <div class="hamburger-dropdown-values">
-                <select>
-                <option>hey</option>
-                </select>
+        <img :src="hamburger" @click="showBurgerOptions = !showBurgerOptions" class="hamburger-img" alt="hamburger menu"/>
+            <div class="hamburger-dropdown-values" v-if="showBurgerOptions === true">
+                <span>Browse all</span>
+                <span>Rent</span>
+                <span>Commercicial</span>
+                <span>Landlords</span>
+                <span>Dashboard</span>
             </div>
-
+        </div>
         </div>
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
@@ -190,6 +193,7 @@ const passwordAndSecurityModal = ref(false);
 const current_password = ref('');
 const errorText = ref('');
 const formDraft = ref({ ... user.value});
+const showBurgerOptions = ref(false);
 const errors = reactive({
     name: '',
     email: '',
@@ -431,14 +435,15 @@ onMounted( async () => {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     z-index: 100;
     padding-left: 40px;
     background-color: #FFFFFF;
     margin-bottom: 40px;
 }
 .logo-wrapper {
-
 }
+
 .logo {
     height:  108px;
     cursor: pointer;
@@ -957,6 +962,12 @@ input:checked + .slider:before {
         height: auto;
         padding-left: 15px;
     }
+    .mobile-top {
+        display: flex;
+        position: absolute;
+        flex-direction: row;
+        align-items: center;
+    }
     .logo {
         height: 80px;
     }
@@ -967,13 +978,24 @@ input:checked + .slider:before {
     }
     .hamburger-img {
         height:  35px;
+        width: 40px;
         display: flex;
         padding: 8px 8px;
         background-color: #FFFFFF;
         border: 1px solid #000000;
         border-radius: 60px;
         visibility: visible;
+        flex-shrink: 0;
         cursor: pointer;
+    }
+    .hamburger-dropdown-values {
+        display: flex;
+        top: 100%;
+        right: 0;
+        flex-direction: column;
+        font-size: 15px;
+        position: absolute;
+        z-index: 1000;
     }
     .headings-selector {
         visibility: hidden;
