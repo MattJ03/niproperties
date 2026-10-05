@@ -9,11 +9,16 @@
             <div class="hamburger-dropdown-values" v-if="showBurgerOptions === true">
                 <span>Browse all</span>
                 <span>Rent</span>
-                <span>Commercicial</span>
+                <span>Commercial</span>
                 <span>Landlords</span>
                 <span>Dashboard</span>
             </div>
         </div>
+            <div class="btn-section-nav">
+                <button class="settings-mobile">
+                    <img :src="settings" class="settings-img-mobile" alt="settings"/>
+                </button>
+            </div>
         </div>
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
@@ -445,6 +450,7 @@ onMounted( async () => {
 }
 
 .logo {
+
     height:  108px;
     cursor: pointer;
 
@@ -747,6 +753,12 @@ input:checked + .slider:before {
     height: 22px;
     width: 22px;
 }
+.settings-img-mobile {
+    display: none;
+}
+.mobile-top {
+    display: none;
+}
 .modal-overlay {
         position: fixed;
         top: 0;
@@ -960,13 +972,16 @@ input:checked + .slider:before {
 @media(max-width: 900px) {
     .nav-bar {
         height: auto;
-        padding-left: 15px;
+        width: 100%;
+        padding-left: 8px;
     }
     .mobile-top {
         display: flex;
-        position: absolute;
+        position: relative;
+
         flex-direction: row;
         align-items: center;
+        width: 100%;
     }
     .logo {
         height: 80px;
@@ -977,8 +992,8 @@ input:checked + .slider:before {
         flex-direction: column;
     }
     .hamburger-img {
-        height:  35px;
-        width: 40px;
+        height:  25px;
+        width: 25px;
         display: flex;
         padding: 8px 8px;
         background-color: #FFFFFF;
@@ -991,11 +1006,14 @@ input:checked + .slider:before {
     .hamburger-dropdown-values {
         display: flex;
         top: 100%;
-        right: 0;
         flex-direction: column;
         font-size: 15px;
         position: absolute;
         z-index: 1000;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        gap: 5px;
+        padding: 8px 12px;
     }
     .headings-selector {
         visibility: hidden;
@@ -1003,9 +1021,41 @@ input:checked + .slider:before {
     .headings {
         font-size: 15px;
     }
-    .settings-btn {
-        height: auto;
-        width: fit-content;
+    .mobile-top .btn-section-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        gap: 10px;
     }
+
+
+    .settings-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        padding-right: 16px;
+    }
+
+    .settings-img-mobile {
+        display: block;
+        height: 32px;
+        width: 32px;
+    }
+
+
+    .headings-selector,
+    .nav-bar > .btn-section-nav {
+        display: none;
+    }
+
+
 }
 </style>
