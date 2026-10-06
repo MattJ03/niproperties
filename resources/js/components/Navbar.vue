@@ -18,7 +18,7 @@
                 <button class="settings-mobile">
                     <img @click="settingsOpen = !settingsOpen" :src="settings" class="settings-img-mobile" alt="settings"/>
                 </button>
-                <button class="upload-mobile" v-if="authStore.role === 'landlord'">
+                <button class="upload-mobile" v-if="authStore.role === 'landlord'" @click="moveToUpload()">
                     <img :src="upload" class="upload-img-mobile" alt="upload"/>
                 </button>
                 <button class="login-mobile" v-if="!authStore.loggedIn" @click="moveToLogin()">

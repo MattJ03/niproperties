@@ -52,7 +52,6 @@
                     </div>
                 <div class="county-section">
                     <strong><p class="filter-topic">County</p></strong>
-
                     <select v-model="filters.county" class="county-select">
                         <option class="dropdown-value-county" v-for="county in counties" > {{ county }}</option>
                     </select>
@@ -479,6 +478,7 @@ onMounted(() => {
 }
 .listing-and-filter-container {
     display: flex;
+
     flex-direction: row;
 }
 .filters-header {
@@ -624,6 +624,7 @@ onMounted(() => {
     width: 100%;
 }
 .county-select {
+   display: block;
     width: 85%;
     height: 50px;
     border: 1px solid #F2EFE6;
@@ -636,13 +637,7 @@ onMounted(() => {
 .county-select:hover {
     border: 1px solid #FF0000;
 }
-.dropdown-value-county {
-    font-size: 16px;
-    height: 50px;
-    border-radius: 12px;
-    background-color: #000000;
-    color: #FFFFFF;
-}
+
 .room-number-selection {
     display: flex;
     flex-direction: column;
@@ -869,6 +864,7 @@ onMounted(() => {
     }
     .listing-and-filter-container {
         flex-direction: column;
+        align-items: center;
     }
     .filter-sort-hidden {
         display: flex;
@@ -895,5 +891,11 @@ onMounted(() => {
         width: 80%;
 
     }
+    .listings-rows {
+        margin-top: 60px;
+    }
+
+
+
 }
 </style>
