@@ -847,4 +847,9 @@ onMounted(() => {
     right: 80px;
 
 }
+@media(max-width: 900px) {
+    .header-container {
+        display: none;
+    }
+}
 </style>
