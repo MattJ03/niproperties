@@ -1048,11 +1048,11 @@ input:checked + .slider:before {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: transparent;
+        border-radius: 60px;
         border: none;
         cursor: pointer;
-        padding: 0;
-
+        padding: 6px 6px;
+        background-color: #E7CBA6;
     }
 
     .settings-img-mobile {
@@ -1064,9 +1064,11 @@ input:checked + .slider:before {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: transparent;
+        border-radius: 60px;
+        padding: 6px 6px;
         border: none;
         cursor: pointer;
+        background-color: #E7CBA6;
     }
     .upload-img-mobile {
         display: block;
@@ -1078,6 +1080,9 @@ input:checked + .slider:before {
         border-radius: 12px;
         cursor: pointer;
         font-weight: bold;
+        background-color: #E7CBA6;
+        color: #2d6e53;
+        border: none;
     }
     .login-mobile-text {
         font-size: 16px;
@@ -1087,6 +1092,7 @@ input:checked + .slider:before {
         height: 32px;
         border-radius: 10px;
         font-weight: bold;
+        background-color: #E7CBA6;
     }
     .headings-selector,
     .nav-bar > .btn-section-nav {
