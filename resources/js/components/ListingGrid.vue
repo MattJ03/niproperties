@@ -268,4 +268,7 @@ function formatPrice(price) {
 .view-btn:hover {
     background-color: #2d6e53;
 }
+@media (max-width: 900px) {
+
+}
 </style>

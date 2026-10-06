@@ -17,8 +17,14 @@
         <div class="listing-and-filter-container">
             <div class="filter-container">
                 <div class="filter-sort-hidden">
-                    <span class="filter-hidden-text" @click="showFilters = !showFilters">Filters</span>
-                    <span class="sort-hidden-text">Sort option</span>
+                    <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
+                    <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                   <select class="sort-mobile" v-model="sortOption" @change="sortingCalls()">
+                    <option value="recent">Sort: Most recent</option>
+                    <option value="views">Sort: Most viewed</option>
+                    <option value="price-high-to-low">Sort: Price - High to low</option>
+                    <option value="price-low-to-high">Sort: Price - low to high</option>
+                   </select>
                 </div>
                 <div v-if="!showFilters" class="filters-values">
                 <div class="top-of-filters">
@@ -862,6 +868,9 @@ onMounted(() => {
     .header-container {
         display: none;
     }
+    .container {
+
+    }
     .listing-and-filter-container {
         flex-direction: column;
         align-items: center;
@@ -869,6 +878,7 @@ onMounted(() => {
     .filter-sort-hidden {
         display: flex;
         flex-direction: row;
+        align-items: center;
         height: 20%;
         width: 80%;
         justify-content: space-between;
@@ -879,6 +889,7 @@ onMounted(() => {
         margin: auto;
         margin-top: 8px;
 
+
     }
     .filter-hidden-text {
 
@@ -887,14 +898,30 @@ onMounted(() => {
 
     }
     .filter-container {
+
+        width: 88%;
+        margin: 0 50px;
         margin-top: 90px;
-        width: 80%;
+        padding-bottom: 20px;
+    }
+    .county-select {
+        position: relative;
+    }
+    .dropdown-value-county {
 
     }
     .listings-rows {
         margin-top: 60px;
+        width: 88%;
     }
-
+    .sort-mobile {
+        padding: 6px 7px;
+        position: relative;
+        font-size: 15px;
+        border-radius: 12px;
+        border: 1px solid #2d6e53;
+        background-color: #FFFFFF;
+    }
 
 
 }
