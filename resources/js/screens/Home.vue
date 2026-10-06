@@ -602,6 +602,11 @@ onMounted(async () => {
     .container {
 
     }
+    .top-container {
+        min-height: 100dvh;
+        overflow: hidden;
+        position: relative;
+    }
     .hello-user-wrapper {
         width: 90%;
     }

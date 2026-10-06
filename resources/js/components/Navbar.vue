@@ -66,7 +66,7 @@
             <div class="horizontal-line-settings"></div>
             <div class="landlord-settings">
                 <span class="secondary-header">Account</span>
-                <div class="settings-selection-row" @click="editProfileModal = true; passwordAndSecurityModal = false;">
+                <div class="settings-selection-row" @click="editProfileModal = true; passwordAndSecurityModal = false; settingsOpen = false;">
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
@@ -789,6 +789,7 @@ input:checked + .slider:before {
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 12px;
+    z-index: 0;
 }
 .top-of-square-row {
     display: flex;
@@ -1092,7 +1093,19 @@ input:checked + .slider:before {
         display: none;
 
     }
-
+    .settings-wrapper {
+        width: 70%;
+        z-index: 5;
+        min-width: 0;
+    }
+    .edit-profile-square {
+        width: 90%;
+        height: auto;
+    }
+    .edit-profile-row {
+       display: flex;
+        flex-direction: column;
+    }
 
 }
 </style>
