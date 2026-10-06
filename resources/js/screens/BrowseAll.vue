@@ -13,8 +13,14 @@
                 <option value="price-low-to-high">Sort: Price - low to high</option>
             </select>
         </div>
+
         <div class="listing-and-filter-container">
             <div class="filter-container">
+                <div class="filter-sort-hidden">
+                    <span class="filter-hidden-text" @click="showFilters = !showFilters">Filters</span>
+                    <span class="sort-hidden-text">Sort option</span>
+                </div>
+                <div v-if="!showFilters" class="filters-values">
                 <div class="top-of-filters">
                <h2 class="filters-header">Filters</h2>
                     <div class="reset-wrapper">
@@ -91,6 +97,7 @@
                 Apply filters</button>
                 </div>
                 </div>
+            </div>
         <div class="listings-rows">
             <h1 v-if="listingStore.allListings.length === 0" class="no-listings-text">No listings found</h1>
             <ListingGrid
@@ -161,7 +168,7 @@ const filters = reactive({
     max_num_of_rooms: '',
     search: '',
 });
-
+const showFilters = ref(false);
 const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
@@ -453,6 +460,9 @@ onMounted(() => {
     width: 100%;
     padding: 0 50px;
 }
+.filter-sort-hidden {
+    display: none;
+}
 .filter-container {
     display: flex;
     box-shadow: 0 6px 20px rgba(0,0,0,.06);
@@ -464,12 +474,18 @@ onMounted(() => {
     border-radius: 12px;
     background-color: #FFFFFF;
 }
+.filters-values {
+
+}
 .listing-and-filter-container {
     display: flex;
     flex-direction: row;
 }
 .filters-header {
    margin-left: 30px;
+}
+.filters-hidden-details {
+    display: none;
 }
 .top-of-filters {
     display: flex;
@@ -850,6 +866,34 @@ onMounted(() => {
 @media(max-width: 900px) {
     .header-container {
         display: none;
+    }
+    .listing-and-filter-container {
+        flex-direction: column;
+    }
+    .filter-sort-hidden {
+        display: flex;
+        flex-direction: row;
+        height: 20%;
+        width: 80%;
+        justify-content: space-between;
+        padding: 8px 8px;
+        border-radius: 10px;
+        background-color: #1F4D3A;
+        color: #FFFFFF;
+        margin: auto;
+        margin-top: 8px;
+
+    }
+    .filter-hidden-text {
+
+    }
+    .sort-hidden-text {
+
+    }
+    .filter-container {
+        margin-top: 90px;
+        width: 80%;
+
     }
 }
 </style>
