@@ -463,7 +463,7 @@ onMounted(() => {
     align-items: start;
     gap: 20px;
     width: 100%;
-    padding: 0 50px;
+    padding: 0 30px;
 }
 .filter-sort-hidden {
     display: none;
