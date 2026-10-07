@@ -462,6 +462,8 @@ const moveToLandlordsListings = async() => {
 }
 .member-since-answer {
     color: #000000;
+    white-space: wrap;
+    overflow: hidden;
 }
 .home-img-in-details {
     height: 30px;
@@ -581,5 +583,33 @@ const moveToLandlordsListings = async() => {
         margin: 0;
         margin-right: 0;
     }
+    .modal-square {
+       width: 100%;
+
+    }
+    .member-since-text {
+        font-size: 15px;
+    }
+    .member-since-answer {
+        font-size: 15px;
+    }
+    .text-and-answer {
+        padding-left: 6px;
+    }
+   .landlord-details-square {
+       width: 45%;
+   }
+   .home-img-in-details {
+       height: 20px;
+       width: 20px;
+
+   }
+   .specific-details-wrapper {
+       padding-left: 6px;
+
+   }
+   .horizontal-line-below-landlord {
+       margin-top: 15px;
+   }
 }
 </style>
