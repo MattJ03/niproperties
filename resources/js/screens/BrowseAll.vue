@@ -17,8 +17,8 @@
         <div class="listing-and-filter-container">
             <div class="filter-container">
                 <div class="filter-sort-hidden">
-                    <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
-                    <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                    <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                    <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
                    <select class="sort-mobile" v-model="sortOption" @change="sortingCalls()">
                     <option value="recent">Sort: Most recent</option>
                     <option value="views">Sort: Most viewed</option>
@@ -916,6 +916,7 @@ onMounted(() => {
     }
     .sort-mobile {
         padding: 6px 7px;
+
         position: relative;
         font-size: 15px;
         border-radius: 12px;

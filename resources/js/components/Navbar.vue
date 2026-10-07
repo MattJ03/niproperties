@@ -1,5 +1,8 @@
 <template>
     <nav class="nav-bar">
+        <div class="logo-wrapper">
+            <img :src="nipropertieslogo" class="logo-desktop" @click="moveToHome()"/>
+        </div>
         <div class="mobile-top">
         <div class="logo-wrapper">
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
@@ -459,10 +462,12 @@ onMounted( async () => {
 }
 
 .logo {
-
     height:  108px;
     cursor: pointer;
-
+}
+.logo-desktop {
+        height:  108px;
+        cursor: pointer;
 }
 .headings-selector {
     display: flex;
@@ -1112,6 +1117,8 @@ input:checked + .slider:before {
        display: flex;
         flex-direction: column;
     }
-
+    .logo-desktop {
+        display: none;
+    }
 }
 </style>
