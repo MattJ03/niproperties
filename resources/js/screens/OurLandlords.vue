@@ -201,7 +201,7 @@ const moveToLandlordsListings = async() => {
     border-radius: 14px;
     width: 100%;
     height: 10%;
-    background-color: #f3f4f6;
+    background-color: #FFFFFF;
     border: 1px solid #f3f4f6;
 }
 .landlord-amount-pulled {
@@ -215,6 +215,7 @@ const moveToLandlordsListings = async() => {
     height: 100%;
     gap: 10px;
     margin-right: 20px;
+    background-color: #FFFFFF;
 
 }
 .vertical-line {
@@ -548,6 +549,7 @@ const moveToLandlordsListings = async() => {
         margin-top: 100px;
     }
     .landlord-info {
+
         height: fit-content;
         padding: 14px 1px;
     }
@@ -558,14 +560,26 @@ const moveToLandlordsListings = async() => {
     .mobile-landlord-column {
         display: flex;
         flex-direction: column;
+        gap: 3px;
         padding-left: 0;
-        align-items: center;
+        align-items: start;
+        padding-right: 16px;
     }
     .landlord-name {
         padding-left: 8px;
+        font-size: 16px;
     }
     .desktop-landlord-info {
         display: none;
+    }
+    .view-info-btn {
+        padding: 8px 8px;
+        margin-right: 8px;
+    }
+    .number-of-listings {
+        padding-right: 16px;
+        margin: 0;
+        margin-right: 0;
     }
 }
 </style>
