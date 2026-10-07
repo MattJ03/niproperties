@@ -1,7 +1,36 @@
 <template>
     <nav class="nav-bar">
         <div class="logo-wrapper">
+            <img :src="nipropertieslogo" class="logo-desktop" @click="moveToHome()"/>
+        </div>
+        <div class="mobile-top">
+        <div class="logo-wrapper">
             <img :src="nipropertieslogo" class="logo" @click="moveToHome()"/>
+        </div>
+        <div class="hamburger-menu">
+        <img :src="hamburger" @click="showBurgerOptions = !showBurgerOptions" class="hamburger-img" alt="hamburger menu"/>
+            <div class="hamburger-dropdown-values" v-if="showBurgerOptions === true">
+                <span @click="moveToBrowseAll()">Browse all</span>
+                <span @click="moveToRent()">Rent</span>
+                <span @click="moveToCommercial()">Commercial</span>
+                <span @click="moveToOurLandlords()">Landlords</span>
+                <span @click="moveToDashboard()">Dashboard</span>
+            </div>
+        </div>
+            <div class="btn-section-nav">
+                <button class="settings-mobile">
+                    <img @click="settingsOpen = !settingsOpen" :src="settings" class="settings-img-mobile" alt="settings"/>
+                </button>
+                <button class="upload-mobile" v-if="authStore.role === 'landlord'" @click="moveToUpload()">
+                    <img :src="upload" class="upload-img-mobile" alt="upload"/>
+                </button>
+                <button class="login-mobile" v-if="!authStore.loggedIn" @click="moveToLogin()">
+                    <span class="login-mobile-text">Login</span>
+                </button>
+                <button class="logout-mobil" v-if="authStore.loggedIn" @click="logout()">
+                    <span class="login-mobile-text">Logout</span>
+                </button>
+            </div>
         </div>
         <div class="headings-selector">
             <strong><span class="headings" @click="moveToBrowseAll()">Browse all</span></strong>
@@ -40,7 +69,7 @@
             <div class="horizontal-line-settings"></div>
             <div class="landlord-settings">
                 <span class="secondary-header">Account</span>
-                <div class="settings-selection-row" @click="editProfileModal = true; passwordAndSecurityModal = false;">
+                <div class="settings-selection-row" @click="editProfileModal = true; passwordAndSecurityModal = false; settingsOpen = false;">
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
@@ -160,6 +189,7 @@ import bell from '../assets/bell.png';
 import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
+import hamburger from '../assets/hamburger.png';
 
 
 const error = ref('');
@@ -180,6 +210,7 @@ const passwordAndSecurityModal = ref(false);
 const current_password = ref('');
 const errorText = ref('');
 const formDraft = ref({ ... user.value});
+const showBurgerOptions = ref(false);
 const errors = reactive({
     name: '',
     email: '',
@@ -421,18 +452,22 @@ onMounted( async () => {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     z-index: 100;
     padding-left: 40px;
     background-color: #FFFFFF;
     margin-bottom: 40px;
 }
 .logo-wrapper {
-
 }
+
 .logo {
     height:  108px;
     cursor: pointer;
-
+}
+.logo-desktop {
+        height:  108px;
+        cursor: pointer;
 }
 .headings-selector {
     display: flex;
@@ -732,6 +767,12 @@ input:checked + .slider:before {
     height: 22px;
     width: 22px;
 }
+.settings-img-mobile {
+    display: none;
+}
+.mobile-top {
+    display: none;
+}
 .modal-overlay {
         position: fixed;
         top: 0;
@@ -753,6 +794,7 @@ input:checked + .slider:before {
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 12px;
+    z-index: 0;
 }
 .top-of-square-row {
     display: flex;
@@ -886,6 +928,12 @@ input:checked + .slider:before {
     margin-right: 25px;
 
 }
+.hamburger-menu {
+    display: none;
+}
+.hamburger-img {
+    display: none;
+}
 .update-profile {
     background-color: #2dcc95;
     height: 48px;
@@ -935,5 +983,142 @@ input:checked + .slider:before {
     gap: 10px;
     justify-content: right;
     margin-right: 25px;
+}
+@media(max-width: 900px) {
+    .nav-bar {
+        height: auto;
+        width: 100%;
+        padding-left: 8px;
+    }
+    .mobile-top {
+        display: flex;
+        position: relative;
+
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    .logo {
+        height: 80px;
+    }
+    .hamburger-menu {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .hamburger-img {
+        height:  25px;
+        width: 25px;
+        display: flex;
+        padding: 8px 8px;
+        background-color: #FFFFFF;
+        border: 1px solid #000000;
+        border-radius: 60px;
+        visibility: visible;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+    .hamburger-dropdown-values {
+        display: flex;
+        top: 100%;
+        flex-direction: column;
+        font-size: 15px;
+        position: absolute;
+        z-index: 1000;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        gap: 5px;
+        padding: 8px 12px;
+    }
+    .headings-selector {
+        visibility: hidden;
+    }
+    .headings {
+        font-size: 15px;
+    }
+    .mobile-top .btn-section-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+
+        padding-top: 0;
+        padding-bottom: 0;
+        gap: 10px;
+        margin-right: 18px;
+    }
+
+
+    .settings-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 60px;
+        border: none;
+        cursor: pointer;
+        padding: 6px 6px;
+        background-color: #E7CBA6;
+    }
+
+    .settings-img-mobile {
+        display: block;
+        height: 32px;
+        width: 32px;
+    }
+    .upload-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 60px;
+        padding: 6px 6px;
+        border: none;
+        cursor: pointer;
+        background-color: #E7CBA6;
+    }
+    .upload-img-mobile {
+        display: block;
+        height: 32px;
+        width: 32px;
+    }
+    .login-mobile {
+        height: 32px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        background-color: #E7CBA6;
+        color: #2d6e53;
+        border: none;
+    }
+    .login-mobile-text {
+        font-size: 16px;
+
+    }
+    .logout-mobil {
+        height: 32px;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color: #E7CBA6;
+    }
+    .headings-selector,
+    .nav-bar > .btn-section-nav {
+        display: none;
+
+    }
+    .settings-wrapper {
+        width: 70%;
+        z-index: 5;
+        min-width: 0;
+    }
+    .edit-profile-square {
+        width: 90%;
+        height: auto;
+    }
+    .edit-profile-row {
+       display: flex;
+        flex-direction: column;
+    }
+    .logo-desktop {
+        display: none;
+    }
 }
 </style>

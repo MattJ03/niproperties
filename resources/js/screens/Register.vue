@@ -5,7 +5,6 @@
                 <img :src="niproperties" class="logo-img" alt="logo" />
             <h2 class="header-reg">Get started on NI Properties</h2>
             </div>
-            <p class="header-mes">Create an account to view properties in Northern ireland and create listings.</p>
             <div class="account-selection">
                 <div class="buyer-square"
                      :class="{ active: role === 'buyer'}"
@@ -169,6 +168,7 @@ setTimeout(() => {
 .container {
     display: flex;
     gap: 60px;
+    width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     padding: 30px;
@@ -181,7 +181,7 @@ setTimeout(() => {
     flex-direction: column;
     background-color: #ffffff;
     height: 85%;
-    width: 45%;
+    width: 55%;
     border:  solid 1px #ffffff;
     border-radius: 14px;
     margin-left: 90px;
@@ -191,20 +191,23 @@ setTimeout(() => {
 .form-card {
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+
     flex-direction: column;
     gap: 25px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 25px;
+    box-sizing: border-box;
 }
 .input-field {
     height: 60px;
-    width: 540px;
+    padding-left: 20px;
+    width: 90%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
     font-size: 16px;
-    padding-left: 20px;
+
 }
 .input-field:focus {
     outline: none;
@@ -215,6 +218,7 @@ setTimeout(() => {
 }
 .form-field {
     position: relative;
+
 }
 .form-field label {
     position: absolute;
@@ -270,6 +274,7 @@ setTimeout(() => {
     font-size: 18px;
     cursor: pointer;
     border-radius: 12px;
+    box-sizing: border-box;
 }
 .buyer-square:hover {
     border-color: #1F4D3A;
@@ -315,6 +320,8 @@ setTimeout(() => {
     width: 80%;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 30px;
     background-color: #1F4D3A;
     color: #ffffff;
@@ -345,6 +352,8 @@ setTimeout(() => {
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #fffffff3;
     color: #0064e0;
     font-size: 15px;
@@ -378,5 +387,52 @@ setTimeout(() => {
     object-fit: cover;
    width: 100%;
     border-radius: 12px;
+}
+@media(max-width: 900px) {
+    .container {
+        max-width: 85%;
+        flex-direction: column;
+        gap: 24px;
+        padding: 16px;
+    }
+    .form-container {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .form-card {
+        width: 100%;
+        height: auto;
+        padding: 0;
+
+    }
+    .form-field {
+        display: flex;
+        justify-content: center;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .form-field label {
+       left: 40px;
+    }
+    .image-container {
+        visibility: hidden;
+    }
+    .logo-img {
+        height: 100px;
+    }
+    .buyer-square {
+        width: 30%;
+        font-size: 17px;
+        padding: 3px 6px;
+    }
+    .buyer-square img {
+        width: 30px;
+    }
+    .landlord-square {
+        font-size: 17px;
+        width: 30%;
+        padding: 0px 6px;
+    }
 }
 </style>

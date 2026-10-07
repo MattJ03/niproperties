@@ -109,11 +109,13 @@ import { useRouter } from "vue-router";
     margin: auto;
     height: 100dvh;
     width: 100%;
+    max-width: 1900px;
 }
 .form-card {
-
     height: 80%;
     width: 32%;
+    padding: 0 24px;
+    box-sizing: border-box;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     border-radius: 14px;
@@ -135,16 +137,18 @@ import { useRouter } from "vue-router";
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+
     gap: 35px;
 }
 .input-field {
     height: 60px;
-    width: 540px;
+    width: 100%;
+    max-width: 100%;
     border-radius: 14px;
     border: solid 1px #ccd0d5;
     font-size: 16px;
     padding-left: 20px;
+    box-sizing: border-box;
 }
 .input-field:focus {
     outline: none;
@@ -179,6 +183,8 @@ import { useRouter } from "vue-router";
     width: 80%;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 30px;
     background-color: #1F4D3A;
     color: #ffffff;
@@ -197,6 +203,8 @@ import { useRouter } from "vue-router";
     border-radius: 30px;
     background-color: #fffffff3;
     color: #1877f2;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 15px;
     cursor: pointer;
     border: solid 1px #0064e0;
@@ -247,5 +255,30 @@ import { useRouter } from "vue-router";
     color: #FFFFFF;
     font-size: 15px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .container {
+        align-items: flex-start;
+        flex-direction: column;
+        max-width: 85%;
+        gap: 24px;
+
+        padding: 16px;
+    }
+    .form-card {
+
+        width: 100%;
+        height: auto;
+        padding: 24px;
+    }
+    .guest-wrapper {
+        margin-top: 15px;
+    }
+    .continue-as-guest-text {
+        margin-top: 35px;
+    }
+    .continue-guest-btn {
+        margin-top: 10px;
+    }
 }
 </style>

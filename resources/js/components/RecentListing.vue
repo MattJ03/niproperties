@@ -1,4 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
     <div class="container">
         <div class="img-wrapper">
             <img  v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" alt="listing image" class="listing-img"/>
@@ -84,6 +84,7 @@ const moveToListingInfo = async () => {
     border-radius: 12px;
     border: 1px solid #000000;
     cursor: pointer;
+
 
 }
 .img-wrapper {
@@ -190,5 +191,22 @@ const moveToListingInfo = async () => {
 }
 .view-btn:hover {
     background-color: #2d6e53;
+}
+@media (max-width: 900px) {
+    .container {
+        height: auto;
+    }
+    .img-wrapper {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+    .listing-img {
+        width: 100%;
+        height: auto;
+    }
+    .listing-details-wrapper {
+        height: auto;
+    }
+
 }
 </style>

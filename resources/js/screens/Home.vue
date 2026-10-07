@@ -280,6 +280,7 @@ onMounted(async () => {
     display: flex;
     width: 100%;
     flex-direction: column;
+
 }
 
 .top-container {
@@ -513,6 +514,7 @@ onMounted(async () => {
     flex-direction: row;
     width: 100%;
     gap: 30px;
+    z-index: 1;
 
 }
 .-info-square {
@@ -584,15 +586,74 @@ onMounted(async () => {
     padding-left: 10px;
 }
 .recent-uploads-container {
-   height: 50dvh;
+   height: auto;
     margin-left: 30px;
     margin-right: 30px;
+
+
 }
 .row-recent-uploads {
     display: flex;
-    gap: 20px;
+    gap: 25px;
 
     flex-direction: row;
+}
+@media(max-width: 900px) {
+    .container {
 
+    }
+    .top-container {
+        min-height: 100dvh;
+        overflow: hidden;
+        position: relative;
+    }
+    .hello-user-wrapper {
+        width: 90%;
+    }
+    .row-of-popular-searches {
+        display: grid;
+        margin-top: 15px;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .selection-background {
+        padding: 12px 8px;
+        font-size: 16px;
+    }
+    .row-info-squares {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        margin-bottom: 20px;
+        gap: 15px;
+
+
+    }
+    .-info-square {
+        width: 100%;
+        box-sizing: border-box;
+        padding-bottom: 20px;
+    }
+    .info-container {
+        height: auto;
+        overflow: visible;
+    }
+    .info-in-square {
+        font-size: 15px;
+    }
+    .bottom-of-square-text {
+        font-size: 16px;
+    }
+    .bottom-square-icon {
+        width: 30px;
+    }
+    .recent-uploads-container {
+        display: flex;
+        justify-content: center;
+    }
+    .row-recent-uploads {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 </style>

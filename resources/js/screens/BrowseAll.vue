@@ -13,8 +13,20 @@
                 <option value="price-low-to-high">Sort: Price - low to high</option>
             </select>
         </div>
+
         <div class="listing-and-filter-container">
             <div class="filter-container">
+                <div class="filter-sort-hidden">
+                    <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                    <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
+                   <select class="sort-mobile" v-model="sortOption" @change="sortingCalls()">
+                    <option value="recent">Sort: Most recent</option>
+                    <option value="views">Sort: Most viewed</option>
+                    <option value="price-high-to-low">Sort: Price - High to low</option>
+                    <option value="price-low-to-high">Sort: Price - low to high</option>
+                   </select>
+                </div>
+                <div v-if="!showFilters" class="filters-values">
                 <div class="top-of-filters">
                <h2 class="filters-header">Filters</h2>
                     <div class="reset-wrapper">
@@ -46,7 +58,6 @@
                     </div>
                 <div class="county-section">
                     <strong><p class="filter-topic">County</p></strong>
-
                     <select v-model="filters.county" class="county-select">
                         <option class="dropdown-value-county" v-for="county in counties" > {{ county }}</option>
                     </select>
@@ -91,6 +102,7 @@
                 Apply filters</button>
                 </div>
                 </div>
+            </div>
         <div class="listings-rows">
             <h1 v-if="listingStore.allListings.length === 0" class="no-listings-text">No listings found</h1>
             <ListingGrid
@@ -161,7 +173,7 @@ const filters = reactive({
     max_num_of_rooms: '',
     search: '',
 });
-
+const showFilters = ref(false);
 const search = ref('');
 
 const numRoomsRange = ref([1, 2, 3, 4, 5]);
@@ -453,6 +465,9 @@ onMounted(() => {
     width: 100%;
     padding: 0 50px;
 }
+.filter-sort-hidden {
+    display: none;
+}
 .filter-container {
     display: flex;
     box-shadow: 0 6px 20px rgba(0,0,0,.06);
@@ -464,12 +479,19 @@ onMounted(() => {
     border-radius: 12px;
     background-color: #FFFFFF;
 }
+.filters-values {
+
+}
 .listing-and-filter-container {
     display: flex;
+
     flex-direction: row;
 }
 .filters-header {
    margin-left: 30px;
+}
+.filters-hidden-details {
+    display: none;
 }
 .top-of-filters {
     display: flex;
@@ -608,6 +630,7 @@ onMounted(() => {
     width: 100%;
 }
 .county-select {
+   display: block;
     width: 85%;
     height: 50px;
     border: 1px solid #F2EFE6;
@@ -620,13 +643,7 @@ onMounted(() => {
 .county-select:hover {
     border: 1px solid #FF0000;
 }
-.dropdown-value-county {
-    font-size: 16px;
-    height: 50px;
-    border-radius: 12px;
-    background-color: #000000;
-    color: #FFFFFF;
-}
+
 .room-number-selection {
     display: flex;
     flex-direction: column;
@@ -845,6 +862,68 @@ onMounted(() => {
     cursor: pointer;
     transform: translateY(-50%);
     right: 80px;
+
+}
+@media(max-width: 900px) {
+    .header-container {
+        display: none;
+    }
+    .container {
+
+    }
+    .listing-and-filter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .filter-sort-hidden {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 20%;
+        width: 80%;
+        justify-content: space-between;
+        padding: 8px 8px;
+        border-radius: 10px;
+        background-color: #1F4D3A;
+        color: #FFFFFF;
+        margin: auto;
+        margin-top: 8px;
+
+
+    }
+    .filter-hidden-text {
+
+    }
+    .sort-hidden-text {
+
+    }
+    .filter-container {
+
+        width: 88%;
+        margin: 0 50px;
+        margin-top: 90px;
+        padding-bottom: 20px;
+    }
+    .county-select {
+        position: relative;
+    }
+    .dropdown-value-county {
+
+    }
+    .listings-rows {
+        margin-top: 60px;
+        width: 88%;
+    }
+    .sort-mobile {
+        padding: 6px 7px;
+
+        position: relative;
+        font-size: 15px;
+        border-radius: 12px;
+        border: 1px solid #2d6e53;
+        background-color: #FFFFFF;
+    }
+
 
 }
 </style>
