@@ -3,6 +3,12 @@
     <div class="container">
         <div class="filter-and-listings-container">
                 <div class="filter-container">
+                    <div class="filter-sort-hidden">
+                        <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                        <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
+
+                    </div>
+                    <div v-if="!showFilters" class="filters-values">
                     <div class="top-of-filters">
                         <h2 class="filters-header">Filters</h2>
                         <div class="reset-wrapper">
@@ -64,6 +70,7 @@
                             <img :src="scaffolding" alt="scaffolding" class="img-in-btn" />
                             Apply filters</button>
                     </div>
+                </div>
                 </div>
         <div class="rent-listings-container">
             <RentGrid
@@ -134,6 +141,7 @@ const finalPageNum = ref(0);
 const finalPageNumRounded = ref(finalPageNum.value);
 const sortOption = ref('recent');
 const { listingsCount } = storeToRefs(listingStore);
+const showFilters = ref(false);
 const getFinalPageNum = () => {
     finalPageNum.value = listingsCount.value / 16;
     return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
@@ -431,6 +439,9 @@ async function getPreviousPageListings() {
     margin-left: 30px;
     flex-direction: column;
 }
+.filters-values {
+
+}
 .min-max-row {
     display: flex;
     justify-content: center;
@@ -446,6 +457,9 @@ async function getPreviousPageListings() {
     border: 1px solid #F2EFE6;
     font-size: 16px;
     padding-left: 15px;
+}
+.filter-sort-hidden {
+    display: none;
 }
 .min-max-input:hover {
     border: 1px solid #FF0000;
@@ -587,7 +601,7 @@ async function getPreviousPageListings() {
 }
 .rent-listings-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     width: 100%;
     margin: 150px 40px 0 35px;
@@ -723,5 +737,84 @@ async function getPreviousPageListings() {
     right: 80px;
 
 }
+@media(max-width: 900px) {
+    .filter-and-listings-container {
+        flex-direction: column;
+    }
+    .filter-container {
+        height: auto;
+        width: 88%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 90px;
+        padding-bottom: 20px;
+    }
+    .filter-sort-hidden {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 20%;
+        width: 80%;
+        justify-content: space-between;
+        padding: 8px 8px;
+        border-radius: 10px;
+        background-color: #1F4D3A;
+        color: #FFFFFF;
+        margin: auto;
+        margin-top: 8px;
 
+
+    }
+    .sort-mobile {
+        padding: 6px 7px;
+
+        position: relative;
+        font-size: 15px;
+        border-radius: 12px;
+        border: 1px solid #2d6e53;
+        background-color: #FFFFFF;
+    }
+    .rent-listings-container {
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 88%;
+    }
+    .pagination-container {
+        display: flex;
+        width: 100%;
+        margin-left: -30px;
+    }
+    .pagination-wrapper {
+        width: 100%;
+        margin-right: -40px;
+    }
+    .page-num-button {
+        width: 40px;
+    }
+    .num-wrapper {
+        gap: 6px;
+    }
+    .previous-btn {
+        width: 80px;
+        gap: 3px;
+        padding: 4px 4px;
+        margin-left: 14px;
+        margin-right: 12px;
+        font-size: 15px;
+    }
+    .final-page-num {
+        display: none;
+    }
+    .more-btn {
+        display: none;
+    }
+    .next-btn {
+        width: 80px;
+        gap: 3px;
+        padding: 4px 4px;
+        font-size: 15px;
+        margin-right: 6px;
+    }
+}
 </style>
