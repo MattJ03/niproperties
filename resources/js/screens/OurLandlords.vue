@@ -19,6 +19,10 @@
                 <div class="landlord-info">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
+                    <div class="mobile-landlord-column">
+                    <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
+                    <span class="landlord-name"> {{ landlord.name }}</span>
+                    </div>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
                     <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings(selectedlandlord.id)" >View info</button>
                 </div>
@@ -276,8 +280,8 @@ const moveToLandlordsListings = async() => {
     width: 100%;
     height: 60px;
     border-radius: 14px;
-    background-color: #f3f4f6;
-    border: 1px solid #f3f4f6;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
 
 }
 .landlord-image {
@@ -368,6 +372,9 @@ const moveToLandlordsListings = async() => {
 
     background-color: #FFFFFF;
 
+}
+.mobile-landlord-column {
+    display: none;
 }
 .landlord-info-header {
     padding: 3px 30px;
@@ -526,5 +533,21 @@ const moveToLandlordsListings = async() => {
 .close-btn {
     height: 40px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .landlord-list {
+        height: auto;
+        width: 88%;
+        margin-left: 20px;
+    }
+    .landlord-info {
+        height: fit-content;
+        padding: 14px 1px;
+    }
+    .mobile-landlord-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 </style>
