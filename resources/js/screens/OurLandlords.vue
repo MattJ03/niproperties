@@ -606,10 +606,16 @@ const moveToLandlordsListings = async() => {
    }
    .specific-details-wrapper {
        padding-left: 6px;
+       word-break: break-word;
 
    }
    .horizontal-line-below-landlord {
        margin-top: 15px;
+       box-sizing: border-box;
+   }
+   .close-modal {
+       margin-top: 12px;
+       width: 60%;
    }
 }
 </style>
