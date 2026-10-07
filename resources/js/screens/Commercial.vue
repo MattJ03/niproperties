@@ -654,8 +654,11 @@ onMounted(async () => {
         color: #FFFFFF;
         margin: auto;
         margin-top: 8px;
-
-
+    }
+    .listings-rows {
+        margin-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 </style>
