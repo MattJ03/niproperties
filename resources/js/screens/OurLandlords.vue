@@ -17,8 +17,10 @@
 
             <div class="landlords-section" v-for="landlord in userDirectoryStore.landlords" :key="landlord.id">
                 <div class="landlord-info">
+                    <div class="desktop-landlord-info">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
+                    </div>
                     <div class="mobile-landlord-column">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
@@ -373,6 +375,10 @@ const moveToLandlordsListings = async() => {
     background-color: #FFFFFF;
 
 }
+.desktop-landlord-info {
+    display: flex;
+    align-items: center;
+}
 .mobile-landlord-column {
     display: none;
 }
@@ -539,15 +545,27 @@ const moveToLandlordsListings = async() => {
         height: auto;
         width: 88%;
         margin-left: 20px;
+        margin-top: 100px;
     }
     .landlord-info {
         height: fit-content;
         padding: 14px 1px;
     }
+    .landlord-image {
+        margin-left: 4px;
+    }
+
     .mobile-landlord-column {
         display: flex;
         flex-direction: column;
+        padding-left: 0;
         align-items: center;
+    }
+    .landlord-name {
+        padding-left: 8px;
+    }
+    .desktop-landlord-info {
+        display: none;
     }
 }
 </style>
