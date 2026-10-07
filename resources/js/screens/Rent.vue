@@ -774,5 +774,11 @@ async function getPreviousPageListings() {
         border: 1px solid #2d6e53;
         background-color: #FFFFFF;
     }
+    .rent-listings-container {
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 88%;
+    }
 }
 </style>
