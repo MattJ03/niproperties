@@ -112,7 +112,7 @@ const moveToListingInfo = async () => {
 
 .img-wrapper {
     width: 100%;
-    height: 180px;
+    height: 250px;
     overflow: hidden;
     background-color: #f3f4f6;
 }
