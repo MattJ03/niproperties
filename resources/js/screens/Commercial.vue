@@ -3,6 +3,11 @@
     <div class="container">
         <div class="filter-and-listings-container">
             <div class="filter-container">
+                <div class="filter-sort-hidden">
+                    <span v-if="showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Show filters</span>
+                    <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
+                </div>
+                <div v-if="!showFilters" class="filters-values">
                 <div class="top-of-container">
                     <h2 class="filter-header">Filters</h2>
                     <div class="reset-wrapper" @click="resetFilters()">
@@ -72,6 +77,7 @@
                     <span class="apply-filters-text">Apply filters</span>
                 </button>
                 </div>
+            </div>
             </div>
             <div class="listings-rows">
                 <ListingGrid
@@ -146,6 +152,7 @@ const numRoomsRange = ref([1, 2, 3, 4, 5]);
 const { listingsCount } = storeToRefs(listingStore);
 const loading = ref(false);
 const error = ref('');
+const showFilters = ref(false);
 const getFinalPageNum = () => {
     finalPageNum.value = listingsCount.value / 16;
     return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
@@ -246,7 +253,7 @@ onMounted(async () => {
 
 }
 .listings-rows {
-    display: flex;
+    display: grid;
     flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
     gap: 20px;
@@ -421,6 +428,9 @@ onMounted(async () => {
 .rent-buy-section {
     display: flex;
     margin-left: 30px;
+}
+.filter-sort-hidden {
+    display: none;
 }
 .keys-img {
     height: 18px;
@@ -617,5 +627,35 @@ onMounted(async () => {
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+}
+
+@media(max-width: 900px) {
+    .filter-and-listings-container {
+        flex-direction: column;
+        margin-top: 40px;
+
+    }
+    .filter-container {
+        width: 88%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 60px;
+    }
+    .filter-sort-hidden {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 20%;
+        width: 80%;
+        justify-content: space-between;
+        padding: 8px 8px;
+        border-radius: 10px;
+        background-color: #1F4D3A;
+        color: #FFFFFF;
+        margin: auto;
+        margin-top: 8px;
+
+
+    }
 }
 </style>
