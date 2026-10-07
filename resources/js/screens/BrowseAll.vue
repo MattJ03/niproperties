@@ -911,7 +911,7 @@ onMounted(() => {
 
     }
     .listings-rows {
-        margin-top: 60px;
+        margin-top: 30px;
         width: 88%;
     }
     .sort-mobile {
