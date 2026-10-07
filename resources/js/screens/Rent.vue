@@ -8,7 +8,7 @@
                         <span v-if="!showFilters" class="filter-hidden-text" @click="showFilters = !showFilters">Hide filters</span>
 
                     </div>
-                    <div v-if="showFilters" class="filters-values">
+                    <div v-if="!showFilters" class="filters-values">
                     <div class="top-of-filters">
                         <h2 class="filters-header">Filters</h2>
                         <div class="reset-wrapper">
@@ -440,7 +440,7 @@ async function getPreviousPageListings() {
     flex-direction: column;
 }
 .filters-values {
-    display: none;
+
 }
 .min-max-row {
     display: flex;
@@ -601,7 +601,7 @@ async function getPreviousPageListings() {
 }
 .rent-listings-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     width: 100%;
     margin: 150px 40px 0 35px;
