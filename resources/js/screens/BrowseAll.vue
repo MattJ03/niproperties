@@ -941,8 +941,9 @@ onMounted(() => {
    .previous-btn {
        width: 80px;
        gap: 3px;
-       padding: 0 0;
-       margin-left: 0;
+       padding: 4px 4px;
+       margin-left: 14px;
+       margin-right: 12px;
        font-size: 15px;
    }
    .final-page-num {
@@ -954,8 +955,9 @@ onMounted(() => {
    .next-btn {
        width: 80px;
        gap: 3px;
-       padding: 0 0;
+       padding: 4px 4px;
        font-size: 15px;
+       margin-right: 6px;
    }
 
 
