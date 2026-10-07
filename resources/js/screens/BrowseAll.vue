@@ -923,6 +923,40 @@ onMounted(() => {
         border: 1px solid #2d6e53;
         background-color: #FFFFFF;
     }
+   .pagination-container {
+       display: flex;
+       width: 100%;
+       margin-left: -30px;
+   }
+   .pagination-wrapper {
+       width: 100%;
+       margin-right: -40px;
+   }
+   .page-num-button {
+       width: 40px;
+   }
+   .num-wrapper {
+       gap: 6px;
+   }
+   .previous-btn {
+       width: 80px;
+       gap: 3px;
+       padding: 0 0;
+       margin-left: 0;
+       font-size: 15px;
+   }
+   .final-page-num {
+       display: none;
+   }
+   .more-btn {
+       display: none;
+   }
+   .next-btn {
+       width: 80px;
+       gap: 3px;
+       padding: 0 0;
+       font-size: 15px;
+   }
 
 
 }
