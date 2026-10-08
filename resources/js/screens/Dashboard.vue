@@ -352,4 +352,16 @@ function formatPrice(price) {
     font-size: 20px;
 
 }
+@media(max-width: 900px) {
+    .row-of-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 8px;
+        gap: 20px;
+    }
+    .analytics-square {
+        height: 150px;
+        width: 150px;
+    }
+}
 </style>
