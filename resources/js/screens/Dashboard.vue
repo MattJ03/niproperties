@@ -151,12 +151,13 @@ function formatPrice(price) {
 .container {
     display: flex;
     flex-direction: column;
+    height: auto;
     width: 100%;
 }
 .row-of-stats {
     display: flex;
     flex-direction: row;
-    height: 15dvh;
+    height: auto;
     width: 100%;
     gap: 80px;
     margin-top: 180px;
@@ -356,12 +357,40 @@ function formatPrice(price) {
     .row-of-stats {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        padding-left: 8px;
+        padding-left: 12px;
         gap: 20px;
     }
     .analytics-square {
         height: 150px;
         width: 150px;
     }
+    .row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-left: 12px;
+        margin-top: 20px;
+        gap: 20px;
+    }
+    .landlords-most-listings-wrapper {
+        height: auto;
+        width: fit-content;
+    }
+    .landlords-most-listings-wrapper span {
+        font-size: 16px;
+    }
+    .landlord-leaderboard {
+        padding-top: 6px;
+    }
+    .listings-per-county-wrapper {
+        width: fit-content;
+    }
+    .listings-per-county-wrapper span {
+        font-size: 16px;
+        height: auto;
+    }
+    .county-index-info {
+        padding-top: 6px;
+    }
+
 }
 </style>
