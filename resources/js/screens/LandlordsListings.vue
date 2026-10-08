@@ -37,7 +37,7 @@
                   <div class="search-bar">
                   <img :src="search2" class="search-img" alt="search image"/>
                       <input type="text"  v-model="search" class="search-input" placeholder="postcode, town, county..."/>
-                      <input type="text"  v-model="searchMobile" class="search-input-mobile" placeholder="postcode, town, county..."/>
+                      <input type="text"  v-model="searchMobile" class="search-input-mobile" placeholder="search..."/>
                   </div>
                   </div>
               <div class="filters-wrapper">
