@@ -167,7 +167,9 @@
                 </div>
             </div>
             <div class="buttons-wrapper">
-                <button class="update-profile" @click="updatePassword()">Update password</button>
+                <button class="update-profile" @click="updatePassword()"
+                :class="{ disabled: !passwords.oldPassword}"
+                >Update password</button>
                 <span class="reset-profile" @click="resetEditProfileConfiguration()">Reset</span>
             </div>
         </div>
@@ -948,6 +950,10 @@ input:checked + .slider:before {
     background-color: #2d6e53;
     color: #FFFFFF;
 }
+.update-profile.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
 .reset-profile {
     cursor: pointer;
 }
@@ -1119,6 +1125,9 @@ input:checked + .slider:before {
     }
     .logo-desktop {
         display: none;
+    }
+    .new-password-title {
+        margin-top: 20px;
     }
 
     .password-security-square {
