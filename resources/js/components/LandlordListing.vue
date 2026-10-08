@@ -301,12 +301,16 @@ const moveToListingInfo = async () => {
 @media(max-width: 900px) {
     .listing-card {
         width: 100%;
+        height: 500px;
     }
     .landlord-info-wrapper {
         margin-right: 60px;
     }
     .created-at-text {
         margin-right: 0px;
+    }
+    .bottom-of-listing {
+        margin-top: 12px;
     }
 }
 </style>

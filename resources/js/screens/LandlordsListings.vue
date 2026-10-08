@@ -50,6 +50,7 @@
               </div>
       </div>
       <div class="listings-list">
+          <h2 v-if="landlordListings === 0">No listings</h2>
           <LandlordListing
               v-for="listing in listingStore.landlordListings"
               :listing="listing"

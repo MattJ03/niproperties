@@ -542,7 +542,7 @@ class ListingController extends Controller
     if($query->count() <= 0) {
         return response()->json([
             'message' => 'no listings found',
-            'listings' => $query->items(),
+            'listings' => $query,
         ]);
     }
        $listings = $query->with('listingImages')
