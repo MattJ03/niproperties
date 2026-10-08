@@ -550,6 +550,9 @@ const moveToLandlordsListings = async() => {
         margin-left: 20px;
         margin-top: 100px;
     }
+    .landlord-modal {
+        height: 100dvh;
+    }
     .landlord-info {
 
         height: fit-content;
@@ -585,7 +588,8 @@ const moveToLandlordsListings = async() => {
     }
     .modal-square {
        width: 100%;
-
+        overflow-y: auto;
+        box-sizing: border-box;
     }
     .member-since-text {
         font-size: 15px;
@@ -604,8 +608,12 @@ const moveToLandlordsListings = async() => {
        width: 20px;
 
    }
+   .about-header {
+       margin-bottom: 6px;
+   }
    .specific-details-wrapper {
        padding-left: 6px;
+
        word-break: break-word;
 
    }
@@ -615,7 +623,23 @@ const moveToLandlordsListings = async() => {
    }
    .close-modal {
        margin-top: 12px;
-       width: 60%;
+       width: 100%;
+   }
+   .landlord-description-wrapper {
+       margin-top: 0;
+   }
+   .landlord-description {
+       margin-top: 3px;
+   }
+   .about-header {
+       margin-top: 12px;
+   }
+   .listings-row {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+       padding-bottom: 8px;
+   }
+   .horizontal-line-below-about {
+       margin-top: 6px;
    }
 }
 </style>

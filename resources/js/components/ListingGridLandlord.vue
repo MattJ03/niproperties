@@ -41,14 +41,15 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 250px;
+    height: 200px;
     border: 1px solid #65676b;
     border-radius: 12px;
 }
 .img-wrapper {
     width: 100%;
-    height: 45%;
+    height: 40%;
     overflow: hidden;
+    border-radius: 12px;
 }
 .listing-img {
     width: 100%;
