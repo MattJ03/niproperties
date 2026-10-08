@@ -539,21 +539,15 @@ class ListingController extends Controller
         });
     }
 
-    if($query->count() <= 0) {
-        return response()->json([
-            'message' => 'no listings found',
-            'listings' => $query,
-        ]);
-    }
        $listings = $query->with('listingImages')
-                          ->with('landlord');
-    $listings->orderBy('created_at', 'desc');
-    $listings = $listings->paginate(20);
+                          ->with('landlord')
+                           ->orderBy('created_at', 'desc')
+                           ->paginate(20);
 
     return response()->json([
         'listings' => $listings->items(),
         'listings_count' => $listings->total(),
-        'message' => 'listings found.',
+        'message' => $listings->total() > 0 ? 'listings found.' : 'listings not found.',
     ]);
     }
 

@@ -50,7 +50,7 @@
               </div>
       </div>
       <div class="listings-list">
-          <h2 v-if="landlordListings === 0">No listings</h2>
+          <h2 v-if="listingStore.totalLandlordListings === 0">No listings found</h2>
           <LandlordListing
               v-for="listing in listingStore.landlordListings"
               :listing="listing"
@@ -136,23 +136,16 @@ onMounted(async () => {
         await listingStore.fetchLandlordById(props.landlordId);
     }
     console.log('listings:', listingStore.landlordListings);
+    await listingStore.getLandlordsListings(landlord.value.id);
 });
 
-watch(searchMobile, async (newValue, oldValue) => {
-    loading.value = true;
-    if(searchMobile.value !== oldValue) {
-        try {
-            console.log('sent')
-            await listingStore.getLandlordsListings(landlord.value.id, {
-                searchMobile: newValue,
-            });
-        } catch(err) {
-            error.value = error.response?.data?.message || 'failed to to search for listings';
-        } finally {
-            loading.value = false;
-        }
+watch(searchMobile, async (newValue, oldvalue) => {
+    if(searchMobile !== oldvalue) {
+        await listingStore.getLandlordsListings(landlord.value.id, {
+            searchMobile: newValue,
+        });
     }
-});
+})
 
 const applyFilters = () => {
     listingStore.getLandlordsListings(landlord.value.id, {
