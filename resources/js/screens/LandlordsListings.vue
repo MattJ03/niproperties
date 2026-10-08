@@ -555,4 +555,30 @@ const getSpecificPageListings = async (page) => {
 .listings-text {
     margin-top: 30px;
 }
+.header-lower-column {
+    display: none;
+}
+@media(max-width: 900px) {
+    .landlord-header-wrapper {
+        margin-top: 100px;
+        height: 60px;
+        padding-left: 12px;
+        gap: 8px;
+    }
+
+    .header-lower-column {
+        display: flex;
+        flex-direction: column;
+    }
+    .rent-buy-wrapper {
+        display: none;
+    }
+    .field {
+        display: none;
+    }
+    .apply-filters-btn {
+        display: none;
+    }
+}
+
 </style>
