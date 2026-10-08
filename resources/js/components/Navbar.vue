@@ -73,7 +73,7 @@
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
-                <div class="security-selection-row" @click="passwordAndSecurityModal = true; editProfileModal = false;">
+                <div class="security-selection-row" @click="passwordAndSecurityModal = true; editProfileModal = false; settingsOpen = false;">
                     <img :src="lock" class="lock-img" alt="lock"/>
                     <span>Password & security</span>
                 </div>
