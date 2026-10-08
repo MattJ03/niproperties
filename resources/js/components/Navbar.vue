@@ -1120,5 +1120,14 @@ input:checked + .slider:before {
     .logo-desktop {
         display: none;
     }
+
+    .password-security-square {
+        width: 90%;
+    }
+    .password-entries {
+        flex-direction: column;
+        padding-left: 12px;
+    }
+
 }
 </style>
