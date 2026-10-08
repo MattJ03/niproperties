@@ -182,6 +182,7 @@ function formatPrice(price) {
     margin-top: 10px;
     color: #000000;
     font-size: 20px;
+    font-weight: bold;
 }
 .analytic-square-value {
     display: flex;
@@ -205,7 +206,7 @@ function formatPrice(price) {
 .landlords-most-listings-wrapper {
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: auto;
     border: 1px solid #000000;
     width: 300px;
     border-radius: 14px;
@@ -215,6 +216,7 @@ function formatPrice(price) {
 .top-of-leaderboard-text {
     font-size: 22px;
     padding-left: 15px;
+    font-weight: bold;
 }
 .listing-details {
     display: flex;
@@ -241,6 +243,7 @@ function formatPrice(price) {
 }
 .landlord-details {
     display: flex;
+    width: 95%;
     justify-content: left;
     flex-direction: row;
     padding-left: 10px;
@@ -254,7 +257,10 @@ function formatPrice(price) {
 
 .total-listings-count {
     display: flex;
-    margin-left: 10px;
+    width: 100%;
+    justify-content: right;
+
+
 }
 .line-wrapper {
     display: flex;
@@ -291,7 +297,7 @@ function formatPrice(price) {
     flex-direction: column;
     padding-top: 20px;
     padding-bottom: 3px;
-    width: 100%;
+    width: 97%;
 }
 .listing-text-viewed {
     font-size: 20px;
@@ -332,7 +338,16 @@ function formatPrice(price) {
     width: 100%;
 }
 .county-values {
-    display: none;
+    display: flex;
+    flex-direction: row;
+}
+.county-answer {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    padding-right: 8px;
+    font-size: 20px;
+
 }
 .rent-to-buy-square {
     height: 300px;
@@ -359,6 +374,12 @@ function formatPrice(price) {
     padding-left: 10px;
     font-size: 20px;
 
+}
+.listing-views {
+    display: flex;
+    justify-content: right;
+    padding-right: 8px;
+    width: 10%;
 }
 @media(max-width: 900px) {
     .row-of-stats {
@@ -387,10 +408,11 @@ function formatPrice(price) {
         gap: 10px;
     }
     .landlord-name {
-        width: 70%;
+       width: fit-content;
     }
     .total-listings-count {
-        width: 100%;
+        width: 30%;
+        display: flex;
         justify-content: right;
         padding-right: 8px;
     }
@@ -448,16 +470,17 @@ function formatPrice(price) {
     }
     .rent-to-buy-square {
         display: flex;
-        width: 180px;
+        width: 270px;
     }
     .chart-card {
 
-        width: fit-content;
+        width: 270px;
     }
     .chart-title {
         display: flex;
-        justify-content: center;
+        justify-content: left;
         padding-bottom: 10px;
+        font-size: 18px;
     }
     .county-answer {
         display: flex;
