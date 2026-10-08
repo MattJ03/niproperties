@@ -641,5 +641,8 @@ const moveToLandlordsListings = async() => {
    .horizontal-line-below-about {
        margin-top: 6px;
    }
+   .vertical-line {
+       visibility: hidden;
+   }
 }
 </style>

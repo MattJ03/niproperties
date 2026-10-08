@@ -68,6 +68,7 @@ function getPrice(price) {
 .address-line-1-text {
     font-size: 15px;
     color: #000000;
+    font-weight: bold;
 }
 .listing-details {
     margin-top: 18px;
