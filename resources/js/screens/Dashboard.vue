@@ -44,7 +44,7 @@
             <div class="horizontal-line-below-header"></div>
             <div v-for="listing in mostViewedListings" class="listing-index-info">
                 <div class="listing-details">
-                <span class="listing-text-viewed"> {{ listing.address_line_1 }} </span>
+                <span class="listing-text-viewed"> {{ listing.address_line_1 }}: </span>
                 <span class="listing-views"> {{ listing.views }} </span>
                 </div>
                     <div class="horizontal-line-below-entry"></div>
@@ -359,6 +359,8 @@ function formatPrice(price) {
         grid-template-columns: repeat(2, 1fr);
         padding-left: 12px;
         gap: 20px;
+        margin-top: 100px;
+        margin-bottom: 20px;
     }
     .analytics-square {
         height: 150px;
@@ -373,7 +375,7 @@ function formatPrice(price) {
     }
     .landlords-most-listings-wrapper {
         height: auto;
-        width: fit-content;
+        width: 150px;
     }
     .landlords-most-listings-wrapper span {
         font-size: 16px;
@@ -391,6 +393,31 @@ function formatPrice(price) {
     .county-index-info {
         padding-top: 6px;
     }
+    .listings-most-viewed-wrapper {
+        width: 180px;
 
+    }
+    .listing-index-info {
+        width: 100%;
+
+        padding-top: 10px;
+    }
+    .top-of-leaderboard-text {
+        font-size: 16px;
+    }
+    .listing-details {
+        font-size: 16px;
+        padding-left: 0;
+        width: fit-content;
+    }
+    .listing-text-viewed {
+        font-size: 16px;
+        padding-left: 3px;
+        width: 150px;
+    }
+    .listing-views {
+        font-size: 16px;
+        padding-right: 20px;
+    }
 }
 </style>
