@@ -32,7 +32,7 @@
             <div v-for="landlord in landlordLeaderboard" class="landlord-index-info">
                 <div class="landlord-details">
                 <img :src="agent" class="agent-pfp" alt="profile picture"/>
-                <span> {{ landlord.name }} : </span>
+                <span class="landlord-name"> {{ landlord.name }} : </span>
                 <span class="total-listings-count"> {{ landlord.listings_count }}</span>
                 </div>
                     <div class="horizontal-line-below-entry"></div>
@@ -54,7 +54,10 @@
                 <span class="top-of-leaderboard-text">Listings per county</span>
                 <div class="horizontal-line-below-header"></div>
                 <div v-for="(count, county) in listingsPerCounty" :key="county" class="county-index-info">
-                    <span class="county-text"> {{ county }}: {{ count }} </span>
+                    <div class="county-values">
+                    <span class="county-text"> {{ county }}:</span>
+                        <span class="county-answer"> {{ count }}</span>
+                    </div>
                     <div class="horizontal-line-below-entry"></div>
                 </div>
             </div>
@@ -268,6 +271,7 @@ function formatPrice(price) {
     justify-content: left;
     flex-direction: row;
     padding-left: 10px;
+    width: 100%;
     margin-bottom: 6px;
 }
 .listings-most-viewed-wrapper {
@@ -327,6 +331,9 @@ function formatPrice(price) {
     padding-bottom: 3px;
     width: 100%;
 }
+.county-values {
+    display: none;
+}
 .rent-to-buy-square {
     height: 300px;
     width: 300px;
@@ -379,6 +386,14 @@ function formatPrice(price) {
         margin-top: 20px;
         gap: 10px;
     }
+    .landlord-name {
+        width: 70%;
+    }
+    .total-listings-count {
+        width: 100%;
+        justify-content: right;
+        padding-right: 8px;
+    }
     .landlords-most-listings-wrapper {
         height: auto;
         width: 270px;
@@ -390,12 +405,17 @@ function formatPrice(price) {
         padding-top: 6px;
     }
     .listings-per-county-wrapper {
-        width: fit-content;
+        width: 270px;
     }
     .listings-per-county-wrapper span {
         font-size: 18px;
         height: auto;
     }
+    .county-values {
+        display: flex;
+        flex-direction: row;
+    }
+
     .county-index-info {
         padding-top: 6px;
     }
@@ -438,6 +458,12 @@ function formatPrice(price) {
         display: flex;
         justify-content: center;
         padding-bottom: 10px;
+    }
+    .county-answer {
+        display: flex;
+        justify-content: right;
+        width: 100%;
+        padding-right: 8px;
     }
 }
 </style>
