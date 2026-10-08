@@ -36,7 +36,8 @@
               <div class="search-wrapper">
                   <div class="search-bar">
                   <img :src="search2" class="search-img" alt="search image"/>
-                  <input type="text"  v-model="search" class="search-input" placeholder="postcode, town, county..."/>
+                      <input type="text"  v-model="search" class="search-input" placeholder="postcode, town, county..."/>
+                      <input type="text"  v-model="searchMobile" class="search-input-mobile" placeholder="postcode, town, county..."/>
                   </div>
                   </div>
               <div class="filters-wrapper">
@@ -85,7 +86,7 @@
 <script setup>
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import profilePicture from '../assets/agent.png';
 import search2 from '../assets/search.png';
 import {useRoute} from "vue-router";
@@ -103,6 +104,7 @@ const loading = ref(false);
 const error = ref('');
 const pageNum = ref(1);
 const { landlordListings } = storeToRefs(listingStore)
+const searchMobile = ref('');
 
 const finalPageNumRounded = computed(() => {
     return Math.ceil(landlordListings.value.length / 20);
@@ -135,6 +137,22 @@ onMounted(async () => {
     console.log('listings:', listingStore.landlordListings);
 });
 
+watch(searchMobile, async (newValue, oldValue) => {
+    loading.value = true;
+    if(searchMobile.value !== oldValue) {
+        try {
+            console.log('sent')
+            await listingStore.getLandlordsListings(landlord.value.id, {
+                searchMobile: newValue,
+            });
+        } catch(err) {
+            error.value = error.response?.data?.message || 'failed to to search for listings';
+        } finally {
+            loading.value = false;
+        }
+    }
+});
+
 const applyFilters = () => {
     listingStore.getLandlordsListings(landlord.value.id, {
         county: filters.county || null,
@@ -144,8 +162,8 @@ const applyFilters = () => {
         min_num_rooms: filters.min_num_rooms || null,
         search: search.value || null,
     });
-
 }
+
 const removeFilters = () => {
     filters.rent_or_buy = '';
         filters.county = '';
@@ -153,7 +171,7 @@ const removeFilters = () => {
         filters.min_price = '';
         filters.min_num_rooms = '';
         search.value = '';
-
+        searchMobile.value = '';
         listingStore.getLandlordsListings(landlord.value.id);
 };
 
@@ -555,8 +573,9 @@ const getSpecificPageListings = async (page) => {
 .listings-text {
     margin-top: 30px;
 }
-.header-lower-column {
-    display: none;
+
+.search-input-mobile {
+    display: none
 }
 @media(max-width: 900px) {
     .landlord-header-wrapper {
@@ -565,10 +584,17 @@ const getSpecificPageListings = async (page) => {
         padding-left: 12px;
         gap: 8px;
     }
+    .filters-container {
+        gap: 8px;
+    }
+
 
     .header-lower-column {
         display: flex;
         flex-direction: column;
+    }
+    .landlord-name {
+        font-size: 18px;
     }
     .rent-buy-wrapper {
         display: none;
@@ -577,6 +603,28 @@ const getSpecificPageListings = async (page) => {
         display: none;
     }
     .apply-filters-btn {
+        display: none;
+    }
+    .search-input {
+        display: none;
+    }
+    .search-wrapper {
+
+    }
+    .search-input-mobile {
+        display: flex;
+        border-radius: 14px;
+        height: 50px;
+        background-color: #f3f4f6;
+        border: 1px solid #FFFFFF;
+        padding-left: 8px;
+        font-size: 16px;
+        width: 160px;
+    }
+    .search-img {
+        display: none;
+    }
+    .remove-filters-text {
         display: none;
     }
 }

@@ -528,6 +528,16 @@ class ListingController extends Controller
                      ->orWhere('description', 'LIKE', '%' . $search . '%');
         });
     }
+    if($request->filled('searchMobile')) {
+        $searchMobile = $request->query('searchMobile');
+        $query->where(function ($query) use ($searchMobile) {
+            $query->where('address_line_1', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('address_line_2', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('county', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('postcode', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchMobile . '%');
+        });
+    }
 
     if($query->count() <= 0) {
         return response()->json([
