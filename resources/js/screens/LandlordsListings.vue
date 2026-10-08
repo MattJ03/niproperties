@@ -631,6 +631,44 @@ const getSpecificPageListings = async (page) => {
         width: 90%;
 
     }
+
+    .pagination-container {
+        display: flex;
+        width: 100%;
+        margin-left: -30px;
+    }
+    .pagination-wrapper {
+        width: 100%;
+
+    }
+    .page-num-button {
+        width: 40px;
+    }
+    .num-wrapper {
+        gap: 6px;
+    }
+    .previous-btn {
+        width: 80px;
+        gap: 3px;
+        padding: 4px 4px;
+        margin-left: 14px;
+        margin-right: 12px;
+        font-size: 15px;
+    }
+    .final-page-num {
+        display: none;
+    }
+    .more-btn {
+        display: none;
+    }
+    .next-btn {
+        width: 80px;
+        gap: 3px;
+        padding: 4px 4px;
+        font-size: 15px;
+        margin-right: 6px;
+    }
+
 }
 
 </style>
