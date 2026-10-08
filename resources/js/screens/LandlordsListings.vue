@@ -627,6 +627,10 @@ const getSpecificPageListings = async (page) => {
     .remove-filters-text {
         display: none;
     }
+    .listings-list {
+        width: 90%;
+
+    }
 }
 
 </style>

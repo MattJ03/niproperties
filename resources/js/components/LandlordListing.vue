@@ -128,7 +128,7 @@ const moveToListingInfo = async () => {
     display: flex;
     flex-direction: column;
     background-color: #f3f4f6;
-    width: 80%;
+    width: 70%;
     height: 600px;
     max-width: 720px;
     border-radius: 12px;
@@ -297,5 +297,10 @@ const moveToListingInfo = async () => {
 .view-btn:hover {
     cursor: pointer;
     background-color: #2d6e53;
+}
+@media(max-width: 900px) {
+    .listing-card {
+        width: 100%;
+    }
 }
 </style>
