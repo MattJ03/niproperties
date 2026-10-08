@@ -366,19 +366,25 @@ function formatPrice(price) {
         height: 150px;
         width: 150px;
     }
+    .analytics-square-title {
+        font-size: 18px;
+    }
     .row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
         margin-left: 12px;
         margin-top: 20px;
-        gap: 20px;
+        gap: 10px;
     }
     .landlords-most-listings-wrapper {
         height: auto;
-        width: 150px;
+        width: 270px;
     }
     .landlords-most-listings-wrapper span {
-        font-size: 16px;
+        font-size: 18px;
     }
     .landlord-leaderboard {
         padding-top: 6px;
@@ -387,15 +393,16 @@ function formatPrice(price) {
         width: fit-content;
     }
     .listings-per-county-wrapper span {
-        font-size: 16px;
+        font-size: 18px;
         height: auto;
     }
     .county-index-info {
         padding-top: 6px;
     }
     .listings-most-viewed-wrapper {
-        width: 180px;
-
+        width: 270px;
+        height: fit-content;
+        gap: 10px;
     }
     .listing-index-info {
         width: 100%;
@@ -403,21 +410,34 @@ function formatPrice(price) {
         padding-top: 10px;
     }
     .top-of-leaderboard-text {
-        font-size: 16px;
+        font-size: 18px;
     }
     .listing-details {
         font-size: 16px;
         padding-left: 0;
-        width: fit-content;
+
     }
     .listing-text-viewed {
-        font-size: 16px;
+        font-size: 18px;
         padding-left: 3px;
-        width: 150px;
+        width: 270px;
     }
     .listing-views {
-        font-size: 16px;
+        font-size: 18px;
         padding-right: 20px;
+    }
+    .rent-to-buy-square {
+        display: flex;
+        width: 180px;
+    }
+    .chart-card {
+
+        width: fit-content;
+    }
+    .chart-title {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
     }
 }
 </style>
