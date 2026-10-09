@@ -636,11 +636,19 @@ function changeSrcNumber() {
         height: 50px;
         width: 50%;
     }
-    .listing-card-body {
-        flex-direction: column;
+    .img-wrapper {
+        height: 60%;
     }
     .listing-card {
         margin-top: 100px;
+        height: auto;
+    }
+    .listing-card-main {
+        height: auto;
+    }
+    .listing-card-body {
+        height: auto;
+        flex-direction: column;
     }
     .arrow-beside-name {
         padding-right: 8px;
@@ -686,7 +694,7 @@ function changeSrcNumber() {
     }
     .street-view-section {
         margin-left: 8px;
-        width: 100%;
+        width: 85%;
 
     }
     .map-view {
@@ -695,6 +703,11 @@ function changeSrcNumber() {
         margin-right: auto;
         width: 370px;
     }
-
+    .listing-card-side {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        flex: none;
+    }
 }
 </style>
