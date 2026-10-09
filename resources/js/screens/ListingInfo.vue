@@ -252,6 +252,7 @@ function changeSrcNumber() {
 .container {
     display: flex;
     width: 100%;
+
     justify-content: center;
 
 }
@@ -401,9 +402,9 @@ function changeSrcNumber() {
     align-items: center;
     flex-direction: row;
     margin-left: 30px;
-    margin-top: 15px;
+    margin-top: 35px;
     font-size: 22px;
-    color: #2d6e53;
+    color: #000000;
     gap: 5px;
 }
 .address-line-1-text {
@@ -636,6 +637,31 @@ function changeSrcNumber() {
     }
     .arrow-beside-name {
         padding-right: 8px;
+    }
+    .is_active-text {
+        margin-left: 8px;
+    }
+    .is_not_active-text {
+        margin-left: 8px;
+    }
+    .listing-details-specifics {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+    }
+    .listing-info {
+        gap: 20px;
+    }
+    .field {
+        margin-top: 35px;
+    }
+    .listing-address-area {
+        margin-left: 8px;
+        color: #000000;
+        margin-top: 45px;
+    }
+    .description-section {
+        margin-left: 8px;
     }
 }
 </style>
