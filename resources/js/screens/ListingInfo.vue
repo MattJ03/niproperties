@@ -66,7 +66,7 @@
                         </div>
                         <div class="data-point">
                             <span>Uploaded: </span>
-                            <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MMMM/YYYY')}}</span>
+                            <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MM/YYYY')}}</span>
                         </div>
                     </div>
                     <div class="street-view-section">
@@ -662,6 +662,13 @@ function changeSrcNumber() {
     }
     .description-section {
         margin-left: 8px;
+    }
+    .listing-stats {
+        margin-left: 8px;
+        gap: 14px;
+    }
+    .data-point {
+        font-size: 16px;
     }
 }
 </style>
