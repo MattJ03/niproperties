@@ -280,14 +280,14 @@ onMounted(async () => {
     display: flex;
     width: 100%;
     flex-direction: column;
-
+    overflow-x: clip;
 }
 
 .top-container {
     display: flex;
     width: 100%;
     height: 100dvh;
-    overflow: hidden;
+    overflow-x: clip;
     position: relative;
 }
 
@@ -295,6 +295,7 @@ onMounted(async () => {
 
     position: absolute;
     width: 100%;
+    overflow-x: clip;
     height: 100%;
     object-fit: cover;
     display: block;
@@ -609,6 +610,9 @@ onMounted(async () => {
     }
     .hello-user-wrapper {
         width: 90%;
+    }
+    .message-trusted {
+        font-size: 18px;
     }
     .row-of-popular-searches {
         display: grid;

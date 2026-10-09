@@ -8,7 +8,6 @@
             </div>
 
             <div class="listing-card-body">
-
                 <div class="listing-card-main">
                     <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{ landlord.name }}
                         <span class="arrow-beside-name">> </span>
@@ -627,5 +626,16 @@ function changeSrcNumber() {
     height: 18px;
     margin-left: 24px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .landlord-name-btn {
+        padding-left: 6px;
+        margin-left: 8px;
+        height: 50px;
+        width: 50%;
+    }
+    .arrow-beside-name {
+        padding-right: 8px;
+    }
 }
 </style>
