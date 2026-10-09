@@ -1068,8 +1068,8 @@ input:checked + .slider:before {
 
     .settings-img-mobile {
         display: block;
-        height: 32px;
-        width: 32px;
+        height: 28px;
+        width: 28px;
     }
     .upload-mobile {
         display: flex;
@@ -1083,8 +1083,8 @@ input:checked + .slider:before {
     }
     .upload-img-mobile {
         display: block;
-        height: 32px;
-        width: 32px;
+        height: 28px;
+        width: 28px;
     }
     .login-mobile {
         height: 32px;
@@ -1092,7 +1092,7 @@ input:checked + .slider:before {
         cursor: pointer;
         font-weight: bold;
         background-color: #E7CBA6;
-        color: #2d6e53;
+        color: #1F4D3A;
         border: none;
     }
     .login-mobile-text {
@@ -1102,7 +1102,8 @@ input:checked + .slider:before {
     .logout-mobil {
         height: 32px;
         border-radius: 10px;
-        font-weight: bold;
+        color: #1F4D3A;
+        border: none;
         background-color: #E7CBA6;
     }
     .headings-selector,
