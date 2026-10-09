@@ -1137,6 +1137,9 @@ input:checked + .slider:before {
         flex-direction: column;
         padding-left: 12px;
     }
+    .bottom-square {
+        padding-bottom: 8px;
+    }
 
 }
 </style>

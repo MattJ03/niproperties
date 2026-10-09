@@ -43,6 +43,18 @@
                 </div>
                 </div>
             <div class="row-details">
+                <div class="field">
+                    <strong><label class="field-text">Rent/Buy</label></strong>
+                    <div class="rent-or-buy-button-wrapper">
+                        <button class="rent-select-btn" @click="form.type = 'rent'; cleanPrice()"
+                                :class=" { active: form.type === 'rent'}"
+                        >Rent</button>
+                        <button class="buy-select-btn" @click="form.type = 'buy'; cleanPrice()"
+                                :class=" { active: form.type === 'buy'}"
+                        >Buy</button>
+                    </div>
+                    <span class="error-message" v-if="errors.type"> {{ errors.type }}</span>
+                </div>
                 <div v-if="form.type === 'buy'" class="field">
                 <strong><label class="field-text">Price (£)</label></strong>
                 <input type="number" v-model="form.price" class="input-text-town" placeholder="£">
@@ -58,18 +70,7 @@
                     <input type="number" v-model="form.no_of_rooms" class="input-text-town">
                     <span class="error-message" v-if="errors.no_of_rooms"> {{ errors.no_of_rooms }}</span>
                 </div>
-                <div class="field">
-                    <strong><label class="field-text">Rent/Buy</label></strong>
-                    <div class="rent-or-buy-button-wrapper">
-                    <button class="rent-select-btn" @click="form.type = 'rent'; cleanPrice()"
-                    :class=" { active: form.type === 'rent'}"
-                    >Rent</button>
-                    <button class="buy-select-btn" @click="form.type = 'buy'; cleanPrice()"
-                    :class=" { active: form.type === 'buy'}"
-                    >Buy</button>
-                    </div>
-                    <span class="error-message" v-if="errors.type"> {{ errors.type }}</span>
-                </div>
+
                 </div>
             <div class="row-details">
                 <div class="field">
@@ -523,7 +524,7 @@ input-text-number-beds {
     border: none;
     color: #FFFFFF;
     border-radius: 14px;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     margin-top: 10px;
 }
@@ -532,6 +533,41 @@ input-text-number-beds {
         color: #c0392b;
         font-size: 12px;
         margin-top: 6px;
+
+}
+@media(max-width: 900px) {
+    .header-group {
+        display: none;
+    }
+    .container {
+        height: auto;
+    }
+    .property-details-card {
+        width: 95%;
+        margin-top: 20px;
+        margin-left: 12px;
+        padding-left: 6px;
+    }
+    .row-details-address {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .input-text-address {
+        width: 100%;
+    }
+    .row-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .attach-card {
+        margin-left: 12px;
+        padding-left: 12px;
+        width: 95%;
+        padding-right: 10px;
+    }
+    .drag-file-wrapper {
+        width: 80%;
+    }
 
 }
 </style>
