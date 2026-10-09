@@ -74,6 +74,7 @@
                         <iframe
                         width="400px"
                         height="400"
+                        class="map-view"
                         frameborder="0" style="border: 0"
                         referrerpolicy="origin-when-cross-origin"
                         :src="`${streetViewUrl}`"
@@ -635,6 +636,9 @@ function changeSrcNumber() {
         height: 50px;
         width: 50%;
     }
+    .listing-card {
+        margin-top: 100px;
+    }
     .arrow-beside-name {
         padding-right: 8px;
     }
@@ -648,9 +652,11 @@ function changeSrcNumber() {
         display: flex;
         flex-direction: column;
         margin-left: 8px;
+        margin-top: 40px;
     }
     .listing-info {
         gap: 20px;
+        width: 100%;
     }
     .field {
         margin-top: 35px;
@@ -662,13 +668,29 @@ function changeSrcNumber() {
     }
     .description-section {
         margin-left: 8px;
+        width: 100%;
+    }
+    .description-text {
+        width: 90%;
     }
     .listing-stats {
         margin-left: 8px;
         gap: 14px;
+        width: 85%;
     }
     .data-point {
         font-size: 16px;
+    }
+    .street-view-section {
+        margin-left: 8px;
+        width: 100%;
+
+    }
+    .map-view {
+        border-radius: 14px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 370px;
     }
 }
 </style>
