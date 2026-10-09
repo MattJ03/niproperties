@@ -636,6 +636,9 @@ function changeSrcNumber() {
         height: 50px;
         width: 50%;
     }
+    .listing-card-body {
+        flex-direction: column;
+    }
     .listing-card {
         margin-top: 100px;
     }
@@ -692,5 +695,6 @@ function changeSrcNumber() {
         margin-right: auto;
         width: 370px;
     }
+
 }
 </style>
