@@ -97,12 +97,12 @@ class AuthController extends Controller
     }
 
     public function currentUser(Request $request) {
-        $user = User::findOrFail(auth('sanctum')->id());
+        $user = User::find(auth('sanctum')->id());
 
         if(!$user) {
             return response()->json([
                 'message' => 'currently not logged in',
-            ]);
+            ], 200);
         }
 
 
