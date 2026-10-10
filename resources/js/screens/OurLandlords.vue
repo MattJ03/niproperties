@@ -188,7 +188,7 @@ const moveToLandlordsListings = async() => {
     flex-direction: column;
     margin-top: 170px;
     margin-left: 50px;
-    height: 80dvh;
+    height: auto;
     width: 60%;
     background-color: #FFFFFF;
     border-radius: 12px;
