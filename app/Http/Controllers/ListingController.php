@@ -528,22 +528,26 @@ class ListingController extends Controller
                      ->orWhere('description', 'LIKE', '%' . $search . '%');
         });
     }
-
-    if($query->count() <= 0) {
-        return response()->json([
-            'message' => 'no listings found',
-            'listings' => $query->items(),
-        ]);
+    if($request->filled('searchMobile')) {
+        $searchMobile = $request->query('searchMobile');
+        $query->where(function ($query) use ($searchMobile) {
+            $query->where('address_line_1', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('address_line_2', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('county', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('postcode', 'LIKE', '%'. $searchMobile . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchMobile . '%');
+        });
     }
+
        $listings = $query->with('listingImages')
-                          ->with('landlord');
-    $listings->orderBy('created_at', 'desc');
-    $listings = $listings->paginate(20);
+                          ->with('landlord')
+                           ->orderBy('created_at', 'desc')
+                           ->paginate(20);
 
     return response()->json([
         'listings' => $listings->items(),
         'listings_count' => $listings->total(),
-        'message' => 'listings found.',
+        'message' => $listings->total() > 0 ? 'listings found.' : 'listings not found.',
     ]);
     }
 

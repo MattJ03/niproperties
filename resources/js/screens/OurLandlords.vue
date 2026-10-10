@@ -17,8 +17,14 @@
 
             <div class="landlords-section" v-for="landlord in userDirectoryStore.landlords" :key="landlord.id">
                 <div class="landlord-info">
+                    <div class="desktop-landlord-info">
                     <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
                     <span class="landlord-name"> {{ landlord.name }}</span>
+                    </div>
+                    <div class="mobile-landlord-column">
+                    <img :src="peopleIcon" class="landlord-image" alt="landlord image"/>
+                    <span class="landlord-name"> {{ landlord.name }}</span>
+                    </div>
                     <span class="number-of-listings">Number of listings: {{ landlord.listings_count}}</span>
                     <button class="view-info-btn" @click="showInfoModal = true; selectedlandlord = landlord; listingStore.getLandlordsRecentListings(selectedlandlord.id)" >View info</button>
                 </div>
@@ -195,7 +201,7 @@ const moveToLandlordsListings = async() => {
     border-radius: 14px;
     width: 100%;
     height: 10%;
-    background-color: #f3f4f6;
+    background-color: #FFFFFF;
     border: 1px solid #f3f4f6;
 }
 .landlord-amount-pulled {
@@ -209,6 +215,7 @@ const moveToLandlordsListings = async() => {
     height: 100%;
     gap: 10px;
     margin-right: 20px;
+    background-color: #FFFFFF;
 
 }
 .vertical-line {
@@ -276,8 +283,8 @@ const moveToLandlordsListings = async() => {
     width: 100%;
     height: 60px;
     border-radius: 14px;
-    background-color: #f3f4f6;
-    border: 1px solid #f3f4f6;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
 
 }
 .landlord-image {
@@ -369,6 +376,13 @@ const moveToLandlordsListings = async() => {
     background-color: #FFFFFF;
 
 }
+.desktop-landlord-info {
+    display: flex;
+    align-items: center;
+}
+.mobile-landlord-column {
+    display: none;
+}
 .landlord-info-header {
     padding: 3px 30px;
 }
@@ -448,6 +462,8 @@ const moveToLandlordsListings = async() => {
 }
 .member-since-answer {
     color: #000000;
+    white-space: wrap;
+    overflow: hidden;
 }
 .home-img-in-details {
     height: 30px;
@@ -526,5 +542,107 @@ const moveToLandlordsListings = async() => {
 .close-btn {
     height: 40px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .landlord-list {
+        height: auto;
+        width: 88%;
+        margin-left: 20px;
+        margin-top: 100px;
+    }
+    .landlord-modal {
+        height: 100dvh;
+    }
+    .landlord-info {
+
+        height: fit-content;
+        padding: 14px 1px;
+    }
+    .landlord-image {
+        margin-left: 4px;
+    }
+
+    .mobile-landlord-column {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding-left: 0;
+        align-items: start;
+        padding-right: 16px;
+    }
+    .landlord-name {
+        padding-left: 8px;
+        font-size: 16px;
+    }
+    .desktop-landlord-info {
+        display: none;
+    }
+    .view-info-btn {
+        padding: 8px 8px;
+        margin-right: 8px;
+    }
+    .number-of-listings {
+        padding-right: 16px;
+        margin: 0;
+        margin-right: 0;
+    }
+    .modal-square {
+       width: 100%;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    .member-since-text {
+        font-size: 15px;
+    }
+    .member-since-answer {
+        font-size: 15px;
+    }
+    .text-and-answer {
+        padding-left: 6px;
+    }
+   .landlord-details-square {
+       width: 45%;
+   }
+   .home-img-in-details {
+       height: 20px;
+       width: 20px;
+
+   }
+   .about-header {
+       margin-bottom: 6px;
+   }
+   .specific-details-wrapper {
+       padding-left: 6px;
+
+       word-break: break-word;
+
+   }
+   .horizontal-line-below-landlord {
+       margin-top: 15px;
+       box-sizing: border-box;
+   }
+   .close-modal {
+       margin-top: 12px;
+       width: 100%;
+   }
+   .landlord-description-wrapper {
+       margin-top: 0;
+   }
+   .landlord-description {
+       margin-top: 3px;
+   }
+   .about-header {
+       margin-top: 12px;
+   }
+   .listings-row {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+       padding-bottom: 8px;
+   }
+   .horizontal-line-below-about {
+       margin-top: 6px;
+   }
+   .vertical-line {
+       visibility: hidden;
+   }
 }
 </style>

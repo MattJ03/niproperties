@@ -73,7 +73,7 @@
                     <img :src="agent" class="agent-img" alt="agent"/>
                     <span>Edit profile</span>
                 </div>
-                <div class="security-selection-row" @click="passwordAndSecurityModal = true; editProfileModal = false;">
+                <div class="security-selection-row" @click="passwordAndSecurityModal = true; editProfileModal = false; settingsOpen = false;">
                     <img :src="lock" class="lock-img" alt="lock"/>
                     <span>Password & security</span>
                 </div>
@@ -167,7 +167,9 @@
                 </div>
             </div>
             <div class="buttons-wrapper">
-                <button class="update-profile" @click="updatePassword()">Update password</button>
+                <button class="update-profile" @click="updatePassword()"
+                :class="{ disabled: !passwords.oldPassword}"
+                >Update password</button>
                 <span class="reset-profile" @click="resetEditProfileConfiguration()">Reset</span>
             </div>
         </div>
@@ -948,6 +950,10 @@ input:checked + .slider:before {
     background-color: #2d6e53;
     color: #FFFFFF;
 }
+.update-profile.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
 .reset-profile {
     cursor: pointer;
 }
@@ -1062,8 +1068,8 @@ input:checked + .slider:before {
 
     .settings-img-mobile {
         display: block;
-        height: 32px;
-        width: 32px;
+        height: 28px;
+        width: 28px;
     }
     .upload-mobile {
         display: flex;
@@ -1077,8 +1083,8 @@ input:checked + .slider:before {
     }
     .upload-img-mobile {
         display: block;
-        height: 32px;
-        width: 32px;
+        height: 28px;
+        width: 28px;
     }
     .login-mobile {
         height: 32px;
@@ -1086,7 +1092,7 @@ input:checked + .slider:before {
         cursor: pointer;
         font-weight: bold;
         background-color: #E7CBA6;
-        color: #2d6e53;
+        color: #1F4D3A;
         border: none;
     }
     .login-mobile-text {
@@ -1096,7 +1102,8 @@ input:checked + .slider:before {
     .logout-mobil {
         height: 32px;
         border-radius: 10px;
-        font-weight: bold;
+        color: #1F4D3A;
+        border: none;
         background-color: #E7CBA6;
     }
     .headings-selector,
@@ -1120,5 +1127,20 @@ input:checked + .slider:before {
     .logo-desktop {
         display: none;
     }
+    .new-password-title {
+        margin-top: 20px;
+    }
+
+    .password-security-square {
+        width: 90%;
+    }
+    .password-entries {
+        flex-direction: column;
+        padding-left: 12px;
+    }
+    .bottom-square {
+        padding-bottom: 8px;
+    }
+
 }
 </style>

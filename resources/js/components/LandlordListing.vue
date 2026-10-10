@@ -26,11 +26,11 @@
                  </div>
                  <div class="field-and-img">
                      <img :src="bed" class="bed-img" alt="bed"/>
-                     <span> beds</span>
+                     <span> {{ props.listing.beds }} beds</span>
                  </div>
                  <div class="field-and-img">
                      <img :src="bathroom" class="bathroom-img" alt="bathroom"/>
-                     <span>Bathrooms</span>
+                     <span>  {{ props.listing.bathrooms }} Bathrooms</span>
                  </div>
              </div>
              <div class="horizontal-line-below-address"></div>
@@ -128,7 +128,7 @@ const moveToListingInfo = async () => {
     display: flex;
     flex-direction: column;
     background-color: #f3f4f6;
-    width: 80%;
+    width: 70%;
     height: 600px;
     max-width: 720px;
     border-radius: 12px;
@@ -152,7 +152,7 @@ const moveToListingInfo = async () => {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
-
+    font-size: 20px;
     margin-top: 10px;
     width: 100%;
 }
@@ -160,13 +160,13 @@ const moveToListingInfo = async () => {
     font-weight: bold;
     margin-top: 15px;
     margin-left: 20px;
-    font-size: 22px;
+    font-size: 26px;
 }
 .rent-text {
     font-weight: bold;
     margin-top: 15px;
     margin-left: 20px;
-    font-size: 22px;
+    font-size: 26px;
 }
 .rent-section {
     margin-top: 15px;
@@ -192,13 +192,13 @@ const moveToListingInfo = async () => {
     gap: 5px;
     color: #A9A9A9;
     margin-left: 20px;
-    margin-top: 7px;
+    margin-top: 10px;
 }
 .town-postcode-wrapper span {
-    font-size: 14px;
+    font-size: 18px;
 }
 .location-img {
-    height: 16px;
+    height: 18px;
 }
 .housing-info-wrapper {
     display: flex;
@@ -209,7 +209,7 @@ const moveToListingInfo = async () => {
     margin-top: 10px;
 }
 .housing-info-wrapper span {
-    font-size: 15px;
+    font-size: 18px;
     color: #808080;
 
 }
@@ -297,5 +297,20 @@ const moveToListingInfo = async () => {
 .view-btn:hover {
     cursor: pointer;
     background-color: #2d6e53;
+}
+@media(max-width: 900px) {
+    .listing-card {
+        width: 100%;
+        height: 500px;
+    }
+    .landlord-info-wrapper {
+        margin-right: 60px;
+    }
+    .created-at-text {
+        margin-right: 0px;
+    }
+    .bottom-of-listing {
+        margin-top: 12px;
+    }
 }
 </style>

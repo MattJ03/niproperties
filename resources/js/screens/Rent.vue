@@ -758,7 +758,7 @@ async function getPreviousPageListings() {
         justify-content: space-between;
         padding: 8px 8px;
         border-radius: 10px;
-        background-color: #1F4D3A;
+        background-color: #2d6e53;
         color: #FFFFFF;
         margin: auto;
         margin-top: 8px;

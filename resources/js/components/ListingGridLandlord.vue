@@ -10,8 +10,8 @@
                 <span class="town-text"> {{ props.listing.town }}, </span>
                 <span class="postcode-text"> {{ props.listing.postcode }}</span>
             </div>
-            <span v-if="props.listing.price" class="price-text"> £ {{ props.listing.price }} </span>
-            <span v-if="props.listing.rent_per_month" class="price-text"> £{{ props.listing.rent_per_month }} per month</span>
+            <span v-if="props.listing.price" class="price-text"> {{ getPrice(props.listing.price) }} </span>
+            <span v-if="props.listing.rent_per_month" class="price-text"> {{ getPrice(props.listing.rent_per_month) }} per month</span>
         </div>
         </div>
 </template>
@@ -33,7 +33,16 @@ const primaryImage = computed(() => {
         return null;
     }
     return props.listing.listing_images.find(img => img.is_primary) ?? props.listing.listing_images[0];
-})
+});
+
+function getPrice(price) {
+     price = Intl.NumberFormat('en-gb', {
+        currency: 'GBP',
+        style: "currency",
+
+    }).format(price);
+     return price;
+}
 
 </script>
 <style scoped>
@@ -41,14 +50,15 @@ const primaryImage = computed(() => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 250px;
+    height: 200px;
     border: 1px solid #65676b;
     border-radius: 12px;
 }
 .img-wrapper {
     width: 100%;
-    height: 45%;
+    height: 40%;
     overflow: hidden;
+    border-radius: 12px;
 }
 .listing-img {
     width: 100%;
@@ -58,10 +68,11 @@ const primaryImage = computed(() => {
 .address-line-1-text {
     font-size: 15px;
     color: #000000;
+    font-weight: bold;
 }
 .listing-details {
     margin-top: 18px;
-    margin-left: 15px;
+    margin-left: 6px;
 }
 .town-postcode {
     display: flex;
@@ -84,6 +95,6 @@ const primaryImage = computed(() => {
 .price-text {
     color: #000000;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
 }
 </style>

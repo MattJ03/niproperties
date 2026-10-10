@@ -8,7 +8,6 @@
             </div>
 
             <div class="listing-card-body">
-
                 <div class="listing-card-main">
                     <button @click="currentLandlord = landlord; moveToLandlordsDetails(landlord)" class="landlord-name-btn"> {{ landlord.name }}
                         <span class="arrow-beside-name">> </span>
@@ -67,7 +66,7 @@
                         </div>
                         <div class="data-point">
                             <span>Uploaded: </span>
-                            <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MMMM/YYYY')}}</span>
+                            <span class="data-point-answer"> {{ dayjs(listing.created_at).format('DD/MM/YYYY')}}</span>
                         </div>
                     </div>
                     <div class="street-view-section">
@@ -75,6 +74,7 @@
                         <iframe
                         width="400px"
                         height="400"
+                        class="map-view"
                         frameborder="0" style="border: 0"
                         referrerpolicy="origin-when-cross-origin"
                         :src="`${streetViewUrl}`"
@@ -253,6 +253,7 @@ function changeSrcNumber() {
 .container {
     display: flex;
     width: 100%;
+
     justify-content: center;
 
 }
@@ -402,9 +403,9 @@ function changeSrcNumber() {
     align-items: center;
     flex-direction: row;
     margin-left: 30px;
-    margin-top: 15px;
+    margin-top: 35px;
     font-size: 22px;
-    color: #2d6e53;
+    color: #000000;
     gap: 5px;
 }
 .address-line-1-text {
@@ -627,5 +628,108 @@ function changeSrcNumber() {
     height: 18px;
     margin-left: 24px;
     cursor: pointer;
+}
+@media(max-width: 900px) {
+    .landlord-name-btn {
+        padding-left: 6px;
+        margin-left: 8px;
+        height: 50px;
+        width: 50%;
+    }
+    .img-wrapper {
+        height: 60%;
+    }
+    .listing-card {
+        margin-top: 100px;
+        height: auto;
+    }
+    .listing-card-main {
+        height: auto;
+    }
+    .listing-card-body {
+        height: auto;
+        flex-direction: column;
+    }
+    .arrow-beside-name {
+        padding-right: 8px;
+    }
+    .is_active-text {
+        margin-left: 8px;
+    }
+    .is_not_active-text {
+        margin-left: 8px;
+    }
+    .listing-details-specifics {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+        margin-top: 40px;
+    }
+    .listing-info {
+        gap: 20px;
+        width: 100%;
+    }
+    .field {
+        margin-top: 35px;
+    }
+    .listing-address-area {
+        margin-left: 8px;
+        color: #000000;
+        margin-top: 45px;
+    }
+    .description-section {
+        margin-left: 8px;
+        width: 100%;
+    }
+    .description-text {
+        width: 90%;
+    }
+    .listing-stats {
+        margin-left: 8px;
+        gap: 14px;
+        width: 85%;
+    }
+    .data-point {
+        font-size: 16px;
+    }
+    .street-view-section {
+        margin-left: 8px;
+        width: 85%;
+
+    }
+    .map-view {
+        border-radius: 14px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 370px;
+    }
+    .listing-card-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        flex: none;
+    }
+    .landlord-details-card {
+        width: 60%;
+        padding-left: 0;
+    }
+    .purchase-card {
+        width: 60%;
+        padding-left: 0;
+    }
+    .landlord-name-box {
+        font-size: 22px;
+    }
+    .contact-info-square {
+        width: 90%;
+        height: auto;
+    }
+    .contact-details {
+        margin-top: 30px;
+        padding-left: 8px;
+
+    }
 }
 </style>

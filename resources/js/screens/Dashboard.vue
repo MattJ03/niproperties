@@ -32,7 +32,7 @@
             <div v-for="landlord in landlordLeaderboard" class="landlord-index-info">
                 <div class="landlord-details">
                 <img :src="agent" class="agent-pfp" alt="profile picture"/>
-                <span> {{ landlord.name }} : </span>
+                <span class="landlord-name"> {{ landlord.name }} : </span>
                 <span class="total-listings-count"> {{ landlord.listings_count }}</span>
                 </div>
                     <div class="horizontal-line-below-entry"></div>
@@ -44,7 +44,7 @@
             <div class="horizontal-line-below-header"></div>
             <div v-for="listing in mostViewedListings" class="listing-index-info">
                 <div class="listing-details">
-                <span class="listing-text-viewed"> {{ listing.address_line_1 }} </span>
+                <span class="listing-text-viewed"> {{ listing.address_line_1 }}: </span>
                 <span class="listing-views"> {{ listing.views }} </span>
                 </div>
                     <div class="horizontal-line-below-entry"></div>
@@ -54,7 +54,10 @@
                 <span class="top-of-leaderboard-text">Listings per county</span>
                 <div class="horizontal-line-below-header"></div>
                 <div v-for="(count, county) in listingsPerCounty" :key="county" class="county-index-info">
-                    <span class="county-text"> {{ county }}: {{ count }} </span>
+                    <div class="county-values">
+                    <span class="county-text"> {{ county }}:</span>
+                        <span class="county-answer"> {{ count }}</span>
+                    </div>
                     <div class="horizontal-line-below-entry"></div>
                 </div>
             </div>
@@ -151,12 +154,13 @@ function formatPrice(price) {
 .container {
     display: flex;
     flex-direction: column;
+    height: auto;
     width: 100%;
 }
 .row-of-stats {
     display: flex;
     flex-direction: row;
-    height: 15dvh;
+    height: auto;
     width: 100%;
     gap: 80px;
     margin-top: 180px;
@@ -178,6 +182,7 @@ function formatPrice(price) {
     margin-top: 10px;
     color: #000000;
     font-size: 20px;
+    font-weight: bold;
 }
 .analytic-square-value {
     display: flex;
@@ -201,7 +206,7 @@ function formatPrice(price) {
 .landlords-most-listings-wrapper {
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: auto;
     border: 1px solid #000000;
     width: 300px;
     border-radius: 14px;
@@ -211,6 +216,7 @@ function formatPrice(price) {
 .top-of-leaderboard-text {
     font-size: 22px;
     padding-left: 15px;
+    font-weight: bold;
 }
 .listing-details {
     display: flex;
@@ -237,6 +243,7 @@ function formatPrice(price) {
 }
 .landlord-details {
     display: flex;
+    width: 95%;
     justify-content: left;
     flex-direction: row;
     padding-left: 10px;
@@ -250,7 +257,10 @@ function formatPrice(price) {
 
 .total-listings-count {
     display: flex;
-    margin-left: 10px;
+    width: 100%;
+    justify-content: right;
+
+
 }
 .line-wrapper {
     display: flex;
@@ -267,6 +277,7 @@ function formatPrice(price) {
     justify-content: left;
     flex-direction: row;
     padding-left: 10px;
+    width: 100%;
     margin-bottom: 6px;
 }
 .listings-most-viewed-wrapper {
@@ -286,7 +297,7 @@ function formatPrice(price) {
     flex-direction: column;
     padding-top: 20px;
     padding-bottom: 3px;
-    width: 100%;
+    width: 97%;
 }
 .listing-text-viewed {
     font-size: 20px;
@@ -326,6 +337,18 @@ function formatPrice(price) {
     padding-bottom: 3px;
     width: 100%;
 }
+.county-values {
+    display: flex;
+    flex-direction: row;
+}
+.county-answer {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    padding-right: 8px;
+    font-size: 20px;
+
+}
 .rent-to-buy-square {
     height: 300px;
     width: 300px;
@@ -351,5 +374,119 @@ function formatPrice(price) {
     padding-left: 10px;
     font-size: 20px;
 
+}
+.listing-views {
+    display: flex;
+    justify-content: right;
+    padding-right: 8px;
+    width: 10%;
+}
+@media(max-width: 900px) {
+    .row-of-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 12px;
+        gap: 20px;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+    .analytics-square {
+        height: 150px;
+        width: 150px;
+    }
+    .analytics-square-title {
+        font-size: 18px;
+    }
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+        margin-left: 12px;
+        margin-top: 20px;
+        gap: 10px;
+    }
+    .landlord-name {
+       width: fit-content;
+    }
+    .total-listings-count {
+        width: 30%;
+        display: flex;
+        justify-content: right;
+        padding-right: 8px;
+    }
+    .landlords-most-listings-wrapper {
+        height: auto;
+        width: 270px;
+    }
+    .landlords-most-listings-wrapper span {
+        font-size: 18px;
+    }
+    .landlord-leaderboard {
+        padding-top: 6px;
+    }
+    .listings-per-county-wrapper {
+        width: 270px;
+    }
+    .listings-per-county-wrapper span {
+        font-size: 18px;
+        height: auto;
+    }
+    .county-values {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .county-index-info {
+        padding-top: 6px;
+    }
+    .listings-most-viewed-wrapper {
+        width: 270px;
+        height: fit-content;
+        gap: 10px;
+    }
+    .listing-index-info {
+        width: 100%;
+
+        padding-top: 10px;
+    }
+    .top-of-leaderboard-text {
+        font-size: 18px;
+    }
+    .listing-details {
+        font-size: 16px;
+        padding-left: 0;
+
+    }
+    .listing-text-viewed {
+        font-size: 18px;
+        padding-left: 3px;
+        width: 270px;
+    }
+    .listing-views {
+        font-size: 18px;
+        padding-right: 20px;
+    }
+    .rent-to-buy-square {
+        display: flex;
+        width: 270px;
+    }
+    .chart-card {
+
+        width: 270px;
+    }
+    .chart-title {
+        display: flex;
+        justify-content: left;
+        padding-bottom: 10px;
+        font-size: 18px;
+    }
+    .county-answer {
+        display: flex;
+        justify-content: right;
+        width: 100%;
+        padding-right: 8px;
+    }
 }
 </style>
