@@ -705,9 +705,31 @@ function changeSrcNumber() {
     }
     .listing-card-side {
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: column;
-        width: 80%;
+        width: 100%;
         flex: none;
+    }
+    .landlord-details-card {
+        width: 60%;
+        padding-left: 0;
+    }
+    .purchase-card {
+        width: 60%;
+        padding-left: 0;
+    }
+    .landlord-name-box {
+        font-size: 22px;
+    }
+    .contact-info-square {
+        width: 90%;
+        height: auto;
+    }
+    .contact-details {
+        margin-top: 30px;
+        padding-left: 8px;
+
     }
 }
 </style>
