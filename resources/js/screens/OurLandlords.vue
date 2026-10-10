@@ -189,6 +189,7 @@ const moveToLandlordsListings = async() => {
     margin-top: 170px;
     margin-left: 50px;
     height: auto;
+    padding-bottom: 12px;
     width: 60%;
     background-color: #FFFFFF;
     border-radius: 12px;
@@ -200,7 +201,8 @@ const moveToLandlordsListings = async() => {
     justify-content: space-between;
     border-radius: 14px;
     width: 100%;
-    height: 10%;
+    padding-bottom: 8px;
+    height: 60px;
     background-color: #FFFFFF;
     border: 1px solid #f3f4f6;
 }
