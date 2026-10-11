@@ -45,7 +45,9 @@
             </div>
             <div class="created-at-view-listing-wrapper">
                 <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
-                <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View listing</button>
+                <button class="delete-btn">Delete</button>
+                <button class="update-btn">Update</button>
+                <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
             </div>
         </div>
     </div>
@@ -286,6 +288,32 @@ const moveToListingInfo = async () => {
 .created-at-text {
     color: #88807b;
     margin-right: 20px;
+}
+.delete-btn {
+    padding: 12px 8px;
+    background-color: #FF4000;
+    border-radius: 12px;
+    margin-right: 12px;
+    font-size: 16px;
+    color: #f3f4f6;
+    border: none;
+}
+.delete-btn:hover {
+    background-color: #D43500;
+    cursor: pointer;
+}
+.update-btn {
+    padding: 12px 8px;
+    background-color: #FFBF00;
+    border-radius: 12px;
+    margin-right: 12px;
+    font-size: 16px;
+    color: #f3f4f6;
+    border: none;
+}
+.update-btn:hover {
+    background-color: #BFFF00;
+    cursor: pointer;
 }
 .view-btn {
     padding: 12px 8px;
