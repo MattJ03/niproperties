@@ -10,7 +10,7 @@ import LandlordsListings from "../screens/LandlordsListings.vue";
 import Commercial from "../screens/Commercial.vue";
 import ListingInfo from '../screens/ListingInfo.vue';
 import Dashboard from "../screens/Dashboard.vue";
-
+import MyListings from "../screens/MyListings.vue";
 
 const routes = [
     { path: '/register', component: Register, name: 'register' },
@@ -24,6 +24,7 @@ const routes = [
     { path: '/commericial-listings', component: Commercial, name: 'commercial' },
     { path: '/listing/:listingId', component: ListingInfo, name: 'listing info' },
     { path: '/dashboard', component: Dashboard, name: 'dashboard' },
+    { path: '/myListings', component: MyListings, name: 'my listings' },
 ];
 
 const router = createRouter({

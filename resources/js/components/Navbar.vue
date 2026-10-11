@@ -15,7 +15,7 @@
                 <span @click="moveToCommercial()">Commercial</span>
                 <span @click="moveToOurLandlords()">Landlords</span>
                 <span @click="moveToDashboard()">Dashboard</span>
-                <span v-if="listingStore.landlordListings.length >= 1">My Listings</span>
+                <span v-if="listingStore.landlordListings.length >= 1" @click="moveToMyListings()">My Listings</span>
             </div>
         </div>
             <div class="btn-section-nav">
@@ -39,6 +39,7 @@
             <strong><span class="headings" @click="moveToCommercial()">Commercial</span></strong>
             <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
             <strong><span class="headings" @click="moveToDashboard()">Dashboard & Analytics</span></strong>
+            <strong><span class="headings" @click="moveToMyListings">My listings</span></strong>
         </div>
         <div class="btn-section-nav">
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
@@ -348,6 +349,19 @@ const moveToDashboard = async () => {
         });
     } catch(err) {
 
+    } finally {
+        loading.value = false;
+    }
+}
+
+const moveToMyListings = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'my listings',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to my listings';
     } finally {
         loading.value = false;
     }
