@@ -74,6 +74,7 @@ const props = defineProps({
     },
 });
 const loading = ref(false);
+const error = ref('');
 const listingStore = useListingStore();
 const selectedListing = ref(null);
 const name = ref(props.listing.landlord.name);
@@ -129,6 +130,7 @@ const deleteListing = async () => {
     loading.value = true;
     try {
         await listingStore.deleteListing(props.listing.id);
+        await listingStore.getLandlordsListings(props.listing.landlord.id);
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to delete listing';
     } finally {
