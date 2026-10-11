@@ -211,7 +211,7 @@ class ListingController extends Controller
     }
 
     public function delete(Listing $listing) {
-      $user = auth()->user();
+      $user = auth('sanctum')->user();
 
       $this->authorize('delete', $listing);
       $listing->delete();

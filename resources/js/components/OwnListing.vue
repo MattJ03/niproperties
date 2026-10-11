@@ -45,7 +45,7 @@
             </div>
             <div class="created-at-view-listing-wrapper">
                 <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
-                <button class="delete-btn">Delete</button>
+                <button class="delete-btn" @click="deleteListing()">Delete</button>
                 <button class="update-btn">Update</button>
                 <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
             </div>
@@ -122,6 +122,13 @@ const moveToListingInfo = async () => {
         error.value = error.response?.data?.message || 'failed to move to listing info';
     } finally {
         loading.value = false;
+    }
+}
+
+const deleteListing = async (id) => {
+    loading.value = true;
+    try {
+        const res = await api.post('')
     }
 }
 </script>
