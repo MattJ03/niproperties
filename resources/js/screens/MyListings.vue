@@ -49,6 +49,13 @@
                 </div>
             </div>
         </div>
+        <div class="landlords-listings">
+            <OwnListing
+                v-for="listing in listingStore.landlordListings"
+                :listing="listing"
+                id="listing.id"
+                />
+        </div>
 
     </div>
 </template>
@@ -61,7 +68,7 @@ import reset from "../assets/reset.png";
 import { useListingStore } from "../stores/ListingStore.js";
 import {useAuthStore} from "../stores/AuthStore.js";
 import {storeToRefs} from "pinia";
-
+import OwnListing from "../components/OwnListing.vue";
 const loading = ref(false);
 const errror = ref('');
 const listingStore = useListingStore();
@@ -88,7 +95,7 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
 <style scoped>
 .container {
     width: 100%;
-    min-height: 100dvh;
+
 
 }
 .landlord-header-wrapper {
@@ -298,6 +305,15 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
     height: 20px;
     width: 20px;
 }
+.landlords-listings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    margin-top: 30px;
+}
 @media(max-width: 900px) {
     .landlord-header-wrapper {
         margin-top: 100px;
@@ -349,5 +365,13 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
         display: none;
     }
 
+    .landlords-listings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
 }
 </style>
