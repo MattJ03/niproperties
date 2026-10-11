@@ -15,7 +15,7 @@
                 <span @click="moveToCommercial()">Commercial</span>
                 <span @click="moveToOurLandlords()">Landlords</span>
                 <span @click="moveToDashboard()">Dashboard</span>
-                <span v-if="listingStore.landlordListings.length >= 1" @click="moveToMyListings()">My Listings</span>
+                <span v-if="role" @click="moveToMyListings()">My Listings</span>
             </div>
         </div>
             <div class="btn-section-nav">
@@ -39,7 +39,7 @@
             <strong><span class="headings" @click="moveToCommercial()">Commercial</span></strong>
             <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
             <strong><span class="headings" @click="moveToDashboard()">Dashboard & Analytics</span></strong>
-            <strong><span class="headings" @click="moveToMyListings">My listings</span></strong>
+            <strong><span class="headings" v-if="role === 'landlord'" @click="moveToMyListings">My listings</span></strong>
         </div>
         <div class="btn-section-nav">
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
@@ -205,6 +205,7 @@ const loading = ref(false)
 const settingsOpen = ref(false);
 const userStore = useUserDirectoryStore();
 const listingStore = useListingStore();
+import route from "../router/index.js";
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = computed(() => {
@@ -361,7 +362,7 @@ const moveToMyListings = async () => {
             name: 'my listings',
         });
     } catch(err) {
-        error.value = error.response?.data?.message || 'failed to move to my listings';
+        error.value = error.response?.data?.message || 'failed to route to my listings';
     } finally {
         loading.value = false;
     }

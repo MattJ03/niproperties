@@ -68,12 +68,13 @@ const listingStore = useListingStore();
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 const filters = reactive({
-    min_rooms: '',
-    max_rooms: '',
+    min_num_rooms: '',
+    max_num_rooms: '',
     county: '',
     min_price: '',
     max_price: '',
 });
+const rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const search = ref('');
 const searchMobile= ref('');
 
