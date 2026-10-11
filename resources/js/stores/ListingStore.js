@@ -54,6 +54,18 @@ export const useListingStore = defineStore('listings', () => {
        }
    }
 
+   const deleteListing = async (id) => {
+       loading.value = true;
+       try {
+           const res = await api.delete(`deleteListing/${id}`);
+           return true;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to delete listing';
+       } finally {
+           loading.value = false;
+       }
+   }
+
    const get3RecentListings = async () => {
        loading.value = true;
        try {
@@ -291,6 +303,7 @@ export const useListingStore = defineStore('listings', () => {
        totalListings,
        storeListing,
        getAllListings,
+       deleteListing,
        get3RecentListings,
        getListingsOrderedByViews,
        getListingsOrderedByPrice,

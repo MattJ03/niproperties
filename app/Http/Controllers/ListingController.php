@@ -214,6 +214,7 @@ class ListingController extends Controller
       $user = auth('sanctum')->user();
 
       $this->authorize('delete', $listing);
+
       $listing->delete();
 
       return response()->json([

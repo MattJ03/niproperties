@@ -125,10 +125,14 @@ const moveToListingInfo = async () => {
     }
 }
 
-const deleteListing = async (id) => {
+const deleteListing = async () => {
     loading.value = true;
     try {
-        const res = await api.post('')
+        await listingStore.deleteListing(props.listing.id);
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to delete listing';
+    } finally {
+        loading.value = false;
     }
 }
 </script>
