@@ -133,7 +133,9 @@ const moveToListingInfo = async () => {
     max-width: 720px;
     border-radius: 12px;
     cursor: pointer;
-
+}
+.listing-card:hover {
+    border: 1px solid #FF0000;
 }
 .img-wrapper {
     overflow: hidden;

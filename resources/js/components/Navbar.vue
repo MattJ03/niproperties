@@ -15,6 +15,7 @@
                 <span @click="moveToCommercial()">Commercial</span>
                 <span @click="moveToOurLandlords()">Landlords</span>
                 <span @click="moveToDashboard()">Dashboard</span>
+                <span v-if="listingStore.landlordListings.length >= 1">My Listings</span>
             </div>
         </div>
             <div class="btn-section-nav">
@@ -192,6 +193,7 @@ import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
 import hamburger from '../assets/hamburger.png';
+import {useListingStore} from "../stores/ListingStore.js";
 
 
 const error = ref('');
@@ -201,6 +203,7 @@ const { role } = storeToRefs(authStore);
 const loading = ref(false)
 const settingsOpen = ref(false);
 const userStore = useUserDirectoryStore();
+const listingStore = useListingStore();
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = computed(() => {
@@ -442,6 +445,9 @@ const validatePassword = () => {
 
 onMounted( async () => {
     await authStore.getCurrentUser();
+    await listingStore.getLandlordsListings(authStore.user.id);
+    console.log('my amount of listings ' + listingStore.landlordListings.length);
+
 });
 
 </script>
