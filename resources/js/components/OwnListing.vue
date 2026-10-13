@@ -51,6 +51,12 @@
             </div>
         </div>
     </div>
+    <div v-if="showUpdateModal === true" class="modal-overlay">
+        <div class="update-modal-square">
+            <span class="update-listing-title">Update listing</span>
+        </div>
+
+    </div>
 
 </template>
 <script setup>
@@ -92,9 +98,8 @@ const firstLetterName = computed(() => {
     }
     return name.value.charAt(0).toUpperCase();
 });
-
+const showUpdateModal = ref(true);
 const formatPrice = computed(() => {
-
     if(props.listing.price) {
         console.log('running');
         return new Intl.NumberFormat('en-GB',
@@ -136,6 +141,11 @@ const deleteListing = async () => {
     } finally {
         loading.value = false;
     }
+}
+
+const updateModalAppear = () => {
+    showUpdateModal = true;
+
 }
 </script>
 <style scoped>
@@ -341,6 +351,28 @@ const deleteListing = async () => {
     cursor: pointer;
     background-color: #2d6e53;
 }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: transparent;
+
+
+}
+.update-modal-square {
+    display: flex;
+    width: 65%;
+    height: 650px;
+    background-color: #D3D3D3;
+    border-radius: 10px;
+
+}
 @media(max-width: 900px) {
     .listing-card {
         width: 100%;
@@ -354,6 +386,25 @@ const deleteListing = async () => {
     }
     .bottom-of-listing {
         margin-top: 12px;
+    }
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        z-index: 65;
+    }
+    .update-modal-square {
+        display: flex;
+        width: 80%;
+        height: 500px;
+        background-color: #FFFFFF;
     }
 }
 </style>
