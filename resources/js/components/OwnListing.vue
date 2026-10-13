@@ -46,7 +46,7 @@
             <div class="created-at-view-listing-wrapper">
                 <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
                 <button class="delete-btn" @click="deleteListing()">Delete</button>
-                <button class="update-btn">Update</button>
+                <button class="update-btn" @click="updateModalAppear()">Update</button>
                 <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
             </div>
         </div>
@@ -54,6 +54,29 @@
     <div v-if="showUpdateModal === true" class="modal-overlay">
         <div class="update-modal-square">
             <span class="update-listing-title">Update listing</span>
+            <div class="horizontal-line"></div>
+            <div class="listing-details">
+                <div class="address-section">
+                <div class="field">
+                    <span class="listing-data">Address line 1</span>
+                    <input type="text" class="address-input"/>
+                </div>
+                <div class="field">
+                    <span class="listing-data">Address line 2</span>
+                    <input type="text" class="address-input"/>
+                </div>
+                </div>
+                <div class="listing-location-info">
+                    <div class="field">
+                    <span class="listing-data">Town</span>
+                    <input type="text" class="town-input"/>
+                    </div>
+                    <div class="field">
+                        <span class="listing-data">County</span>
+                        <select class="county-dropdown"/>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -98,7 +121,8 @@ const firstLetterName = computed(() => {
     }
     return name.value.charAt(0).toUpperCase();
 });
-const showUpdateModal = ref(true);
+
+const showUpdateModal = ref(false);
 const formatPrice = computed(() => {
     if(props.listing.price) {
         console.log('running');
@@ -144,7 +168,7 @@ const deleteListing = async () => {
 }
 
 const updateModalAppear = () => {
-    showUpdateModal = true;
+    showUpdateModal.value = true;
 
 }
 </script>
@@ -367,11 +391,67 @@ const updateModalAppear = () => {
 }
 .update-modal-square {
     display: flex;
+    flex-direction: column;
     width: 65%;
     height: 650px;
     background-color: #D3D3D3;
     border-radius: 10px;
 
+}
+.update-listing-title {
+    font-size: 22px;
+    padding: 20px 20px;
+}
+.horizontal-line {
+    width: 100%;
+    border-top: 1px solid #88807b;
+
+}
+.listing-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 20px;
+
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 3px;
+}
+.address-section {
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
+.address-input {
+    width: 450px;
+    height: 45px;
+    border-radius: 12px;
+    border: 1px solid #D3D3D3;
+    font-size: 16px;
+    padding-left: 6px;
+}
+.listing-location-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px 20px;
+}
+.town-input {
+    height: 45px;
+    border-radius: 12px;
+    padding-left: 6px;
+    border: 1px solid #FFFFFF;
+    font-size: 16px;
+}
+.county-dropdown {
+    width: 300px;
+    height: 45px;
+    padding-left: 6px;
+    border-radius: 12px;
+    border: 1px solid #FFFFFF;
 }
 @media(max-width: 900px) {
     .listing-card {
