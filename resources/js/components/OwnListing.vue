@@ -55,7 +55,7 @@
         <div class="update-modal-square">
             <div class="top-of-modal">
             <span class="update-listing-title">Update listing</span>
-                <img :src="x" class="close-modal" alt="close"/>
+                <img :src="x" class="close-modal" @click="showUpdateModal = false" alt="close"/>
             </div>
             <div class="horizontal-line"></div>
             <div class="listing-details">
@@ -66,23 +66,23 @@
                 </div>
                 <div class="field">
                     <span class="listing-data">Address line 2</span>
-                    <input type="text" class="address-input"/>
+                    <input type="text" class="address-input" v-model="formDraft.address_line_2"/>
                 </div>
                 </div>
                 <div class="listing-location-info">
                     <div class="field">
                     <span class="listing-data">Town</span>
-                    <input type="text" class="town-input" placeholder="Belfast"/>
+                    <input type="text" class="town-input" v-model="formDraft.town" placeholder="Belfast"/>
                     </div>
                     <div class="field">
                         <span class="listing-data">County</span>
-                        <select class="county-dropdown">
+                        <select class="county-dropdown" v-model="formDraft.county">
                         <option v-for="county in counties">{{ county }}</option>
                         </select>
                     </div>
                     <div class="field">
                         <span class="listing-data">Postcode</span>
-                        <input type="text" class="town-input" placeholder="BT7 1JW"/>
+                        <input type="text" class="town-input" v-model="formDraft.postcode" placeholder="BT7 1JW"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
@@ -90,43 +90,49 @@
                         <span class="listing-data">Rent or buy</span>
                         <div class="rent-or-buy-button-wrapper">
                             <button class="rent-select-btn"
-                                    :class=" { }"
+                                    :class=" { active: formDraft.type === 'rent' }"
                             >Rent</button>
                             <button class="buy-select-btn"
-                                    :class=" {}"
+                                    :class=" { active: formDraft.type === 'buy' }"
                             >Buy</button>
                         </div>
                     </div>
                     <div class="field">
                         <span class="listing-data">No. of rooms</span>
-                        <input type="number" class="town-input" placeholder="6"/>
+                        <input type="number" class="town-input" v-model="formDraft.no_of_rooms" placeholder="6"/>
                     </div>
                     <div class="field">
-                        <span class="listng-data">Rent per month (£)</span>
-                        <input type="number" class="town-input" placeholder="£"/>
+                        <span v-if="formDraft.type === 'rent'" class="listng-data">Rent per month (£)</span>
+                        <input v-if="formDraft.type === 'rent'" type="number" class="town-input" placeholder="£"/>
+                        <span v-if="formDraft.type === 'buy'" class="listing-data">Price (£)</span>
+                        <input v-if="formDraft.type === 'buy'" type="number" class="town-input" placeholder="£"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
                     <div class="field">
                         <span class="listing-data">Property type</span>
                         <div class="pill-selection">
-                            <button class="residential-btn">Residential</button>
-                            <button class="commericial-btn">Commercial</button>
+                            <button class="residential-btn" @click="formDraft.is_commercial = false"
+                            :class="{ active: formDraft.isCommercial === false }"
+                            >Residential</button>
+                            <button class="commericial-btn" @click="formDraft.is_commercial = true"
+                            :class="{ active: formDraft.isCommercial === true }"
+                            >Commercial</button>
                         </div>
                     </div>
                     <div class="field">
                         <span class="listing-data">Number of beds</span>
-                        <input type="number" class="town-input" placeholder="3"/>
+                        <input type="number" class="town-input" v-model="formDraft.beds" placeholder="3"/>
                     </div>
                     <div class="field">
                         <span class="listing-data">Number of bathrooms</span>
-                        <input type="number" class="town-input" placeholder="2"/>
+                        <input type="number" class="town-input" v-model="formDraft.bathrooms" placeholder="2"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
                     <div class="description-field">
                         <span class="listing-data">Short description about the property</span>
-                        <textarea class="description-text"></textarea>
+                        <textarea class="description-text" v-model="formDraft.description"></textarea>
                     </div>
                 </div>
             </div>
