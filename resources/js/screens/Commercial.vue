@@ -257,6 +257,7 @@ onMounted(async () => {
     flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
     gap: 20px;
+    width: 100%;
     min-height: 0;
     min-width: 0;
     padding: 0 50px;

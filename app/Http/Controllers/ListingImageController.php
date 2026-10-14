@@ -17,7 +17,7 @@ class ListingImageController extends Controller
         $this->authorize('create', [ListingImage::class, $listing]);
 
         $validatedImage = $request->validate([
-           'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg,avif|max:2048',
             'is_primary' => 'boolean',
 
         ]);

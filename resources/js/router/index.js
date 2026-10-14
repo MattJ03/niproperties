@@ -10,6 +10,8 @@ import LandlordsListings from "../screens/LandlordsListings.vue";
 import Commercial from "../screens/Commercial.vue";
 import ListingInfo from '../screens/ListingInfo.vue';
 import Dashboard from "../screens/Dashboard.vue";
+import MyListings from "../screens/MyListings.vue";
+import { useAuthStore } from "../stores/AuthStore.js";
 
 
 const routes = [
@@ -24,6 +26,7 @@ const routes = [
     { path: '/commericial-listings', component: Commercial, name: 'commercial' },
     { path: '/listing/:listingId', component: ListingInfo, name: 'listing info' },
     { path: '/dashboard', component: Dashboard, name: 'dashboard' },
+    { path: '/myListings', component: MyListings, name: 'my listings', meta: { role: 'landlord'} },
 ];
 
 const router = createRouter({
@@ -31,5 +34,20 @@ const router = createRouter({
     routes,
 });
 
+router.beforeEach(async (to) => {
+   const authStore = useAuthStore();
+  await authStore.getCurrentUser();
+   if(!to.meta.role) {
+       return true;
+   }
+
+   if(to.meta.role === 'landlord' && authStore.role === 'landlord') {
+       return true;
+   } else {
+       await router.push({
+           name: 'login',
+       });
+   }
+});
 
 export default router;

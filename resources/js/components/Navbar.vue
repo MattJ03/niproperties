@@ -15,6 +15,7 @@
                 <span @click="moveToCommercial()">Commercial</span>
                 <span @click="moveToOurLandlords()">Landlords</span>
                 <span @click="moveToDashboard()">Dashboard</span>
+                <span v-if="role" @click="moveToMyListings()">My Listings</span>
             </div>
         </div>
             <div class="btn-section-nav">
@@ -38,6 +39,7 @@
             <strong><span class="headings" @click="moveToCommercial()">Commercial</span></strong>
             <strong><span class="headings" @click="moveToOurLandlords()">Our landlords</span></strong>
             <strong><span class="headings" @click="moveToDashboard()">Dashboard & Analytics</span></strong>
+            <strong><span class="headings" v-if="role === 'landlord'" @click="moveToMyListings">My listings</span></strong>
         </div>
         <div class="btn-section-nav">
             <button class="sell-btn" v-if="role === 'landlord'" @click="moveToUpload()" >
@@ -192,6 +194,7 @@ import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
 import hamburger from '../assets/hamburger.png';
+import {useListingStore} from "../stores/ListingStore.js";
 
 
 const error = ref('');
@@ -201,6 +204,8 @@ const { role } = storeToRefs(authStore);
 const loading = ref(false)
 const settingsOpen = ref(false);
 const userStore = useUserDirectoryStore();
+const listingStore = useListingStore();
+import route from "../router/index.js";
 const { landlord } = storeToRefs(userStore);
 const { user } = storeToRefs(authStore);
 const initial = computed(() => {
@@ -350,6 +355,19 @@ const moveToDashboard = async () => {
     }
 }
 
+const moveToMyListings = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'my listings',
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to route to my listings';
+    } finally {
+        loading.value = false;
+    }
+}
+
 const updateAccount = async () => {
     loading.value = true;
     if(!passwordCheck()) {
@@ -442,6 +460,9 @@ const validatePassword = () => {
 
 onMounted( async () => {
     await authStore.getCurrentUser();
+    await listingStore.getLandlordsListings(authStore.user.id);
+    console.log('my amount of listings ' + listingStore.landlordListings.length);
+
 });
 
 </script>

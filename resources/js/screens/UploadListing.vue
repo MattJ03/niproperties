@@ -79,7 +79,7 @@
                     <button class="residential-btn" @click="form.is_commercial = false"
                             :class="{ active: form.is_commercial === false }"
                     >Residential</button>
-                    <button class="commericial-btn" @click="form.is_commercial = true"
+                    <button class="commericial-btn" @click="form.is_commercial = 1"
                             :class="{ active: form.is_commercial === true }"
                     >Commercial</button>
                 </div>

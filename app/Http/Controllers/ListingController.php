@@ -142,9 +142,10 @@ class ListingController extends Controller
         ], 201);
     }
 
-    public function show(Request $request, Listing $listing)
+    public function show(Request $request, $id)
     {
         $user = $request->user();
+        $listing = Listing::find($id);
         if(auth()->check() && $user->hasRole('landlord') && $user->id === $listing->landlord_id) {
             $listing->load(['listingImages', 'landlord']);
             return response()->json([
@@ -168,8 +169,15 @@ class ListingController extends Controller
 
 
 
-    public function update(Request $request, Listing $listing, GeocodingService $geocodingService)
+    public function update(Request $request, $id, GeocodingService $geocodingService)
     {
+        $listing = Listing::find($id);
+        if(!$listing) {
+            return response()->json([
+                'message' => 'listing not found',
+                'listing' => $listing,
+            ]);
+        }
         $this->authorize('update', $listing);
         $validatedData = $request->validate([
             'address_line_1' => 'required|string|max:255|min:3',
@@ -178,8 +186,12 @@ class ListingController extends Controller
             'county' => 'required|string|max:40|min:3',
             'postcode' => 'required|string|max:40|min:3',
             'price' => 'nullable|numeric|min:1|max:100000000',
+            'rent_per_month' => 'nullable|numeric|min:1|max:100000000000',
+            'beds' => 'required|numeric|max:1000',
+            'bathrooms' => 'required|numeric|max:1000',
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
+            'description' => 'nullable|max:255',
             'sale_status' => 'required|in:open',
         ]);
 
@@ -191,8 +203,11 @@ class ListingController extends Controller
             'postcode' => $validatedData['postcode'],
             'price' => $validatedData['price'],
             'rent_per_month' => $validatedData['rent_per_month'],
+            'beds' => $validatedData['beds'],
+            'bathrooms' => $validatedData['bathrooms'],
             'no_of_rooms' => $validatedData['no_of_rooms'],
             'type' => $validatedData['type'],
+            'description' => $validatedData['description'],
             'sale_status' => $validatedData['sale_status'],
             'landlord_id' => $request->user()->id,
         ]);
@@ -211,9 +226,10 @@ class ListingController extends Controller
     }
 
     public function delete(Listing $listing) {
-      $user = auth()->user();
+      $user = auth('sanctum')->user();
 
       $this->authorize('delete', $listing);
+
       $listing->delete();
 
       return response()->json([
