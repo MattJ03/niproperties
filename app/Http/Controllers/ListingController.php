@@ -142,9 +142,10 @@ class ListingController extends Controller
         ], 201);
     }
 
-    public function show(Request $request, Listing $listing)
+    public function show(Request $request, $id)
     {
         $user = $request->user();
+        $listing = Listing::find($id);
         if(auth()->check() && $user->hasRole('landlord') && $user->id === $listing->landlord_id) {
             $listing->load(['listingImages', 'landlord']);
             return response()->json([

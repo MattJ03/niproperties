@@ -46,7 +46,7 @@
             <div class="created-at-view-listing-wrapper">
                 <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
                 <button class="delete-btn" @click="deleteListing()">Delete</button>
-                <button class="update-btn" @click="updateModalAppear()">Update</button>
+                <button class="update-btn" @click="selectedListing = props.listing.id; updateModalAppear()">Update</button>
                 <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <div class="address-section">
                 <div class="field">
                     <span class="listing-data">Address line 1</span>
-                    <input type="text" class="address-input" placeholder="36 Cromwell Road"/>
+                    <input type="text" class="address-input" v-model="formDraft.address_line_1" placeholder="36 Cromwell Road"/>
                 </div>
                 <div class="field">
                     <span class="listing-data">Address line 2</span>
@@ -136,7 +136,7 @@
 
 </template>
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 import location from '../assets/location.png';
 import rooms from '../assets/rooms2.png';
 import bed from '../assets/bed.png';
@@ -146,6 +146,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import router from '../router/index.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import x from '../assets/x2.png';
+import { storeToRefs } from "pinia";
 
 dayjs.extend(RelativeTime);
 
@@ -177,6 +178,13 @@ const firstLetterName = computed(() => {
 });
 const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
 const showUpdateModal = ref(false);
+const { listing } = storeToRefs(listingStore);
+const formDraft = ref({... listing.value});
+console.log(formDraft.value.address_line_1);
+watch(listing, (newValue) => {
+   formDraft.value = {...newValue};
+});
+
 const formatPrice = computed(() => {
     if(props.listing.price) {
         console.log('running');
@@ -193,6 +201,7 @@ const formatPrice = computed(() => {
         }).format(props.listing.rent_per_month);
     }
 });
+
 
 const moveToListingInfo = async () => {
     loading.value = true;
@@ -221,8 +230,15 @@ const deleteListing = async () => {
     }
 }
 
-const updateModalAppear = () => {
-    showUpdateModal.value = true;
+const updateModalAppear = async () => {
+    loading.value = true;
+    try {
+        console.log(selectedListing.value);
+        await listingStore.showListing(selectedListing.value);
+        showUpdateModal.value = true;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get listing info';
+    }
 
 }
 </script>
@@ -595,9 +611,11 @@ const updateModalAppear = () => {
 .close-modal {
     height: 30px;
     padding: 8px 8px;
+    border-radius: 16px;
 }
-.close-modal {
+.close-modal:hover {
     cursor: pointer;
+    background-color: #cccccc;
 }
 @media(max-width: 900px) {
     .listing-card {
