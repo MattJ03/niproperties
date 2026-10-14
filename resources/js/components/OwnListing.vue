@@ -45,6 +45,16 @@
             </div>
             <div class="created-at-view-listing-wrapper">
                 <span class="created-at-text">listed {{ dayjs(props.listing.created_at).from() }}</span>
+
+                <div class="button-row-desktop">
+                <button class="delete-btn" @click="deleteListing()">Delete</button>
+                <button class="update-btn" @click="selectedListing = props.listing.id; updateModalAppear()">Update</button>
+                <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
+                </div>
+                </div>
+        </div>
+        <div class="mobile-bottom-row">
+            <div class="button-row">
                 <button class="delete-btn" @click="deleteListing()">Delete</button>
                 <button class="update-btn" @click="selectedListing = props.listing.id; updateModalAppear()">Update</button>
                 <button class="view-btn" @click="selectedListing = props.listing; moveToListingInfo()">View</button>
@@ -268,7 +278,7 @@ const updateModalAppear = async () => {
     display: flex;
     flex-direction: column;
     background-color: #f3f4f6;
-    width: 70%;
+    width: 50%;
     height: 600px;
     max-width: 720px;
     border-radius: 12px;
@@ -378,6 +388,14 @@ const updateModalAppear = async () => {
     text-wrap: auto;
     color: #808080;
 }
+.button-row {
+    display: flex;
+    flex-direction: row;
+}
+.button-row-desktop {
+    display: flex;
+    flex-direction: row;
+}
 .bottom-of-listing {
     display: flex;
     flex-direction: row;
@@ -418,6 +436,7 @@ const updateModalAppear = async () => {
     font-weight: bold;
     font-size: 16px;
 }
+
 .created-at-view-listing-wrapper {
     display: flex;
     align-items: center;
@@ -573,7 +592,9 @@ const updateModalAppear = async () => {
     font-weight: 500;
     transition: all 0.15s ease;
 }
-
+.mobile-bottom-row {
+    display: none;
+}
 .rent-select-btn.active,
 .buy-select-btn.active {
     background-color: #2d6e53;
@@ -672,7 +693,12 @@ const updateModalAppear = async () => {
     }
     .bottom-of-listing {
         margin-top: 12px;
+        width: 92%;
     }
+.housing-info-wrapper {
+    margin-left: 8px;
+    gap: 20px;
+}
     .modal-overlay {
         position: fixed;
         top: 0;
@@ -688,9 +714,29 @@ const updateModalAppear = async () => {
     }
     .update-modal-square {
         display: flex;
-        width: 80%;
-        height: 500px;
+        width: 100%;
+        height: auto;
         background-color: #FFFFFF;
     }
+    .town-postcode-wrapper {
+        margin-top: 16px;
+    }
+   .button-row-desktop {
+       display: none;
+   }
+    .mobile-bottom-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+       width: 100%;
+        padding-bottom: 16px;
+    }
+    .view-btn,
+    .delete-btn,
+    .update-btn {
+        padding: 12px 12px;
+    }
+
 }
 </style>

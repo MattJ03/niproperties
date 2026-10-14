@@ -103,6 +103,10 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
 </script>
 <style scoped>
 .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     width: 100%;
 
 
@@ -379,8 +383,9 @@ const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 100%;
+        width: 85%;
         gap: 20px;
     }
+
 }
 </style>

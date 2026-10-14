@@ -210,6 +210,7 @@ export const useListingStore = defineStore('listings', () => {
        try {
            const res = await api.put(`updateListing/${id}`, payload);
            listing.value = res.data.listing;
+           console.log('listing updated' + listing.value.id);
        } catch(err) {
            error.value = error.response?.data?.message || 'failed to update listing';
        } finally {
