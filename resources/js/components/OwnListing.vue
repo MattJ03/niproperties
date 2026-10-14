@@ -73,7 +73,39 @@
                     </div>
                     <div class="field">
                         <span class="listing-data">County</span>
-                        <select class="county-dropdown"/>
+                        <select class="county-dropdown">
+                        <option v-for="county in counties">{{ county }}</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <span class="listing-data">Postcode</span>
+                        <input type="text" class="town-input"/>
+                    </div>
+                </div>
+                <div class="listing-location-info">
+                    <div class="field">
+                        <span class="listing-data">Rent or buy</span>
+                        <div class="rent-or-buy-button-wrapper">
+                            <button class="rent-select-btn"
+                                    :class=" { }"
+                            >Rent</button>
+                            <button class="buy-select-btn"
+                                    :class=" {}"
+                            >Buy</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="listing-data">No. of rooms</span>
+                        <input type="number" class="town-input"/>
+                    </div>
+                    <div class="field">
+                        <span class="listng-data">Rent per month (£)</span>
+                        <input type="number" class="town-input" />
+                    </div>
+                </div>
+                <div class="listing-location-info">
+                    <div class="field">
+                        <span class="listing-data">Property type</span>
                     </div>
                 </div>
             </div>
@@ -121,7 +153,7 @@ const firstLetterName = computed(() => {
     }
     return name.value.charAt(0).toUpperCase();
 });
-
+const counties = ['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down'];
 const showUpdateModal = ref(false);
 const formatPrice = computed(() => {
     if(props.listing.price) {
@@ -435,9 +467,13 @@ const updateModalAppear = () => {
 }
 .listing-location-info {
     display: flex;
+    width: 100%;
+
     flex-direction: row;
-    justify-content: space-between;
-    padding: 30px 20px;
+    padding-top: 40px;
+    padding-left: 20px;
+    gap: 90px;
+
 }
 .town-input {
     height: 45px;
@@ -449,9 +485,38 @@ const updateModalAppear = () => {
 .county-dropdown {
     width: 300px;
     height: 45px;
-    padding-left: 6px;
     border-radius: 12px;
     border: 1px solid #FFFFFF;
+    font-size: 16px;
+}
+.rent-or-buy-button-wrapper {
+    display: flex;
+    height: 45px;
+    width: 200px;
+}
+.rent-select-btn,
+.buy-select-btn {
+    width: 100px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: 1.5px solid #2d6e53;
+    background-color: transparent;
+    font-size: 15px;
+    color: #2d6e53;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.rent-select-btn.active,
+.buy-select-btn.active {
+    background-color: #2d6e53;
+    color: #FDFBD4;
+    border-color: #2d6e53;
+}
+.pill-selection {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
 }
 @media(max-width: 900px) {
     .listing-card {
