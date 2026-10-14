@@ -428,7 +428,7 @@ const updateModalAppear = async () => {
     margin-right: 20px;
 }
 .delete-btn {
-    padding: 12px 8px;
+    padding: 14px 24px;
     background-color: #FF4000;
     border-radius: 12px;
     margin-right: 12px;
@@ -441,7 +441,7 @@ const updateModalAppear = async () => {
     cursor: pointer;
 }
 .update-btn {
-    padding: 12px 8px;
+    padding: 14px 24px;
     background-color: #FFBF00;
     border-radius: 12px;
     margin-right: 12px;
@@ -454,7 +454,7 @@ const updateModalAppear = async () => {
     cursor: pointer;
 }
 .view-btn {
-    padding: 12px 8px;
+    padding: 14px 24px;
     background-color: #2dcc95;
     border-radius: 12px;
     margin-right: 40px;
