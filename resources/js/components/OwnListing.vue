@@ -53,13 +53,16 @@
     </div>
     <div v-if="showUpdateModal === true" class="modal-overlay">
         <div class="update-modal-square">
+            <div class="top-of-modal">
             <span class="update-listing-title">Update listing</span>
+                <img :src="x" class="close-modal" alt="close"/>
+            </div>
             <div class="horizontal-line"></div>
             <div class="listing-details">
                 <div class="address-section">
                 <div class="field">
                     <span class="listing-data">Address line 1</span>
-                    <input type="text" class="address-input"/>
+                    <input type="text" class="address-input" placeholder="36 Cromwell Road"/>
                 </div>
                 <div class="field">
                     <span class="listing-data">Address line 2</span>
@@ -69,7 +72,7 @@
                 <div class="listing-location-info">
                     <div class="field">
                     <span class="listing-data">Town</span>
-                    <input type="text" class="town-input"/>
+                    <input type="text" class="town-input" placeholder="Belfast"/>
                     </div>
                     <div class="field">
                         <span class="listing-data">County</span>
@@ -79,7 +82,7 @@
                     </div>
                     <div class="field">
                         <span class="listing-data">Postcode</span>
-                        <input type="text" class="town-input"/>
+                        <input type="text" class="town-input" placeholder="BT7 1JW"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
@@ -96,11 +99,11 @@
                     </div>
                     <div class="field">
                         <span class="listing-data">No. of rooms</span>
-                        <input type="number" class="town-input"/>
+                        <input type="number" class="town-input" placeholder="6"/>
                     </div>
                     <div class="field">
                         <span class="listng-data">Rent per month (£)</span>
-                        <input type="number" class="town-input" />
+                        <input type="number" class="town-input" placeholder="£"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
@@ -113,11 +116,11 @@
                     </div>
                     <div class="field">
                         <span class="listing-data">Number of beds</span>
-                        <input type="number" class="town-input"/>
+                        <input type="number" class="town-input" placeholder="3"/>
                     </div>
                     <div class="field">
                         <span class="listing-data">Number of bathrooms</span>
-                        <input type="number" class="town-input"/>
+                        <input type="number" class="town-input" placeholder="2"/>
                     </div>
                 </div>
                 <div class="listing-location-info">
@@ -142,6 +145,7 @@ import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import router from '../router/index.js';
 import { useListingStore } from "../stores/ListingStore.js";
+import x from '../assets/x2.png';
 
 dayjs.extend(RelativeTime);
 
@@ -443,8 +447,8 @@ const updateModalAppear = () => {
     display: flex;
     flex-direction: column;
     width: 55%;
-    height: 750px;
-    background-color: #D3D3D3;
+    height: fit-content;
+    background-color: #FFFFFF;
     border-radius: 10px;
 
 }
@@ -476,6 +480,7 @@ const updateModalAppear = () => {
     width: 100%;
     flex-direction: column;
     font-size: 18px;
+    padding-bottom: 16px;
     gap: 3px;
 }
 .address-section {
@@ -504,7 +509,7 @@ const updateModalAppear = () => {
     height: 45px;
     border-radius: 12px;
     padding-left: 6px;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #D3D3D3;
     font-size: 16px;
 }
 .county-dropdown {
@@ -571,13 +576,28 @@ const updateModalAppear = () => {
 }
 .description-text {
     width: 85%;
-    background-color: #FDFBD4;
+    background-color: #FFFFFF;
     border-radius: 14px;
     height: 130px;
     color: #000000;
     padding-left: 15px;
     padding-top: 5px;
+
     font-size: 16px;
+}
+.top-of-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.close-modal {
+    height: 30px;
+    padding: 8px 8px;
+}
+.close-modal {
+    cursor: pointer;
 }
 @media(max-width: 900px) {
     .listing-card {
