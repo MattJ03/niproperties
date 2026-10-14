@@ -94,7 +94,10 @@ const applyFilters = async () => {
     try {
         await listingStore.getLandlordsListings(filters.landlordId, {
             min_num_rooms: filters.min_num_rooms,
-
+            max_num_rooms: filters.max_num_rooms,
+            min_price: filters.min_price,
+            max_price: filters.max_price,
+            search: search.value,
         });
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to get filtered landlord listings';
@@ -103,6 +106,15 @@ const applyFilters = async () => {
     }
 }
 
+watch(searchMobile, async (newSearch, oldSearch) => {
+
+    if(searchMobile !== oldSearch) {
+        await listingStore.getLandlordsListings(user.value.id, {
+            searchMobile: newSearch,
+        });
+        console.log('search gone');
+    }
+});
 onMounted( async () => {
     await authStore.getCurrentUser();
     await listingStore.getLandlordsListings(authStore.user.id);
