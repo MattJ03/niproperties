@@ -42,7 +42,7 @@
                 </div>
                 <div class="filters-wrapper">
                     <button class="apply-filters-btn" @click="applyFilters(landlord.id, filters)">Apply filters</button>
-                    <span class="remove-filters-text" @click="removeFilters()">
+                    <span class="remove-filters-text" @click="resetFilters()">
                       <img :src="reset" class="reset-img" alt="reset"/>
                   Reset Filters
                   </span>
@@ -89,6 +89,15 @@ onMounted( async () => {
    await authStore.getCurrentUser();
    await listingStore.getLandlordsListings(authStore.user.id);
 });
+
+const resetFilters = () => {
+    filters.min_num_rooms = '';
+    filters.max_num_rooms = '';
+    filters.county = '';
+    filters.min_price = '';
+    filters.max_price = '';
+    search.value = '';
+}
 
 const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
 </script>

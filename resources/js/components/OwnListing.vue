@@ -89,10 +89,10 @@
                     <div class="field">
                         <span class="listing-data">Rent or buy</span>
                         <div class="rent-or-buy-button-wrapper">
-                            <button class="rent-select-btn"
+                            <button class="rent-select-btn" @click="formDraft.type = 'rent'; formDraft.price = '';"
                                     :class=" { active: formDraft.type === 'rent' }"
                             >Rent</button>
-                            <button class="buy-select-btn"
+                            <button class="buy-select-btn" @click="formDraft.type = 'buy'; formDraft.rent_per_month = ''"
                                     :class=" { active: formDraft.type === 'buy' }"
                             >Buy</button>
                         </div>
@@ -113,10 +113,10 @@
                         <span class="listing-data">Property type</span>
                         <div class="pill-selection">
                             <button class="residential-btn" @click="formDraft.is_commercial = false"
-                            :class="{ active: formDraft.isCommercial === false }"
+                            :class="{ active: formDraft.is_commercial === false }"
                             >Residential</button>
                             <button class="commericial-btn" @click="formDraft.is_commercial = true"
-                            :class="{ active: formDraft.isCommercial === true }"
+                            :class="{ active: formDraft.is_commercial === true }"
                             >Commercial</button>
                         </div>
                     </div>
