@@ -124,13 +124,14 @@ setTimeout(() => {
     console.log(user.value.id);
 }, 5000);
 
-const resetFilters = () => {
+const resetFilters = async () => {
     filters.min_num_rooms = '';
     filters.max_num_rooms = '';
     filters.county = '';
     filters.min_price = '';
     filters.max_price = '';
     search.value = '';
+    await listingStore.getLandlordsListings(user.value.id);
 }
 
 
