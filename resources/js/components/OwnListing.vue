@@ -106,6 +106,24 @@
                 <div class="listing-location-info">
                     <div class="field">
                         <span class="listing-data">Property type</span>
+                        <div class="pill-selection">
+                            <button class="residential-btn">Residential</button>
+                            <button class="commericial-btn">Commercial</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="listing-data">Number of beds</span>
+                        <input type="number" class="town-input"/>
+                    </div>
+                    <div class="field">
+                        <span class="listing-data">Number of bathrooms</span>
+                        <input type="number" class="town-input"/>
+                    </div>
+                </div>
+                <div class="listing-location-info">
+                    <div class="description-field">
+                        <span class="listing-data">Short description about the property</span>
+                        <textarea class="description-text"></textarea>
                     </div>
                 </div>
             </div>
@@ -424,8 +442,8 @@ const updateModalAppear = () => {
 .update-modal-square {
     display: flex;
     flex-direction: column;
-    width: 65%;
-    height: 650px;
+    width: 55%;
+    height: 750px;
     background-color: #D3D3D3;
     border-radius: 10px;
 
@@ -441,6 +459,7 @@ const updateModalAppear = () => {
 }
 .listing-details {
     display: flex;
+
     flex-direction: column;
     width: 100%;
     padding: 40px 20px;
@@ -448,6 +467,13 @@ const updateModalAppear = () => {
 }
 .field {
     display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 3px;
+}
+.description-field {
+    display: flex;
+    width: 100%;
     flex-direction: column;
     font-size: 18px;
     gap: 3px;
@@ -468,7 +494,6 @@ const updateModalAppear = () => {
 .listing-location-info {
     display: flex;
     width: 100%;
-
     flex-direction: row;
     padding-top: 40px;
     padding-left: 20px;
@@ -517,6 +542,42 @@ const updateModalAppear = () => {
     display: flex;
     flex-direction: row;
     height: fit-content;
+}
+.residential-btn {
+    padding: 14px 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #2d6e53;
+    background-color: #FFFFFF;
+    border: 1px solid #2d6e53;
+    cursor: pointer;
+}
+.residential-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.commericial-btn {
+    padding: 14px 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #2d6e53;
+    background-color: #FFFFFF;
+    border: 1px solid #2d6e53;
+    cursor: pointer;
+}
+.commericial-btn.active {
+    background-color: #2d6e53;
+    color: #FFFFFF;
+}
+.description-text {
+    width: 85%;
+    background-color: #FDFBD4;
+    border-radius: 14px;
+    height: 130px;
+    color: #000000;
+    padding-left: 15px;
+    padding-top: 5px;
+    font-size: 16px;
 }
 @media(max-width: 900px) {
     .listing-card {
