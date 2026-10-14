@@ -205,6 +205,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const updateListing = async (id, payload) => {
+       loading.value = true;
+       try {
+           const res = await api.put(`updateListing/${id}`, payload);
+           listing.value = res.data.listing;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to update listing';
+       } finally {
+           loading.value = false;
+       }
+    }
+
     const getListingsSoldThisMonth = async (month, year) => {
        loading.value = true;
        try {
@@ -303,6 +315,7 @@ export const useListingStore = defineStore('listings', () => {
        totalListings,
        storeListing,
        getAllListings,
+       updateListing,
        deleteListing,
        get3RecentListings,
        getListingsOrderedByViews,

@@ -113,10 +113,10 @@
                         <span class="listing-data">Property type</span>
                         <div class="pill-selection">
                             <button class="residential-btn" @click="formDraft.is_commercial = false"
-                            :class="{ active: formDraft.is_commercial === false }"
+                            :class="{ active: formDraft.is_commercial == false }"
                             >Residential</button>
                             <button class="commericial-btn" @click="formDraft.is_commercial = true"
-                            :class="{ active: formDraft.is_commercial === true }"
+                            :class="{ active: formDraft.is_commercial == true }"
                             >Commercial</button>
                         </div>
                     </div>
@@ -134,6 +134,9 @@
                         <span class="listing-data">Short description about the property</span>
                         <textarea class="description-text" v-model="formDraft.description"></textarea>
                     </div>
+                </div>
+                <div class="update-btn-wrapper">
+                <button class="update-listing-btn" @click="updateListing()">Update</button>
                 </div>
             </div>
         </div>
@@ -242,11 +245,22 @@ const updateModalAppear = async () => {
         console.log(selectedListing.value);
         await listingStore.showListing(selectedListing.value);
         showUpdateModal.value = true;
-    } catch(err) {
+    } catch (err) {
         error.value = error.response?.data?.message || 'failed to get listing info';
     }
-
 }
+
+    const updateListing = async () => {
+        loading.value = true;
+        try {
+            await listingStore.updateListing(selectedListing.value, formDraft.value);
+            await listingStore.getLandlordsListings(props.listing.landlord.id);
+        } catch (err) {
+            error.value = error.response?.data?.message || 'failed to get '
+        } finally {
+            loading.value = false;
+        }
+    }
 </script>
 <style scoped>
 .listing-card {
@@ -622,6 +636,27 @@ const updateModalAppear = async () => {
 .close-modal:hover {
     cursor: pointer;
     background-color: #cccccc;
+}
+.update-listing-btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 145px;
+    height: 45px;
+    font-size: 16px;
+    background-color: #FFBF00;
+    border: 1px solid #FFFFFF;
+    border-radius: 12px;
+    color: #FFFFFF;
+}
+.update-listing-btn:hover {
+    background-color: #BFFF00;
+    cursor: pointer;
+}
+.update-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 @media(max-width: 900px) {
     .listing-card {

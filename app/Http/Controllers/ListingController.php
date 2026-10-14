@@ -169,8 +169,15 @@ class ListingController extends Controller
 
 
 
-    public function update(Request $request, Listing $listing, GeocodingService $geocodingService)
+    public function update(Request $request, $id, GeocodingService $geocodingService)
     {
+        $listing = Listing::find($id);
+        if(!$listing) {
+            return response()->json([
+                'message' => 'listing not found',
+                'listing' => $listing,
+            ]);
+        }
         $this->authorize('update', $listing);
         $validatedData = $request->validate([
             'address_line_1' => 'required|string|max:255|min:3',
@@ -179,6 +186,7 @@ class ListingController extends Controller
             'county' => 'required|string|max:40|min:3',
             'postcode' => 'required|string|max:40|min:3',
             'price' => 'nullable|numeric|min:1|max:100000000',
+            'rent_per_month' => 'nullable|numeric|min:1|max:100000000000',
             'no_of_rooms' => 'required|numeric|min:1|max:45',
             'type' => 'required|string|max:40|min:3',
             'sale_status' => 'required|in:open',
