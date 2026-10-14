@@ -686,7 +686,7 @@ const updateModalAppear = async () => {
         height: 500px;
     }
     .landlord-info-wrapper {
-        margin-right: 60px;
+
     }
     .created-at-text {
         margin-right: 0px;

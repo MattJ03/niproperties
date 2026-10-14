@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="filters-wrapper">
-                    <button class="apply-filters-btn" @click="applyFilters(landlord.id, filters)">Apply filters</button>
+                    <button class="apply-filters-btn" @click="applyFilters()">Apply filters</button>
                     <span class="remove-filters-text" @click="resetFilters()">
                       <img :src="reset" class="reset-img" alt="reset"/>
                   Reset Filters
@@ -74,7 +74,9 @@ const errror = ref('');
 const listingStore = useListingStore();
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
+
 const filters = reactive({
+    landlordId: user.value.id,
     min_num_rooms: '',
     max_num_rooms: '',
     county: '',
@@ -84,11 +86,31 @@ const filters = reactive({
 const rooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const search = ref('');
 const searchMobile= ref('');
+const error = ref('');
+const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
+
+const applyFilters = async () => {
+    loading.value = true;
+    try {
+        await listingStore.getLandlordsListings(filters.landlordId, {
+            min_num_rooms: filters.min_num_rooms,
+
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to get filtered landlord listings';
+    } finally {
+        loading.value = false;
+    }
+}
 
 onMounted( async () => {
-   await authStore.getCurrentUser();
-   await listingStore.getLandlordsListings(authStore.user.id);
+    await authStore.getCurrentUser();
+    await listingStore.getLandlordsListings(authStore.user.id);
 });
+
+setTimeout(() => {
+    console.log(user.value.id);
+}, 5000);
 
 const resetFilters = () => {
     filters.min_num_rooms = '';
@@ -99,7 +121,7 @@ const resetFilters = () => {
     search.value = '';
 }
 
-const counties = ref(['Fermanagh', 'Antrim', 'Tyrone', 'Londonderry', 'Armagh', 'Down']);
+
 </script>
 <style scoped>
 .container {
