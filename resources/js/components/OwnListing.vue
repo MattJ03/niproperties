@@ -255,6 +255,7 @@ const updateModalAppear = async () => {
         try {
             await listingStore.updateListing(selectedListing.value, formDraft.value);
             await listingStore.getLandlordsListings(props.listing.landlord.id);
+            showUpdateModal.value = false;
         } catch (err) {
             error.value = error.response?.data?.message || 'failed to get '
         } finally {
