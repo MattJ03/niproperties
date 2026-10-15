@@ -139,6 +139,10 @@
                     <input type="password" v-model="current_password" class="name-field" />
                     <span class="error-text" v-if="errors.password"> {{ errors.password }}</span>
                 </div>
+                <div class="field">
+                    <span class="field-name">Description</span>
+                    <textarea class="landlord-description" v-model="formDraft.description"></textarea>
+                </div>
             </div>
             <div class="bottom-square">
             <div class="buttons-update-wrapper">
@@ -247,7 +251,6 @@ const moveToLogin = async () => {
         loading.value = false;
     }
 }
-
 const moveToUpload = async () => {
     loading.value = true;
     try {
@@ -379,6 +382,7 @@ const updateAccount = async () => {
             email: formDraft.value.email,
             contact: formDraft.value.contact,
             password: current_password.value,
+            description: formDraft.value.description,
         });
         current_password.value = '';
         editProfileModal.value = false;
@@ -812,7 +816,7 @@ input:checked + .slider:before {
 .edit-profile-square {
     display: flex;
     flex-direction: column;
-    height: 550px;
+    height: auto;
     width: 700px;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
@@ -947,6 +951,8 @@ input:checked + .slider:before {
     align-items: center;
     height: 100%;
    gap: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     justify-content: right;
     margin-right: 25px;
 
@@ -1009,7 +1015,17 @@ input:checked + .slider:before {
     height: 100%;
     gap: 10px;
     justify-content: right;
+
     margin-right: 25px;
+}
+.landlord-description {
+    height: 120px;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding-left: 6px;
+    padding-top: 6px;
+    font-size: 16px;
 }
 @media(max-width: 900px) {
     .nav-bar {

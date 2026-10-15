@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
-#[Fillable(['name', 'email', 'contact', 'password'])]
+#[Fillable(['name', 'email', 'contact', 'password', 'description'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {

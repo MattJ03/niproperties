@@ -78,7 +78,8 @@
                 </div>
             <div class="landlord-description-wrapper">
                 <h3 class="about-header">About {{ selectedlandlord.name }}</h3>
-                <p class="landlord-description">Ill do this later</p>
+                <p class="landlord-description"> {{ selectedlandlord.description }} </p>
+                <p class="landlord-description" v-if="!selectedlandlord.description"> Landlord does not have a description</p>
                 <div class="horizontal-line-below-about"></div>
             </div>
             <div class="listings-wrapper">
@@ -159,7 +160,9 @@ onMounted(() => {
     userDirectoryStore.getLandlords();
 
 });
-
+setTimeout(() => {
+    console.log(selectedlandlord.value.description);
+}, 5000);
 const moveToLandlordsListings = async() => {
     loading.value = true;
 
@@ -416,6 +419,7 @@ const moveToLandlordsListings = async() => {
     height: 100%;
     background-color: #F2EFE6;
     border-radius: 12px;
+    padding-left: 15px;
 }
 .landlord-profile-pic {
     margin-top: 10px;
@@ -497,7 +501,7 @@ const moveToLandlordsListings = async() => {
     flex-direction: column;
     margin-left: 40px;
     margin-top: 20px;
-    width: 100%;
+    width: 95%;
 }
 .about-header {
     font-size: 23px;
