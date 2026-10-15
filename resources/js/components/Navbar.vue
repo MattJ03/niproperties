@@ -139,6 +139,10 @@
                     <input type="password" v-model="current_password" class="name-field" />
                     <span class="error-text" v-if="errors.password"> {{ errors.password }}</span>
                 </div>
+                <div class="field">
+                    <span class="field-name">Description</span>
+                    <textarea class="landlord-description"></textarea>
+                </div>
             </div>
             <div class="bottom-square">
             <div class="buttons-update-wrapper">
@@ -812,7 +816,7 @@ input:checked + .slider:before {
 .edit-profile-square {
     display: flex;
     flex-direction: column;
-    height: 550px;
+    height: auto;
     width: 700px;
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
@@ -1010,6 +1014,9 @@ input:checked + .slider:before {
     gap: 10px;
     justify-content: right;
     margin-right: 25px;
+}
+.landlord-description {
+    height: 120px;
 }
 @media(max-width: 900px) {
     .nav-bar {
