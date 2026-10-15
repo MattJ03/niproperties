@@ -951,6 +951,8 @@ input:checked + .slider:before {
     align-items: center;
     height: 100%;
    gap: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     justify-content: right;
     margin-right: 25px;
 
@@ -1013,10 +1015,16 @@ input:checked + .slider:before {
     height: 100%;
     gap: 10px;
     justify-content: right;
+
     margin-right: 25px;
 }
 .landlord-description {
     height: 120px;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding-left: 6px;
+    padding-top: 6px;
 }
 @media(max-width: 900px) {
     .nav-bar {
