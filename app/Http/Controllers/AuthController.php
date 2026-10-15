@@ -17,6 +17,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'contact' => 'required|string|max:20',
             'password' => 'required|string|min:8|confirmed',
+            'description' => 'nullable|string|max:255',
             ]);
 
         $user = User::create([
@@ -24,6 +25,7 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'contact' => $validatedData['contact'],
             'password' => Hash::make($validatedData['password']),
+            'description' => $validatedData['description'],
         ]);
 
         $user->assignRole('landlord');
