@@ -141,7 +141,7 @@
                 </div>
                 <div class="field">
                     <span class="field-name">Description</span>
-                    <textarea class="landlord-description"></textarea>
+                    <textarea class="landlord-description" v-model="formDraft.description"></textarea>
                 </div>
             </div>
             <div class="bottom-square">
@@ -251,7 +251,6 @@ const moveToLogin = async () => {
         loading.value = false;
     }
 }
-
 const moveToUpload = async () => {
     loading.value = true;
     try {
@@ -383,6 +382,7 @@ const updateAccount = async () => {
             email: formDraft.value.email,
             contact: formDraft.value.contact,
             password: current_password.value,
+            description: formDraft.value.description,
         });
         current_password.value = '';
         editProfileModal.value = false;
@@ -1025,6 +1025,7 @@ input:checked + .slider:before {
     color: #FFFFFF;
     padding-left: 6px;
     padding-top: 6px;
+    font-size: 16px;
 }
 @media(max-width: 900px) {
     .nav-bar {

@@ -123,6 +123,7 @@ class AuthController extends Controller
             'contact' => 'sometimes|string|max:20',
             'email' => 'sometimes|string|email|max:255',
             'password' => 'required|string|min:8',
+            'description' => 'nullable|string|max:255',
         ]);
 
         if(!Hash::check($validatedData['password'], $user['password'])) {
@@ -135,6 +136,7 @@ class AuthController extends Controller
             'name' => $validatedData['name'] ?? null,
             'email' => $validatedData['email'] ?? null,
             'contact' => $validatedData['contact'] ?? null,
+            'description' => $validatedData['description'] ?? null,
         ]));
 
         return response()->json([
