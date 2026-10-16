@@ -3,5 +3,4 @@ import { defineStore } from "pinia";
 
 export const useFavouriteStore = defineStore('favourite', {
 
-
 });

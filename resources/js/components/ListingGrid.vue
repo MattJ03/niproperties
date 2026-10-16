@@ -1,6 +1,9 @@
 <template>
     <div class="container">
         <div class="img-wrapper">
+            <div class="top-of-listing">
+            <img :src="heart" class="favourite-img" alt="favourite"/>
+            </div>
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
         <div class="listing-details">
@@ -55,7 +58,8 @@ import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
-import {format} from "pathe";
+import heart from '../assets/heart.png';
+
 
 const noImage = ref('');
 const props = defineProps({
@@ -127,7 +131,23 @@ function formatPrice(price) {
     height: 250px;
     overflow: hidden;
 }
+.top-of-listing {
+    display: flex;
+  flex-direction: row;
+  width: 100%;
+    justify-content: right;
+    position: relative;
+    z-index: 100;
+}
+.favourite-img {
+    position: absolute;
+    padding-right: 12px;
+    padding-top: 12px;
+    height: 30px;
+    cursor: pointer;
+}
 .listing-img {
+    position: relative;
     width: 100%;
     height: 100%;
     border-radius: 12px;
