@@ -485,7 +485,7 @@ function changeSrcNumber() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #006AFF;
+    background-color: #FD9ED0;
     height: 55%;
     width: 85%;
     gap: 6px;
