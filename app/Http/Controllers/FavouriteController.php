@@ -10,7 +10,7 @@ class FavouriteController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function toggleFavourite(Request $request, $id) {
+   public function toggleFavourite($id) {
        $user = auth('sanctum')->user();
        $listing = Listing::find($id);
 
@@ -29,7 +29,7 @@ class FavouriteController extends Controller
 
        return response()->json([
            'listing' => $listing,
-           'message' => 'favourite succesfully',
+           'message' => 'favourite successfully',
        ]);
 
    }
