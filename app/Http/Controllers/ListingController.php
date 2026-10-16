@@ -727,4 +727,10 @@ class ListingController extends Controller
           'message' => 'listings found',
       ]);
       }
+
+      public function addToFavourite(Request $request, $id) {
+      $user = auth('sanctum')->user();
+      $listing = Listing::findOrFail($id);
+
+      }
 }
