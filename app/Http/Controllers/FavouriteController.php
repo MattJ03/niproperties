@@ -2,64 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favourite;
 use Illuminate\Http\Request;
+use App\Models\Listing;
 
 class FavouriteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
+   public function toggleFavourite(Request $request, $id) {
+       $user = auth('sanctum')->user();
+       $listing = Listing::find($id);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+       if(!$listing) {
+           return response()->json([
+               'message' => 'listing not found',
+               'listing' => $listing,
+           ]);
+       }
+       if(!$user->favourites()->where('listing_id', $listing->id)->exists()) {
+           $user->favourites()->attach($listing->id);
+       }
+       if($user->favourites()->where('listing_id', $listing->id)->exists()) {
+           $user->favourites()->detach($listing->id);
+       }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+       return response()->json([
+           'listing' => $listing,
+           'message' => 'favourite succesfully',
+       ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Favourite $favourite)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Favourite $favourite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Favourite $favourite)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Favourite $favourite)
-    {
-        //
-    }
+   }
 }
