@@ -96,8 +96,8 @@
                     </div>
                     <div class="purchase-card">
                         <button>
-                            <img :src="cart" alt="cart"/>
-                            <span>Purchase</span>
+                            <img :src="heart" alt="cart"/>
+                            <span>Favourite</span>
                         </button>
 
                     </div>
@@ -157,7 +157,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import x from '../assets/x.png';
 import copy from '../assets/copy.png';
 import tick from '../assets/greenTick.png';
-
+import heart from '../assets/heart.png';
 
 const listingStore = useListingStore();
 
