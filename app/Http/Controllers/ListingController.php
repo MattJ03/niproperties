@@ -442,12 +442,12 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
     }
 
     public function rentListings(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
       $query = Listing::where('sale_status', 'open');
 
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
 
       if($request->filled('min_price')) {
@@ -482,7 +482,7 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
             ->orderBy('created_at', 'desc')
             ->paginate(16);
 
-        $userFavouriteIds  = $user ? $user->favourites()->pluck('listing.id')->toArray() : [];
+        $userFavouriteIds  = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
         $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
             $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
             return $listing;
@@ -580,12 +580,12 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
     }
 
     public function getCommercialListings(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
 
       $query = Listing::where('sale_status', 'open');
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
 
       $query->where('is_commercial', true);
@@ -626,6 +626,11 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
                         ->with('landlord')
                          ->paginate(16);
 
+      $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+      $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+          $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+          return $listing;
+      });
 
       if($listings->count() <= 0) {
             return response()->json([
