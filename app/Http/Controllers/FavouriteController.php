@@ -22,15 +22,20 @@ class FavouriteController extends Controller
        }
        if(!$user->favourites()->where('listing_id', $listing->id)->exists()) {
            $user->favourites()->attach($listing->id);
+
+           return response()->json([
+               'listing' => $listing,
+               'message' => 'favourite successfully',
+           ]);
        }
        if($user->favourites()->where('listing_id', $listing->id)->exists()) {
            $user->favourites()->detach($listing->id);
-       }
 
-       return response()->json([
-           'listing' => $listing,
-           'message' => 'favourite successfully',
-       ]);
+           return response()->json([
+               'listing' => $listing,
+               'message'=> 'favourite successfully removed',
+           ]);
+       }
 
    }
 }
