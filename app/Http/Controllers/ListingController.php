@@ -482,6 +482,12 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
             ->orderBy('created_at', 'desc')
             ->paginate(16);
 
+        $userFavouriteIds  = $user ? $user->favourites()->pluck('listing.id')->toArray() : [];
+        $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+            $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+            return $listing;
+        });
+
         if($listings->count() <= 0) {
             return response()->json([
                 'message' => 'No listings found.',
