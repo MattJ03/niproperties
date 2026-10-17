@@ -788,7 +788,11 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
       }
 
       $listings = $query->orderBy('listings.created_at', 'desc')->paginate(16);
-
+          $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+          $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+              $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+              return $listing;
+          });
 
       return response()->json([
           'listings' => $listings->items(),
