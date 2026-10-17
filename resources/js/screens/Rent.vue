@@ -147,8 +147,8 @@ const getFinalPageNum = () => {
     return finalPageNumRounded.value = Math.ceil(finalPageNum.value);
 }
 
-onMounted(async () => {
-    await listingStore.getRentListings();
+onMounted(  () => {
+    listingStore.getRentListings();
 });
 
 async function applyFilters() {

@@ -390,8 +390,11 @@ function formatPrice(price) {
 }
 
 
-onMounted(() => {
-    console.log('onMounted running')
+onMounted(async () => {
+    if(route.query.params === 'favourites') {
+        await listingStore.getFavouriteListings();
+        return;
+        }
     listingStore.getAllListings();
 
 

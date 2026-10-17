@@ -96,8 +96,8 @@
                     </div>
                     <div class="purchase-card">
                         <button>
-                            <img :src="cart" alt="cart"/>
-                            <span>Purchase</span>
+                            <img :src="heart" alt="cart"/>
+                            <span>Favourite</span>
                         </button>
 
                     </div>
@@ -157,7 +157,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime.js';
 import x from '../assets/x.png';
 import copy from '../assets/copy.png';
 import tick from '../assets/greenTick.png';
-
+import heart from '../assets/heart.png';
 
 const listingStore = useListingStore();
 
@@ -485,7 +485,7 @@ function changeSrcNumber() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #006AFF;
+    background-color: #FD9ED0;
     height: 55%;
     width: 85%;
     gap: 6px;

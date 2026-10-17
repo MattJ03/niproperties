@@ -1,6 +1,10 @@
 <template>
     <div class="container">
         <div class="img-wrapper">
+            <div class="top-of-listing">
+                <img v-if="!isFavourite" :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+                <img v-if="isFavourite" :src="redHeart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+            </div>
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
         <div class="listing-details">
@@ -46,7 +50,7 @@
 
 </template>
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import {ref, reactive, computed, watch} from 'vue';
 import location from '../assets/location.png';
 import rooms from '../assets/rooms.png';
 import pin from '../assets/pin.png';
@@ -55,6 +59,11 @@ import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js';
 import router from '../router/index.js';
 import { useListingStore } from "../stores/ListingStore.js";
+import heart from '../assets/heart.png';
+import api from "../axios.js";
+import redHeart from '../assets/redheart.png';
+
+
 const noImage = ref('');
 const props = defineProps({
     listing: {
@@ -69,8 +78,11 @@ const currentPage = ref(1);
 const nextPage = ref(currentPage + 1);
 const selectedListing = ref(null);
 const pageOneToFive = ref([1, 2, 3, 4, 5]);
-
-
+const favourite = ref(props.listing.is_favourite);
+const isFavourite = computed(() =>  favourite.value );
+watch(() => props.listing.is_favourite, (newValue) => {
+    favourite.value = newValue;
+});
 
 dayjs.extend(relativeTime);
 
@@ -97,6 +109,18 @@ const moveToListingInfo = async () => {
     }
 }
 
+const toggleFavourite = async () => {
+    loading.value = true;
+    try {
+        const res = await api.post('favouriteListing/' + props.listing.id);
+        favourite.value = !favourite.value;
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to toggle favourite listing';
+    } finally {
+        loading.value = false;
+    }
+}
+
 </script>
 <style scoped>
 .container {
@@ -115,6 +139,21 @@ const moveToListingInfo = async () => {
     height: 250px;
     overflow: hidden;
     background-color: #f3f4f6;
+}
+.top-of-listing {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: right;
+    position: relative;
+
+}
+.favourite-img {
+    position: absolute;
+    padding-right: 12px;
+    padding-top: 12px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .listing-img {

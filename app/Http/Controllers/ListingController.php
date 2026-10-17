@@ -19,12 +19,12 @@ class ListingController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
       $query = Listing::where('sale_status', 'open');
 
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
       if($request->filled('rent_or_buy')) {
           $query->where('type', $request->rent_or_buy);
@@ -63,6 +63,12 @@ class ListingController extends Controller
       $listings = $query->with('listingImages')
                          ->orderBy('created_at', 'desc')
                           ->paginate(16);
+
+$userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+      $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+          $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+          return $listing;
+      });
 
       if($listings->count() <= 0) {
           return response()->json([
@@ -436,12 +442,12 @@ class ListingController extends Controller
     }
 
     public function rentListings(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
       $query = Listing::where('sale_status', 'open');
 
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
 
       if($request->filled('min_price')) {
@@ -475,6 +481,12 @@ class ListingController extends Controller
             ->where('type', 'rent')
             ->orderBy('created_at', 'desc')
             ->paginate(16);
+
+        $userFavouriteIds  = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+        $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+            $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+            return $listing;
+        });
 
         if($listings->count() <= 0) {
             return response()->json([
@@ -568,12 +580,12 @@ class ListingController extends Controller
     }
 
     public function getCommercialListings(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
 
       $query = Listing::where('sale_status', 'open');
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
 
       $query->where('is_commercial', true);
@@ -614,6 +626,11 @@ class ListingController extends Controller
                         ->with('landlord')
                          ->paginate(16);
 
+      $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+      $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+          $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+          return $listing;
+      });
 
       if($listings->count() <= 0) {
             return response()->json([
@@ -726,5 +743,61 @@ class ListingController extends Controller
           'listings' => $listings,
           'message' => 'listings found',
       ]);
+      }
+
+      public function getFavouriteListings(Request $request) {
+      $user = auth('sanctum')->user();
+
+      $query = $user->favourites()
+                    ->with('listingImages')
+                    ->where('listings.sale_status', 'open');
+
+      if($request->filled('max_price')) {
+          $query->where('listings.price', '<=', $request->max_price);
+      }
+      if($request->filled('min_price')) {
+          $query->where('listings.price', '>=', $request->min_price);
+      }
+      if($request->filled('max_num_of_rooms')) {
+          $query->where('listings.no_of_rooms', '<=', $request->max_num_of_rooms);
+      }
+      if($request->filled('min_num_of_rooms')) {
+          $query->where('listings.no_of_rooms', '>=', $request->min_num_of_rooms);
+      }
+      if($request->filled('county')) {
+          $query->where('listings.county', $request->county);
+      }
+      if($request->filled('rent_or_buy')) {
+          $query->where('listings.type', $request->rent_or_buy);
+      }
+      if($request->filled('town')) {
+          $query->where('listings.town', $request->town);
+      }
+
+
+      if($request->filled('search')) {
+          $search = $request->query('search');
+          $query->where(function ($query) use ($search) {
+              $query->where('listings.address_line_1', 'LIKE', '%'. $search . '%')
+                  ->orWhere('listings.address_line_2', 'LIKE', '%' . $search . '%')
+                  ->orWhere('listings.county', 'LIKE', '%' . $search . '%')
+                  ->orWhere('listings.town', 'LIKE', '%' . $search . '%')
+                  ->orWhere('listings.postcode', 'LIKE', '%' . $search . '%')
+                  ->orWhere('listings.description', 'LIKE', '%' . $search . '%');
+          });
+      }
+
+      $listings = $query->orderBy('listings.created_at', 'desc')->paginate(16);
+          $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+          $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+              $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+              return $listing;
+          });
+
+      return response()->json([
+          'listings' => $listings->items(),
+          'message' => 'listings found',
+      ]);
+
       }
 }

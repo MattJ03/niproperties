@@ -93,6 +93,10 @@
                     <span>Change language</span>
                     <div class="not-allowed-box">Not supporting other languages currently</div>
                 </div>
+                <div v-if="role === 'buyer'" class="language-row" @click="moveToFavourites()">
+                    <img :src="heart" class="language-img" alt="heart" />
+                    <span>Favourite listings</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -135,7 +139,7 @@
             </div>
             <div class="edit-profile-row">
                 <div class="field">
-                    <span class="field-name">Enter current password</span>
+                    <span class="field-name">Enter password</span>
                     <input type="password" v-model="current_password" class="name-field" />
                     <span class="error-text" v-if="errors.password"> {{ errors.password }}</span>
                 </div>
@@ -146,7 +150,7 @@
             </div>
             <div class="bottom-square">
             <div class="buttons-update-wrapper">
-                <button class="update-profile" @click="updateAccount()">Save changes</button>
+                <button class="update-profile" @click="updateAccount()">Save</button>
                 <span class="reset-profile" @click="resetEditProfileConfiguration()">Reset</span>
             </div>
         </div>
@@ -198,8 +202,8 @@ import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
 import hamburger from '../assets/hamburger.png';
-import {useListingStore} from "../stores/ListingStore.js";
-
+import { useListingStore } from "../stores/ListingStore.js";
+import heart from '../assets/whiteheart.png';
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -462,6 +466,20 @@ const validatePassword = () => {
     return validate;
 }
 
+const moveToFavourites = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse',
+            query: { params: 'favourites' },
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to favourites';
+    } finally {
+        loading.value = false;
+    }
+}
+
 onMounted( async () => {
     await authStore.getCurrentUser();
     await listingStore.getLandlordsListings(authStore.user.id);
@@ -614,6 +632,7 @@ onMounted( async () => {
     height: 100dvh;
     min-width: 320px;
     background-color: #2a2f2c;
+    z-index: 9999;
 
 }
 .top-of-wrapper {
@@ -966,7 +985,7 @@ input:checked + .slider:before {
 .update-profile {
     background-color: #2dcc95;
     height: 48px;
-    width: fit-content;
+    width: 80px;
     font-size: 16px;
     color: #FFFFFF;
     border-radius: 10px;
@@ -1178,6 +1197,26 @@ input:checked + .slider:before {
     .bottom-square {
         padding-bottom: 8px;
     }
-
+    .landlord-description {
+        width: 280px;
+        height: 60%;
+    }
+    .top-of-square-row {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .profile-photo-row {
+        margin-top: 8px;
+    }
+    .update-profile {
+       height: 40px;
+        width: fit-content;
+    }
+    .edit-profile-photo {
+        height: 40px;
+    }
+    .change-photo-btn {
+        height: 34px;
+    }
 }
 </style>
