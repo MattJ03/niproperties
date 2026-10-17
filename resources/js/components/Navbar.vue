@@ -470,7 +470,8 @@ const moveToFavourites = async () => {
     loading.value = true;
     try {
         await router.push({
-            name: 'browse'
+            name: 'browse',
+            query: { params: 'favourites' },
         });
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to move to favourites';

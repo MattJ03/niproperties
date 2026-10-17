@@ -391,6 +391,10 @@ function formatPrice(price) {
 
 
 onMounted(() => {
+    if(route.query.params === 'favourites') {
+
+    return;
+        }
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
 
