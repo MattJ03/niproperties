@@ -294,6 +294,18 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
+    const getFavouritedListings = async () => {
+       loading.value = true;
+       try {
+           const res = await api.get('favouriteListings');
+           allListings.value = res.data.listings;
+       } catch(err) {
+           error.value = error.response?.data?.message || 'failed to get listings favourites';
+       } finally {
+           loading.value = false;
+       }
+    }
+
    return {
        loading,
        error,
@@ -334,5 +346,6 @@ export const useListingStore = defineStore('listings', () => {
        getListingsPerCounty,
        getListingsPerTypeSplit,
        getTotalListings,
+       getFavouritedListings,
    };
 });
