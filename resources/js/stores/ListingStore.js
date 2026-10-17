@@ -294,7 +294,7 @@ export const useListingStore = defineStore('listings', () => {
        }
     }
 
-    const getFavouritedListings = async () => {
+    const getFavouriteListings = async () => {
        loading.value = true;
        try {
            const res = await api.get('favouriteListings');
@@ -346,6 +346,6 @@ export const useListingStore = defineStore('listings', () => {
        getListingsPerCounty,
        getListingsPerTypeSplit,
        getTotalListings,
-       getFavouritedListings,
+       getFavouriteListings,
    };
 });

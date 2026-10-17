@@ -791,7 +791,7 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
 
 
       return response()->json([
-          'listings' => $listings,
+          'listings' => $listings->items(),
           'message' => 'listings found',
       ]);
 

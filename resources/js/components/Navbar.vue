@@ -93,7 +93,7 @@
                     <span>Change language</span>
                     <div class="not-allowed-box">Not supporting other languages currently</div>
                 </div>
-                <div class="language-row" @click="moveToFavourites()">
+                <div v-if="role === 'buyer'" class="language-row" @click="moveToFavourites()">
                     <img :src="heart" class="language-img" alt="heart" />
                     <span>Favourite listings</span>
                 </div>

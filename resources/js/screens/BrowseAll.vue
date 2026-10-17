@@ -390,10 +390,10 @@ function formatPrice(price) {
 }
 
 
-onMounted(() => {
+onMounted(async () => {
     if(route.query.params === 'favourites') {
-
-    return;
+        await listingStore.getFavouriteListings();
+        return;
         }
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);

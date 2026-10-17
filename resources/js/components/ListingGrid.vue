@@ -2,8 +2,8 @@
     <div class="container">
         <div class="img-wrapper">
             <div class="top-of-listing">
-                <img v-if="!isFavourite" :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
-                <img v-if="isFavourite" :src="redHeart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+                <img v-if="!favourite" :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+                <img v-if="favourite" :src="redHeart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
             </div>
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
