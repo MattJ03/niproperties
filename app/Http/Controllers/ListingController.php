@@ -745,9 +745,60 @@ $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() 
       ]);
       }
 
-      public function addToFavourite(Request $request, $id) {
+      public function getFavouriteListings(Request $request) {
       $user = auth('sanctum')->user();
-      $listing = Listing::findOrFail($id);
+
+      $query = Listing::query();
+      $query->where('sale_status', 'open');
+      if($request->filled('max_price')) {
+          $query->where('price', '<=', $request->max_price);
+      }
+      if($request->filled('min_price')) {
+          $query->where('price', '>=', $request->min_price);
+      }
+      if($request->filled('max_num_of_rooms')) {
+          $query->where('no_of_rooms', '<=', $request->max_num_of_rooms);
+      }
+      if($request->filled('min_nun_of_rooms')) {
+          $query->where('no_of_rooms', '>=', $request->min_num_of_rooms);
+      }
+      if($request->filled('county')) {
+          $query->where('county', $request->county);
+      }
+      if($request->filled('rent_or_buy')) {
+          $query->where('type', $request->rent_or_buy);
+      }
+      if($request->filled('town')) {
+          $query->where('town', $request->town);
+      }
+
+      if($request->filled('search')) {
+          $search = $request->query('search');
+          $query->where(function ($query) use ($search) {
+              $query->where('address_line_1', 'LIKE', '%'. $search . '%')
+                  ->orWhere('address_line_2', 'LIKE', '%' . $search . '%')
+                  ->orWhere('county', 'LIKE', '%' . $search . '%')
+                  ->orWhere('town', 'LIKE', '%' . $search . '%')
+                  ->orWhere('postcode', 'LIKE', '%' . $search . '%')
+                  ->orWhere('description', 'LIKE', '%' . $search . '%');
+          });
+      }
+
+      if($query->count() <= 0) {
+          return response()->json([
+              'listings' => $query,
+              'message' => 'no listings found',
+          ]);
+      }
+
+      $listing = $query->with('listingImages')->with('favourites')
+                        ->orderBy('created_at', 'desc')
+                         ->paginate(16);
+
+      return response()->json([
+          'listings' => $listing,
+          'message' => 'listings found',
+      ]);
 
       }
 }

@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/storeListing', [ListingController::class, 'store']);
     Route::put('/updateListing/{id}', [ListingController::class, 'update']);
     Route::post('/favouriteListing/{id}', [FavouriteController::class, 'toggleFavourite']);
+    Route::get('/favouriteListings', [ListingController::class, 'getFavouriteListings']);
     Route::delete('/deleteListing/{listing}', [ListingController::class, 'delete']);
     Route::post('/listings/{listing}/images', [ListingImageController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
