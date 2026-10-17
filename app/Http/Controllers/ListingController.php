@@ -19,7 +19,7 @@ class ListingController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
   public function index(Request $request) {
-      $user = auth('sanctum')->id();
+      $user = auth('sanctum')->user();
 
       $query = Listing::where('sale_status', 'open');
 
@@ -63,6 +63,11 @@ class ListingController extends Controller
       $listings = $query->with('listingImages')
                          ->orderBy('created_at', 'desc')
                           ->paginate(16);
+$userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
+      $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
+          $listing->is_favourite = in_array($listing->id, $userFavouriteIds);
+          return $listing;
+      });
 
       if($listings->count() <= 0) {
           return response()->json([

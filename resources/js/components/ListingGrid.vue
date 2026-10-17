@@ -78,7 +78,7 @@ const currentPage = ref(1);
 const nextPage = ref(currentPage + 1);
 const selectedListing = ref(null);
 const pageOneToFive = ref([1, 2, 3, 4, 5]);
-const favourite = ref(false);
+const favourite = ref(props.listing.is_favourite);
 const isFavourite = computed(() =>  favourite.value );
 dayjs.extend(relativeTime);
 
