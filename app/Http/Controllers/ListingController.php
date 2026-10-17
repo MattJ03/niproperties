@@ -24,7 +24,7 @@ class ListingController extends Controller
       $query = Listing::where('sale_status', 'open');
 
       if($user) {
-          $query->where('landlord_id', '!=', $user);
+          $query->where('landlord_id', '!=', $user->id);
       }
       if($request->filled('rent_or_buy')) {
           $query->where('type', $request->rent_or_buy);
@@ -63,6 +63,7 @@ class ListingController extends Controller
       $listings = $query->with('listingImages')
                          ->orderBy('created_at', 'desc')
                           ->paginate(16);
+
 $userFavouriteIds = $user ? $user->favourites()->pluck('listing_id')->toArray() : [];
       $listings->getCollection()->transform(function ($listing) use ($userFavouriteIds) {
           $listing->is_favourite = in_array($listing->id, $userFavouriteIds);

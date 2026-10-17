@@ -391,7 +391,6 @@ function formatPrice(price) {
 
 
 onMounted(() => {
-    console.log('onMounted running')
     listingStore.getAllListings();
     console.log(listingStore.allListings.length);
 
