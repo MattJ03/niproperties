@@ -146,7 +146,7 @@ const toggleFavourite = async () => {
     width: 100%;
     justify-content: right;
     position: relative;
-    z-index: 100;
+
 }
 .favourite-img {
     position: absolute;
