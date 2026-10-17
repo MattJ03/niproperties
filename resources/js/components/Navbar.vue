@@ -93,7 +93,7 @@
                     <span>Change language</span>
                     <div class="not-allowed-box">Not supporting other languages currently</div>
                 </div>
-                <div class="language-row">
+                <div class="language-row" @click="moveToFavourites()">
                     <img :src="heart" class="language-img" alt="heart" />
                     <span>Favourite listings</span>
                 </div>
@@ -464,6 +464,19 @@ const validatePassword = () => {
     }
 
     return validate;
+}
+
+const moveToFavourites = async () => {
+    loading.value = true;
+    try {
+        await router.push({
+            name: 'browse'
+        });
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to move to favourites';
+    } finally {
+        loading.value = false;
+    }
 }
 
 onMounted( async () => {
