@@ -2,7 +2,8 @@
     <div class="container">
         <div class="img-wrapper">
             <div class="top-of-listing">
-            <img :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+            <img v-if="!isFavourite" :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
+                <img v-if="isFavourite" :src="redHeart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
             </div>
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
@@ -60,6 +61,8 @@ import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
 import heart from '../assets/heart.png';
 import api from '../axios.js';
+import redHeart from '../assets/redheart.png';
+
 
 const noImage = ref('');
 const props = defineProps({
@@ -75,8 +78,8 @@ const currentPage = ref(1);
 const nextPage = ref(currentPage + 1);
 const selectedListing = ref(null);
 const pageOneToFive = ref([1, 2, 3, 4, 5]);
-
-
+const favourite = ref(false);
+const isFavourite = computed(() =>  favourite.value );
 dayjs.extend(relativeTime);
 
 const primaryImage = computed(() => {
@@ -120,6 +123,7 @@ const toggleFavourite = async () => {
     loading.value = true;
     try {
         const res = await api.post('favouriteListing/' + props.listing.id);
+        favourite.value = !favourite.value;
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to toggle favourite listing';
     } finally {
