@@ -614,6 +614,7 @@ onMounted( async () => {
     height: 100dvh;
     min-width: 320px;
     background-color: #2a2f2c;
+    z-index: 9999;
 
 }
 .top-of-wrapper {

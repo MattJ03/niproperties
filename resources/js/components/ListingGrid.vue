@@ -151,7 +151,7 @@ const toggleFavourite = async () => {
   width: 100%;
     justify-content: right;
     position: relative;
-    z-index: 100;
+
 }
 .favourite-img {
     position: absolute;
@@ -159,6 +159,7 @@ const toggleFavourite = async () => {
     padding-top: 12px;
     height: 30px;
     cursor: pointer;
+    z-index: 5;
 }
 .listing-img {
     position: relative;
