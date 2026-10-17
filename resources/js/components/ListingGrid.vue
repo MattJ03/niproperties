@@ -2,7 +2,7 @@
     <div class="container">
         <div class="img-wrapper">
             <div class="top-of-listing">
-            <img :src="heart" class="favourite-img" alt="favourite"/>
+            <img :src="heart" @click="toggleFavourite()" class="favourite-img" alt="favourite"/>
             </div>
             <img v-if="primaryImage" :src="`/api/listings/listing-images/${primaryImage.id}`" class="listing-img" alt="listing image" />
         </div>
@@ -59,7 +59,7 @@ import relativeTime from 'dayjs/plugin/relativeTime.js';
 import { useListingStore } from "../stores/ListingStore.js";
 import router from '../router/index.js';
 import heart from '../assets/heart.png';
-
+import api from '../axios.js';
 
 const noImage = ref('');
 const props = defineProps({
@@ -114,7 +114,17 @@ function formatPrice(price) {
         style: 'currency',
         currency: 'GBP',
     }).format(price);
+}
 
+const toggleFavourite = async () => {
+    loading.value = true;
+    try {
+        const res = await api.post('favouriteListing/' + props.listing.id);
+    } catch(err) {
+        error.value = error.response?.data?.message || 'failed to toggle favourite listing';
+    } finally {
+        loading.value = false;
+    }
 }
 </script>
 <style scoped>
