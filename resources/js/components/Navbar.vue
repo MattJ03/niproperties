@@ -93,6 +93,10 @@
                     <span>Change language</span>
                     <div class="not-allowed-box">Not supporting other languages currently</div>
                 </div>
+                <div class="language-row">
+                    <img :src="heart" class="language-img" alt="heart" />
+                    <span>Favourite listings</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -198,8 +202,8 @@ import language from '../assets/language.png';
 import x from '../assets/x2.png';
 import agent2 from '../assets/agent.png';
 import hamburger from '../assets/hamburger.png';
-import {useListingStore} from "../stores/ListingStore.js";
-
+import { useListingStore } from "../stores/ListingStore.js";
+import heart from '../assets/whiteheart.png';
 
 const error = ref('');
 const authStore = useAuthStore();
