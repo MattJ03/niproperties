@@ -171,6 +171,7 @@ class AuthController extends Controller
         $deletedUser = User::findOrFail($request->userId);
 
         $deletedListing = Listing::where('landlord_id', $deletedUser->id)->delete();
+        $deletedUser->deleteToken();
         $deletedUser->delete();
 
         return response()->json([
