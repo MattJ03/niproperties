@@ -166,11 +166,11 @@ class AuthController extends Controller
         ]);
     }
 
-    public function deleteUserAccount($id) {
+    public function deleteUserAccount() {
         $user = auth('sanctum')->user();
 
-        $deletedAccountUser = User::where('id', $id)->delete();
-        $deletedListings = Listing::where('landlord_id', $id)->delete();
+        $deletedAccountUser = User::where('id', $user->id)->delete();
+        $deletedListings = Listing::where('landlord_id', $user->id)->delete();
 
         return response()->json([
              'message' => 'user deleted successfully alongside their listings',
