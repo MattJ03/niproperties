@@ -223,4 +223,17 @@ class AuthControllerTest extends TestCase
 
     }
 
+    public function test_delete_user_removes_from_database(): void {
+        $user = User::factory()->create([
+            'id' => 5,
+        ]);
+        $this->actingAs($user);
+
+        $response = $this->deleteJson('/api/deleteUserAccount');
+        $response->assertStatus(200);
+        $this->assertDatabaseMissing('users', [
+            'id' => 5,
+        ]);
+    }
+
 }

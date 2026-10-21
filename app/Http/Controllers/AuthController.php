@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -161,6 +162,18 @@ class AuthController extends Controller
         $user->update(['password' => Hash::make($validatedData['newPassword'])]);
         return response()->json([
             'message' => 'password updated',
+            'user' => $user,
+        ]);
+    }
+
+    public function deleteUserAccount() {
+        $user = auth('sanctum')->user();
+
+        $deletedAccountUser = User::where('id', $user->id)->delete();
+        $deletedListings = Listing::where('landlord_id', $user->id)->delete();
+
+        return response()->json([
+             'message' => 'user deleted successfully alongside their listings',
             'user' => $user,
         ]);
     }

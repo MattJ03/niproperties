@@ -95,8 +95,9 @@
                         </div>
                     </div>
                     <div class="purchase-card">
-                        <button>
-                            <img :src="heart" alt="cart"/>
+                        <button @click="addToFavourite()">
+                            <img v-if="favourite" :src="redheart" alt="favourite"/>
+                            <img v-if="!favourite" :src="heart" alt="favourite" />
                             <span>Favourite</span>
                         </button>
 
@@ -141,7 +142,7 @@
     </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue';
+import {ref, reactive, computed, onMounted, watch} from 'vue';
 import Navbar from "../components/Navbar.vue";
 import { useListingStore } from "../stores/ListingStore.js";
 import { useRoute } from "vue-router";
@@ -158,6 +159,9 @@ import x from '../assets/x.png';
 import copy from '../assets/copy.png';
 import tick from '../assets/greenTick.png';
 import heart from '../assets/heart.png';
+import api from '../axios.js';
+import redheart from '../assets/redheart.png';
+
 
 const listingStore = useListingStore();
 
@@ -168,8 +172,12 @@ const showModal = ref(false);
 const isEmailCopied = ref(false);
 const isNumberCopied = ref(false);
 dayjs.extend(RelativeTime);
-
+const favourite = ref();
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
+watch(favourite, (newValue) => {
+    favourite.value = newValue;
+    console.log(favourite.value)
+})
 
 const currentImage = computed(() => {
     return listing.value?.listing_images?.[currentIndex.value] ?? null;
@@ -182,6 +190,7 @@ const streetViewUrl = computed(() => {
 });
 
 onMounted(async () => {
+    await listingStore.getAllListings();
     await listingStore.showListing(route.params.listingId);
     const primaryIdx = listing.value?.listing_images?.findIndex(img => img.is_primary);
     currentIndex.value = primaryIdx > -1 ? primaryIdx : 0;
@@ -247,6 +256,16 @@ function changeSrcNumber() {
     setTimeout(() => {
         isNumberCopied.value = false;
     }, 5000);
+}
+
+const addToFavourite = async () => {
+    loading.value = true;
+    try {
+        const res = await api.post('favouriteListing/' + listing.value.id);
+        favourite.value = !favourite.value;
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to change favourite value';
+    }
 }
 </script>
 <style scoped>
@@ -410,6 +429,9 @@ function changeSrcNumber() {
 }
 .address-line-1-text {
 }
+.map-view {
+    border-radius: 12px;
+}
 .listing-card-side {
     flex: 0 0 20%;
     padding: 20px;
@@ -500,7 +522,7 @@ function changeSrcNumber() {
     height: 18px;
 }
 .purchase-card button:hover {
-    background-color: #006affcc;
+    background-color: #FB53AC;
 }
 .horizontal-line-above-description {
     border-top: 1px solid #D3D3D3;
