@@ -808,12 +808,14 @@ input:checked + .slider:before {
     flex-direction: row;
     gap: 8px;
     margin-top: 26px;
+    cursor: pointer;
 }
 .language-row span {
     color: #FFFFFF;
 }
 .language-row span:hover + .not-allowed-box {
     display: block;
+    cursor: pointer;
 }
 .language-img {
     height: 22px;
@@ -1058,6 +1060,9 @@ input:checked + .slider:before {
     flex-direction: row;
     gap: 8px;
     margin-top: 26px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 16px;
 
 }
 .delete-account-row span {
@@ -1069,6 +1074,7 @@ input:checked + .slider:before {
 }
 .delete-account-row:hover {
     background-color: #FF0000;
+    cursor: pointer;
 }
 @media(max-width: 900px) {
     .nav-bar {
