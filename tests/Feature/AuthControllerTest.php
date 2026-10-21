@@ -231,6 +231,9 @@ class AuthControllerTest extends TestCase
 
         $response = $this->deleteJson('/api/deleteUserAccount');
         $response->assertStatus(200);
+        $this->assertDatabaseMissing('users', [
+            'id' => 5,
+        ]);
     }
 
 }

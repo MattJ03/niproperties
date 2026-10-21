@@ -97,6 +97,10 @@
                     <img :src="heart" class="language-img" alt="heart" />
                     <span>Favourite listings</span>
                 </div>
+                <div class="delete-account-row" v-if="authStore.loggedIn">
+                    <img :src="deleteAccount" class="language-img" alt="delete account"/>
+                    <span>Delete account</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -204,6 +208,8 @@ import agent2 from '../assets/agent.png';
 import hamburger from '../assets/hamburger.png';
 import { useListingStore } from "../stores/ListingStore.js";
 import heart from '../assets/whiteheart.png';
+import deleteAccount from '../assets/deleteaccount.png';
+
 
 const error = ref('');
 const authStore = useAuthStore();
@@ -1045,6 +1051,24 @@ input:checked + .slider:before {
     padding-left: 6px;
     padding-top: 6px;
     font-size: 16px;
+}
+.delete-account-row {
+   position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 26px;
+
+}
+.delete-account-row span {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+.delete-account-row img {
+    height: 22px;
+}
+.delete-account-row:hover {
+    background-color: #FF0000;
 }
 @media(max-width: 900px) {
     .nav-bar {
