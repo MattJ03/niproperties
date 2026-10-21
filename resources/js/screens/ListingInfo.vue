@@ -429,6 +429,9 @@ const addToFavourite = async () => {
 }
 .address-line-1-text {
 }
+.map-view {
+    border-radius: 12px;
+}
 .listing-card-side {
     flex: 0 0 20%;
     padding: 20px;

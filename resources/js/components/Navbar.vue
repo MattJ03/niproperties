@@ -97,7 +97,7 @@
                     <img :src="heart" class="language-img" alt="heart" />
                     <span>Favourite listings</span>
                 </div>
-                <div class="delete-account-row" v-if="authStore.loggedIn">
+                <div class="delete-account-row" v-if="authStore.loggedIn" @click="deleteUserAccount()">
                     <img :src="deleteAccount" class="language-img" alt="delete account"/>
                     <span>Delete account</span>
                 </div>
@@ -493,6 +493,20 @@ onMounted( async () => {
 
 });
 
+const deleteUserAccount = async  () => {
+    loading.value = true;
+    try {
+       await authStore.deleteAccount();
+        await router.push({
+            name: 'register',
+        });
+    } catch (err) {
+        error.value = error.response?.data?.message || 'failed to delete account';
+    } finally {
+        loading.value = false;
+    }
+
+}
 </script>
 <style scoped>
 .nav-bar {
