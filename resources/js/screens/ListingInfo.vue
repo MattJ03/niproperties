@@ -96,8 +96,8 @@
                     </div>
                     <div class="purchase-card">
                         <button @click="addToFavourite()">
-                            <img v-if="!favourite" :src="heart" alt="favourite"/>
-                            <img v-if="favourite" :src="heart" alt="favourite" />
+                            <img v-if="favourite" :src="redheart" alt="favourite"/>
+                            <img v-if="!favourite" :src="heart" alt="favourite" />
                             <span>Favourite</span>
                         </button>
 
@@ -175,7 +175,8 @@ dayjs.extend(RelativeTime);
 const favourite = ref();
 const { listing, landlord, error, loading } = storeToRefs(listingStore);
 watch(favourite, (newValue) => {
-    favourite.value = listing.is_favourite;
+    favourite.value = newValue;
+    console.log(favourite.value)
 })
 
 const currentImage = computed(() => {
@@ -518,7 +519,7 @@ const addToFavourite = async () => {
     height: 18px;
 }
 .purchase-card button:hover {
-    background-color: #006affcc;
+    background-color: #FB53AC;
 }
 .horizontal-line-above-description {
     border-top: 1px solid #D3D3D3;
