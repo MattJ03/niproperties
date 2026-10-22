@@ -45,6 +45,7 @@
                     <input type="password" class="input-field" id="password" v-model="form.password" placeholder=" "/>
                     <label for="password">Password</label>
                     <span class="field-error" v-if="errors.password"> {{ errors.password }}</span>
+                    <span class="field-error" v-if="errorPasswordTooShort"> {{ errorPasswordTooShort }}</span>
                 </div>
                 <div class="form-field">
                     <input type="password" class="input-field" id="password_confirmation" v-model="form.password_confirmation" placeholder=" "/>
@@ -83,7 +84,6 @@ const errors = reactive({
    password_confiration: '',
     diff_passwords: ''
 });
-
 const form = reactive ({
     name: '',
     email: '',
@@ -91,7 +91,8 @@ const form = reactive ({
     password: '',
     password_confirmation: '',
 });
-
+const passwordTooShort = computed(() => form.password.length <= 8);
+const errorPasswordTooShort = ref('');
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -103,6 +104,7 @@ function validate() {
     errors.contact = form.contact ? '' : 'Please enter your phone number';
     errors.password = form.password ? '' : 'Please enter a password';
     errors.password_confiration = form.password_confirmation ? '' : 'Please confirm your password';
+
     if (!form.name || !form.email || !form.contact || !form.password || !form.password_confirmation) {
         valid = false;
     } else if(form.password !== form.password_confirmation) {
@@ -113,13 +115,19 @@ function validate() {
     return valid;
 }
 
-
+setTimeout(() => {
+    console.log(passwordTooShort.value + errorPasswordTooShort.value);
+}, 10000);
 const submitReg = async () => {
     if(!validate()) {
         return;
     }
     if(!role.value) {
         error.value = 'Please select buyer or landlord';
+        return;
+    }
+    if(passwordTooShort.value) {
+        errorPasswordTooShort.value = 'password minimum 8 characters';
         return;
     }
 
