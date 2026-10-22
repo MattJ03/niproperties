@@ -105,7 +105,7 @@
             </div>
             <div class="horizontal-line-settings"></div>
             <div class="profile-photo-row">
-                <img :src="user.profile_picture || agent2" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
+                <img :src="user.profile_picture ? `http://127.0.0.1:8000/storage/${user.profile_picture}` : agent2" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
                 <button class="change-photo-btn" @click="triggerFileInput()">Change photo</button>
                 <span class="remove-photo-text">Remove photo</span>
                 <input

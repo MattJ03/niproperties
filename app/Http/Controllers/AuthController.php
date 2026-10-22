@@ -191,7 +191,7 @@ class AuthController extends Controller
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $path = $request->file('profile_picture')->store('profile-pictures/' . $user->id, 'profilePictures');
+        $path = $request->file('profile_picture')->store('profile-pictures/' . $user->id, 'public');
         $user->update([
             'profile_picture' => $path,
             ]);
