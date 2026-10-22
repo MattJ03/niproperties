@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 class AuthController extends Controller
 {
     public function registerLandlord(Request $request) {
@@ -176,6 +176,24 @@ class AuthController extends Controller
              'message' => 'user deleted successfully alongside their listings',
             'user' => $user,
         ]);
+    }
+
+    public function storeProfilePicture(Request $request) {
+        $user = auth('sanctum')->user();
+        if(!$user->hasRole('landlord')) {
+            return response()->json([
+                'message' => 'user does not have a landlord role',
+            ], 403);
+        }
+
+        $validatedData = $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $path = Storage::disk('public')->put('profile_picture', $validatedData['profile_picture']);
+        $user->update([
+            'profile_picture' => $path,
+            ]);
     }
 
 }
