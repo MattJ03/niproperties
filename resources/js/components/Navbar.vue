@@ -105,9 +105,16 @@
             </div>
             <div class="horizontal-line-settings"></div>
             <div class="profile-photo-row">
-                <img :src="agent2" class="edit-profile-photo" alt="pfp"/>
-                <button class="change-photo-btn">Change photo</button>
+                <img :src="user.profile_picture || agent2" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
+                <button class="change-photo-btn" @click="triggerFileInput()">Change photo</button>
                 <span class="remove-photo-text">Remove photo</span>
+                <input
+                    ref="fileInput"
+                    type="file"
+                    accept="image/*"
+                    style="display: none;"
+                    @change="handleProfileUpload"
+                />
             </div>
             <div class="edit-profile-row">
                 <div class="field">
@@ -201,6 +208,7 @@ import hamburger from '../assets/hamburger.png';
 import { useListingStore } from "../stores/ListingStore.js";
 import heart from '../assets/whiteheart.png';
 import deleteAccount from '../assets/deleteaccount.png';
+import api from '../axios.js';
 
 
 const error = ref('');
@@ -240,7 +248,13 @@ const passwords = reactive({
 });
 watch(user, (newUser) => {
     formDraft.value = {... newUser };
-})
+});
+
+const fileInput = ref(null);
+
+function triggerFileInput() {
+    fileInput.value.click();
+}
 const moveToLogin = async () => {
     loading.value = true;
     try {
@@ -499,6 +513,29 @@ const deleteUserAccount = async  () => {
     } finally {
         loading.value = false;
     }
+}
+
+const handleProfileUpload = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    if(!file) return;
+    if(file) {
+        loading.value = true;
+        formData.append('profile_picture', file);
+    }
+        try {
+         const res = await api.post('storeProfilePicture', formData, {
+             headers: {
+                 'Content-Type': 'multipart/form-data',
+             },
+         });
+         await authStore.getCurrentUser();
+        } catch (err) {
+        error.value = err.response?.data?.message || 'failed to upload profile picture';
+        } finally {
+            loading.value = false;
+            event.target.value = '';
+        }
 
 }
 </script>
