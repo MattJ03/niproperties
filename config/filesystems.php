@@ -65,7 +65,14 @@ return [
             'root' => storage_path('app/private/listings'),
             'visibility' => 'private',
             'throw' => false,
-        ]
+        ],
+
+        'profilePictures' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/profile-pictures'),
+            'visibility' => 'private',
+            'throw' => false,
+        ],
 
     ],
 
