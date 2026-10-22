@@ -295,6 +295,7 @@ const moveToBrowseAll = async () => {
         await router.push({
             name: 'browse',
         });
+       await listingStore.getAllListings();
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to move to browse';
     }
