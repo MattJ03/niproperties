@@ -180,6 +180,7 @@ class AuthController extends Controller
 
     public function storeProfilePicture(Request $request) {
         $user = auth('sanctum')->user();
+
         if(!$user->hasRole('landlord')) {
             return response()->json([
                 'message' => 'user does not have a landlord role',
@@ -190,10 +191,15 @@ class AuthController extends Controller
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $path = Storage::disk('public')->put('profile_picture', $validatedData['profile_picture']);
+        $path = $request->file('profile_picture')->store('profile-pictures/' . $user->id, 'profilePictures');
         $user->update([
             'profile_picture' => $path,
             ]);
+
+        return response()->json([
+            'message' => 'profile picture updated',
+            'user' => $user,
+        ]);
     }
 
 }
