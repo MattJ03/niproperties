@@ -480,6 +480,7 @@ const moveToFavourites = async () => {
             name: 'browse',
             query: { params: 'favourites' },
         });
+        await listingStore.getFavouriteListings();
     } catch(err) {
         error.value = error.response?.data?.message || 'failed to move to favourites';
     } finally {
