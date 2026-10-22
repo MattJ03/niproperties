@@ -115,7 +115,9 @@ export const useAuthStore = defineStore('auth', () => {
         loading.value = true;
         try {
             const res = await api.delete('deleteUserAccount');
-
+            localStorage.removeItem('name');
+            localStorage.removeItem('role');
+            localStorage.removeItem('token');
         } catch(err) {
             error.value = error.response?.data?.message || 'failed to delete user account';
         } finally {
