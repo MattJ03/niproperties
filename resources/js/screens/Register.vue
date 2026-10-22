@@ -22,7 +22,7 @@
 
             </div>
             <div class="error-role-wrapper">
-                <span class="field-error" v-if="!role"> {{ error }}</span>
+                <span class="field-error" v-if="error"> {{ error }}</span>
             </div>
             <form @submit.prevent="submitReg()" class="form-card">
 
@@ -81,7 +81,7 @@ const errors = reactive({
    email: '',
    contact: '',
    password: '',
-   password_confiration: '',
+   password_confirmation: '',
     diff_passwords: ''
 });
 const form = reactive ({
@@ -91,7 +91,7 @@ const form = reactive ({
     password: '',
     password_confirmation: '',
 });
-const passwordTooShort = computed(() => form.password.length <= 8);
+const passwordTooShort = computed(() => form.password.length < 8);
 const errorPasswordTooShort = ref('');
 const authStore = useAuthStore();
 const router = useRouter();
@@ -103,7 +103,7 @@ function validate() {
     errors.email = form.email ? '' : 'Please enter your email';
     errors.contact = form.contact ? '' : 'Please enter your phone number';
     errors.password = form.password ? '' : 'Please enter a password';
-    errors.password_confiration = form.password_confirmation ? '' : 'Please confirm your password';
+    errors.password_confirmation = form.password_confirmation ? '' : 'Please confirm your password';
 
     if (!form.name || !form.email || !form.contact || !form.password || !form.password_confirmation) {
         valid = false;
