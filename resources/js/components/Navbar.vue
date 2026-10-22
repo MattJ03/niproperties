@@ -80,14 +80,6 @@
                     <span>Password & security</span>
                 </div>
                 <span class="secondary-header-preferences">Preferences</span>
-                <div class="notifications-row">
-                    <img :src="bell" class="bell-img" alt="bell"/>
-                    <span>Email notifications</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                               <span class="slider round"></span>
-                    </label>
-                </div>
                 <div class="language-row">
                     <img :src="language" class="language-img" alt="language"/>
                     <span>Change language</span>
