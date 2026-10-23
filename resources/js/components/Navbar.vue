@@ -105,7 +105,7 @@
             </div>
             <div class="horizontal-line-settings"></div>
             <div class="profile-photo-row">
-                <img :src="user.profile_picture ? `http://127.0.0.1:8000/storage/${user.profile_picture}` : agent2" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
+                <img :src="profilePictureUrl" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
                 <button class="change-photo-btn" @click="triggerFileInput()">Change photo</button>
                 <span class="remove-photo-text">Remove photo</span>
                 <input
@@ -237,6 +237,15 @@ const errors = reactive({
     email: '',
     contact: '',
     password: '',
+});
+
+const backendBaseUrl = import.meta.env.VITE_API_URL.replace('/api/', '');
+
+const profilePictureUrl = computed(() => {
+    if (!user.value || !user.value.profile_picture) {
+        return agent2; // Fallback default image
+    }
+    return `${backendBaseUrl}/storage/${user.value.profile_picture}`;
 });
 const passwordsErrors = reactive({
     oldPassword: '',
