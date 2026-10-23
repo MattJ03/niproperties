@@ -205,7 +205,11 @@ class AuthController extends Controller
     public function deleteProfilePicture(Request $request) {
         $user = auth('sanctum')->user();
 
-        Storage::delete('profile-pictures/' . $user->id);
+        Storage::disk('public')->delete($user->profile_picture);
+
+        $user->update([
+            'profile_picture' => null,
+        ]);
 
         return response()->json([
             'message' => 'profile picture deleted',
