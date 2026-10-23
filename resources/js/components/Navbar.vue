@@ -107,7 +107,7 @@
             <div class="profile-photo-row">
                 <img :src="profilePictureUrl" @click="triggerFileInput()" class="edit-profile-photo" alt="pfp"/>
                 <button class="change-photo-btn" @click="triggerFileInput()">Change photo</button>
-                <span class="remove-photo-text">Remove photo</span>
+                <span class="remove-photo-text" @click="removeProfilePicture">Remove photo</span>
                 <input
                     ref="fileInput"
                     type="file"
@@ -527,26 +527,40 @@ const deleteUserAccount = async  () => {
 const handleProfileUpload = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
-    if(!file) return;
-    if(file) {
+    if (!file) return;
+    if (file) {
         loading.value = true;
         formData.append('profile_picture', file);
     }
-        try {
-         const res = await api.post('storeProfilePicture', formData, {
-             headers: {
-                 'Content-Type': 'multipart/form-data',
-             },
-         });
-         await authStore.getCurrentUser();
-        } catch (err) {
+    try {
+        const res = await api.post('storeProfilePicture', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        await authStore.getCurrentUser();
+    } catch (err) {
         error.value = err.response?.data?.message || 'failed to upload profile picture';
-        } finally {
-            loading.value = false;
-            event.target.value = '';
-        }
-
+    } finally {
+        loading.value = false;
+        event.target.value = '';
+    }
 }
+
+    const removeProfilePicture = async () => {
+        loading.value = true;
+        try {
+            const res = await api.post('deleteProfilePicture');
+
+        } catch (err) {
+            error.value = err.response?.data?.message || 'failed to delete profile picture';
+        } finally {
+            await authStore.getCurrentUser();
+            loading.value = false;
+        }
+    }
+
+
 </script>
 <style scoped>
 .nav-bar {
